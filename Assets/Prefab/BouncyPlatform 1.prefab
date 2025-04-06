@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.07, y: -8.1138, z: 0}
-  m_LocalScale: {x: 3.3286748, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.7735849, g: 0.21456033, b: 0.31929132, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 92f4bcee26590e64c9b20baa1f3e8e8a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.05, y: 1.11}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,15 +119,17 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.6}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
-  m_AdjacentStartPoint: {x: -0.5, y: 0.5}
-  m_AdjacentEndPoint: {x: 0.5, y: 0.5}
-  m_UseAdjacentStartPoint: 1
-  m_UseAdjacentEndPoint: 1
+  - {x: -2.9502568, y: 0.1993165}
+  - {x: -0.1411825, y: 0.23253584}
+  - {x: 0.057457827, y: 0.23108053}
+  - {x: 2.975171, y: 0.2076211}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!251 &6159494154031921073
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -159,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 50
+  jumpForce: 48
   preBoost: 100
   boostMultiplier: 1.2
+  destroyColor: {r: 0.6415094, g: 0.032680616, b: 0.1309664, a: 1}
   destroyTime: 5
