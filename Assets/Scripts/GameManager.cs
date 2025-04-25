@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         while (spawnPosition.y <= towerHeight)
         {
             // Only proceed if within the range of the generationReference
-            if (generationReference != null && generationReference.position.y + 100f >= spawnPosition.y)
+            if (generationReference != null && generationReference.position.y + 20f >= spawnPosition.y)
             {
                 spawnPosition.y += Random.Range(4.5f, 5.5f);
                 spawnPosition.x = Random.Range(-4f, 4f);
@@ -102,9 +102,10 @@ public class GameManager : MonoBehaviour
                     scaleY = secondPlatformYScale;
                 }
 
-                GameObject instantiated = Instantiate(selectedPlatformPrefab, spawnPosition, Quaternion.identity);
-                instantiated.transform.localScale = new Vector3(scaleX, scaleY, 1);
-                instantiated.transform.SetParent(transform);
+                GameObject platform = Instantiate(selectedPlatformPrefab, spawnPosition, Quaternion.identity);
+                ObjectDestroyMonitor.Instance.AddPlatform(platform);
+                platform.transform.localScale = new Vector3(scaleX, scaleY, 1);
+                platform.transform.SetParent(transform);
 
                 if (powerUpPrefab != null && Random.Range(0f, 1f) < powerUpSpawnRate)
                 {
@@ -126,11 +127,13 @@ public class GameManager : MonoBehaviour
             0f
         );
 
-        Instantiate(powerUpPrefab, powerUpPosition, Quaternion.identity);
+        GameObject powerUp = Instantiate(powerUpPrefab, powerUpPosition, Quaternion.identity);
+        ObjectDestroyMonitor.Instance.AddCollectible(powerUp);
     }
 
     public void SetLevelSettings(int currentLevelIndex)
     {
+
         var currentLevelConfig = LevelManager.Instance.levels[currentLevelIndex];
 
         // First platform attributes

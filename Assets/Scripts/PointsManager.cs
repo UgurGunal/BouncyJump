@@ -5,11 +5,21 @@ using TMPro; // Import TextMeshPro namespace
 
 public class PointsManager : MonoBehaviour
 {
-    public TMP_Text angularVelocityText; // Use TMP_Text instead of Text
+    public static PointsManager Instance { get; private set; }
+
+    public TMP_Text angularVelocityText;
     public TMP_Text heightText;
-    public Transform character; // Reference to the character object
+    public Transform character;
 
     private Rigidbody2D rb;
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject); // Optional safeguard
+    }
 
     void Start()
     {
@@ -21,20 +31,13 @@ public class PointsManager : MonoBehaviour
         UpdateUI();
     }
 
-    void Update()
+    public void UpdateUI()
     {
-        if (rb != null)
-        {
-            UpdateUI();
-        }
+        int angularVelocity = Mathf.RoundToInt(rb.angularVelocity);
+        int height = Mathf.Max(Mathf.RoundToInt(character.position.y), 0);
+
+        angularVelocityText.SetText("{0}", angularVelocity);
+        heightText.SetText("{0}", height);
     }
 
-    void UpdateUI()
-    {
-        int angularVelocity = Mathf.RoundToInt(rb.angularVelocity); // Get angular velocity
-        int height = Mathf.Max(Mathf.RoundToInt(character.position.y),0); // Get height (Y position)
-
-        angularVelocityText.text = angularVelocity.ToString();
-        heightText.text = height.ToString();
-    }
 }

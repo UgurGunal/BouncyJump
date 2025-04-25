@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
-    public float ballRelativePosition = 4f;
-    public float startCameraOffset = 0f;
-    public float cameraMovementStartPos = 20f;
+    [SerializeField] private Transform target;
+    [SerializeField] private float ballRelativePosition = 4f;
+    [SerializeField] private float startCameraOffset = 0f;
+    [SerializeField] private float cameraMovementStartPos = 20f;
+    [SerializeField] private float upperBorder = 1f; // Camera follows when ball passes camera.y + 1
+
 
     private float cameraPos; // Track the camera position
     private float upwardCameraSpeed; // This will be set by LevelManager
@@ -24,12 +26,12 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        // Update target position while going upwards
-        if (target.position.y - ballRelativePosition > cameraPos)
+        // Update target position while going upwards 
+        if (target.position.y - ballRelativePosition - upperBorder> cameraPos)
         {
-            cameraPos = Mathf.Max(target.position.y - ballRelativePosition, startCameraOffset);
+            cameraPos = Mathf.Max(target.position.y - ballRelativePosition - upperBorder, startCameraOffset);
         }
-
+ 
         // Move the camera only after a certain height
         if (target.position.y > cameraMovementStartPos)
         {

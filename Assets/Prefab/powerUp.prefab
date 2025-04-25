@@ -134,6 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angularSpeedIncrease: 4000
-  newAngularLimit: 4800
-  newJumpBoostMultiplier: 0.009
+  newAngularLimit: 5200
+  newJumpBoostMultiplier: 0.0082
   duration: 5

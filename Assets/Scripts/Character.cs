@@ -25,8 +25,34 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal");
+    moveX = 0f;
+
+    
+    // Use keyboard in Editor for testing
+    moveX = Input.GetAxis("Horizontal");
+    
+    // Touch controls for mobile
+    if (Input.touchCount > 0)
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
+            {
+                if (touch.position.x > Screen.width / 2)
+                {
+                    moveX = 1f; // Move right
+                }
+                else
+                {
+                    moveX = -1f; // Move left
+                }
+                break; // Only use one touch input
+            }
+        }
     }
+    
+    }
+
 
     private void FixedUpdate()
     {

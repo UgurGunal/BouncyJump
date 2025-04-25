@@ -110,7 +110,7 @@ public class ParallaxBackground : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (mainCamera == null || backgroundInstances[0] == null)
             return;
@@ -161,7 +161,7 @@ public class ParallaxBackground : MonoBehaviour
         // If the lowest background has moved below the camera view, reposition it
         float cameraBottomY = mainCamera.transform.position.y - (mainCamera.orthographicSize);
 
-        if (lowestY + backgroundHeight < cameraBottomY)
+        if (lowestY + backgroundHeight - 12 < cameraBottomY)  // 4 is random value I tried 
         {
             // Move the lowest background to be above the highest one
             backgroundInstances[lowestIndex].transform.position = new Vector3(
@@ -176,10 +176,10 @@ public class ParallaxBackground : MonoBehaviour
 
         if (highestY > cameraTopY + backgroundHeight)
         {
-            // Move the highest background to be below the lowest one
+            // Move the highest background to be below the lowest one (0.1F FOR DESTROYING WHITE LINE )
             backgroundInstances[highestIndex].transform.position = new Vector3(
                 backgroundInstances[highestIndex].transform.position.x,
-                lowestY - backgroundHeight,
+                lowestY - backgroundHeight-0.1f,
                 backgroundInstances[highestIndex].transform.position.z
             );
         }

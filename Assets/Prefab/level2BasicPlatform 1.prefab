@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 9150485712844544035}
   m_Layer: 0
   m_Name: level2BasicPlatform 1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &6726923341677753225
 Transform:
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 319251873, guid: 6d2184177b039c549b505fb0b9fbeb72, type: 3}
+  m_Sprite: {fileID: -2084597529, guid: 6d2184177b039c549b505fb0b9fbeb72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,10 +122,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0.2}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.635, y: 0}
-  - {x: 2.635, y: 0}
-  m_AdjacentStartPoint: {x: -3, y: 0}
-  m_AdjacentEndPoint: {x: 3, y: 0}
+  - {x: -2.91, y: 0}
+  - {x: 2.91, y: 0}
+  m_AdjacentStartPoint: {x: -3.2, y: 0}
+  m_AdjacentEndPoint: {x: 3.2, y: 0}
   m_UseAdjacentStartPoint: 1
   m_UseAdjacentEndPoint: 1
 --- !u!251 &6159494154031921073
@@ -142,7 +142,7 @@ PlatformEffector2D:
     m_Bits: 4294967295
   m_RotationalOffset: 0
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
+  m_UseOneWayGrouping: 1
   m_SurfaceArc: 180
   m_UseSideFriction: 0
   m_UseSideBounce: 0
@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 32.4
+  jumpForce: 34.4
   preBoost: 50
   boostMultiplier: 1.2
-  destroyColor: {r: 0.735849, g: 0.36070177, b: 0, a: 1}
-  destroyTime: 5
+  destroyTime: 2
+  shakeMagnitude: 0.12

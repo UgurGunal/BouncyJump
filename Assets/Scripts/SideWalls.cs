@@ -1,52 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Collider2D))]
 public class WallBoostManager : MonoBehaviour
 {
-    public float boostMultiplier = 1.4f; // Boost for multiplier
-    public float cooldownTime = 0.5f;    // Cooldown before applying boost again
+    public float boostMultiplier = 1.4f;
+    public float cooldownTime = 0.5f;
 
-    private float cooldownCounter = 0f; // Timer to track cooldown
-
-    private void Update()
-    {
-        // Reduce cooldown over time
-        if (cooldownCounter > 0)
-        {
-            cooldownCounter -= Time.deltaTime;
-        }
-    }
+    private bool isOnCooldown = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
+        if (isOnCooldown || collision.rigidbody == null)
+            return;
 
-        if (rb != null && cooldownCounter <= 0)
-        {
-            
+        collision.rigidbody.angularVelocity *= boostMultiplier;
+        StartCoroutine(CooldownRoutine());
+    }
 
-            // Apply the boost
-            rb.angularVelocity *= boostMultiplier;
-
-            //// Determine boost based on wall's tag
-            //if (CompareTag("RightWall"))
-            //{
-            //    if (rb.angularVelocity > 0)
-            //    {
-            //        rb.angularVelocity *= -1;
-            //    }
-            //}
-            //else if (CompareTag("LeftWall"))
-            //{
-            //    if(rb.angularVelocity < 0)
-            //    {
-            //        rb.angularVelocity *= -1;
-            //    }
-            //}
-
-            // Start cooldown
-            cooldownCounter = cooldownTime;
-        }
+    private IEnumerator CooldownRoutine()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        isOnCooldown = false;
     }
 }
