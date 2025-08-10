@@ -2,95 +2,48 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
+    public int levelCount = 4;
+    public float levelHeight = 200f;
+
+    public GameObject coin1Prefab;
+    public GameObject coin2Prefab;
+    public GameObject powerupPrefab;
+    public GameObject diamondPrefab;
 
     [System.Serializable]
-    public class PlatformConfig
+    public class LevelData
     {
-        public GameObject platformShortPrefab; // Short version of first platform
-        public GameObject platformLongPrefab;  // Long version of first platform
-        public float platformMinXScale;
-        public float platformMaxXScale;
-        public float platformYScale;
-        public float platformSpawnRate;
+        public float cameraSpeed = 5f;
+        public GameObject longPlatformPrefab;
+        public GameObject shortPlatformPrefab;
+        public GameObject specialPlatformPrefab;
+        public float longPlatformSpawnRate = 1f;
+        public float shortPlatformSpawnRate = 1f;
+        public float specialPlatformSpawnRate = 1f;
+        public float coin1SpawnRate = 1f;
+        public float coin2SpawnRate = 1f;
+        public float powerupSpawnRate = 1f;
+        public float diamondSpawnRate = 1f;
+        public float emptySpawnRate = 5f;
     }
 
-    [System.Serializable]
-    public class PlatformSimpleConfig
+    public LevelData[] levels;
+
+    void Start()
     {
-        public GameObject platformPrefab;
-        public float platformMinXScale;
-        public float platformMaxXScale;
-        public float platformYScale;
-        public float platformSpawnRate;
-    }
-
-    [System.Serializable]
-    public class LevelConfig
-    {
-        public float upwardCameraSpeed; // Camera speed
-        public float powerUpSpawnRate;  // Power-up spawn rate
-        public PlatformConfig firstPlatformConfig;     // Includes short/long prefabs
-        public PlatformSimpleConfig secondPlatformConfig; // Second platform remains simple
-    }
-
-    public LevelConfig[] levels;
-    public int currentLevel = 0;
-
-    public Transform player; // Player reference
-    public int nextLevelThreshold = 800;
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-
-    private void Start()
-    {
-        ApplyLevelSettings();
-    }
-
-    private void Update()
-    {
-        if (player == null) return;
-
-        // Move to next level if threshold reached
-        if (player.position.y >= (currentLevel + 1) * nextLevelThreshold)
+        if (PointsManager.Instance != null)
         {
-            NextLevel();
+            PointsManager.Instance.StartSession();
         }
     }
 
-    public void NextLevel()
+    public int GetCurrentLevel(float playerY)
     {
-        if (currentLevel < levels.Length - 1)
-        {
-            currentLevel++;
-            ApplyLevelSettings();
-        }
-        else
-        {
-            Debug.Log("Game Completed! Restarting...");
-            RestartGame();
-        }
+        return Mathf.FloorToInt(playerY / levelHeight);
     }
 
-    private void ApplyLevelSettings()
+    public LevelData GetLevelData(int level)
     {
-        Debug.Log("Applying Level " + (currentLevel + 1));
-
-        // Apply camera speed for new level
-        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
-        if (cameraFollow != null)
-        {
-            cameraFollow.SetCameraSpeed(levels[currentLevel].upwardCameraSpeed);
-        }
-    }
-
-    public void RestartGame()
-    {
-        currentLevel = 0;
-        ApplyLevelSettings();
+        return levels[Mathf.Clamp(level, 0, levels.Length - 1)];
     }
 }

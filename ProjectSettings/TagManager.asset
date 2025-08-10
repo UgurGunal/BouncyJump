@@ -6,14 +6,15 @@ TagManager:
   tags:
   - RightWall
   - LeftWall
+  - Platform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 

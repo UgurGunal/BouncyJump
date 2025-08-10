@@ -1,60 +1,88 @@
-using System.Collections;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    private PointsManager pointsManager;
+    [Header("Jump Settings")]
+    public float jumpForce = 16f;
+    public float comboBonus = 0.005f; // Multiplier for current combo to jump bonus
 
-    [SerializeField] private float jumpForce = 30f;
-    [SerializeField] private float preBoost = 100f;
-    [SerializeField] private float boostMultiplier = 1.2f;
-    [SerializeField] private float destroyTime = 0.5f; // Duration of the shake
-    [SerializeField] private float shakeMagnitude = 0.7f; // Magnitude of the shake
+    [Header("Collision Detection")]
+    public float velocityThreshold = 1f; // Very lenient velocity check
+    public float contactNormalThreshold = -0.2f; // Very lenient normal check
 
-    private Transform target;
-    private bool isBeingDestroyed = false;
+    [Header("Combo System")]
+    public bool enableComboSystem = false; // Set to true if you want combo functionality
+
+    [Header("Destruction Settings")]
+    public float destroyTime = 2f; // Time in seconds before destruction after player passes
+    public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
+
+    private Transform playerTransform;
+    private bool isDestroying = false;
+    private float destroyTimer;
+    private Vector3 originalPosition;
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        // Find the player by tag
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
         {
-            target = player.transform;
+            playerTransform = playerObject.transform;
         }
+
+        // Store the original position for the shake effect
+        originalPosition = transform.position;
     }
 
-
-    private void SecondOnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        // Get the player's rigidbody
-        Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
-        Character character = collision.collider.GetComponent<Character>();
-
-        if (playerRb != null)
+        // If the player hasn't been found yet, try to find it again
+        if (playerTransform == null)
         {
-   
-
-            // Debug information
-
-            if (collision.relativeVelocity.y < 0)
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
             {
-                // Apply angular velocity modifications
-                if (playerRb.angularVelocity <= 0)
-                    playerRb.angularVelocity -= preBoost;
-                else
-                    playerRb.angularVelocity += preBoost;
+                playerTransform = playerObject.transform;
+            }
+            else
+            {
+                // If player is still not found, do nothing.
+                return;
+            }
+        }
 
-                playerRb.angularVelocity *= boostMultiplier;
+        // Check if the player has passed the platform
+        if (!isDestroying && playerTransform.position.y > transform.position.y)
+        {
+            isDestroying = true;
+            destroyTimer = destroyTime;
+        }
 
-                // Calculate jump boost
-                float jumpBoost = 0;
-                if (character != null)
+        // If the platform is in the process of being destroyed
+        if (isDestroying)
+        {
+            destroyTimer -= Time.fixedDeltaTime;
+
+            if (destroyTimer <= 0f)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                float shakeStartTime = destroyTime * (2.0f / 3.0f);
+                if (destroyTimer <= shakeStartTime)
                 {
-                    jumpBoost = character.CalculateJumpBoost();
+                    // Calculate the progress of the shake (from 0 to 1) over the last 2/3 of the time
+                    float shakeProgress = 1f - (destroyTimer / shakeStartTime);
+                    float currentShakeMagnitude = shakeMagnitude * shakeProgress;
+                    transform.position = originalPosition + Random.insideUnitSphere * currentShakeMagnitude;
                 }
-
-                // Apply the velocity change to make the player jump
-                playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce + jumpBoost);
+                else
+                {
+                    // If not shaking yet, ensure the position is the original one
+                    transform.position = originalPosition;
+                }
             }
         }
     }
@@ -62,185 +90,152 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Get the player's rigidbody
-        Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
-        Character character = collision.collider.GetComponent<Character>();
-
-        if (playerRb != null)
+        PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
+        if (player != null)
         {
-            // Check collision contact points to determine direction
-            bool collidingFromTop = false;
-
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                // If contact normal points downward, character is hitting from above
-                if (contact.normal.y < -0.5f)  // Platform's normal pointing down means object is above
-                {
-                    collidingFromTop = true;
-                    break;
-                }
-            }
-
-            // Debug information
-            Debug.Log($"Colliding from top: {collidingFromTop}, RelVelocity: {collision.relativeVelocity.y}");
-
-            if (collidingFromTop)
-            {
-                
-                    if (pointsManager == null)
-                    {
-                        pointsManager = FindObjectOfType<PointsManager>();
-                    }
-
-                    pointsManager?.UpdateUI();
-
-                    // Apply angular velocity modifications
-                    if (playerRb.angularVelocity <= 0)
-                        playerRb.angularVelocity -= preBoost;
-                    else
-                        playerRb.angularVelocity += preBoost;
-
-                    playerRb.angularVelocity *= boostMultiplier;
-
-                    // Calculate jump boost
-                    float jumpBoost = 0;
-                    if (character != null)
-                    {
-                        jumpBoost = character.CalculateJumpBoost();
-                    }
-
-                    // Apply the velocity change to make the player jump
-                    playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce + jumpBoost);
-                
-               
-            }
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            HandleJump(player, rb, collision);
         }
     }
 
-
-
-    public IEnumerator DestroyPlatformWithShake()
+    private void HandleJump(PlayerBallController player, Rigidbody2D rb, Collision2D collision)
     {
-        if (!isBeingDestroyed)
+        // Simplified and more reliable detection
+        bool isOnTop = false;
+
+        // Method 1: Contact normal detection (very lenient)
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            isBeingDestroyed = true;
-            Vector3 originalPosition = transform.position;
-            float elapsedTime = 0f;
-
-            // Calculate phase durations
-            float phase1Duration = destroyTime * 0.3f;
-            float phase2Duration = destroyTime * 0.35f;
-            float phase3Duration = destroyTime * 0.35f;
-            float phase2ShakeInterval = 0.05f; // Higher = slower shake
-            float phase3ShakeInterval = 0.012f; // Lower = faster shake
-
-            float shakeTimer = 0f;
-            Vector3 currentShakeOffset = Vector3.zero;
-
-            while (elapsedTime < destroyTime)
+            if (contact.normal.y < contactNormalThreshold)
             {
-                float normalizedTime = elapsedTime / (phase1Duration + phase2Duration + phase3Duration);
+                isOnTop = true;
+                break;
+            }
+        }
 
-                if (elapsedTime < phase1Duration)
-                {
-                    // Phase 1: No shaking
-                    currentShakeOffset = Vector3.zero;
-                    transform.position = originalPosition;
-                }
-                else if (elapsedTime < phase1Duration + phase2Duration)
-                {
-                    // Phase 2: Small shake, low frequency
-                    shakeTimer += Time.deltaTime;
-                    if (shakeTimer >= phase2ShakeInterval)
-                    {
-                        shakeTimer = 0f;
-                        currentShakeOffset = new Vector3(
-                            Random.Range(-shakeMagnitude / 2, shakeMagnitude / 2f),
-                            Random.Range(-shakeMagnitude / 2, shakeMagnitude / 2f),
-                            0
-                        );
-                    }
-                    transform.position = originalPosition + currentShakeOffset;
-                }
-                else
-                {
-                    // Phase 3: Big shake, high frequency
-                    shakeTimer += Time.deltaTime;
-                    if (shakeTimer >= phase3ShakeInterval)
-                    {
-                        shakeTimer = 0f;
-                        currentShakeOffset = new Vector3(
-                            Random.Range(-shakeMagnitude, shakeMagnitude),
-                            Random.Range(-shakeMagnitude, shakeMagnitude),
-                            0
-                        );
-                    }
-                    transform.position = originalPosition + currentShakeOffset;
-                }
+        // Method 2: Simple position check (if normal detection fails)
+        if (!isOnTop)
+        {
+            isOnTop = player.transform.position.y > transform.position.y;
+        }
 
+        // Method 3: Very lenient velocity check
+        bool isNotMovingUp = rb.velocity.y <= velocityThreshold;
 
-                elapsedTime += Time.deltaTime;
-                yield return null;
+        // Debug information
+        // Debug.Log($"Platform Collision - IsOnTop: {isOnTop}, IsNotMovingUp: {isNotMovingUp}, PlayerY: {player.transform.position.y:F2}, PlatformY: {transform.position.y:F2}, VelocityY: {rb.velocity.y:F2}");
+
+        // Jump if player is on top AND not moving upward
+        if (isOnTop && isNotMovingUp)
+        {
+            // Calculate relative velocity for combo increment
+            float relativeVelocity = Mathf.Abs(collision.relativeVelocity.y);
+
+            // Increment combo if combo system is enabled
+            if (enableComboSystem)
+            {
+                IncrementPlatformCombo(relativeVelocity);
             }
 
-            // Reset the platform position to its original position after shake
-            Destroy(gameObject);
+            // Calculate jump bonus using current combo value (if combo system is enabled)
+            float jumpBonus = 0f;
+            if (enableComboSystem)
+            {
+                jumpBonus = GetComboBonus();
+            }
+
+            // Apply jump with bonus: platform jump force + combo jump bonus
+            float totalJumpForce = jumpForce + jumpBonus;
+            player.Jump(totalJumpForce);
+
+            //Debug.Log($"Jump Applied - Force: {totalJumpForce:F2}, Base: {jumpForce:F2}, Bonus: {jumpBonus:F2}, RelativeVelocity: {relativeVelocity:F2}");
         }
     }
 
-
-    // Reset platform for reuse
-    public void ResetPlatform()
+    private void IncrementPlatformCombo(float relativeVelocity)
     {
-        isBeingDestroyed = false;
+        // Try to increment combo safely without direct ComboManager reference
+        try
+        {
+            // Use reflection to safely access ComboManager
+            System.Type comboManagerType = System.Type.GetType("ComboManager");
+            if (comboManagerType != null)
+            {
+                var instanceProperty = comboManagerType.GetProperty("Instance");
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    if (instance != null)
+                    {
+                        var platformComboMethod = comboManagerType.GetMethod("PlatformComboIncrement");
+                        if (platformComboMethod != null)
+                        {
+                            platformComboMethod.Invoke(instance, new object[] { relativeVelocity });
+                            //Debug.Log($"Platform Combo Incremented - Velocity: {relativeVelocity:F2}");
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception)
+        {
+            // ComboManager not available
+            //Debug.Log($"ComboManager not found - No combo incremented: {ex.Message}");
+        }
     }
 
+    private float GetComboBonus()
+    {
+        // Try to get combo bonus safely without direct ComboManager reference
+        try
+        {
+            // Use reflection to safely access ComboManager
+            System.Type comboManagerType = System.Type.GetType("ComboManager");
+            if (comboManagerType != null)
+            {
+                var instanceProperty = comboManagerType.GetProperty("Instance");
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    if (instance != null)
+                    {
+                        var getComboMethod = comboManagerType.GetMethod("getCombo");
+                        if (getComboMethod != null)
+                        {
+                            float currentCombo = (float)getComboMethod.Invoke(instance, null);
+                            return currentCombo * comboBonus;
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception)
+        {
+            // ComboManager not available, return 0 bonus
+        }
+
+        return 0f;
+    }
+
+    // Public methods to control combo system manually
+    public void SetComboBonus(float bonus)
+    {
+        comboBonus = bonus;
+    }
+
+    public void EnableComboSystem(bool enable)
+    {
+        enableComboSystem = enable;
+    }
+
+    // Public methods to adjust collision detection
+    public void SetVelocityThreshold(float threshold)
+    {
+        velocityThreshold = threshold;
+    }
+
+    public void SetContactNormalThreshold(float threshold)
+    {
+        contactNormalThreshold = threshold;
+    }
 }
-
-
-//if (!isBeingDestroyed)
-//{
-//    isBeingDestroyed = true;
-//    Vector3 originalPosition = transform.position;
-//    float elapsedTime = 0f;
-
-//    // Calculate phase durations
-//    float phase1Duration = destroyTime * 0.3f;
-//    float phase2Duration = destroyTime * 0.3f;
-//    float phase3Duration = destroyTime * 0.4f;
-//    float phase2Frequency = 10f; // Medium frequency
-//    float phase3Frequency = 25f; // High frequency
-
-//    while (elapsedTime < destroyTime)
-//    {
-//        float normalizedTime = elapsedTime / (phase1Duration + phase2Duration + phase3Duration);
-
-//        if (elapsedTime < phase1Duration)
-//        {
-//            // Phase 1: No shaking
-//            transform.position = originalPosition;
-//        }
-//        else if (elapsedTime < phase1Duration + phase2Duration)
-//        {
-//            // Phase 2: Mild shake
-//            float t = (elapsedTime - phase1Duration) * phase2Frequency;
-//            float offsetX = Mathf.Sin(t) * (shakeMagnitude / 3f);
-//            float offsetY = Mathf.Cos(t) * (shakeMagnitude / 3f);
-//            transform.position = originalPosition + new Vector3(offsetX, offsetY, 0);
-//        }
-//        else
-//        {
-//            // Phase 3: Stronger, faster shake
-//            float t = (elapsedTime - phase1Duration - phase2Duration) * phase3Frequency;
-//            float offsetX = Mathf.Sin(t) * shakeMagnitude;
-//            float offsetY = Mathf.Cos(t) * shakeMagnitude;
-//            transform.position = originalPosition + new Vector3(offsetX, offsetY, 0);
-//        }
-
-//        elapsedTime += Time.deltaTime;
-//        yield return null;
-//    }
-
-//    // Reset the platform position to its original position after shake
-//    Destroy(gameObject);
-//}
