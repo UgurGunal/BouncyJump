@@ -14,6 +14,8 @@ public class CameraFollow : MonoBehaviour
     private float highestCameraY = 0f;
     private Camera mainCamera;
 
+    private bool hasTriggeredRestart = false; // Add this line
+
     [Header("Game Over Settings")]
     public float restartMargin = 0f;
 
@@ -64,23 +66,42 @@ public class CameraFollow : MonoBehaviour
     }
 
     void CheckCameraBounds()
+{
+    if (hasTriggeredRestart) return; // Guard to prevent multiple calls
+    
+    if (mainCamera != null)
     {
-        if (mainCamera != null)
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(player.position);
+        if (viewportPoint.y < -restartMargin)
         {
-            Vector3 viewportPoint = mainCamera.WorldToViewportPoint(player.position);
-            if (viewportPoint.y < -restartMargin)
-            {
-                RestartGame();
-            }
+            hasTriggeredRestart = true; // Set guard
+            RestartGame();
         }
     }
+}
 
     void RestartGame()
     {
+        // End session first to capture final stats before pausing
         if (PointsManager.Instance != null)
         {
             PointsManager.Instance.EndSession();
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+
+        // Pause the game immediately
+        Time.timeScale = 0f; 
+
+        // Then, show the revive panel
+        if (RevivePanelUI.Instance != null && player != null)
+        {
+            RevivePanelUI.Instance.ShowRevivePanel();
+        }
+        else
+        {
+            // Fallback if RevivePanelUI is not in scene or player is null
+            // Resume time before loading new scene in fallback
+            Time.timeScale = 1f; 
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
     }
 }

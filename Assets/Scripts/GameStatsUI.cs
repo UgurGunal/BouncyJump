@@ -8,6 +8,7 @@ public class GameStatsUI : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI gemsText;
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI levelText; // New: Reference for Level Text
 
     [Header("Update Settings")]
     public float updateInterval = 0.1f; // How often to update the UI (e.g., 10 times per second)
@@ -27,7 +28,7 @@ public class GameStatsUI : MonoBehaviour
     {
         if (PointsManager.Instance == null)
         {
-            Debug.LogWarning("GameStatsUI: PointsManager.Instance is null. Cannot update UI.");
+            //Debug.LogWarning("GameStatsUI: PointsManager.Instance is null. Cannot update UI.");
             return;
         }
 
@@ -53,6 +54,12 @@ public class GameStatsUI : MonoBehaviour
         if (timeText != null)
         {
             timeText.text = $"Time: {PointsManager.Instance.SessionDuration:F1}s";
+        }
+
+        // Update Level Text (New)
+        if (levelText != null)
+        {
+            levelText.text = $"Level: {PointsManager.Instance.CurrentLevel}";
         }
     }
 }

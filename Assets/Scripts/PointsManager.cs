@@ -12,6 +12,8 @@ public class PointsManager : MonoBehaviour
     private float _sessionStartTime = 0f;
     private float _sessionDuration = 0f;
     private bool _sessionActive = false;
+    private int _currentLevel = 0; // New: Track current level
+    private int _totalEarnedCoins = 0;
 
     // --- Public Properties to access data ---
     public float HighestHeightReached => _highestHeightReached;
@@ -19,8 +21,11 @@ public class PointsManager : MonoBehaviour
     public int PowerupsCollected => _powerupsCollected;
     public int GemsCollected => _gemsCollected;
     public float SessionDuration => _sessionDuration;
+    public int CurrentLevel => _currentLevel; // New: Public property for current level
+    public int TotalEarnedCoins => _totalEarnedCoins;
 
     void Awake()
+
     {
         if (Instance == null)
         {
@@ -45,7 +50,6 @@ public class PointsManager : MonoBehaviour
         if (_sessionActive)
         {
             // Update highest height reached
-            // Assuming player is the object with PlayerBallController
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
             {
@@ -53,6 +57,12 @@ public class PointsManager : MonoBehaviour
                 if (currentPlayerY > _highestHeightReached)
                 {
                     _highestHeightReached = currentPlayerY;
+                }
+
+                // Update current level based on player's height
+                if (LevelManager.Instance != null)
+                {
+                    _currentLevel = LevelManager.Instance.GetCurrentLevel(currentPlayerY);
                 }
             }
 
@@ -71,32 +81,42 @@ public class PointsManager : MonoBehaviour
         _sessionStartTime = Time.time;
         _sessionDuration = 0f;
         _sessionActive = true;
-        Debug.Log("Session Started!");
+        _currentLevel = 0; // New: Reset level on session start
+        _totalEarnedCoins = 0;
+        
     }
 
     public void EndSession()
     {
         _sessionActive = false;
-        Debug.Log($"Session Ended! Height: {_highestHeightReached:F2}, Coins: {_coinsCollected}, Powerups: {_powerupsCollected}, Gems: {_gemsCollected}, Time: {_sessionDuration:F2}s");
-        // You might want to save these stats here or pass them to a UI
+
+        if (LevelManager.Instance != null)
+        {
+            int maxReachedLevel = Mathf.CeilToInt(_highestHeightReached / LevelManager.Instance.levelHeight);
+            _totalEarnedCoins = _coinsCollected * Mathf.Max(1, maxReachedLevel);
+        }
+        else
+        {
+            _totalEarnedCoins = _coinsCollected;
+        }
     }
 
     // --- Collectable Methods ---
     public void AddCoin(int value)
     {
         _coinsCollected += value;
-        Debug.Log($"Coin collected! Value: {value}. Total Coins: {_coinsCollected}");
+        
     }
 
     public void AddPowerup()
     {
         _powerupsCollected++;
-        Debug.Log($"Powerup collected! Total Powerups: {_powerupsCollected}");
+        
     }
 
     public void AddGem(int value)
     {
         _gemsCollected += value;
-        Debug.Log($"Gem collected! Value: {value}. Total Gems: {_gemsCollected}");
+        
     }
 }

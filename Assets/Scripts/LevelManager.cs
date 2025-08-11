@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager Instance { get; private set; } // New: Singleton Instance
+
     public int levelCount = 4;
-    public float levelHeight = 200f;
+    public float levelHeight = 20f;
 
     public GameObject coin1Prefab;
     public GameObject coin2Prefab;
@@ -29,6 +31,20 @@ public class LevelManager : MonoBehaviour
 
     public LevelData[] levels;
 
+    // New: Awake method for Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            // Optional: DontDestroyOnLoad(gameObject); if you want it to persist across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         if (PointsManager.Instance != null)
@@ -39,7 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public int GetCurrentLevel(float playerY)
     {
-        return Mathf.FloorToInt(playerY / levelHeight);
+        return Mathf.Max(0, Mathf.FloorToInt(playerY / levelHeight));
     }
 
     public LevelData GetLevelData(int level)

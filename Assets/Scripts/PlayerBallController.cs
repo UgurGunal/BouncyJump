@@ -17,12 +17,14 @@ public class PlayerBallController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput = 0f;
     private bool isTouchingSideWall = false;
+    private Camera mainCamera;
     private float effectiveMaxSpeed; // Dynamic max speed including combo bonus
     private ComboManager comboManager; // Direct reference instead of reflection
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
         
         // Get direct reference to ComboManager
         comboManager = ComboManager.Instance;
@@ -38,12 +40,11 @@ public class PlayerBallController : MonoBehaviour
     {
         // Get input (lightweight, no optimization needed)
         HandleInput();
-
-        UpdateEffectiveMaxSpeed();
     }
     
     private void HandleInput()
     {
+        
         moveInput = 0f;
         
         #if UNITY_EDITOR || UNITY_STANDALONE
@@ -65,6 +66,10 @@ public class PlayerBallController : MonoBehaviour
 
     void FixedUpdate()
     {
+        UpdateEffectiveMaxSpeed();
+
+    
+
         if (!isTouchingSideWall)
         {
             float currentVelocityX = rb.velocity.x;
@@ -152,5 +157,20 @@ public class PlayerBallController : MonoBehaviour
         return effectiveMaxSpeed;
     }
 
-    
+    public void Revive(Vector2 revivePosition)
+    {
+        // Reset position
+        transform.position = revivePosition;
+        
+        // Reset velocity
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        
+        // Reset any other player state as needed
+        isTouchingSideWall = false;
+        
+        //Debug.Log($"Player revived at position: {revivePosition}");
+    }
 }

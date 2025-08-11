@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TowerGenerator : MonoBehaviour
+    public class TowerGenerator : MonoBehaviour
 {
     public Transform player;
     public LevelManager levelManager;
@@ -28,7 +28,7 @@ public class TowerGenerator : MonoBehaviour
     {
         if (player == null || levelManager == null || cameraFollow == null)
         {
-            //Debug.LogError("Player, LevelManager, or CameraFollow not assigned in TowerGenerator!");
+            
             return;
         }
 
@@ -43,17 +43,16 @@ public class TowerGenerator : MonoBehaviour
     {
         if (player == null) return;
 
-        // Check for level change
-        int newLevel = levelManager.GetCurrentLevel(player.position.y);
-        if (newLevel != currentLevel)
-        {
-            currentLevel = newLevel;
-            UpdateLevelSettings(currentLevel);
-        }
-
         // Spawn new platforms as player moves up
         while (lastSpawnedPlatformY < player.position.y + 10f)
         {
+            // Check for level change
+            int newLevel = levelManager.GetCurrentLevel(lastSpawnedPlatformY);
+            if (newLevel != currentLevel)
+            {
+                currentLevel = newLevel;
+                UpdateLevelSettings(currentLevel);
+            }
             SpawnPlatform();
         }
     }
