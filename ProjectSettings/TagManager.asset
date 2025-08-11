@@ -7,6 +7,7 @@ TagManager:
   - RightWall
   - LeftWall
   - Platform
+  - Coin
   layers:
   - Default
   - TransparentFX

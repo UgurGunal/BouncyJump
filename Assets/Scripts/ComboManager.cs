@@ -7,7 +7,7 @@ public class ComboManager : MonoBehaviour
     public float maxCombo = 1000f;
     [SerializeField] private float currentCombo = 0f; // Made private with SerializeField for inspector visibility
     public float minDecrease = 80f; // Minimum decay rate per second
-    public float maxDecrease = 300f; // Maximum decay rate per second
+    public float maxDecrease = 280f; // Maximum decay rate per second
     
     [Header("Bonus Speed Limit")]
     public float speedLimitBonus = 3f; // Additional speed at max combo
@@ -62,12 +62,18 @@ public class ComboManager : MonoBehaviour
     {
         playerController = FindObjectOfType<PlayerBallController>();
         
-        //Debug.LogWarning("ComboManager: PlayerBallController not found in scene!");
+        if (playerController == null && showDebugLogs)
+        {
+            //Debug.LogWarning("ComboManager: PlayerBallController not found in scene!");
+        }
         
         // Initialize combo to 0
         currentCombo = 0f;
         
-        //Debug.Log($"ComboManager initialized. Max Combo: {maxCombo}");
+        if (showDebugLogs)
+        {
+            //Debug.Log($"ComboManager initialized. Max Combo: {maxCombo}");
+        }
     }
     
     void Update()
@@ -100,7 +106,10 @@ public class ComboManager : MonoBehaviour
         currentCombo -= decayRate * deltaTime;
         currentCombo = Mathf.Max(0f, currentCombo);
         
-        //Debug.Log("Combo decayed to zero");
+        if (showDebugLogs && oldCombo > 0f && currentCombo == 0f)
+        {
+            //Debug.Log("Combo decayed to zero");
+        }
     }
     
     public float getCombo()
@@ -132,7 +141,10 @@ public class ComboManager : MonoBehaviour
     {
         if (relativeVelocity < 0f)
         {
-            //Debug.LogWarning($"Negative relative velocity for platform: {relativeVelocity}");
+            if (showDebugLogs)
+            {
+                //Debug.LogWarning($"Negative relative velocity for platform: {relativeVelocity}");
+            }
             return;
         }
         
@@ -154,27 +166,33 @@ public class ComboManager : MonoBehaviour
             currentCombo = Mathf.Min(maxCombo, currentCombo);
         }
         
-        //Debug.Log($"Platform combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+        if (showDebugLogs)
+        {
+            //Debug.Log($"Platform combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+        }
     }
     
     public void WallComboIncrement(GameObject wall, float relativeVelocity)
     {
         if (wall == null)
         {
-            //Debug.LogWarning("WallComboIncrement called with null wall!");
+            if (showDebugLogs)
+                //Debug.LogWarning("WallComboIncrement called with null wall!");
             return;
         }
         
         if (relativeVelocity < 0f)
         {
-            //Debug.LogWarning($"Negative relative velocity for wall: {relativeVelocity}");
+            if (showDebugLogs)
+                //Debug.LogWarning($"Negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
         // Check if this wall is on cooldown
         if (IsWallOnCooldown(wall))
         {
-            //Debug.Log($"Wall {wall.name} is on cooldown, no combo added");
+            if (showDebugLogs)
+                //Debug.Log($"Wall {wall.name} is on cooldown, no combo added");
             return;
         }
         
@@ -197,14 +215,68 @@ public class ComboManager : MonoBehaviour
         SetWallCooldown(wall);
         ResetOtherWallCooldowns(wall);
         
-        //Debug.Log($"Wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+        if (showDebugLogs)
+        {
+            //Debug.Log($"Wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+        }
+    }
+
+    // New method with custom cooldown logic: hitting one wall resets others and sets current to max cooldown
+    public void WallComboIncrementWithCooldown(GameObject wall, float relativeVelocity, float customCooldownDuration)
+    {
+        if (wall == null)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning("WallComboIncrementWithCooldown called with null wall!");
+            return;
+        }
+        
+        if (relativeVelocity < 0f)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning($"Negative relative velocity for wall: {relativeVelocity}");
+            return;
+        }
+        
+        // Check if this wall is on cooldown
+        if (IsWallOnCooldown(wall))
+        {
+            if (showDebugLogs)
+                //Debug.Log($"Wall {wall.name} is on cooldown, no combo added");
+            return;
+        }
+        
+        // Calculate combo as relative velocity X × wallVelocityMultiplier
+        float calculatedCombo = relativeVelocity * wallVelocityMultiplier;
+        
+        float oldCombo = currentCombo;
+        
+        // Add base combo from wall bounce
+        AddCombo(calculatedCombo);
+        
+        // Multiply current combo by wallComboMultiplier
+        if (wallComboMultiplier != 1.0f)
+        {
+            currentCombo *= wallComboMultiplier;
+            currentCombo = Mathf.Min(maxCombo, currentCombo);
+        }
+        
+        // Custom cooldown logic: Set current wall to max cooldown and reset all others
+        SetWallCooldownWithDuration(wall, customCooldownDuration);
+        ResetAllOtherWallCooldowns(wall);
+        
+        if (showDebugLogs)
+        {
+            //Debug.Log($"Wall combo with custom cooldown: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+        }
     }
     
     private void AddCombo(float amount)
     {
         if (amount < 0f)
         {
-            //Debug.LogWarning($"Trying to add negative combo: {amount}");
+            if (showDebugLogs)
+                //Debug.LogWarning($"Trying to add negative combo: {amount}");
             return;
         }
         
@@ -220,6 +292,11 @@ public class ComboManager : MonoBehaviour
     {
         wallCooldowns[wall] = Time.time + wallCooldownDuration;
     }
+
+    private void SetWallCooldownWithDuration(GameObject wall, float duration)
+    {
+        wallCooldowns[wall] = Time.time + duration;
+    }
     
     private void ResetOtherWallCooldowns(GameObject currentWall)
     {
@@ -233,6 +310,25 @@ public class ComboManager : MonoBehaviour
             }
         }
         
+        foreach (var wall in expiredCooldowns)
+        {
+            wallCooldowns.Remove(wall);
+        }
+    }
+
+    private void ResetAllOtherWallCooldowns(GameObject currentWall)
+    {
+        expiredCooldowns.Clear(); // Reuse the list
+        
+        foreach (var kvp in wallCooldowns)
+        {
+            if (kvp.Key != currentWall && kvp.Key != null) // Added null check
+            {
+                expiredCooldowns.Add(kvp.Key);
+            }
+        }
+        
+        // Remove all other walls from cooldown (reset them)
         foreach (var wall in expiredCooldowns)
         {
             wallCooldowns.Remove(wall);
@@ -269,7 +365,10 @@ public class ComboManager : MonoBehaviour
     
     public void ResetCombo()
     {
-        //Debug.Log("Combo reset to 0");
+        if (showDebugLogs){
+             //Debug.Log("Combo reset to 0");
+        }
+
             
         currentCombo = 0f;
         wallCooldowns.Clear();
@@ -285,7 +384,10 @@ public class ComboManager : MonoBehaviour
     {
         currentCombo = Mathf.Clamp(value, 0f, maxCombo);
         
-        //Debug.Log($"Combo set to: {currentCombo}");
+        if (showDebugLogs){
+            //Debug.Log($"Combo set to: {currentCombo}");
+        }
+        
     }
     
     // Method to test combo functionality

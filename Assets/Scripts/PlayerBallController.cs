@@ -3,10 +3,10 @@ using UnityEngine;
 public class PlayerBallController : MonoBehaviour
 {
     [Header("Movement")]
-    public float acceleration = 50f;
+    public float acceleration = 45f;
     public float deceleration = 2f;
-    public float turnFactor = 80f;
-    public float maxSpeed = 7f;
+    public float turnFactor = 90f;
+    public float maxSpeed = 6.5f;
     public float restartMargin = 0f;
 
     [Header("Combo Speed System")]

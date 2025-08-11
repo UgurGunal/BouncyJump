@@ -7,20 +7,20 @@ using UnityEngine;
     public CameraFollow cameraFollow;
 
     [Header("Platform Generation Settings")]
-    public float platformXMin = -2.5f;
-    public float platformXMax = 2.5f;
-    public float platformYIntervalMin = 2f;
-    public float platformYIntervalMax = 4f;
+    public float platformXMin = -1.84f;
+    public float platformXMax = 1.84f;
+    public float platformYIntervalMin = 1.8f;
+    public float platformYIntervalMax = 1.9f;
     public float platformScaleXMin = 0.9f;
-    public float platformScaleXMax = 1.1f;
+    public float platformScaleXMax = 1f;
 
     [Header("Collectable Generation Settings")]
-    public float collectableXMin = -2.5f;
-    public float collectableXMax = 2.5f;
-    public float collectableYOffsetMin = 1f;
-    public float collectableYOffsetMax = 2f;
+    public float collectableXMin = -1.5f;
+    public float collectableXMax = 1.5f;
+    public float collectableYOffsetMin = 0.65f;
+    public float collectableYOffsetMax = 0.9f;
 
-    private float lastSpawnedPlatformY = 0f;
+    private float lastSpawnedPlatformY = -2f;
     private int currentLevel = -1;
     private Transform generatedObjectsParent;
 
@@ -69,7 +69,14 @@ using UnityEngine;
     void UpdateLevelSettings(int level)
     {
         LevelManager.LevelData levelData = levelManager.GetLevelData(level);
-        cameraFollow.constantSpeed = levelData.cameraSpeed;
+        
+        // Update camera speed using the new method
+        if (cameraFollow != null)
+        {
+            cameraFollow.UpdateCameraSpeed(levelData.cameraSpeed);
+        }
+        
+        Debug.Log($"Level changed to {level}, Camera speed: {levelData.cameraSpeed}");
     }
 
     void SpawnPlatform()

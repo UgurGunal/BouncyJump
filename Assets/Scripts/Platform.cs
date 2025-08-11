@@ -4,17 +4,17 @@ public class Platform : MonoBehaviour
 {
     [Header("Jump Settings")]
     public float jumpForce = 16f;
-    public float comboBonus = 0.005f; // Multiplier for current combo to jump bonus
+    public float comboBonus = 0.006f; // Multiplier for current combo to jump bonus
 
     [Header("Collision Detection")]
-    public float velocityThreshold = 1f; // Very lenient velocity check
-    public float contactNormalThreshold = -0.2f; // Very lenient normal check
+    public float velocityThreshold = 5f; // Very lenient velocity check
+    public float contactNormalThreshold = 0f; // Very lenient normal check
 
     [Header("Combo System")]
     public bool enableComboSystem = false; // Set to true if you want combo functionality
 
     [Header("Destruction Settings")]
-    public float destroyTime = 2f; // Time in seconds before destruction after player passes
+    public float destroyTime = 3f; // Time in seconds before destruction after player passes
     public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
 
     private Transform playerTransform;
