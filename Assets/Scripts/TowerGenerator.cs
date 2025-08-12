@@ -7,12 +7,12 @@ using UnityEngine;
     public CameraFollow cameraFollow;
 
     [Header("Platform Generation Settings")]
-    public float platformXMin = -1.84f;
-    public float platformXMax = 1.84f;
+    public float platformXMin = -1.82f;
+    public float platformXMax = 1.82f;
     public float platformYIntervalMin = 1.8f;
     public float platformYIntervalMax = 1.9f;
-    public float platformScaleXMin = 0.9f;
-    public float platformScaleXMax = 1f;
+    public float platformScaleXMin = 0.85f;
+    public float platformScaleXMax = 0.95f;
 
     [Header("Collectable Generation Settings")]
     public float collectableXMin = -1.5f;
@@ -20,7 +20,7 @@ using UnityEngine;
     public float collectableYOffsetMin = 0.65f;
     public float collectableYOffsetMax = 0.9f;
 
-    private float lastSpawnedPlatformY = -2f;
+    private float lastSpawnedPlatformY = -2f; //to make first platform lower
     private int currentLevel = -1;
     private Transform generatedObjectsParent;
 

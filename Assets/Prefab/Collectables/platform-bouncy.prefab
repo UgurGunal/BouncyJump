@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 86212842, guid: 427685ef5f677c14895ad911873ebe2a, type: 3}
+  m_Sprite: {fileID: -409356870, guid: 427685ef5f677c14895ad911873ebe2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.53571427, y: 0.5285714}
+  m_Size: {x: 2.5428572, y: 0.41428572}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -124,7 +124,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.5428572, y: 0.41428572}
-    newSize: {x: 0.53571427, y: 0.5285714}
+    newSize: {x: 2.5428572, y: 0.41428572}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -163,10 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 22
-  comboBonus: 0.008
+  jumpForce: 19
+  comboBonus: 0.006
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  destroyTime: 4
+  destroyTime: 3.5
   shakeMagnitude: 0.1

@@ -6,8 +6,8 @@ public class ComboManager : MonoBehaviour
     [Header("Combo Settings")]
     public float maxCombo = 1000f;
     [SerializeField] private float currentCombo = 0f; // Made private with SerializeField for inspector visibility
-    public float minDecrease = 80f; // Minimum decay rate per second
-    public float maxDecrease = 280f; // Maximum decay rate per second
+    public float minDecrease = 60f; // Minimum decay rate per second
+    public float maxDecrease = 260f; // Maximum decay rate per second
     
     [Header("Bonus Speed Limit")]
     public float speedLimitBonus = 3f; // Additional speed at max combo
@@ -16,13 +16,13 @@ public class ComboManager : MonoBehaviour
     public float rotationSpeedMultiplier = 2f; // Multiplier for combo-based rotation
     
     [Header("Platform Combo Settings")]
-    public float platformVelocityMultiplier = 3f; // Multiplier for relative velocity
-    public float platformMinimumBonus = 36f; // Minimum bonus value
+    public float platformVelocityMultiplier = 2f; // Multiplier for relative velocity
+    public float platformMinimumBonus = 30f; // Minimum bonus value
     public float platformComboMultiplier = 1.00f; // Multiplier for current combo
     
     [Header("Wall Combo Settings")]
-    public float wallVelocityMultiplier = 14f; // Multiplier for relative velocity
-    public float wallComboMultiplier = 1.01f; // Multiplier for current combo
+    public float wallVelocityMultiplier = 10f; // Multiplier for relative velocity
+    public float wallComboMultiplier = 1f; // Multiplier for current combo
 
     [Header("Wall Cooldown")]
     public float wallCooldownDuration = 1.5f;

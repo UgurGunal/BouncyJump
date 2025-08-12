@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -308783723, guid: 427685ef5f677c14895ad911873ebe2a, type: 3}
+  m_Sprite: {fileID: -2090488853, guid: 427685ef5f677c14895ad911873ebe2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,10 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 16
-  comboBonus: 0.006
+  jumpForce: 14
+  comboBonus: 0.008
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  destroyTime: 2
+  destroyTime: 1.8
   shakeMagnitude: 0.1

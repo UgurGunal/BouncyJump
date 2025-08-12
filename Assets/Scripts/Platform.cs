@@ -3,8 +3,8 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     [Header("Jump Settings")]
-    public float jumpForce = 16f;
-    public float comboBonus = 0.006f; // Multiplier for current combo to jump bonus
+    public float jumpForce = 14f;
+    public float comboBonus = 0.005f; // Multiplier for current combo to jump bonus
 
     [Header("Collision Detection")]
     public float velocityThreshold = 5f; // Very lenient velocity check

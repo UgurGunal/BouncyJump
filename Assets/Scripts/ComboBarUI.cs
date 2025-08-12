@@ -3,106 +3,98 @@ using UnityEngine.UI;
 
 public class ComboBarUI : MonoBehaviour
 {
-    [Header("UI References")]
-    public Image comboBarFill; // The red fill image
-    public Image comboBarBackground; // The background image
-    
+    [Header("UI Elements")]
+    public Slider comboSlider;
+
+    [Header("Smooth Transition Settings")]
+    public float smoothSpeed = 5f; // How fast the slider catches up to actual combo
+    public bool useSmoothTransitions = true; // Toggle for smooth vs instant updates
+
     private ComboManager comboManager;
-    private RectTransform backgroundRect;
-    private RectTransform fillRect;
-    private float maxComboValue;
-    
+    private float targetComboValue = 0f;
+    private float currentSliderValue = 0f;
+    private float lastUpdateTime = 0f;
+    private const float UPDATE_INTERVAL = 1f / 60f; // 60 FPS update interval
+
     void Start()
     {
         // Find ComboManager
         comboManager = ComboManager.Instance;
         
-        // Get max combo value from ComboManager
-        if (comboManager != null)
+        if (comboManager == null)
         {
-            maxComboValue = comboManager.maxCombo;
+            Debug.LogError("ComboBarUI: ComboManager not found in scene!");
+            return;
         }
-        else
+
+        // Initialize slider with maxCombo from ComboManager
+        if (comboSlider != null)
         {
-            maxComboValue = 1000f; // Default fallback
-        }
-        
-        // Get RectTransforms for sizing
-        if (comboBarBackground != null)
-        {
-            backgroundRect = comboBarBackground.GetComponent<RectTransform>();
-        }
-        if (comboBarFill != null)
-        {
-            fillRect = comboBarFill.GetComponent<RectTransform>();
-        }
-        
-        // Ensure proper UI setup
-        SetupUI();
-        
-        // Initialize bar
-        UpdateComboBar();
-    }
-    
-    void SetupUI()
-    {
-        if (comboBarFill != null && comboBarBackground != null)
-        {
-            // Make fill image match background exactly
-            if (fillRect != null && backgroundRect != null)
-            {
-                // Copy background's size and position to fill
-                fillRect.sizeDelta = backgroundRect.sizeDelta;
-                fillRect.anchoredPosition = backgroundRect.anchoredPosition;
-                fillRect.anchorMin = backgroundRect.anchorMin;
-                fillRect.anchorMax = backgroundRect.anchorMax;
-                fillRect.pivot = backgroundRect.pivot;
-                
-                // Start with zero width
-                fillRect.sizeDelta = new Vector2(0f, fillRect.sizeDelta.y);
-            }
-            
-            //Debug.Log("UI Setup completed - Fill matches background");
+            comboSlider.minValue = 0f;
+            comboSlider.maxValue = comboManager.maxCombo; // Automatically fetch maxCombo
+            comboSlider.value = 0f;
+            currentSliderValue = 0f;
         }
     }
-    
+
     void Update()
     {
-        UpdateComboBar();
-    }
-    
-    void UpdateComboBar()
-    {
-        if (comboManager != null && comboBarFill != null && comboBarBackground != null)
+        if (comboManager == null) return;
+
+        // Update at 60 FPS for better performance
+        if (Time.time - lastUpdateTime >= UPDATE_INTERVAL)
         {
-            // Get current combo value
-            float currentCombo = comboManager.getCombo();
+            UpdateSmoothTransition();
+            lastUpdateTime = Time.time;
+        }
+    }
+
+    void UpdateSmoothTransition()
+    {
+        // Get the target combo value
+        targetComboValue = comboManager.CurrentCombo;
+
+        if (useSmoothTransitions)
+        {
+            // Smooth transition using Lerp with fixed time step
+            currentSliderValue = Mathf.Lerp(currentSliderValue, targetComboValue, smoothSpeed * UPDATE_INTERVAL);
             
-            // Calculate fill ratio (0 to 1)
-            float fillRatio = currentCombo / maxComboValue;
-            fillRatio = Mathf.Clamp01(fillRatio); // Ensure it's between 0 and 1
-            
-            // Get background width and calculate fill width
-            if (backgroundRect != null && fillRect != null)
+            // Update slider with smooth value
+            if (comboSlider != null)
             {
-                float backgroundWidth = backgroundRect.sizeDelta.x;
-                float fillWidth = backgroundWidth * fillRatio;
-                
-                // Update fill width
-                fillRect.sizeDelta = new Vector2(fillWidth, fillRect.sizeDelta.y);
-                
-                // Debug.Log($"Combo: {currentCombo}, Ratio: {fillRatio:F2}, Fill Width: {fillWidth:F1}");
+                comboSlider.value = currentSliderValue;
             }
         }
         else
         {
-            // No ComboManager or UI elements, hide the bar
-            if (fillRect != null)
+            // Instant update (original behavior)
+            if (comboSlider != null)
             {
-                fillRect.sizeDelta = new Vector2(0f, fillRect.sizeDelta.y);
+                comboSlider.value = targetComboValue;
             }
-            
-            //Debug.LogWarning("ComboBarUI: Missing ComboManager or UI elements!");
         }
+    }
+
+    // Public method to force instant update (useful for testing)
+    public void ForceUpdate()
+    {
+        if (comboManager != null && comboSlider != null)
+        {
+            targetComboValue = comboManager.CurrentCombo;
+            currentSliderValue = targetComboValue;
+            comboSlider.value = targetComboValue;
+        }
+    }
+
+    // Public method to toggle smooth transitions
+    public void SetSmoothTransitions(bool smooth)
+    {
+        useSmoothTransitions = smooth;
+    }
+
+    // Public method to adjust smooth speed
+    public void SetSmoothSpeed(float speed)
+    {
+        smoothSpeed = Mathf.Max(0.1f, speed);
     }
 } 

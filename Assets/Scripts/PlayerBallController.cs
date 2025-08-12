@@ -6,7 +6,7 @@ public class PlayerBallController : MonoBehaviour
     public float acceleration = 45f;
     public float deceleration = 2f;
     public float turnFactor = 90f;
-    public float maxSpeed = 6.5f;
+    public float maxSpeed = 6f;
     public float restartMargin = 0f;
 
     [Header("Combo Speed System")]
