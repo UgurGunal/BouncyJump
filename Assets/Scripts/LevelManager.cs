@@ -7,6 +7,10 @@ public class LevelManager : MonoBehaviour
     public int levelCount = 4;
     public float levelHeight = 20f;
 
+    [Header("Player and Camera References")]
+    public Transform player;
+    public CameraFollow cameraFollow;
+
     public GameObject coin1Prefab;
     public GameObject coin2Prefab;
     public GameObject powerupPrefab;
@@ -31,6 +35,10 @@ public class LevelManager : MonoBehaviour
 
     public LevelData[] levels;
 
+    private int currentLevel = -1;
+    private float lastCheckTime = 0f;
+    private float checkInterval = 1f; // Check every 1 second
+
     // New: Awake method for Singleton
     void Awake()
     {
@@ -53,13 +61,51 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (player == null) return;
+
+        // Check for level change based on player's Y position every second
+        if (Time.time - lastCheckTime >= checkInterval)
+        {
+            int newLevel = GetCurrentLevel(player.position.y);
+            if (newLevel != currentLevel)
+            {
+                currentLevel = newLevel;
+                UpdateLevelSettings(currentLevel);
+            }
+            lastCheckTime = Time.time;
+        }
+    }
+
     public int GetCurrentLevel(float playerY)
     {
-        return Mathf.Max(0, Mathf.FloorToInt(playerY / levelHeight));
+        return Mathf.Max(1, Mathf.FloorToInt(playerY / levelHeight) + 1);
     }
 
     public LevelData GetLevelData(int level)
     {
-        return levels[Mathf.Clamp(level, 0, levels.Length - 1)];
+        // Convert level 1-based to 0-based array index
+        int arrayIndex = Mathf.Clamp(level - 1, 0, levels.Length - 1);
+        return levels[arrayIndex];
+    }
+
+    void UpdateLevelSettings(int level)
+    {
+        LevelData levelData = GetLevelData(level);
+        
+        // Update camera speed using the new method
+        if (cameraFollow != null)
+        {
+            cameraFollow.UpdateCameraSpeed(levelData.cameraSpeed);
+        }
+        
+        // Show level change UI
+        if (LevelChangeUI.Instance != null)
+        {
+            LevelChangeUI.Instance.ShowLevelChange(level);
+        }
+        
+        Debug.Log($"Level changed to {level}, Camera speed: {levelData.cameraSpeed}");
     }
 }

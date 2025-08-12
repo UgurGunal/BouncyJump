@@ -4,7 +4,6 @@ using UnityEngine;
 {
     public Transform player;
     public LevelManager levelManager;
-    public CameraFollow cameraFollow;
 
     [Header("Platform Generation Settings")]
     public float platformXMin = -1.82f;
@@ -26,7 +25,7 @@ using UnityEngine;
 
     void Start()
     {
-        if (player == null || levelManager == null || cameraFollow == null)
+        if (player == null || levelManager == null)
         {
             
             return;
@@ -46,13 +45,12 @@ using UnityEngine;
         // Spawn new platforms as player moves up
         while (lastSpawnedPlatformY < player.position.y + 10f)
         {
-            // Check for level change
-            int newLevel = levelManager.GetCurrentLevel(lastSpawnedPlatformY);
-            if (newLevel != currentLevel)
-            {
-                currentLevel = newLevel;
-                UpdateLevelSettings(currentLevel);
-            }
+                    // Check for level change (now handled by LevelManager based on player position)
+        int newLevel = levelManager.GetCurrentLevel(lastSpawnedPlatformY);
+        if (newLevel != currentLevel)
+        {
+            currentLevel = newLevel;
+        }
             SpawnPlatform();
         }
     }
@@ -66,18 +64,7 @@ using UnityEngine;
         }
     }
 
-    void UpdateLevelSettings(int level)
-    {
-        LevelManager.LevelData levelData = levelManager.GetLevelData(level);
-        
-        // Update camera speed using the new method
-        if (cameraFollow != null)
-        {
-            cameraFollow.UpdateCameraSpeed(levelData.cameraSpeed);
-        }
-        
-        Debug.Log($"Level changed to {level}, Camera speed: {levelData.cameraSpeed}");
-    }
+
 
     void SpawnPlatform()
     {

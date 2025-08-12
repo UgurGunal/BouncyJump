@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 14
+  jumpForce: 15
   comboBonus: 0.006
   velocityThreshold: 5
   contactNormalThreshold: 0

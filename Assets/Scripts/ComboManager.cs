@@ -21,7 +21,7 @@ public class ComboManager : MonoBehaviour
     public float platformComboMultiplier = 1.00f; // Multiplier for current combo
     
     [Header("Wall Combo Settings")]
-    public float wallVelocityMultiplier = 10f; // Multiplier for relative velocity
+    public float wallVelocityMultiplier = 12f; // Multiplier for relative velocity
     public float wallComboMultiplier = 1f; // Multiplier for current combo
 
     [Header("Wall Cooldown")]
