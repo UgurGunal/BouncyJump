@@ -35,31 +35,32 @@ public class GameStatsUI : MonoBehaviour
         // Update Height Text
         if (heightText != null)
         {
-            heightText.text = $"Height: {PointsManager.Instance.HighestHeightReached:F2}m";
+            int heightValue = Mathf.RoundToInt(PointsManager.Instance.HighestHeightReached * 5);
+            heightText.text = $"{heightValue:N0}";
         }
 
         // Update Coins Text
         if (coinsText != null)
         {
-            coinsText.text = $"Coins: {PointsManager.Instance.CoinsCollected}";
+            coinsText.text = $"{PointsManager.Instance.CoinsCollected:N0}";
         }
 
         // Update Gems Text
         if (gemsText != null)
         {
-            gemsText.text = $"Gems: {PointsManager.Instance.GemsCollected}";
+            gemsText.text = $"{PointsManager.Instance.GemsCollected}";
         }
 
         // Update Time Text
         if (timeText != null)
         {
-            timeText.text = $"Time: {PointsManager.Instance.SessionDuration:F1}s";
+            timeText.text = $"{PointsManager.Instance.SessionDuration:F1}";
         }
 
         // Update Level Text (New)
         if (levelText != null)
         {
-            levelText.text = $"Level: {PointsManager.Instance.CurrentLevel}";
+            levelText.text = $"{PointsManager.Instance.CurrentLevel}";
         }
     }
 }
