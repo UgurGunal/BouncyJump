@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 15
-  comboBonus: 0.008
+  comboBonus: 0.0075
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1

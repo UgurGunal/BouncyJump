@@ -9,15 +9,15 @@ public class RevivePanelUI : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject panelObject;
-    public Button payDiamondsButton;
-    public Button watchAdButton;
-    public Button exitButton;
+    public GameObject contentContainer; // The content to animate (excludes background)
+    public Button pay3DiamondButton; // Pay 3 diamonds to revive
+    public Button watchAdButton; // Watch ad to revive
+    public Button quitButton; // Quit to game end panel
     public Slider countdownSlider;
-    public TextMeshProUGUI countdownText;
 
     [Header("Revive Settings")]
     public int diamondsToRevive = 3;
-    public float reviveSkipCountDownDuration = 10f;
+    public float reviveCountdownDuration = 10f;
     public float reviveYOffset = 0f;
 
     private PlayerBallController _playerController;
@@ -26,22 +26,26 @@ public class RevivePanelUI : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         panelObject.SetActive(false);
     }
 
     void Start()
     {
-        payDiamondsButton.onClick.AddListener(OnPayDiamondsClick);
+        if (Instance == null)
+        {
+            Instance = this;
+            Debug.Log("RevivePanelUI Instance set");
+        }
+        else
+        {
+            Debug.Log("Duplicate RevivePanelUI found, destroying");
+            Destroy(gameObject);
+            return;
+        }
+
+        pay3DiamondButton.onClick.AddListener(OnPay3DiamondClick);
         watchAdButton.onClick.AddListener(OnWatchAdClick);
-        exitButton.onClick.AddListener(OnExitClick);
+        quitButton.onClick.AddListener(OnQuitClick);
 
         _playerController = FindObjectOfType<PlayerBallController>();
         _cameraFollow = FindObjectOfType<CameraFollow>();
@@ -49,10 +53,36 @@ public class RevivePanelUI : MonoBehaviour
 
     public void ShowRevivePanel()
     {
+        Debug.Log("ShowRevivePanel called");
         panelObject.SetActive(true);
-        _currentCountdownTime = reviveSkipCountDownDuration;
+        contentContainer.transform.localScale = Vector3.zero;
+        StartCoroutine(ScaleAnimation());
+        
+        _currentCountdownTime = reviveCountdownDuration;
         UpdateDiamondButtonState();
         StartCoroutine(CountdownCoroutine());
+    }
+
+    private IEnumerator ScaleAnimation()
+    {
+        float duration = 0.5f;
+        float elapsed = 0f;
+        Vector3 startScale = Vector3.zero;
+        Vector3 endScale = Vector3.one;
+        
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float progress = elapsed / duration;
+            
+            // Smooth ease-out curve (starts fast, slows down at the end)
+            float smoothProgress = 1f - Mathf.Pow(1f - progress, 3f);
+            
+            contentContainer.transform.localScale = Vector3.Lerp(startScale, endScale, smoothProgress);
+            yield return null;
+        }
+        
+        contentContainer.transform.localScale = endScale;
     }
 
     void HideRevivePanel()
@@ -63,10 +93,10 @@ public class RevivePanelUI : MonoBehaviour
 
     void UpdateDiamondButtonState()
     {
-        if (payDiamondsButton != null)
+        if (pay3DiamondButton != null)
         {
             bool canAfford = PointsManager.Instance.GemsCollected >= diamondsToRevive;
-            
+            pay3DiamondButton.interactable = canAfford;
         }
     }
 
@@ -77,14 +107,14 @@ public class RevivePanelUI : MonoBehaviour
             _currentCountdownTime -= Time.unscaledDeltaTime;
             if (countdownSlider != null)
             { 
-                countdownSlider.value = _currentCountdownTime / reviveSkipCountDownDuration;
+                countdownSlider.value = _currentCountdownTime / reviveCountdownDuration;
             }
             yield return null;
         }
         OnCountdownFinished();
     }
 
-    void OnPayDiamondsClick()
+    void OnPay3DiamondClick()
     {
         if (PointsManager.Instance != null && PointsManager.Instance.GemsCollected >= diamondsToRevive)
         {
@@ -100,7 +130,7 @@ public class RevivePanelUI : MonoBehaviour
         StartCoroutine(ReviveCountdown());
     }
 
-    void OnExitClick()
+    void OnQuitClick()
     {
         HideRevivePanel();
         if (GameEndPanelUI.Instance != null)
@@ -116,7 +146,7 @@ public class RevivePanelUI : MonoBehaviour
 
     void OnCountdownFinished()
     {
-        OnExitClick();
+        OnQuitClick();
     }
 
     void RevivePlayer()
@@ -129,33 +159,19 @@ public class RevivePanelUI : MonoBehaviour
         }
         else
         {
-            OnExitClick();
+            OnQuitClick();
         }
     }
 
     IEnumerator ReviveCountdown()
     {
-        if (countdownText != null)
-        {
-            countdownText.gameObject.SetActive(true);
-        }
-
         RevivePlayer();
 
         int countdown = 3;
         while (countdown > 0)
         {
-            if (countdownText != null)
-            {
-                countdownText.text = countdown.ToString();
-            }
             yield return new WaitForSecondsRealtime(1f);
             countdown--;
-        }
-
-        if (countdownText != null)
-        {
-            countdownText.gameObject.SetActive(false);
         }
 
         Time.timeScale = 1f;

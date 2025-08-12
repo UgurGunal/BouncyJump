@@ -19,7 +19,7 @@ using UnityEngine;
     public float collectableYOffsetMin = 0.65f;
     public float collectableYOffsetMax = 0.9f;
 
-    private float lastSpawnedPlatformY = -2f; //to make first platform lower
+    private float lastSpawnedPlatformY = -3f; //to make first platform lower
     private int currentLevel = -1;
     private Transform generatedObjectsParent;
 

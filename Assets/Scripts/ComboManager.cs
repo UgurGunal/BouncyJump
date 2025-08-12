@@ -6,8 +6,8 @@ public class ComboManager : MonoBehaviour
     [Header("Combo Settings")]
     public float maxCombo = 1000f;
     [SerializeField] private float currentCombo = 0f; // Made private with SerializeField for inspector visibility
-    public float minDecrease = 60f; // Minimum decay rate per second
-    public float maxDecrease = 260f; // Maximum decay rate per second
+    public float minDecrease = 80f; // Minimum decay rate per second
+    public float maxDecrease = 280f; // Maximum decay rate per second
     
     [Header("Bonus Speed Limit")]
     public float speedLimitBonus = 3f; // Additional speed at max combo

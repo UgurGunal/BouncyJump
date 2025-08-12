@@ -130,6 +130,8 @@ public class CameraFollow : MonoBehaviour
 
     void RestartGame()
     {
+        Debug.Log("Player died - RestartGame called");
+        
         // End session first to capture final stats before pausing
         if (PointsManager.Instance != null)
         {
@@ -142,10 +144,12 @@ public class CameraFollow : MonoBehaviour
         // Then, show the revive panel
         if (RevivePanelUI.Instance != null && player != null)
         {
+            Debug.Log("Showing RevivePanelUI");
             RevivePanelUI.Instance.ShowRevivePanel();
         }
         else
         {
+            Debug.LogWarning("RevivePanelUI.Instance is null or player is null. RevivePanelUI.Instance: " + (RevivePanelUI.Instance != null) + ", Player: " + (player != null));
             // Fallback if RevivePanelUI is not in scene or player is null
             // Resume time before loading new scene in fallback
             Time.timeScale = 1f; 
