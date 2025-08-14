@@ -12,6 +12,22 @@ public class PlayerBallController : MonoBehaviour
     [Header("Combo Speed System")]
     public bool enableComboSpeedSystem = false; // Set to true if you want combo-based speed increase
 
+    [Header("Collision Scale Effects")]
+    public bool enableWallCollisionScaleEffect = true; // Enable/disable wall collision scale effects
+    public float minCollisionSpeedForEffect = 2f; // Minimum speed to trigger scale effect
+    public float maxCollisionSpeedForEffect = 9f; // Maximum speed for full scale effect
+    public float minSquishScale = 0.60f; // Minimum X scale (maximum squish) - 0.8 = 20% reduction
+    public float maxSquishScale = 0.95f; // Maximum X scale (minimum squish) - 0.95 = 5% reduction
+    public float scaleEffectDuration = 0.15f; // Duration of the scale effect in seconds
+
+    [Header("Platform Collision Scale Effects")]
+    public bool enablePlatformCollisionScaleEffect = true; // Enable/disable platform collision scale effects
+    public float minPlatformCollisionSpeedForEffect = 2f; // Minimum Y speed to trigger platform scale effect
+    public float maxPlatformCollisionSpeedForEffect = 9f; // Maximum Y speed for full platform scale effect
+    public float minPlatformSquishScale = 0.60f; // Minimum Y scale (maximum squish) - 0.7 = 30% reduction
+    public float maxPlatformSquishScale = 0.95f; // Maximum Y scale (minimum squish) - 0.9 = 10% reduction
+    public float platformScaleEffectDuration = 0.15f; // Duration of the platform scale effect in seconds
+
 
 
     private Rigidbody2D rb;
@@ -21,11 +37,17 @@ public class PlayerBallController : MonoBehaviour
     private float effectiveMaxSpeed; // Dynamic max speed including combo bonus
     private ComboManager comboManager; // Direct reference instead of reflection
     private bool gameStarted = false; // Track if the 0.5-second delay has passed
+    private Vector3 originalScale; // Store the original scale for restoration
+    private bool isScaleEffectActive = false; // Track if scale effect is currently active
+    private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+        
+        // Store original scale for restoration
+        originalScale = transform.localScale;
         
         // Get direct reference to ComboManager
         comboManager = ComboManager.Instance;
@@ -150,11 +172,19 @@ public class PlayerBallController : MonoBehaviour
     public void Jump(float jumpForce)
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        
+        // Check landing speed and apply platform scale effect
+        float landingSpeed = Mathf.Abs(rb.velocity.y);
+        ApplyPlatformScaleEffect(landingSpeed);
     }
 
     public void BounceFromWall(float bounceForce, float direction)
     {
         rb.velocity = new Vector2(direction * bounceForce, rb.velocity.y);
+        
+        // Check collision speed and apply scale effect
+        float collisionSpeed = Mathf.Abs(rb.velocity.x);
+        ApplyScaleEffect(collisionSpeed);
     }
 
     // Public methods to control combo speed system
@@ -190,6 +220,124 @@ public class PlayerBallController : MonoBehaviour
         
         gameStarted = true;
         Debug.Log("Game started - Player can now move!");
+    }
+
+    private void ApplyScaleEffect(float collisionSpeed)
+    {
+        // Don't apply effect if disabled
+        if (!enableWallCollisionScaleEffect)
+            return;
+
+        // Don't apply effect if speed is below minimum threshold
+        if (collisionSpeed < minCollisionSpeedForEffect)
+            return;
+
+        // Don't apply effect if already active
+        if (isScaleEffectActive)
+            return;
+
+        // Calculate scale reduction based on collision speed
+        float speedRatio = Mathf.Clamp01((collisionSpeed - minCollisionSpeedForEffect) / 
+                                        (maxCollisionSpeedForEffect - minCollisionSpeedForEffect));
+        
+        // Interpolate between max and min squish scale based on speed
+        float targetXScale = Mathf.Lerp(maxSquishScale, minSquishScale, speedRatio);
+        
+        // Apply the scale effect
+        Vector3 newScale = originalScale;
+        newScale.x = targetXScale;
+        transform.localScale = newScale;
+        
+        // Start the restoration coroutine
+        StartCoroutine(RestoreScaleAfterDelay());
+        
+        float scaleReductionPercent = (1f - targetXScale) * 100f;
+        Debug.Log($"Scale effect applied: Speed={collisionSpeed:F1}, X Scale={targetXScale:F2}, Reduction={scaleReductionPercent:F1}%");
+    }
+
+    private System.Collections.IEnumerator RestoreScaleAfterDelay()
+    {
+        isScaleEffectActive = true;
+        
+        Vector3 squishedScale = transform.localScale; // Current squished scale
+        float elapsedTime = 0f;
+        
+        // Smoothly animate back to original scale over the duration
+        while (elapsedTime < scaleEffectDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / scaleEffectDuration;
+            
+            // Smooth interpolation from squished scale to original scale
+            transform.localScale = Vector3.Lerp(squishedScale, originalScale, progress);
+            
+            yield return null;
+        }
+        
+        // Ensure we end up exactly at the original scale
+        transform.localScale = originalScale;
+        isScaleEffectActive = false;
+        
+        Debug.Log("Scale effect smoothly restored");
+    }
+
+    private void ApplyPlatformScaleEffect(float landingSpeed)
+    {
+        // Don't apply effect if disabled
+        if (!enablePlatformCollisionScaleEffect)
+            return;
+
+        // Don't apply effect if speed is below minimum threshold
+        if (landingSpeed < minPlatformCollisionSpeedForEffect)
+            return;
+
+        // Don't apply effect if already active
+        if (isPlatformScaleEffectActive)
+            return;
+
+        // Calculate scale reduction based on landing speed
+        float speedRatio = Mathf.Clamp01((landingSpeed - minPlatformCollisionSpeedForEffect) / 
+                                        (maxPlatformCollisionSpeedForEffect - minPlatformCollisionSpeedForEffect));
+        
+        // Interpolate between max and min squish scale based on speed
+        float targetYScale = Mathf.Lerp(maxPlatformSquishScale, minPlatformSquishScale, speedRatio);
+        
+        // Apply the scale effect
+        Vector3 newScale = originalScale;
+        newScale.y = targetYScale;
+        transform.localScale = newScale;
+        
+        // Start the restoration coroutine
+        StartCoroutine(RestorePlatformScaleAfterDelay());
+        
+        float scaleReductionPercent = (1f - targetYScale) * 100f;
+        Debug.Log($"Platform scale effect applied: Speed={landingSpeed:F1}, Y Scale={targetYScale:F2}, Reduction={scaleReductionPercent:F1}%");
+    }
+
+    private System.Collections.IEnumerator RestorePlatformScaleAfterDelay()
+    {
+        isPlatformScaleEffectActive = true;
+        
+        Vector3 squishedScale = transform.localScale; // Current squished scale
+        float elapsedTime = 0f;
+        
+        // Smoothly animate back to original scale over the duration
+        while (elapsedTime < platformScaleEffectDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / platformScaleEffectDuration;
+            
+            // Smooth interpolation from squished scale to original scale
+            transform.localScale = Vector3.Lerp(squishedScale, originalScale, progress);
+            
+            yield return null;
+        }
+        
+        // Ensure we end up exactly at the original scale
+        transform.localScale = originalScale;
+        isPlatformScaleEffectActive = false;
+        
+        Debug.Log("Platform scale effect smoothly restored");
     }
 
     public void Revive(Vector2 revivePosition)
