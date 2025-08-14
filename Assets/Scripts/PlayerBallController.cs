@@ -20,6 +20,7 @@ public class PlayerBallController : MonoBehaviour
     private Camera mainCamera;
     private float effectiveMaxSpeed; // Dynamic max speed including combo bonus
     private ComboManager comboManager; // Direct reference instead of reflection
+    private bool gameStarted = false; // Track if the 0.5-second delay has passed
 
     void Start()
     {
@@ -34,12 +35,23 @@ public class PlayerBallController : MonoBehaviour
         }
         
         UpdateEffectiveMaxSpeed();
+        
+        // Start the 0.5-second delay before allowing player movement
+        StartCoroutine(StartGameDelay());
     }
 
     void Update()
     {
-        // Get input (lightweight, no optimization needed)
-        HandleInput();
+        // Only handle input if the game has started (after 0.5-second delay)
+        if (gameStarted)
+        {
+            HandleInput();
+        }
+        else
+        {
+            // Reset input to zero when game hasn't started to prevent any movement
+            moveInput = 0f;
+        }
     }
     
     private void HandleInput()
@@ -66,9 +78,10 @@ public class PlayerBallController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateEffectiveMaxSpeed();
+        // Only allow physics movement if the game has started
+        if (!gameStarted) return;
 
-    
+        UpdateEffectiveMaxSpeed();
 
         if (!isTouchingSideWall)
         {
@@ -155,6 +168,28 @@ public class PlayerBallController : MonoBehaviour
     public float GetEffectiveMaxSpeed()
     {
         return effectiveMaxSpeed;
+    }
+
+    private System.Collections.IEnumerator StartGameDelay()
+    {
+        // Freeze the player's rigidbody for 0.5 seconds
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+        }
+        
+        // Wait for 0.5 seconds
+        yield return new WaitForSeconds(0.5f);
+        
+        // Unfreeze the player and allow movement
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
+        
+        gameStarted = true;
+        Debug.Log("Game started - Player can now move!");
     }
 
     public void Revive(Vector2 revivePosition)

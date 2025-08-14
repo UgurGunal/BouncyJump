@@ -116,7 +116,7 @@ public class GameEndPanelUI : MonoBehaviour
     {
         HideGameEndPanel();
         Time.timeScale = 1f; // Resume time before loading new scene
-        SceneManager.LoadScene("MainMenu"); // Load the MainMenu scene
+        SceneManager.LoadScene("HomeScene"); // Load the HomeScene
     }
 
     void OnRestartClick()

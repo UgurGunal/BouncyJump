@@ -141,7 +141,7 @@ public class RevivePanelUI : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
         }
     }
 
