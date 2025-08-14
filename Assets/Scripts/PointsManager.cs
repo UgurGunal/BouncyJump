@@ -104,6 +104,14 @@ public class PointsManager : MonoBehaviour
         // You might want to save these stats here or pass them to a UI
     }
 
+    public void ResumeSession()
+    {
+        // Resume session without resetting collected items
+        _sessionStartTime = Time.time - _sessionDuration; // Adjust start time to maintain continuous duration
+        _sessionActive = true;
+        Debug.Log("Session Resumed!");
+    }
+
     // --- Collectable Methods ---
     public void AddCoin(int value)
     {

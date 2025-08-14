@@ -14,11 +14,12 @@ public class RevivePanelUI : MonoBehaviour
     public Button watchAdButton; // Watch ad to revive
     public Button quitButton; // Quit to game end panel
     public Slider countdownSlider;
+    public TextMeshProUGUI countdownText; // Text to display countdown seconds
 
     [Header("Revive Settings")]
     public int diamondsToRevive = 3;
     public float reviveCountdownDuration = 10f;
-    public float reviveYOffset = 0f;
+    public float reviveYOffset = -0.6f;
 
     private PlayerBallController _playerController;
     private CameraFollow _cameraFollow;
@@ -153,9 +154,15 @@ public class RevivePanelUI : MonoBehaviour
     {
         if (_playerController != null)
         {
-            float reviveY = (reviveYOffset == 0) ? Camera.main.transform.position.y : reviveYOffset;
+            float reviveY = Camera.main.transform.position.y + reviveYOffset;
             Vector3 newPosition = new Vector3(Camera.main.transform.position.x, reviveY, 0);
             _playerController.Revive(newPosition);
+            
+            // Resume the session to continue tracking stats after revive
+            if (PointsManager.Instance != null)
+            {
+                PointsManager.Instance.ResumeSession();
+            }
         }
         else
         {
@@ -168,10 +175,29 @@ public class RevivePanelUI : MonoBehaviour
         RevivePlayer();
 
         int countdown = 3;
+        
+        // Show countdown text if available
+        if (countdownText != null)
+        {
+            countdownText.gameObject.SetActive(true);
+        }
+        
         while (countdown > 0)
         {
+            // Update countdown text
+            if (countdownText != null)
+            {
+                countdownText.text = countdown.ToString();
+            }
+            
             yield return new WaitForSecondsRealtime(1f);
             countdown--;
+        }
+        
+        // Hide countdown text when finished
+        if (countdownText != null)
+        {
+            countdownText.gameObject.SetActive(false);
         }
 
         Time.timeScale = 1f;
