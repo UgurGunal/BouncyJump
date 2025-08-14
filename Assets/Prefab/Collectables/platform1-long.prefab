@@ -168,5 +168,8 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
+  enableTimerDestroy: 0
   destroyTime: 3.4
   shakeMagnitude: 0.08
+  enableDistanceDestroy: 1
+  destroyDistance: 8

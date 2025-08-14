@@ -14,8 +14,11 @@ public class Platform : MonoBehaviour
     public bool enableComboSystem = false; // Set to true if you want combo functionality
 
     [Header("Destruction Settings")]
+    public bool enableTimerDestroy = true; // Enable/disable timer-based destruction
     public float destroyTime = 3f; // Time in seconds before destruction after player passes
     public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
+    public bool enableDistanceDestroy = true; // Enable/disable distance-based destruction
+    public float destroyDistance = 8f; // Distance below player to instantly destroy platform
 
     private Transform playerTransform;
     private bool isDestroying = false;
@@ -52,14 +55,21 @@ public class Platform : MonoBehaviour
             }
         }
 
-        // Check if the player has passed the platform
-        if (!isDestroying && playerTransform.position.y > transform.position.y)
+        // Check for distance-based destruction (always active if enabled)
+        if (enableDistanceDestroy && playerTransform.position.y > transform.position.y + destroyDistance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Check if the player has passed the platform (for timer-based destruction)
+        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y)
         {
             isDestroying = true;
             destroyTimer = destroyTime;
         }
 
-        // If the platform is in the process of being destroyed
+        // If the platform is in the process of being destroyed (timer-based)
         if (isDestroying)
         {
             destroyTimer -= Time.fixedDeltaTime;

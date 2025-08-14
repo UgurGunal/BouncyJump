@@ -43,7 +43,7 @@ using UnityEngine;
         if (player == null) return;
 
         // Spawn new platforms as player moves up
-        while (lastSpawnedPlatformY < player.position.y + 10f)
+        while (lastSpawnedPlatformY < player.position.y + 8f)
         {
                     // Check for level change (now handled by LevelManager based on player position)
         int newLevel = levelManager.GetCurrentLevel(lastSpawnedPlatformY);
