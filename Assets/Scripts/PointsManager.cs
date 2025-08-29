@@ -13,6 +13,8 @@ public class PointsManager : MonoBehaviour
     private float _sessionDuration = 0f;
     private bool _sessionActive = false;
     private int _currentLevel = 0; // New: Track current level
+    
+
 
     // --- Public Properties to access data ---
     public float HighestHeightReached => _highestHeightReached;
@@ -94,15 +96,51 @@ public class PointsManager : MonoBehaviour
         _sessionDuration = 0f;
         _sessionActive = true;
         _currentLevel = 0; // New: Reset level on session start
+        _currencySaved = false; // Reset currency saved flag for new session
         Debug.Log("Session Started!");
     }
 
+    private bool _currencySaved = false; // Flag to prevent double-saving
+    
     public void EndSession()
     {
         _sessionActive = false;
-        Debug.Log($"Session Ended! Height: {_highestHeightReached:F2}, Coins: {_coinsCollected}, Powerups: {_powerupsCollected}, Gems: {_gemsCollected}, Level: {_currentLevel}, Time: {_sessionDuration:F2}s"); // New: Include level in log
-        // You might want to save these stats here or pass them to a UI
+        Debug.Log($"Session Ended! Height: {_highestHeightReached:F2}, Session Coins: {_coinsCollected}, Total Earned Gold: {TotalEarnedCoins}, Gems: {_gemsCollected}, Level: {_currentLevel}, Time: {_sessionDuration:F2}s");
+        // Note: Currency accumulation/saving is handled by GameEndPanelUI when it shows
     }
+    
+    // Method to mark currency as already saved (called externally when currency is saved immediately)
+    public void MarkCurrencyAsSaved()
+    {
+        _currencySaved = true;
+    }
+    
+    // Method to accumulate current session's currency and save to PlayerPrefs immediately for safety
+    public void AccumulateSessionCurrency()
+    {
+        if (!_currencySaved)
+        {
+            int earnedGold = TotalEarnedCoins;
+            int earnedDiamonds = _gemsCollected;
+            
+            // Save immediately to PlayerPrefs for crash protection
+            if (earnedGold > 0 || earnedDiamonds > 0)
+            {
+                int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
+                int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
+                
+                PlayerPrefs.SetInt("PlayerGold", currentGold + earnedGold);
+                PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + earnedDiamonds);
+                PlayerPrefs.Save();
+                
+                Debug.Log($"Session currency saved immediately - Gold: {currentGold} + {earnedGold} = {currentGold + earnedGold}, Diamonds: {currentDiamonds} + {earnedDiamonds} = {currentDiamonds + earnedDiamonds}");
+            }
+            
+            _currencySaved = true; // Mark this session as processed
+        }
+    }
+    
+
 
     public void ResumeSession()
     {
@@ -116,13 +154,8 @@ public class PointsManager : MonoBehaviour
     public void AddCoin(int value)
     {
         _coinsCollected += value;
-        
-        // Also add to persistent gold currency for shop system
-        int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
-        PlayerPrefs.SetInt("PlayerGold", currentGold + value);
-        PlayerPrefs.Save();
-        
-        Debug.Log($"Coin collected! Value: {value}. Session Coins: {_coinsCollected}, Total Gold: {currentGold + value}");
+        Debug.Log($"Coin collected! Value: {value}. Session Coins: {_coinsCollected}");
+        // Note: Currency is saved at end of session based on TotalEarnedCoins calculation
     }
 
     public void AddPowerup()
@@ -134,12 +167,7 @@ public class PointsManager : MonoBehaviour
     public void AddGem(int value)
     {
         _gemsCollected += value;
-        
-        // Also add to persistent diamond currency for shop system
-        int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
-        PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + value);
-        PlayerPrefs.Save();
-        
-        Debug.Log($"Gem collected! Value: {value}. Session Gems: {_gemsCollected}, Total Diamonds: {currentDiamonds + value}");
+        Debug.Log($"Gem collected! Value: {value}. Session Gems: {_gemsCollected}");
+        // Note: Currency is saved at end of session
     }
 }

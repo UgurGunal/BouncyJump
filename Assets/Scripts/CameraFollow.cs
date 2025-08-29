@@ -132,12 +132,12 @@ public class CameraFollow : MonoBehaviour
     {
         Debug.Log("Player died - RestartGame called");
         
-        // End session first to capture final stats before pausing
+        // End session to capture final stats (currency will be saved by GameEndPanelUI)
         if (PointsManager.Instance != null)
         {
             PointsManager.Instance.EndSession();
         }
-
+        
         // Pause the game immediately
         Time.timeScale = 0f; 
 
