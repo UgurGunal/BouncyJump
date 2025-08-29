@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/BasicTower.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/HomeScene.unity
     guid: adca5b9b13f813c42b9caabfe552e01f
+  - enabled: 1
+    path: Assets/Scenes/OldTower.unity
+    guid: 4f6f591085d2eea44af17b1ddf32bb4e
+  - enabled: 1
+    path: Assets/Scenes/RoyalTower.unity
+    guid: 29e5536eec6a9034e855d311262a3694
+  - enabled: 1
+    path: Assets/Scenes/AmazonTower.unity
+    guid: 787baf50bcaae0d4c9eabb60c533427b
   m_configObjects: {}
