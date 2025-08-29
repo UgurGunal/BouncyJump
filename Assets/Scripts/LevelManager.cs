@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     public Transform player;
     public CameraFollow cameraFollow;
 
+    [Header("Simple Tower Reference")]
+    public SimpleTowerManager simpleTowerManager; // Reference to simple tower manager
+
     public GameObject coin1Prefab;
     public GameObject coin2Prefab;
     public GameObject powerupPrefab;
@@ -88,6 +91,11 @@ public class LevelManager : MonoBehaviour
         // Convert level 1-based to 0-based array index
         int arrayIndex = Mathf.Clamp(level - 1, 0, levels.Length - 1);
         return levels[arrayIndex];
+    }
+
+    public LevelData GetCurrentLevelData()
+    {
+        return GetLevelData(currentLevel);
     }
 
     void UpdateLevelSettings(int level)

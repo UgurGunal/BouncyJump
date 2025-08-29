@@ -11,6 +11,12 @@ public class HomeScreenUI : MonoBehaviour
     public Button buyGoldButton;
     public Button buyDiamondButton;
 
+    [Header("Shop Integration")]
+    public TowerShopManager shopManager;
+    
+    [Header("Tower Integration")]
+    public SimpleTowerManager simpleTowerManager;
+
     void Start()
     {
         // Set up button listeners
@@ -38,46 +44,72 @@ public class HomeScreenUI : MonoBehaviour
         {
             buyDiamondButton.onClick.AddListener(OnBuyDiamondButtonClick);
         }
+
+        // Initialize managers if not assigned
+        if (shopManager == null)
+        {
+            shopManager = FindObjectOfType<TowerShopManager>();
+        }
+        
+        if (simpleTowerManager == null)
+        {
+            simpleTowerManager = SimpleTowerManager.Instance;
+        }
     }
 
     void OnPlayButtonClick()
     {
-        Debug.Log("Play button clicked - Loading game scene");
+        Debug.Log("Play button clicked - Loading current tower scene");
         
-        // Try to load the game scene - you may need to adjust the scene name
-        // based on your actual scene setup in Build Settings
-        try
+        if (simpleTowerManager != null)
         {
-            SceneManager.LoadScene("GameScene");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Failed to load GameScene: {e.Message}");
-            Debug.LogWarning("Please check your Build Settings and ensure 'GameScene' is added to the build");
+            string sceneToLoad = simpleTowerManager.GetCurrentTowerSceneName();
+            Debug.Log($"Loading scene: {sceneToLoad}");
             
-            // Fallback: try to load scene by index 1 (assuming it's the game scene)
-            // You can change this index based on your build settings
             try
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(sceneToLoad);
             }
-            catch (System.Exception e2)
+            catch (System.Exception e)
             {
-                Debug.LogError($"Failed to load scene by index 1: {e2.Message}");
+                Debug.LogError($"Failed to load scene '{sceneToLoad}': {e.Message}");
+                Debug.LogWarning("Please check your Build Settings and ensure the scene is added to the build");
+                
+                // Fallback: try to load default scene
+                try
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+                catch (System.Exception e2)
+                {
+                    Debug.LogError($"Failed to load fallback GameScene: {e2.Message}");
+                }
             }
+        }
+        else
+        {
+            Debug.LogError("SimpleTowerManager not found!");
         }
     }
 
     void OnShopButtonClick()
     {
-        Debug.Log("Shop button clicked - TODO: Implement shop functionality");
-        // TODO: Implement shop functionality
+        Debug.Log("Shop button clicked - TODO: Implement general shop functionality");
+        // TODO: Implement general shop functionality (if different from tower shop)
     }
 
     void OnTowersButtonClick()
     {
-        Debug.Log("Towers button clicked - TODO: Implement towers functionality");
-        // TODO: Implement towers functionality
+        Debug.Log("Towers button clicked - Opening tower shop panel");
+        
+        if (shopManager != null)
+        {
+            shopManager.OpenShop();
+        }
+        else
+        {
+            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
+        }
     }
 
     void OnBuyGoldButtonClick()

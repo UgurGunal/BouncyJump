@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696b6d5c0089211488000dbdef371003, type: 3}
+  m_Name: Basic-lvl4
+  m_EditorClassIdentifier: 
+  levelName: Level 4
+  cameraSpeed: 3.4
+  platformConfig:
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 7766332efd7524249bd4b2c9b47577d1, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: f4cedfddf121f2d44a90995f75c286aa, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 1755461d1203ca145be3e708dd17b3f3, type: 3}
+    longPlatformSpawnRate: 0.48
+    shortPlatformSpawnRate: 0.48
+    specialPlatformSpawnRate: 0.04
+  collectableConfig:
+    coin1Prefab: {fileID: 6595305194927341745, guid: 6dc0d459297dfbc4e8858bd6fe4e6683, type: 3}
+    coin2Prefab: {fileID: 6595305194927341745, guid: 090ca7aa6aeefdc4bb970784d9ae5412, type: 3}
+    powerupPrefab: {fileID: 6595305194927341745, guid: 6dc0d459297dfbc4e8858bd6fe4e6683, type: 3}
+    diamondPrefab: {fileID: 6595305194927341745, guid: c9ee8e1c4b1e2844dacf79692d5366ca, type: 3}
+    coin1SpawnRate: 0.2
+    coin2SpawnRate: 0.25
+    powerupSpawnRate: 0
+    diamondSpawnRate: 0.005
+    emptySpawnRate: 0.55

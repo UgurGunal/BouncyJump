@@ -252,7 +252,6 @@ public class PlayerBallController : MonoBehaviour
         StartCoroutine(RestoreScaleAfterDelay());
         
         float scaleReductionPercent = (1f - targetXScale) * 100f;
-        Debug.Log($"Scale effect applied: Speed={collisionSpeed:F1}, X Scale={targetXScale:F2}, Reduction={scaleReductionPercent:F1}%");
     }
 
     private System.Collections.IEnumerator RestoreScaleAfterDelay()
@@ -277,8 +276,6 @@ public class PlayerBallController : MonoBehaviour
         // Ensure we end up exactly at the original scale
         transform.localScale = originalScale;
         isScaleEffectActive = false;
-        
-        Debug.Log("Scale effect smoothly restored");
     }
 
     private void ApplyPlatformScaleEffect(float landingSpeed)
@@ -311,7 +308,6 @@ public class PlayerBallController : MonoBehaviour
         StartCoroutine(RestorePlatformScaleAfterDelay());
         
         float scaleReductionPercent = (1f - targetYScale) * 100f;
-        Debug.Log($"Platform scale effect applied: Speed={landingSpeed:F1}, Y Scale={targetYScale:F2}, Reduction={scaleReductionPercent:F1}%");
     }
 
     private System.Collections.IEnumerator RestorePlatformScaleAfterDelay()
@@ -336,8 +332,6 @@ public class PlayerBallController : MonoBehaviour
         // Ensure we end up exactly at the original scale
         transform.localScale = originalScale;
         isPlatformScaleEffectActive = false;
-        
-        Debug.Log("Platform scale effect smoothly restored");
     }
 
     public void Revive(Vector2 revivePosition)
