@@ -81,17 +81,9 @@ public class TowerShopManager : MonoBehaviour
     
     void CreateShopItem(TowerShopItem towerItem)
     {
-        if (towerShopItemPrefab == null || towerShopContainer == null) return;
-        
-        GameObject itemObj = Instantiate(towerShopItemPrefab, towerShopContainer);
-        TowerShopItemUI itemUI = itemObj.GetComponent<TowerShopItemUI>();
-        
-        if (itemUI != null)
-        {
-            itemUI.Initialize(towerItem, this);
-        }
-        
-        shopItems.Add(itemObj);
+        // Since using manual shop buttons, this method is no longer needed
+        // Shop items are manually created and use ManualTowerBuyButton script
+        Debug.Log($"CreateShopItem called for {towerItem.towerName} - but using manual shop setup");
     }
     
     public void PurchaseTower(TowerShopItem towerItem)
@@ -170,18 +162,24 @@ public class TowerShopManager : MonoBehaviour
     
     public void UpdateShopUI()
     {
-        // Update all shop item UIs
-        foreach (var item in shopItems)
-        {
-            TowerShopItemUI itemUI = item.GetComponent<TowerShopItemUI>();
-            if (itemUI != null)
-            {
-                itemUI.UpdateUI();
-            }
-        }
+        // Since using manual shop buttons with ManualTowerBuyButton script,
+        // those buttons update themselves automatically
         
         // Update currency display
         UpdateCurrencyDisplay();
+        
+        // Refresh all ManualTowerBuyButton scripts in the scene
+        RefreshAllManualTowerButtons();
+    }
+    
+    void RefreshAllManualTowerButtons()
+    {
+        // Find all ManualTowerBuyButton scripts and refresh them
+        ManualTowerBuyButton[] manualButtons = FindObjectsOfType<ManualTowerBuyButton>();
+        foreach (var button in manualButtons)
+        {
+            button.RefreshButton();
+        }
     }
     
     public int GetPlayerCurrency()

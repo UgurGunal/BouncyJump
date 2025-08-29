@@ -116,7 +116,13 @@ public class PointsManager : MonoBehaviour
     public void AddCoin(int value)
     {
         _coinsCollected += value;
-        Debug.Log($"Coin collected! Value: {value}. Total Coins: {_coinsCollected}");
+        
+        // Also add to persistent gold currency for shop system
+        int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
+        PlayerPrefs.SetInt("PlayerGold", currentGold + value);
+        PlayerPrefs.Save();
+        
+        Debug.Log($"Coin collected! Value: {value}. Session Coins: {_coinsCollected}, Total Gold: {currentGold + value}");
     }
 
     public void AddPowerup()
@@ -128,6 +134,12 @@ public class PointsManager : MonoBehaviour
     public void AddGem(int value)
     {
         _gemsCollected += value;
-        Debug.Log($"Gem collected! Value: {value}. Total Gems: {_gemsCollected}");
+        
+        // Also add to persistent diamond currency for shop system
+        int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
+        PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + value);
+        PlayerPrefs.Save();
+        
+        Debug.Log($"Gem collected! Value: {value}. Session Gems: {_gemsCollected}, Total Diamonds: {currentDiamonds + value}");
     }
 }
