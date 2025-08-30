@@ -14,16 +14,38 @@ public class ParallaxObject
 
 public class ParallaxController : MonoBehaviour
 {
+    [Header("Camera Reference")]
+    [Tooltip("Camera will be auto-found from GamePersistentScene if not assigned")]
     public Transform cameraTransform;
+    
+    [Header("Parallax Objects")]
     public List<ParallaxObject> parallaxObjects = new List<ParallaxObject>();
 
     private Vector3 lastCameraPosition;
 
     void Start()
     {
+        // Use coroutine to ensure camera from persistent scene is found
+        StartCoroutine(InitializeAfterCameraFound());
+    }
+    
+    System.Collections.IEnumerator InitializeAfterCameraFound()
+    {
+        // Wait a moment for GamePersistentScene to load
+        yield return new WaitForSeconds(0.1f);
+        
+        // Auto-find camera if not assigned
+        FindCameraReference();
+        
         if (cameraTransform == null)
-            cameraTransform = Camera.main.transform;
+        {
+            Debug.LogError("[ParallaxController] Camera not found! Make sure GamePersistentScene is loaded with Main Camera");
+            yield break;
+        }
+        
         lastCameraPosition = cameraTransform.position;
+        
+        Debug.Log("[ParallaxController] Initialization complete, parallax system ready");
 
         // Auto-fetch sprite/object height and create duplicates
         foreach (var obj in parallaxObjects)
@@ -98,5 +120,33 @@ public class ParallaxController : MonoBehaviour
             }
         }
         lastCameraPosition = cameraTransform.position;
+    }
+    
+    void FindCameraReference()
+    {
+        // Auto-find camera if not assigned
+        if (cameraTransform == null)
+        {
+            // First try to find Camera.main
+            if (Camera.main != null)
+            {
+                cameraTransform = Camera.main.transform;
+                Debug.Log("[ParallaxController] Auto-found Main Camera from GamePersistentScene");
+            }
+            else
+            {
+                // Fallback: find any camera in the scene
+                Camera anyCamera = FindObjectOfType<Camera>();
+                if (anyCamera != null)
+                {
+                    cameraTransform = anyCamera.transform;
+                    Debug.Log("[ParallaxController] Auto-found Camera from GamePersistentScene");
+                }
+                else
+                {
+                    Debug.LogWarning("[ParallaxController] No camera found! Make sure GamePersistentScene has a Camera");
+                }
+            }
+        }
     }
 }

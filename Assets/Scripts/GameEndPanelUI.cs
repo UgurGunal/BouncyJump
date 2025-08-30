@@ -122,6 +122,10 @@ public class GameEndPanelUI : MonoBehaviour
     {
         HideGameEndPanel();
         Time.timeScale = 1f; // Resume time before loading new scene
+        
+        // Reset the persistent loader flag since we're leaving the game
+        PersistentLoader.ResetForRestart();
+        
         SceneManager.LoadScene("HomeScene"); // Load the HomeScene
     }
 
@@ -129,6 +133,9 @@ public class GameEndPanelUI : MonoBehaviour
     {
         HideGameEndPanel();
         Time.timeScale = 1f; // Resume time before loading new scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload current scene
+        
+        // Reset the persistent loader flag and reload scene
+        PersistentLoader.ResetForRestart();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

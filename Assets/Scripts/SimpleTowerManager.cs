@@ -27,13 +27,16 @@ public class SimpleTowerManager : MonoBehaviour
     
     void Awake()
     {
+        // Singleton pattern with DontDestroyOnLoad for persistence across scenes
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("SimpleTowerManager: Instance created and marked as persistent");
         }
         else
         {
+            Debug.Log("SimpleTowerManager: Duplicate instance destroyed");
             Destroy(gameObject);
         }
     }

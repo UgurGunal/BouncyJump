@@ -39,15 +39,17 @@ public class PointsManager : MonoBehaviour
     }
 
     void Awake()
-
     {
+        // Singleton pattern with DontDestroyOnLoad for persistence across scenes
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep across scene loads if needed, or remove if manager is per-scene
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("PointsManager: Instance created and marked as persistent");
         }
         else
         {
+            Debug.Log("PointsManager: Duplicate instance destroyed");
             Destroy(gameObject);
         }
     }

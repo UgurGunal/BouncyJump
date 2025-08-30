@@ -3,7 +3,9 @@ using UnityEngine;
 public class SimpleTowerGenerator : MonoBehaviour
 {
     [Header("References")]
+    [Tooltip("Player will be auto-found if not assigned")]
     public Transform player;
+    [Tooltip("LevelManager will be auto-found from active tower scene")]
     public LevelManager levelManager;
     
     [Header("Spawn Settings")]
@@ -16,17 +18,65 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void Start()
     {
+        // Use coroutine to wait for tower scene to load and find references
+        StartCoroutine(InitializeAfterTowerSceneLoaded());
+    }
+    
+    System.Collections.IEnumerator InitializeAfterTowerSceneLoaded()
+    {
+        // Wait a moment for tower scene to fully load
+        yield return new WaitForSeconds(0.1f);
+        
+        // Auto-find references
+        FindRequiredReferences();
+        
+        // Check if we have everything we need
         if (player == null || levelManager == null)
         {
-            Debug.LogError("SimpleTowerGenerator: Missing required references");
-            return;
+            Debug.LogError("SimpleTowerGenerator: Missing required references after auto-find");
+            Debug.LogError($"Player: {(player != null ? "Found" : "Missing")}, LevelManager: {(levelManager != null ? "Found" : "Missing")}");
+            yield break;
         }
 
         // Create parent for generated objects
         generatedObjectsParent = new GameObject("GeneratedObjects").transform;
         
+        Debug.Log("[SimpleTowerGenerator] Initialization complete, starting content generation");
+        
         // Spawn initial content
         SpawnInitialContent();
+    }
+    
+    void FindRequiredReferences()
+    {
+        // Auto-find player if not assigned
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+                Debug.Log("[SimpleTowerGenerator] Auto-found Player");
+            }
+            else
+            {
+                Debug.LogWarning("[SimpleTowerGenerator] Player not found! Make sure Player has 'Player' tag");
+            }
+        }
+        
+        // Auto-find LevelManager from the active tower scene
+        if (levelManager == null)
+        {
+            levelManager = LevelManager.Instance;
+            if (levelManager != null)
+            {
+                Debug.Log("[SimpleTowerGenerator] Auto-found LevelManager from tower scene");
+            }
+            else
+            {
+                Debug.LogWarning("[SimpleTowerGenerator] LevelManager not found! Make sure tower scene has LevelManager with singleton pattern");
+            }
+        }
     }
 
     void Update()
@@ -59,19 +109,22 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void SpawnLevelContent()
     {
-        // Get level data directly from level manager
-        LevelManager.LevelData levelData = levelManager.GetCurrentLevelData();
+        // Calculate the Y position for the next platform first
+        float nextPlatformY = lastSpawnedPlatformY + GetRandomYInterval(1.8f, 1.9f);
+        
+        // Get level data based on the platform's Y position (not player position)
+        int platformLevel = levelManager.GetCurrentLevel(nextPlatformY);
+        LevelManager.LevelData levelData = levelManager.GetLevelData(platformLevel);
         if (levelData == null) return;
 
-        // Spawn platform with collectable using manual settings
-        SpawnPlatformWithCollectable(levelData);
+        // Spawn platform with collectable using level data for this Y position
+        SpawnPlatformWithCollectable(levelData, nextPlatformY);
         
-        // Update last spawned Y position with default interval
-        float platformY = lastSpawnedPlatformY + GetRandomYInterval(1.8f, 1.9f);
-        lastSpawnedPlatformY = platformY;
+        // Update last spawned Y position
+        lastSpawnedPlatformY = nextPlatformY;
     }
 
-    void SpawnPlatformWithCollectable(LevelManager.LevelData levelData)
+    void SpawnPlatformWithCollectable(LevelManager.LevelData levelData, float platformY)
     {
         // Choose platform type based on spawn rates
         float totalPlatformSpawnRate = levelData.longPlatformSpawnRate + 
@@ -95,7 +148,7 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         // Determine platform position using default settings
         float platformX = GetRandomXPosition(-1.82f, 1.82f);
-        float platformY = lastSpawnedPlatformY + GetRandomYInterval(1.8f, 1.9f);
+        // platformY is now passed as parameter, no need to calculate again
         float platformScaleX = Random.Range(0.85f, 0.95f);
 
         // Spawn platform

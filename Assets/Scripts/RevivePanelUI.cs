@@ -140,6 +140,9 @@ public class RevivePanelUI : MonoBehaviour
         }
         else
         {
+            // Reset the persistent loader flag since we're leaving the game
+            PersistentLoader.ResetForRestart();
+            
             Time.timeScale = 1f;
             UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
         }

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OldTower.unity
     guid: 4f6f591085d2eea44af17b1ddf32bb4e
   - enabled: 1
+    path: Assets/Scenes/PersistentScene.unity
+    guid: 2b23fd6181b5b63438a897e6b339da00
+  - enabled: 1
     path: Assets/Scenes/RoyalTower.unity
     guid: 29e5536eec6a9034e855d311262a3694
   - enabled: 1

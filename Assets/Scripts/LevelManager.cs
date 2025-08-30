@@ -8,11 +8,11 @@ public class LevelManager : MonoBehaviour
     public float levelHeight = 20f;
 
     [Header("Player and Camera References")]
+    [Tooltip("These will be auto-found from GamePersistentScene if not assigned")]
     public Transform player;
     public CameraFollow cameraFollow;
 
-    [Header("Simple Tower Reference")]
-    public SimpleTowerManager simpleTowerManager; // Reference to simple tower manager
+
 
     public GameObject coin1Prefab;
     public GameObject coin2Prefab;
@@ -58,10 +58,61 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        // Use coroutine to ensure GamePersistentScene is loaded before finding references
+        StartCoroutine(InitializeAfterPersistentScene());
+    }
+    
+    System.Collections.IEnumerator InitializeAfterPersistentScene()
+    {
+        // Wait for persistent scene to be loaded
+        yield return new WaitUntil(() => PersistentLoader.AreGameManagersLoaded());
+        
+        // Small additional delay to ensure all objects are initialized
+        yield return new WaitForEndOfFrame();
+        
+        // Auto-find references from GamePersistentScene if not assigned
+        FindPersistentReferences();
+        
         if (PointsManager.Instance != null)
         {
             PointsManager.Instance.StartSession();
         }
+        
+        Debug.Log("[LevelManager] Initialization complete");
+    }
+    
+    void FindPersistentReferences()
+    {
+        // Auto-find player if not assigned
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+                Debug.Log("[LevelManager] Auto-found Player from GamePersistentScene");
+            }
+            else
+            {
+                Debug.LogWarning("[LevelManager] Player not found! Make sure GamePersistentScene is loaded and Player has 'Player' tag");
+            }
+        }
+        
+        // Auto-find CameraFollow if not assigned
+        if (cameraFollow == null)
+        {
+            cameraFollow = FindObjectOfType<CameraFollow>();
+            if (cameraFollow != null)
+            {
+                Debug.Log("[LevelManager] Auto-found CameraFollow from GamePersistentScene");
+            }
+            else
+            {
+                Debug.LogWarning("[LevelManager] CameraFollow not found! Make sure GamePersistentScene is loaded");
+            }
+        }
+        
+
     }
 
     void Update()
