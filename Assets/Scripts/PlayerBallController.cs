@@ -105,7 +105,10 @@ public class PlayerBallController : MonoBehaviour
 
         UpdateEffectiveMaxSpeed();
 
-        if (!isTouchingSideWall)
+        // Allow movement when not touching wall, or when moving away from wall
+        bool canMove = !isTouchingSideWall || IsMovingAwayFromWall();
+        
+        if (canMove)
         {
             float currentVelocityX = rb.velocity.x;
             float targetVelocityX = moveInput * effectiveMaxSpeed; // Use effective max speed instead of maxSpeed
@@ -167,6 +170,34 @@ public class PlayerBallController : MonoBehaviour
     public void SetTouchingSideWall(bool touching)
     {
         isTouchingSideWall = touching;
+    }
+    
+    private bool IsMovingAwayFromWall()
+    {
+        // If not touching wall, always allow movement
+        if (!isTouchingSideWall) return true;
+        
+        // Check if player is trying to move away from the wall they're touching
+        // This requires knowing which wall we're touching, so let's use a simpler approach:
+        // Allow movement if input direction is opposite to current velocity direction
+        // or if player is at the edge of the screen and trying to move inward
+        
+        float screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        float playerX = transform.position.x;
+        
+        // If player is on left side and moving right, or on right side and moving left
+        if ((playerX < 0 && moveInput > 0) || (playerX > 0 && moveInput < 0))
+        {
+            return true; // Moving toward center, allow it
+        }
+        
+        // If player has no input, allow natural physics to take over
+        if (Mathf.Abs(moveInput) < 0.1f)
+        {
+            return true;
+        }
+        
+        return false; // Prevent moving further into wall
     }
 
     public void Jump(float jumpForce)

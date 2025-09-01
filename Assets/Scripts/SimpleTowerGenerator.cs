@@ -12,6 +12,40 @@ public class SimpleTowerGenerator : MonoBehaviour
     public float spawnHeightOffset = 8f;
     public bool enableCollectableSpawning = true;
     
+    [Header("Platform Generation Settings")]
+    [Tooltip("Minimum Y interval between platforms")]
+    public float minPlatformYInterval = 1.8f;
+    [Tooltip("Maximum Y interval between platforms")]
+    public float maxPlatformYInterval = 1.9f;
+    [Tooltip("Minimum X position for platform spawning")]
+    public float minPlatformXPosition = -1.82f;
+    [Tooltip("Maximum X position for platform spawning")]
+    public float maxPlatformXPosition = 1.82f;
+    [Tooltip("Minimum X scale for platforms")]
+    public float minPlatformScaleX = 0.95f;
+    [Tooltip("Maximum X scale for platforms")]
+    public float maxPlatformScaleX = 1.05f;
+    
+    [Header("Special Platform 2 Settings")]
+    [Tooltip("Minimum X position for special platform 2 spawning (can be different from regular platforms)")]
+    public float minSpecialPlatform2XPosition = -1.5f;
+    [Tooltip("Maximum X position for special platform 2 spawning (can be different from regular platforms)")]
+    public float maxSpecialPlatform2XPosition = 1.5f;
+    
+    [Header("Collectable Generation Settings")]
+    [Tooltip("Minimum X position for collectable spawning")]
+    public float minCollectableXPosition = -1.5f;
+    [Tooltip("Maximum X position for collectable spawning")]
+    public float maxCollectableXPosition = 1.5f;
+    [Tooltip("Minimum Y offset above platform for collectables")]
+    public float minCollectableYOffset = 0.65f;
+    [Tooltip("Maximum Y offset above platform for collectables")]
+    public float maxCollectableYOffset = 0.9f;
+    
+    [Header("Initial Content Settings")]
+    [Tooltip("Number of initial platforms to spawn")]
+    public int initialPlatformCount = 10;
+    
     private Transform generatedObjectsParent;
     private float lastSpawnedPlatformY = -3f;
     private int currentLevel = -1;
@@ -101,7 +135,7 @@ public class SimpleTowerGenerator : MonoBehaviour
     void SpawnInitialContent()
     {
         // Spawn initial platforms
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < initialPlatformCount; i++)
         {
             SpawnLevelContent();
         }
@@ -110,7 +144,7 @@ public class SimpleTowerGenerator : MonoBehaviour
     void SpawnLevelContent()
     {
         // Calculate the Y position for the next platform first
-        float nextPlatformY = lastSpawnedPlatformY + GetRandomYInterval(1.8f, 1.9f);
+        float nextPlatformY = lastSpawnedPlatformY + GetRandomYInterval(minPlatformYInterval, maxPlatformYInterval);
         
         // Get level data based on the platform's Y position (not player position)
         int platformLevel = levelManager.GetCurrentLevel(nextPlatformY);
@@ -129,7 +163,8 @@ public class SimpleTowerGenerator : MonoBehaviour
         // Choose platform type based on spawn rates
         float totalPlatformSpawnRate = levelData.longPlatformSpawnRate + 
                                       levelData.shortPlatformSpawnRate + 
-                                      levelData.specialPlatformSpawnRate;
+                                      levelData.specialPlatformSpawnRate +
+                                      levelData.specialPlatform2SpawnRate;
         float randomPlatformValue = Random.Range(0, totalPlatformSpawnRate);
 
         GameObject platformPrefab;
@@ -141,15 +176,28 @@ public class SimpleTowerGenerator : MonoBehaviour
         {
             platformPrefab = levelData.shortPlatformPrefab;
         }
-        else
+        else if (randomPlatformValue < levelData.longPlatformSpawnRate + levelData.shortPlatformSpawnRate + levelData.specialPlatformSpawnRate)
         {
             platformPrefab = levelData.specialPlatformPrefab;
         }
+        else
+        {
+            platformPrefab = levelData.specialPlatform2Prefab;
+        }
 
         // Determine platform position using default settings
-        float platformX = GetRandomXPosition(-1.82f, 1.82f);
+        float platformX;
+        // Use special X position range for special platform 2, regular range for other platforms
+        if (platformPrefab == levelData.specialPlatform2Prefab)
+        {
+            platformX = GetRandomXPosition(minSpecialPlatform2XPosition, maxSpecialPlatform2XPosition);
+        }
+        else
+        {
+            platformX = GetRandomXPosition(minPlatformXPosition, maxPlatformXPosition);
+        }
         // platformY is now passed as parameter, no need to calculate again
-        float platformScaleX = Random.Range(0.85f, 0.95f);
+        float platformScaleX = Random.Range(minPlatformScaleX, maxPlatformScaleX);
 
         // Spawn platform
         SpawnPlatform(platformX, platformY, platformPrefab, platformScaleX);
@@ -163,6 +211,7 @@ public class SimpleTowerGenerator : MonoBehaviour
         // Choose collectable type based on spawn rates from level manager
         float totalCollectableSpawnRate = levelData.coin1SpawnRate + 
                                         levelData.coin2SpawnRate + 
+                                        levelData.coin3SpawnRate +
                                         levelData.powerupSpawnRate + 
                                         levelData.diamondSpawnRate + 
                                         levelData.emptySpawnRate;
@@ -177,11 +226,15 @@ public class SimpleTowerGenerator : MonoBehaviour
         {
             collectablePrefab = levelManager.coin2Prefab;
         }
-        else if (randomCollectableValue < levelData.coin1SpawnRate + levelData.coin2SpawnRate + levelData.powerupSpawnRate)
+        else if (randomCollectableValue < levelData.coin1SpawnRate + levelData.coin2SpawnRate + levelData.coin3SpawnRate)
+        {
+            collectablePrefab = levelManager.coin3Prefab;
+        }
+        else if (randomCollectableValue < levelData.coin1SpawnRate + levelData.coin2SpawnRate + levelData.coin3SpawnRate + levelData.powerupSpawnRate)
         {
             collectablePrefab = levelManager.powerupPrefab;
         }
-        else if (randomCollectableValue < levelData.coin1SpawnRate + levelData.coin2SpawnRate + levelData.powerupSpawnRate + levelData.diamondSpawnRate)
+        else if (randomCollectableValue < levelData.coin1SpawnRate + levelData.coin2SpawnRate + levelData.coin3SpawnRate + levelData.powerupSpawnRate + levelData.diamondSpawnRate)
         {
             collectablePrefab = levelManager.diamondPrefab;
         }
@@ -189,8 +242,8 @@ public class SimpleTowerGenerator : MonoBehaviour
         if (collectablePrefab != null)
         {
             // Determine collectable position using default settings
-            float collectableX = GetRandomXPosition(-1.5f, 1.5f);
-            float collectableY = platformY + Random.Range(0.65f, 0.9f);
+            float collectableX = GetRandomXPosition(minCollectableXPosition, maxCollectableXPosition);
+            float collectableY = platformY + Random.Range(minCollectableYOffset, maxCollectableYOffset);
 
             // Spawn collectable
             SpawnCollectable(collectableX, collectableY, collectablePrefab);
