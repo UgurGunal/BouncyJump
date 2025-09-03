@@ -2,12 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class CollectableSpawnData
-{
-    public GameObject collectablePrefab;
-    public int amount = 1;
-}
+
 
 public class ChestPlatform : MonoBehaviour
 {
@@ -18,39 +13,104 @@ public class ChestPlatform : MonoBehaviour
     public Sprite closedSprite;
     public Sprite openedSprite;
     
-    [Header("Collectable Spawn Settings")]
-    public List<CollectableSpawnData> collectablesToSpawn = new List<CollectableSpawnData>();
+    [Header("Collectable Prefabs")]
+    public GameObject coin1Prefab;
+    public GameObject coin2Prefab;
+    public GameObject coin3Prefab;
+    public GameObject diamond1Prefab;
+    public GameObject diamond2Prefab;
+    
+    [Header("Spawn Choice System")]
+    public bool useSpawnChoiceSystem = true; // Enable/disable the spawn choice system
+    
+    [Header("Y Position Ranges and Probabilities")]
+    [Range(0, 200)]
+    public float range1Max = 200f; // 0-200
+    public float range1Spawn1Prob = 37f; // 3x coin1
+    public float range1Spawn2Prob = 30f; // 1x coin1, 1x coin2, 1x coin3
+    public float range1Spawn3Prob = 20f; // 3x coin2
+    public float range1Spawn4Prob = 10.5f; // 3x coin3
+    public float range1Spawn5Prob = 1.5f;  // 3x diamond1
+    public float range1Spawn6Prob = 0.75f;  // 3x diamond2
+    
+    [Range(200, 400)]
+    public float range2Max = 400f; // 200-400
+    public float range2Spawn1Prob = 30f; // 3x coin1
+    public float range2Spawn2Prob = 30f; // 1x coin1, 1x coin2, 1x coin3
+    public float range2Spawn3Prob = 24f; // 3x coin2
+    public float range2Spawn4Prob = 11f; // 3x coin3
+    public float range2Spawn5Prob = 3.5f;  // 3x diamond1
+    public float range2Spawn6Prob = 1.5f;  // 3x diamond2
+    
+    [Range(400, 600)]
+    public float range3Max = 600f; // 400-600
+    public float range3Spawn1Prob = 20f; // 3x coin1
+    public float range3Spawn2Prob = 30f; // 1x coin1, 1x coin2, 1x coin3
+    public float range3Spawn3Prob = 25f; // 3x coin2
+    public float range3Spawn4Prob = 18f; // 3x coin3
+    public float range3Spawn5Prob = 5f;  // 3x diamond1
+    public float range3Spawn6Prob = 2f;  // 3x diamond2
+    
+    [Range(600, 800)]
+    public float range4Max = 800f; // 600-800
+    public float range4Spawn1Prob = 10f; // 3x coin1
+    public float range4Spawn2Prob = 20f; // 1x coin1, 1x coin2, 1x coin3
+    public float range4Spawn3Prob = 32f; // 3x coin2
+    public float range4Spawn4Prob = 28f; // 3x coin3
+    public float range4Spawn5Prob = 7.5f; // 3x diamond1
+    public float range4Spawn6Prob = 2.5f;  // 3x diamond2
+    
+    [Range(800, 1000)]
+    public float range5Max = 1000f; // 800-1000
+    public float range5Spawn1Prob = 0f; // 3x coin1
+    public float range5Spawn2Prob = 25f; // 1x coin1, 1x coin2, 1x coin3
+    public float range5Spawn3Prob = 25f; // 3x coin2
+    public float range5Spawn4Prob = 37f; // 3x coin3
+    public float range5Spawn5Prob = 9f; // 3x diamond1
+    public float range5Spawn6Prob = 4f; // 3x diamond2
+    
+    public float range6Spawn1Prob = 0f;  // 3x coin1 (1000+)
+    public float range6Spawn2Prob = 10f; // 1x coin1, 1x coin2, 1x coin3
+    public float range6Spawn3Prob = 20f; // 3x coin2
+    public float range6Spawn4Prob = 50f; // 3x coin3
+    public float range6Spawn5Prob = 14f; // 3x diamond1
+    public float range6Spawn6Prob = 6f;  // 3x diamond2
+
+    
+
     
     [Header("Spawn Position Settings")]
-    public float spawnHeightOffset = 1f; // Height above platform to spawn collectables
-    public float minSpawnDistance = 2f; // Minimum distance from platform center
-    public float maxSpawnDistance = 5f; // Maximum distance from platform center
-    public float spawnAngleRange = 180f; // Angle range for spawn positions (in degrees)
+    public float spawnHeightOffset = 0.4f; // Height above platform to spawn collectables (increased to avoid platform collisions)
     
-    [Header("Collision Avoidance")]
-    public bool enableCollisionAvoidance = true; // Enable/disable collision avoidance
-    public float collectableRadius = 0.5f; // Radius to check for collectable collisions
-    public float platformRadius = 1f; // Radius to check for platform collisions
-    public int maxAttempts = 50; // Maximum attempts to find a valid position
-    public LayerMask obstacleLayers = -1; // Layers to check for obstacles
+    [Header("Debug Options")]
+    public bool enableDebugLogging = false; // Enable to see timing information
     
-    [Header("Position Adjustment")]
-    public float platformYAdjustment = 0.6f; // How much to adjust Y when colliding with platform
-    public float collectableXYAdjustment = 0.3f; // How much to adjust X and Y when colliding with collectable
-    public float maxYAdjustment = 10f; // Maximum Y adjustment to prevent going too high
+    [Header("Platform Jump Settings")]
+    public float jumpForce = 14f; // Base jump force for the platform
+    public float comboBonus = 0.005f; // Multiplier for current combo to jump bonus
     
-    [Header("Lerp Movement Settings")]
-    public float lerpDuration = 2f; // Duration of the lerp movement
-    public AnimationCurve lerpCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [Header("Platform Collision Detection")]
+    public float velocityThreshold = 5f; // Very lenient velocity check
+    public float contactNormalThreshold = 0f; // Very lenient normal check
     
-    [Header("Collision Detection")]
-    public float velocityThreshold = 5f;
-    public float contactNormalThreshold = 0f;
+    [Header("Platform Combo System")]
+    public bool enableComboSystem = false; // Set to true if you want combo functionality
+    
+    [Header("Platform Destruction Settings")]
+    public bool enableTimerDestroy = true; // Enable/disable timer-based destruction
+    public float destroyTime = 3f; // Time in seconds before destruction after player passes
+    public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
+    public bool enableDistanceDestroy = true; // Enable/disable distance-based destruction
+    public float destroyDistance = 8f; // Distance below player to instantly destroy platform
     
     private bool isOpened = false;
     private bool isAnimating = false;
     private Transform playerTransform;
     private Vector3 originalPosition;
+    
+    // Platform destruction variables
+    private bool isDestroying = false;
+    private float destroyTimer;
     
     private void Start()
     {
@@ -69,14 +129,89 @@ public class ChestPlatform : MonoBehaviour
         {
             chestSpriteRenderer.sprite = closedSprite;
         }
+        
+        // Ensure animator starts in the correct state
+        if (chestAnimator != null)
+        {
+            // Force the animator to play the default state (should be idle/empty)
+            chestAnimator.Play(0, 0, 0f); // Play first state (index 0) on layer 0, starting at 0% progress
+            
+            // Alternative: If you have a specific idle state name, use this:
+            // chestAnimator.Play("Idle", 0, 0f);
+            
+            // Alternative: Stop all animations and reset to default
+            // chestAnimator.StopPlayback();
+            // chestAnimator.StartPlayback();
+        }
+    }
+    
+    private void FixedUpdate()
+    {
+        // If the player hasn't been found yet, try to find it again
+        if (playerTransform == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                playerTransform = playerObject.transform;
+            }
+            else
+            {
+                // If player is still not found, do nothing.
+                return;
+            }
+        }
+
+        // Check for distance-based destruction (always active if enabled)
+        if (enableDistanceDestroy && playerTransform.position.y > transform.position.y + destroyDistance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Check if the player has passed the platform (for timer-based destruction)
+        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y)
+        {
+            isDestroying = true;
+            destroyTimer = destroyTime;
+        }
+
+        // If the platform is in the process of being destroyed (timer-based)
+        if (isDestroying)
+        {
+            destroyTimer -= Time.fixedDeltaTime;
+
+            if (destroyTimer <= 0f)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                float shakeStartTime = destroyTime * (2.0f / 3.0f);
+                if (destroyTimer <= shakeStartTime)
+                {
+                    // Calculate the progress of the shake (from 0 to 1) over the last 2/3 of the time
+                    float shakeProgress = 1f - (destroyTimer / shakeStartTime);
+                    float currentShakeMagnitude = shakeMagnitude * shakeProgress;
+                    transform.position = originalPosition + Random.insideUnitSphere * currentShakeMagnitude;
+                }
+                else
+                {
+                    // If not shaking yet, ensure the position is the original one
+                    transform.position = originalPosition;
+                }
+            }
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
-        if (player != null && !isOpened && !isAnimating)
+        if (player != null)
         {
             Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            
+            // Always handle jumping (platform functionality)
             HandleJump(player, rb, collision);
         }
     }
@@ -108,11 +243,31 @@ public class ChestPlatform : MonoBehaviour
         // Jump if player is on top AND not moving upward
         if (isOnTop && isNotMovingUp)
         {
-            // Apply jump to player
-            player.Jump(14f); // Default jump force
+            // Start chest opening BEFORE jumping (if not already opened and not animating)
+            if (!isOpened && !isAnimating)
+            {
+                StartChestOpening();
+            }
             
-            // Start chest opening sequence
-            StartChestOpening();
+            // Calculate relative velocity for combo increment
+            float relativeVelocity = Mathf.Abs(collision.relativeVelocity.y);
+
+            // Increment combo if combo system is enabled
+            if (enableComboSystem)
+            {
+                IncrementPlatformCombo(relativeVelocity);
+            }
+
+            // Calculate jump bonus using current combo value (if combo system is enabled)
+            float jumpBonus = 0f;
+            if (enableComboSystem)
+            {
+                jumpBonus = GetComboBonus();
+            }
+
+            // Apply jump with bonus: platform jump force + combo jump bonus
+            float totalJumpForce = jumpForce + jumpBonus;
+            player.Jump(totalJumpForce);
         }
     }
     
@@ -122,11 +277,18 @@ public class ChestPlatform : MonoBehaviour
         
         isAnimating = true;
         
-        // Start the opening animation
+        // Start the opening animation directly by name
         if (chestAnimator != null)
         {
-            chestAnimator.SetTrigger(openAnimationTrigger);
+            // Play the ChestOpen animation once
+            chestAnimator.Play("ChestOpen", 0, 0f); // Play "ChestOpen" on layer 0, starting at 0% progress
+            
+            // Alternative: If you want to ensure it plays from the beginning each time
+            // chestAnimator.Play("ChestOpen");
         }
+        
+        // Start coroutine to spawn collectables with delay
+        StartCoroutine(SpawnCollectablesWithDelay());
         
         // Start coroutine to handle the complete opening sequence
         StartCoroutine(ChestOpeningSequence());
@@ -148,231 +310,255 @@ public class ChestPlatform : MonoBehaviour
         
         yield return new WaitForSeconds(animationDuration);
         
-        // Spawn collectables
-        SpawnCollectables();
-        
         // Mark as opened
         isOpened = true;
         isAnimating = false;
     }
     
+    private IEnumerator SpawnCollectablesWithDelay()
+    {
+        // Wait 0.1 seconds before spawning collectables
+        yield return new WaitForSeconds(0.16f);
+        
+        // Spawn collectables after the delay
+        if (useSpawnChoiceSystem)
+        {
+            // Use the new spawn choice system based on Y position
+            ChooseAndSpawnCollectables();
+        }
+    }
+    
     private void SpawnCollectables()
     {
-        if (collectablesToSpawn == null || collectablesToSpawn.Count == 0) return;
-        
-        foreach (CollectableSpawnData spawnData in collectablesToSpawn)
+        if (useSpawnChoiceSystem)
         {
-            if (spawnData.collectablePrefab == null || spawnData.amount <= 0) continue;
-            
-            for (int i = 0; i < spawnData.amount; i++)
-            {
-                // Calculate spawn position above the platform
-                Vector3 spawnPosition = transform.position + Vector3.up * spawnHeightOffset;
-                
-                // Instantiate the collectable
-                GameObject collectable = Instantiate(spawnData.collectablePrefab, spawnPosition, Quaternion.identity);
-                
-                // Calculate random target position
-                Vector3 targetPosition = CalculateRandomTargetPosition();
-                
-                // Start lerp movement
-                StartCoroutine(LerpCollectableToPosition(collectable, spawnPosition, targetPosition));
-            }
+            // Use the new spawn choice system based on Y position
+            ChooseAndSpawnCollectables();
         }
+
+    }
+    
+    private void ChooseAndSpawnCollectables()
+    {
+        float chestYPosition = transform.position.y;
+        
+        // Determine spawn choice based on Y position
+        if (chestYPosition <= range1Max)
+        {
+            // Range 1: 0-200
+            ChooseSpawnByProbability(range1Spawn1Prob, range1Spawn2Prob, range1Spawn3Prob, 
+                                   range1Spawn4Prob, range1Spawn5Prob, range1Spawn6Prob);
+        }
+        else if (chestYPosition <= range2Max)
+        {
+            // Range 2: 200-400
+            ChooseSpawnByProbability(range2Spawn1Prob, range2Spawn2Prob, range2Spawn3Prob, 
+                                   range2Spawn4Prob, range2Spawn5Prob, range2Spawn6Prob);
+        }
+        else if (chestYPosition <= range3Max)
+        {
+            // Range 3: 400-600
+            ChooseSpawnByProbability(range3Spawn1Prob, range3Spawn2Prob, range3Spawn3Prob, 
+                                   range3Spawn4Prob, range3Spawn5Prob, range3Spawn6Prob);
+        }
+        else if (chestYPosition <= range4Max)
+        {
+            // Range 4: 600-800
+            ChooseSpawnByProbability(range4Spawn1Prob, range4Spawn2Prob, range4Spawn3Prob, 
+                                   range4Spawn4Prob, range4Spawn5Prob, range4Spawn6Prob);
+        }
+        else if (chestYPosition <= range5Max)
+        {
+            // Range 5: 800-1000
+            ChooseSpawnByProbability(range5Spawn1Prob, range5Spawn2Prob, range5Spawn3Prob, 
+                                   range5Spawn4Prob, range5Spawn5Prob, range5Spawn6Prob);
+        }
+        else
+        {
+            // Range 6: 1000+
+            ChooseSpawnByProbability(range6Spawn1Prob, range6Spawn2Prob, range6Spawn3Prob, 
+                                   range6Spawn4Prob, range6Spawn5Prob, range6Spawn6Prob);
+        }
+    }
+    
+    private void ChooseSpawnByProbability(float spawn1Prob, float spawn2Prob, float spawn3Prob, 
+                                        float spawn4Prob, float spawn5Prob, float spawn6Prob)
+    {
+        float random = Random.Range(0f, 100f);
+        float cumulativeProb = 0f;
+        
+        // Spawn 1: 3x coin1
+        cumulativeProb += spawn1Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnCoin1(3);
+            return;
+        }
+        
+        // Spawn 2: 1x coin1, 1x coin2, 1x coin3
+        cumulativeProb += spawn2Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnCoin1(1);
+            SpawnCoin2(1);
+            SpawnCoin3(1);
+            return;
+        }
+        
+        // Spawn 3: 3x coin2
+        cumulativeProb += spawn3Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnCoin2(3);
+            return;
+        }
+        
+        // Spawn 4: 3x coin3
+        cumulativeProb += spawn4Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnCoin3(3);
+            return;
+        }
+        
+        // Spawn 5: 3x diamond1
+        cumulativeProb += spawn5Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnDiamond1(3);
+            return;
+        }
+        
+        // Spawn 6: 3x diamond2
+        cumulativeProb += spawn6Prob;
+        if (random <= cumulativeProb)
+        {
+            SpawnDiamond2(3);
+            return;
+        }
+        
+        // Fallback: If no spawn was chosen, use spawn 1 (3x coin1)
+        SpawnCoin1(3);
     }
     
     private Vector3 CalculateRandomTargetPosition()
     {
-        if (!enableCollisionAvoidance)
+        // Use absolute world coordinates for X position (not relative to chest)
+        float randomX = Random.Range(-1.5f, 1.5f); // Absolute world X between -1.5 and +1.5
+        float randomY = Random.Range(4.6f, 5.6f);
+        
+        // Add additional height multiplier based on platform height
+        float platformHeight = transform.position.y;
+        float heightMultiplier = 1f / 800f;
+        float additionalHeight = platformHeight * heightMultiplier;
+        
+        // Calculate target position with absolute X, but Y relative to chest plus additional height
+        Vector3 targetPosition = new Vector3(randomX, transform.position.y + randomY + additionalHeight, 0);
+        
+        // Ensure target position is not on top of a platform by checking for collisions
+        // Check multiple points around the coin's final position to ensure complete clearance
+        float coinRadius = 0.5f; // Approximate coin radius for collision detection
+        bool hasPlatformCollision = false;
+        
+        // Check center point
+        Vector2 centerCheck = new Vector2(targetPosition.x, targetPosition.y);
+        if (Physics2D.OverlapPoint(centerCheck) != null)
         {
-            // Original simple random position calculation
-            float randomAngle = Random.Range(-spawnAngleRange / 2f, spawnAngleRange / 2f);
-            float randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
-            Vector3 direction = Quaternion.Euler(0, 0, randomAngle) * Vector3.right;
-            Vector3 targetPosition = transform.position + direction * randomDistance;
-            targetPosition.y = Mathf.Max(targetPosition.y, transform.position.y + spawnHeightOffset);
-            return targetPosition;
+            hasPlatformCollision = true;
         }
         
-        // Try to find a valid position with collision avoidance and adjustment
-        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        // Check left edge
+        Vector2 leftCheck = new Vector2(targetPosition.x - coinRadius, targetPosition.y);
+        if (Physics2D.OverlapPoint(leftCheck) != null)
         {
-            // Calculate random position
-            float randomAngle = Random.Range(-spawnAngleRange / 2f, spawnAngleRange / 2f);
-            float randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
-            Vector3 direction = Quaternion.Euler(0, 0, randomAngle) * Vector3.right;
-            Vector3 candidatePosition = transform.position + direction * randomDistance;
-            candidatePosition.y = Mathf.Max(candidatePosition.y, transform.position.y + spawnHeightOffset);
-            
-            // Try to adjust position if there are collisions
-            Vector3 adjustedPosition = AdjustPositionForCollisions(candidatePosition);
-            
-            // Check if the adjusted position is valid
-            if (IsPositionValid(adjustedPosition))
-            {
-                return adjustedPosition;
-            }
+            hasPlatformCollision = true;
         }
         
-        // If no valid position found after max attempts, return a fallback position
-        Debug.LogWarning($"ChestPlatform: Could not find valid position after {maxAttempts} attempts. Using fallback position.");
-        float fallbackAngle = Random.Range(-spawnAngleRange / 2f, spawnAngleRange / 2f);
-        float fallbackDistance = maxSpawnDistance; // Use max distance as fallback
-        Vector3 fallbackDirection = Quaternion.Euler(0, 0, fallbackAngle) * Vector3.right;
-        Vector3 fallbackPosition = transform.position + fallbackDirection * fallbackDistance;
-        fallbackPosition.y = Mathf.Max(fallbackPosition.y, transform.position.y + spawnHeightOffset);
-        return fallbackPosition;
+        // Check right edge
+        Vector2 rightCheck = new Vector2(targetPosition.x + coinRadius, targetPosition.y);
+        if (Physics2D.OverlapPoint(rightCheck) != null)
+        {
+            hasPlatformCollision = true;
+        }
+        
+        // Check bottom center (most important for landing)
+        Vector2 bottomCheck = new Vector2(targetPosition.x, targetPosition.y - coinRadius);
+        if (Physics2D.OverlapPoint(bottomCheck) != null)
+        {
+            hasPlatformCollision = true;
+        }
+        
+        // If there's any platform collision, move the coin higher
+        if (hasPlatformCollision)
+        {
+            targetPosition.y += 3f; // Add 3 units above any detected platform
+        }
+        
+        return targetPosition;
     }
     
-    private Vector3 AdjustPositionForCollisions(Vector3 originalPosition)
-    {
-        Vector3 adjustedPosition = originalPosition;
-        
-        // Check for collectable collisions and adjust X and Y
-        Collider2D[] collectableColliders = Physics2D.OverlapCircleAll(originalPosition, collectableRadius);
-        foreach (Collider2D collider in collectableColliders)
-        {
-            // Check if it's a collectable (has collectable components)
-            if (collider.GetComponent<CoinCollectable>() != null || 
-                collider.GetComponent<GemCollectable>() != null ||
-                collider.GetComponent<PowerupCollectable>() != null)
-            {
-                // Adjust both X and Y when colliding with collectable
-                float randomXOffset = Random.Range(-collectableXYAdjustment, collectableXYAdjustment);
-                float randomYOffset = Random.Range(-collectableXYAdjustment, collectableXYAdjustment);
-                
-                adjustedPosition.x += randomXOffset;
-                adjustedPosition.y += randomYOffset;
-                
-                // Ensure Y doesn't go too high
-                adjustedPosition.y = Mathf.Min(adjustedPosition.y, transform.position.y + maxYAdjustment);
-                
-                break; // Only adjust once per position
-            }
-        }
-        
-        // Check for platform collisions and adjust Y
-        Collider2D[] platformColliders = Physics2D.OverlapCircleAll(adjustedPosition, platformRadius, obstacleLayers);
-        foreach (Collider2D collider in platformColliders)
-        {
-            // Check if it's a platform (has platform components)
-            if (collider.GetComponent<Platform>() != null || 
-                collider.GetComponent<ChestPlatform>() != null ||
-                collider.CompareTag("Platform"))
-            {
-                // Adjust Y when colliding with platform (move up)
-                adjustedPosition.y += platformYAdjustment;
-                
-                // Ensure Y doesn't go too high
-                adjustedPosition.y = Mathf.Min(adjustedPosition.y, transform.position.y + maxYAdjustment);
-                
-                break; // Only adjust once per position
-            }
-        }
-        
-        return adjustedPosition;
-    }
+
     
-    private bool IsPositionValid(Vector3 position)
-    {
-        // Check for collectable collisions
-        Collider2D[] collectableColliders = Physics2D.OverlapCircleAll(position, collectableRadius);
-        foreach (Collider2D collider in collectableColliders)
-        {
-            // Check if it's a collectable (has collectable components)
-            if (collider.GetComponent<CoinCollectable>() != null || 
-                collider.GetComponent<GemCollectable>() != null ||
-                collider.GetComponent<PowerupCollectable>() != null)
-            {
-                return false; // Position is occupied by a collectable
-            }
-        }
-        
-        // Check for platform collisions
-        Collider2D[] platformColliders = Physics2D.OverlapCircleAll(position, platformRadius, obstacleLayers);
-        foreach (Collider2D collider in platformColliders)
-        {
-            // Check if it's a platform (has platform components)
-            if (collider.GetComponent<Platform>() != null || 
-                collider.GetComponent<ChestPlatform>() != null ||
-                collider.CompareTag("Platform"))
-            {
-                return false; // Position is occupied by a platform
-            }
-        }
-        
-        return true; // Position is valid
-    }
-    
-    private IEnumerator LerpCollectableToPosition(GameObject collectable, Vector3 startPos, Vector3 endPos)
+    private IEnumerator MoveCoinToPosition(GameObject collectable, Vector3 startPos, Vector3 endPos)
     {
         if (collectable == null) yield break;
         
-        float elapsedTime = 0f;
+        float startTime = Time.time;
+        float moveDuration = 0.9f; // Reduced from 0.8f for faster movement
         
-        while (elapsedTime < lerpDuration && collectable != null)
+        // Declare horizontalPos outside the loop so it can be used for final position
+        Vector3 horizontalPos = startPos;
+        
+        while (Time.time < startTime + moveDuration && collectable != null)
         {
-            elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / lerpDuration;
-            float curveValue = lerpCurve.Evaluate(progress);
+            float progress = (Time.time - startTime) / moveDuration;
+            progress = Mathf.Clamp01(progress);
             
-            Vector3 newPosition = Vector3.Lerp(startPos, endPos, curveValue);
-            collectable.transform.position = newPosition;
+            // Apply speed curve: slower start, slower upward, normal falling
+            float speedCurve;
+            if (progress < 0.3f) // First 30% - slower start
+            {
+                speedCurve = Mathf.Pow(progress / 0.3f, 1.5f) * 0.3f; // Slower initial movement
+            }
+            else if (progress < 0.7f) // 30% to 70% - slower upward movement
+            {
+                speedCurve = 0.3f + Mathf.Pow((progress - 0.3f) / 0.4f, 0.7f) * 0.4f; // Slower upward phase
+            }
+            else // 70% to 100% - slower falling speed
+            {
+                speedCurve = 0.7f + Mathf.Pow((progress - 0.7f) / 0.3f, 0.6f) * 0.3f; // Slower falling curve
+            }
+            
+            // Use smooth progress for arc movement to prevent lag/teleporting
+            horizontalPos = Vector3.Lerp(startPos, endPos, speedCurve);
+            
+            // Create smooth arc: goes up then down
+            float arcHeight = 2.6f;
+            
+            // Use smooth arc calculation that matches the speed curve
+            float arcProgress = speedCurve; // Use speedCurve instead of raw progress for smooth arc
+            float height = Mathf.Sin(arcProgress * Mathf.PI) * arcHeight;
+            horizontalPos.y += height;
+            
+            collectable.transform.position = horizontalPos;
             
             yield return null;
         }
         
-        // Ensure final position is set
+        // Ensure final position is set and respects boundaries
         if (collectable != null)
         {
-            collectable.transform.position = endPos;
+            // Use the last calculated position from the movement loop to prevent teleportation
+            Vector3 finalPosition = horizontalPos; // Use last calculated position instead of endPos
+            finalPosition.x = Mathf.Clamp(finalPosition.x, -1.5f, 1.5f);
+            
+            collectable.transform.position = finalPosition;
         }
     }
     
-    // Public methods for runtime configuration
-    public void AddCollectableSpawnData(GameObject prefab, int amount)
-    {
-        CollectableSpawnData newData = new CollectableSpawnData
-        {
-            collectablePrefab = prefab,
-            amount = amount
-        };
-        collectablesToSpawn.Add(newData);
-    }
+
     
-    public void ClearCollectableSpawnData()
-    {
-        collectablesToSpawn.Clear();
-    }
-    
-    public void SetSpawnBoundaries(float minDistance, float maxDistance, float angleRange)
-    {
-        minSpawnDistance = minDistance;
-        maxSpawnDistance = maxDistance;
-        spawnAngleRange = angleRange;
-    }
-    
-    public void SetLerpSettings(float duration, AnimationCurve curve)
-    {
-        lerpDuration = duration;
-        lerpCurve = curve;
-    }
-    
-    public void SetCollisionAvoidanceSettings(bool enable, float collectableRadius, float platformRadius, int maxAttempts, LayerMask obstacleLayers)
-    {
-        enableCollisionAvoidance = enable;
-        this.collectableRadius = collectableRadius;
-        this.platformRadius = platformRadius;
-        this.maxAttempts = maxAttempts;
-        this.obstacleLayers = obstacleLayers;
-    }
-    
-    public void SetPositionAdjustmentSettings(float platformYAdjustment, float collectableXYAdjustment, float maxYAdjustment)
-    {
-        this.platformYAdjustment = platformYAdjustment;
-        this.collectableXYAdjustment = collectableXYAdjustment;
-        this.maxYAdjustment = maxYAdjustment;
-    }
+
     
     // Reset chest state (useful for testing or respawning)
     public void ResetChest()
@@ -387,7 +573,192 @@ public class ChestPlatform : MonoBehaviour
         
         if (chestAnimator != null)
         {
-            chestAnimator.ResetTrigger(openAnimationTrigger);
+            // Reset the animator to the default state
+            chestAnimator.Play(0, 0, 0f); // Go back to first state (index 0)
+            
+            // Alternative: If you have a specific idle state name
+            // chestAnimator.Play("Idle", 0, 0f);
+        }
+    }
+    
+    // Platform combo system methods
+    private void IncrementPlatformCombo(float relativeVelocity)
+    {
+        // Try to increment combo safely without direct ComboManager reference
+        try
+        {
+            // Use reflection to safely access ComboManager
+            System.Type comboManagerType = System.Type.GetType("ComboManager");
+            if (comboManagerType != null)
+            {
+                var instanceProperty = comboManagerType.GetProperty("Instance");
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    if (instance != null)
+                    {
+                        var platformComboMethod = comboManagerType.GetMethod("PlatformComboIncrement");
+                        if (platformComboMethod != null)
+                        {
+                            platformComboMethod.Invoke(instance, new object[] { relativeVelocity });
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception)
+        {
+            // ComboManager not available
+        }
+    }
+
+    private float GetComboBonus()
+    {
+        // Try to get combo bonus safely without direct ComboManager reference
+        try
+        {
+            // Use reflection to safely access ComboManager
+            System.Type comboManagerType = System.Type.GetType("ComboManager");
+            if (comboManagerType != null)
+            {
+                var instanceProperty = comboManagerType.GetProperty("Instance");
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    if (instance != null)
+                    {
+                        var getComboMethod = comboManagerType.GetMethod("getCombo");
+                        if (getComboMethod != null)
+                        {
+                            float currentCombo = (float)getComboMethod.Invoke(instance, null);
+                            return currentCombo * comboBonus;
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception)
+        {
+            // ComboManager not available, return 0 bonus
+        }
+
+        return 0f;
+    }
+
+    // Public methods to control combo system manually
+    public void SetComboBonus(float bonus)
+    {
+        comboBonus = bonus;
+    }
+
+    public void EnableComboSystem(bool enable)
+    {
+        enableComboSystem = enable;
+    }
+
+    // Public methods to adjust collision detection
+    public void SetVelocityThreshold(float threshold)
+    {
+        velocityThreshold = threshold;
+    }
+
+    public void SetContactNormalThreshold(float threshold)
+    {
+        contactNormalThreshold = threshold;
+    }
+    
+    // Public methods to spawn specific collectables
+    public void SpawnCoin1(int amount = 1)
+    {
+        if (coin1Prefab == null) return;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCollectableAtRandomPosition(coin1Prefab);
+        }
+    }
+    
+    public void SpawnCoin2(int amount = 1)
+    {
+        if (coin2Prefab == null) return;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCollectableAtRandomPosition(coin2Prefab);
+        }
+    }
+    
+    public void SpawnCoin3(int amount = 1)
+    {
+        if (coin3Prefab == null) return;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCollectableAtRandomPosition(coin3Prefab);
+        }
+    }
+    
+    public void SpawnDiamond1(int amount = 1)
+    {
+        if (diamond1Prefab == null) return;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCollectableAtRandomPosition(diamond1Prefab);
+        }
+    }
+    
+    public void SpawnDiamond2(int amount = 1)
+    {
+        if (diamond2Prefab == null) return;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCollectableAtRandomPosition(diamond2Prefab);
+        }
+    }
+    
+    // Helper method to spawn a collectable at a random position
+    private void SpawnCollectableAtRandomPosition(GameObject prefab)
+    {
+        if (prefab == null) return;
+        
+        // Calculate spawn position just above the platform with small variance
+        Vector3 spawnPosition = transform.position + Vector3.up * spawnHeightOffset;
+        
+        // Add small random variance to Y position only (X variance causes boundary issues)
+        float yVariance = Random.Range(-0.2f, 0.2f);
+        spawnPosition += new Vector3(0f, yVariance, 0);
+        
+        // Instantiate the collectable with slight position variance
+        GameObject collectable = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        
+        // Make coin non-collectable temporarily and start movement sequence
+        StartCoroutine(CoinSpawnSequence(collectable, spawnPosition));
+    }
+    
+    private IEnumerator CoinSpawnSequence(GameObject collectable, Vector3 startPosition)
+    {
+        // Disable collider to make coin non-collectable and prevent platform collisions
+        Collider2D coinCollider = collectable.GetComponent<Collider2D>();
+        if (coinCollider != null)
+        {
+            coinCollider.enabled = false;
+        }
+        
+        // Calculate random target position
+        Vector3 targetPosition = CalculateRandomTargetPosition();
+        
+        // Start movement to final position immediately
+        StartCoroutine(MoveCoinToPosition(collectable, startPosition, targetPosition));
+        
+        // Wait for movement to complete before making coin collectable
+        yield return new WaitForSeconds(0.4f); // Reduced from 0.8f for faster collectability
+        
+        // Re-enable collider to make coin collectable
+        if (coinCollider != null)
+        {
+            coinCollider.enabled = true;
         }
     }
 }

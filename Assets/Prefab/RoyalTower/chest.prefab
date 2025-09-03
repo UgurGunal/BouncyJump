@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6543918908782215984}
   - component: {fileID: 3155968559890746678}
   - component: {fileID: 1071049993595142390}
-  - component: {fileID: 338911443746854519}
   - component: {fileID: 799421559491578898}
+  - component: {fileID: -2868527047717751487}
   m_Layer: 0
   m_Name: chest
   m_TagString: Platform
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6595305194927341745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.505645, y: -0.0031518992, z: 0}
+  m_LocalPosition: {x: 0.485, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.022403687}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 1.1428572, y: 0.6571429}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 1.1428572, y: 0.9071429}
     newSize: {x: 1.1428572, y: 0.6571429}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1428572, y: 0.6571429}
+  m_Size: {x: 1.1428572, y: 0.58909315}
   m_EdgeRadius: 0
 --- !u!251 &1071049993595142390
 PlatformEffector2D:
@@ -152,28 +152,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
---- !u!114 &338911443746854519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595305194927341745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 15
-  comboBonus: 0.006
-  velocityThreshold: 5
-  contactNormalThreshold: 0
-  enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 3.4
-  shakeMagnitude: 0.08
-  enableDistanceDestroy: 1
-  destroyDistance: 8
 --- !u!95 &799421559491578898
 Animator:
   serializedVersion: 5
@@ -195,3 +173,79 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2868527047717751487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595305194927341745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ae36e5c2b5359479f197be271efa1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestAnimator: {fileID: 799421559491578898}
+  openAnimationTrigger: ChestOpen
+  chestSpriteRenderer: {fileID: 0}
+  closedSprite: {fileID: 1905336848, guid: 58ded9dd1ba7a7f4d8df39fe251f7c30, type: 3}
+  openedSprite: {fileID: -680601116, guid: 58ded9dd1ba7a7f4d8df39fe251f7c30, type: 3}
+  coin1Prefab: {fileID: 6595305194927341745, guid: 3a4951f52ff2bf6458fa62f8a8b3469e, type: 3}
+  coin2Prefab: {fileID: 6595305194927341745, guid: 55e9def79a43dd944a576e389cf08b1d, type: 3}
+  coin3Prefab: {fileID: 6595305194927341745, guid: a7102f6a972d56440b018f3ff752ff5e, type: 3}
+  diamond1Prefab: {fileID: 6595305194927341745, guid: 558b18c7716ad6d49a4216525e556faa, type: 3}
+  diamond2Prefab: {fileID: 6595305194927341745, guid: ed60038291882f543be4060a041e8905, type: 3}
+  useSpawnChoiceSystem: 1
+  range1Max: 200
+  range1Spawn1Prob: 40
+  range1Spawn2Prob: 30
+  range1Spawn3Prob: 20
+  range1Spawn4Prob: 10
+  range1Spawn5Prob: 0
+  range1Spawn6Prob: 0
+  range2Max: 400
+  range2Spawn1Prob: 60
+  range2Spawn2Prob: 20
+  range2Spawn3Prob: 16
+  range2Spawn4Prob: 3
+  range2Spawn5Prob: 1
+  range2Spawn6Prob: 0.1
+  range3Max: 600
+  range3Spawn1Prob: 40
+  range3Spawn2Prob: 30
+  range3Spawn3Prob: 21
+  range3Spawn4Prob: 6
+  range3Spawn5Prob: 2
+  range3Spawn6Prob: 1
+  range4Max: 800
+  range4Spawn1Prob: 15
+  range4Spawn2Prob: 30
+  range4Spawn3Prob: 37
+  range4Spawn4Prob: 12
+  range4Spawn5Prob: 4
+  range4Spawn6Prob: 2
+  range5Max: 1000
+  range5Spawn1Prob: 10
+  range5Spawn2Prob: 25
+  range5Spawn3Prob: 30
+  range5Spawn4Prob: 25
+  range5Spawn5Prob: 7
+  range5Spawn6Prob: 3
+  range6Spawn1Prob: 5
+  range6Spawn2Prob: 15
+  range6Spawn3Prob: 25
+  range6Spawn4Prob: 35
+  range6Spawn5Prob: 14
+  range6Spawn6Prob: 6
+  spawnHeightOffset: 0.4
+  enableDebugLogging: 0
+  jumpForce: 15
+  comboBonus: 0.006
+  velocityThreshold: 5
+  contactNormalThreshold: 0
+  enableComboSystem: 1
+  enableTimerDestroy: 0
+  destroyTime: 3
+  shakeMagnitude: 0.1
+  enableDistanceDestroy: 1
+  destroyDistance: 8

@@ -940,7 +940,7 @@ MonoBehaviour:
   powerupPrefab: {fileID: 6595305194927341745, guid: 558b18c7716ad6d49a4216525e556faa, type: 3}
   diamondPrefab: {fileID: 6595305194927341745, guid: 558b18c7716ad6d49a4216525e556faa, type: 3}
   levels:
-  - cameraSpeed: 2
+  - cameraSpeed: 2.2
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 087f374f3d1e3c14f9f94bf771867503, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 1f997e3afe83e644a849823975e4d4b3, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.006
     emptySpawnRate: 0.7
-  - cameraSpeed: 4
+  - cameraSpeed: 4.1
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 95e15c40ad1ef954ba61c2f682f4acab, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 302a05b9f015e2646afb73cce6156bf0, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}
@@ -1015,7 +1015,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.7
-  - cameraSpeed: 4.4
+  - cameraSpeed: 4.5
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 140c77303dedd5a4890c067969f4ccad, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: c484374c397837946ac400fa70892e0d, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}

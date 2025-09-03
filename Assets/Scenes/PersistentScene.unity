@@ -1279,8 +1279,8 @@ MonoBehaviour:
   maxPlatformXPosition: 1.8
   minPlatformScaleX: 0.95
   maxPlatformScaleX: 1.05
-  minSpecialPlatform2XPosition: -1.4
-  maxSpecialPlatform2XPosition: 1.4
+  minSpecialPlatform2XPosition: -1.28
+  maxSpecialPlatform2XPosition: 1.28
   minCollectableXPosition: -1.5
   maxCollectableXPosition: 1.5
   minCollectableYOffset: 0.65
