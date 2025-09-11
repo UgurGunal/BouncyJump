@@ -19,6 +19,7 @@ public class Platform : MonoBehaviour
     public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
     public bool enableDistanceDestroy = true; // Enable/disable distance-based destruction
     public float destroyDistance = 8f; // Distance below player to instantly destroy platform
+    public float timerDestroyDistance = 4.4f; // Distance below player to start timer-based destruction
 
     private Transform playerTransform;
     private bool isDestroying = false;
@@ -63,7 +64,7 @@ public class Platform : MonoBehaviour
         }
 
         // Check if the player has passed the platform (for timer-based destruction)
-        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y)
+        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y - timerDestroyDistance)
         {
             isDestroying = true;
             destroyTimer = destroyTime;

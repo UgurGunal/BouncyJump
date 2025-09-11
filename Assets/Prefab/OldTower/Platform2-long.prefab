@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1058162906, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: 2028876709, guid: 9079b5c8b95c66f48ac7de0512ee587d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,18 +119,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.031669587}
+  m_Offset: {x: 0.004892111, y: -0.024459615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.3, y: 0.42857143}
+    oldSize: {x: 2.2928572, y: 0.5}
     newSize: {x: 2.3, y: 0.42857143}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3, y: 0.3652323}
+  m_Size: {x: 2.263506, y: 0.45108077}
   m_EdgeRadius: 0
 --- !u!251 &1071049993595142390
 PlatformEffector2D:
@@ -168,9 +168,9 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
+  enableTimerDestroy: 1
   destroyTime: 2.8
-  shakeMagnitude: 0.1
+  shakeMagnitude: 0.06
   enableDistanceDestroy: 1
-  destroyDistance: 8
-  timerDestroyDistance: 4.4
+  destroyDistance: 6
+  timerDestroyDistance: 5
