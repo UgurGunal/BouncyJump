@@ -244,12 +244,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -541629378, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: -903509792, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5785714, y: 14.471429}
+  m_Size: {x: 1.6785715, y: 14.028571}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -306,8 +306,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5785714, y: 14.471429}
-    newSize: {x: 1.5785714, y: 14.471429}
+    oldSize: {x: 1.6785715, y: 14.028571}
+    newSize: {x: 1.6785715, y: 14.028571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -332,6 +332,7 @@ MonoBehaviour:
   maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
+  wallCooldownDuration: 0.8
 --- !u!1 &212887702
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,12 +454,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -905340315, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: -482323620, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.535714, y: 0.78571427}
+  m_Size: {x: 4.385714, y: 0.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -560,12 +561,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: -1363962346, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: 1058427918, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.1928573, y: 14.521428}
+  m_Size: {x: 4.2, y: 14.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -646,12 +647,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -541629378, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: -903509792, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5785714, y: 14.471429}
+  m_Size: {x: 1.6785715, y: 14.028571}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -708,8 +709,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5785714, y: 14.471429}
-    newSize: {x: 1.5785714, y: 14.471429}
+    oldSize: {x: 1.6785715, y: 14.028571}
+    newSize: {x: 1.6785715, y: 14.028571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -734,6 +735,7 @@ MonoBehaviour:
   maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
+  wallCooldownDuration: 0.8
 --- !u!1 &1095547888
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,72 +930,102 @@ MonoBehaviour:
   levelHeight: 200
   player: {fileID: 0}
   cameraFollow: {fileID: 0}
-  coin1Prefab: {fileID: 6595305194927341745, guid: 2fc9cb9f09d913c428525279aaab1131, type: 3}
-  coin2Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
-  coin3Prefab: {fileID: 6595305194927341745, guid: 2fc9cb9f09d913c428525279aaab1131, type: 3}
-  powerupPrefab: {fileID: 6595305194927341745, guid: 826dd3546d3ceb146b84673ea437da86, type: 3}
-  diamondPrefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
+  coin1Prefab: {fileID: 6595305194927341745, guid: c9eba924c438d924ba4372efb68512e2, type: 3}
+  coin2Prefab: {fileID: 6595305194927341745, guid: 254fb7155b7beed4285e406c1efdf9c1, type: 3}
+  coin3Prefab: {fileID: 6595305194927341745, guid: 361945b8c32051e4a9a1fad5a55b687f, type: 3}
+  powerupPrefab: {fileID: 6595305194927341745, guid: 584cb05d3575bd74791d1b37cf4c9329, type: 3}
+  diamondPrefab: {fileID: 6595305194927341745, guid: 584cb05d3575bd74791d1b37cf4c9329, type: 3}
   levels:
-  - cameraSpeed: 1.8
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: cd619c16225f4a2498995f6539349cd8, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 3ad5f57523d1e4446acd0d45c58e9e73, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
-    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
+  - cameraSpeed: 2.4
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 2b0c4c445f8de5c4e8df6b0c46a18f7f, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: dc7200c29bd578c43a6c78715ba9786c, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
     longPlatformSpawnRate: 0.48
     shortPlatformSpawnRate: 0.48
-    specialPlatformSpawnRate: 0.04
-    specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.25
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.04
+    coin1SpawnRate: 0.16
     coin2SpawnRate: 0
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.002
-    emptySpawnRate: 0.75
-  - cameraSpeed: 3
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: 9f22275646b175b40a61bb9d3cb60c5d, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 4d0c0687d55d51342bfff84282b69c97, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
-    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
+    emptySpawnRate: 0.84
+  - cameraSpeed: 3.3
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 0fe33d2789e9621418f5dc5c575bd757, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6c8e813356854a841a767b012fa8049f, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
     longPlatformSpawnRate: 0.48
     shortPlatformSpawnRate: 0.48
-    specialPlatformSpawnRate: 0.04
-    specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.27
-    coin2SpawnRate: 0.08
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.04
+    coin1SpawnRate: 0.2
+    coin2SpawnRate: 0.02
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.003
-    emptySpawnRate: 0.65
-  - cameraSpeed: 3.4
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: 92d7d0fae1eb4f0409c923e5e7842c33, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: dfcc21364b3ac0846908ef2fa04e1953, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
-    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
+    emptySpawnRate: 0.78
+  - cameraSpeed: 3.7
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: e50f2f45de81d134e89e478f7133d70b, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 90d19c36c3707fb4a89106d41dae305e, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
     longPlatformSpawnRate: 0.48
     shortPlatformSpawnRate: 0.48
-    specialPlatformSpawnRate: 0.04
-    specialPlatform2SpawnRate: 0
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.04
     coin1SpawnRate: 0.22
-    coin2SpawnRate: 0.16
+    coin2SpawnRate: 0.04
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
-    emptySpawnRate: 0.62
-  - cameraSpeed: 3.8
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: b7111518dc659ac4697f060aac3f8ac9, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: a049950fafe759d4aaaafc3d45f2f7cf, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
-    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 9a65669cb471f6d4388beff18cbf5c71, type: 3}
-    longPlatformSpawnRate: 0.48
+    emptySpawnRate: 0.74
+  - cameraSpeed: 4
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 92c4b163b18139b419d972c8efa4eccc, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: b731768740d301d489e526c017b248dc, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    longPlatformSpawnRate: 0.47
     shortPlatformSpawnRate: 0.48
-    specialPlatformSpawnRate: 0.04
-    specialPlatform2SpawnRate: 0
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.05
     coin1SpawnRate: 0.2
-    coin2SpawnRate: 0.24
-    coin3SpawnRate: 0
+    coin2SpawnRate: 0.08
+    coin3SpawnRate: 0.02
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
-    emptySpawnRate: 0.56
+    emptySpawnRate: 0.7
+  - cameraSpeed: 4.5
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 08026af7727cc564c935a2ef8a04ea03, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 7ce3cdd1afa14624ab78b8b16d51108f, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    longPlatformSpawnRate: 0.47
+    shortPlatformSpawnRate: 0.48
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.05
+    coin1SpawnRate: 0.13
+    coin2SpawnRate: 0.15
+    coin3SpawnRate: 0.07
+    powerupSpawnRate: 0
+    diamondSpawnRate: 0.005
+    emptySpawnRate: 0.65
+  - cameraSpeed: 4.8
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 8d952f8c720f252468a323ccd0760f9e, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: bdd74320cee14ac4a8c39299566f5d90, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 98780fd80bca7f7479c06daa31622f32, type: 3}
+    longPlatformSpawnRate: 0.47
+    shortPlatformSpawnRate: 0.47
+    specialPlatformSpawnRate: 0
+    specialPlatform2SpawnRate: 0.06
+    coin1SpawnRate: 0
+    coin2SpawnRate: 0.15
+    coin3SpawnRate: 0.2
+    powerupSpawnRate: 0
+    diamondSpawnRate: 0.005
+    emptySpawnRate: 0.65
 --- !u!1 &2125827021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,12 +1084,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -200
-  m_Sprite: {fileID: 327367944, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: 2144155137, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0714285, y: 14.4}
+  m_Size: {x: 1.0642858, y: 14.421429}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

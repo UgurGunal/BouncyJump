@@ -169,7 +169,7 @@ MonoBehaviour:
   contactNormalThreshold: 0
   enableComboSystem: 1
   enableTimerDestroy: 1
-  destroyTime: 3.8
+  destroyTime: 3.9
   shakeMagnitude: 0.06
   enableDistanceDestroy: 1
   destroyDistance: 6

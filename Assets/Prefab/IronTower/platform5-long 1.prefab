@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6543918908782215984}
   - component: {fileID: 3155968559890746678}
   - component: {fileID: 1071049993595142390}
-  - component: {fileID: -1053381292123313914}
+  - component: {fileID: 8364976591598655100}
   m_Layer: 0
-  m_Name: platform-bouncy
+  m_Name: platform5-long 1
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,13 +75,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: -2082337500, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 1476339085, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.4142857, y: 0.4642857}
+  m_Size: {x: 2.1714287, y: 0.45714286}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,18 +119,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.037620887}
+  m_Offset: {x: -0.0026310682, y: -0.028945684}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.45, y: 0.42857143}
-    newSize: {x: 2.4142857, y: 0.4642857}
+    oldSize: {x: 2.1857142, y: 0.5714286}
+    newSize: {x: 2.1714287, y: 0.45714286}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4142857, y: 0.34389904}
+  m_Size: {x: 2.0782, y: 0.49248576}
   m_EdgeRadius: 0
 --- !u!251 &1071049993595142390
 PlatformEffector2D:
@@ -151,7 +151,7 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
---- !u!114 &-1053381292123313914
+--- !u!114 &8364976591598655100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,14 +163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
+  jumpForce: 15
   comboBonus: 0.008
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 1
-  destroyTime: 3.5
-  shakeMagnitude: 0.08
+  enableTimerDestroy: 0
+  destroyTime: 1.8
+  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
-  destroyDistance: 6
-  timerDestroyDistance: 5
+  destroyDistance: 8
+  timerDestroyDistance: 4.4

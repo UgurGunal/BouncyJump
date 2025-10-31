@@ -40,11 +40,22 @@ public class PlayerBallController : MonoBehaviour
     private Vector3 originalScale; // Store the original scale for restoration
     private bool isScaleEffectActive = false; // Track if scale effect is currently active
     private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
+    private TrailRenderer trailRenderer; // Reference to trail renderer component
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+        
+        // Get trail renderer component
+        trailRenderer = GetComponent<TrailRenderer>();
+        
+        // Always enable trail emission with dynamic gradient
+        if (trailRenderer != null)
+        {
+            trailRenderer.emitting = true;
+            SetupTrailRenderer();
+        }
         
         // Store original scale for restoration
         originalScale = transform.localScale;
@@ -74,6 +85,59 @@ public class PlayerBallController : MonoBehaviour
             // Reset input to zero when game hasn't started to prevent any movement
             moveInput = 0f;
         }
+        
+        // Update trail gradient based on current combo
+        UpdateTrailGradient();
+    }
+    
+    private void SetupTrailRenderer()
+    {
+        if (trailRenderer == null) return;
+        
+        // Set up trail renderer for gradient mode
+        trailRenderer.colorGradient = new Gradient();
+        
+        // Create gradient with white color
+        GradientColorKey[] colorKeys = new GradientColorKey[2];
+        colorKeys[0] = new GradientColorKey(Color.white, 0f);
+        colorKeys[1] = new GradientColorKey(Color.white, 1f);
+        
+        // Create alpha keys (will be updated dynamically)
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+        alphaKeys[0] = new GradientAlphaKey(0f, 0f); // Start with 0 alpha
+        alphaKeys[1] = new GradientAlphaKey(0f, 1f); // End with 0 alpha
+        
+        trailRenderer.colorGradient.SetKeys(colorKeys, alphaKeys);
+    }
+    
+    private void UpdateTrailGradient()
+    {
+        if (trailRenderer == null || comboManager == null) return;
+        
+        // Calculate alpha based on combo value with 200 threshold
+        // Alpha is 0 when combo < 200, then scales from 0-1 as combo goes from 200-1000
+        float currentCombo = comboManager.CurrentCombo;
+        float alpha = 0f;
+        
+        if (currentCombo >= 160f)
+        {
+            // Map combo range (200-1000) to alpha range (0-1)
+            alpha = Mathf.Clamp01((currentCombo - 160f) / 1300f);
+        }
+        // If combo < 200, alpha remains 0
+        
+        // Debug logging to see what's happening
+        if (Time.frameCount % 60 == 0) // Log every 60 frames to avoid spam
+        {
+            Debug.Log($"Combo: {currentCombo}, Alpha: {alpha}");
+        }
+        
+        // Try using startColor and endColor instead of gradient
+        Color startColor = new Color(1f, 1f, 1f, alpha); // White with calculated alpha
+        Color endColor = new Color(1f, 1f, 1f, 0f); // White with 0 alpha
+        
+        trailRenderer.startColor = startColor;
+        trailRenderer.endColor = endColor;
     }
     
     private void HandleInput()
@@ -376,9 +440,16 @@ public class PlayerBallController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
         
+        // Clear trail renderer to prevent long trail from teleportation
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+        }
+        
         // Reset any other player state as needed
         isTouchingSideWall = false;
         
         //Debug.Log($"Player revived at position: {revivePosition}");
     }
+
 }

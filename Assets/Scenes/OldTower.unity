@@ -311,10 +311,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 1
   minForce: 1
-  maxForce: 8
+  maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 1.5
+  wallCooldownDuration: 0.8
 --- !u!61 &584390788
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -347,18 +347,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.017898977, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.1, y: 14.485714}
+    oldSize: {x: 2.1, y: 14.457143}
     newSize: {x: 2.15, y: 14.028571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.15, y: 14.028571}
+  m_Size: {x: 2.0642018, y: 14.457143}
   m_EdgeRadius: 0
 --- !u!212 &584390789
 SpriteRenderer:
@@ -412,98 +412,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &855964295
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 855964298}
-  - component: {fileID: 855964297}
-  - component: {fileID: 855964296}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &855964296
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855964295}
-  m_Enabled: 1
---- !u!20 &855964297
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855964295}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &855964298
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855964295}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986354470
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,10 +628,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 0
   minForce: 1
-  maxForce: 8
+  maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 1.5
+  wallCooldownDuration: 0.8
 --- !u!61 &1105971202
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -756,18 +664,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.017899036, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.1, y: 14.485714}
+    oldSize: {x: 2.1, y: 14.457143}
     newSize: {x: 2.15, y: 14.028571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.15, y: 14.028571}
+  m_Size: {x: 2.0642018, y: 14.457143}
   m_EdgeRadius: 0
 --- !u!212 &1105971203
 SpriteRenderer:
@@ -925,11 +833,12 @@ MonoBehaviour:
   velocityThreshold: 4
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 8
+  enableTimerDestroy: 1
+  destroyTime: 3.8
   shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
+  timerDestroyDistance: 5
 --- !u!251 &1850757016
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1111,7 +1020,7 @@ MonoBehaviour:
   powerupPrefab: {fileID: 6595305194927341745, guid: fe869fdc868c59c43aea64a827722b87, type: 3}
   diamondPrefab: {fileID: 6595305194927341745, guid: fe869fdc868c59c43aea64a827722b87, type: 3}
   levels:
-  - cameraSpeed: 2
+  - cameraSpeed: 2.2
     longPlatformPrefab: {fileID: 6595305194927341745, guid: b2976310e229c944686e1f3e1a342d80, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: ad7d386732ad43c4aabd6215dd51ddcc, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}
@@ -1126,7 +1035,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.002
     emptySpawnRate: 0.7
-  - cameraSpeed: 2.4
+  - cameraSpeed: 2.6
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 0aeea81781f2b69438bb6c8eaf704b85, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6495c46433f49ec498e14a24da3f4ca3, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
@@ -1135,13 +1044,13 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.2
-    coin2SpawnRate: 0.05
+    coin1SpawnRate: 0.25
+    coin2SpawnRate: 0.1
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.003
-    emptySpawnRate: 0.75
-  - cameraSpeed: 2.6
+    emptySpawnRate: 0.65
+  - cameraSpeed: 3
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 24d54412abd2be1469431933a1e2c6fa, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 05cd2ec8a73156b47b4f9e908d7a3136, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
@@ -1150,13 +1059,13 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.15
-    coin2SpawnRate: 0.12
-    coin3SpawnRate: 0.01
+    coin1SpawnRate: 0.2
+    coin2SpawnRate: 0.2
+    coin3SpawnRate: 0.02
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
-    emptySpawnRate: 0.72
-  - cameraSpeed: 2.8
+    emptySpawnRate: 0.58
+  - cameraSpeed: 3.2
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 377e78ccc17969246afb531d6dce5edf, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 1ade88712a782254b94468e86038d6ed, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
@@ -1165,47 +1074,31 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.1
-    coin2SpawnRate: 0.16
-    coin3SpawnRate: 0.04
-    powerupSpawnRate: 0
-    diamondSpawnRate: 0.006
-    emptySpawnRate: 0.7
-  - cameraSpeed: 3
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: 7f1ef498163422943a69a352c95d5424, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6a7b83345c58b6b41be9ea1edaa8f46a, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
-    specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
-    longPlatformSpawnRate: 0.48
-    shortPlatformSpawnRate: 0.48
-    specialPlatformSpawnRate: 0.04
-    specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.02
-    coin2SpawnRate: 0.2
-    coin3SpawnRate: 0.08
+    coin1SpawnRate: 0.14
+    coin2SpawnRate: 0.25
+    coin3SpawnRate: 0.05
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
-    emptySpawnRate: 0.7
-  - cameraSpeed: 3.2
-    longPlatformPrefab: {fileID: 6595305194927341745, guid: 140c77303dedd5a4890c067969f4ccad, type: 3}
-    shortPlatformPrefab: {fileID: 6595305194927341745, guid: c484374c397837946ac400fa70892e0d, type: 3}
+    emptySpawnRate: 0.56
+  - cameraSpeed: 3.4
+    longPlatformPrefab: {fileID: 6595305194927341745, guid: 7f1ef498163422943a69a352c95d5424, type: 3}
+    shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6a7b83345c58b6b41be9ea1edaa8f46a, type: 3}
     specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}
     specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 41a231fc478375a4cb92605cc3369724, type: 3}
     longPlatformSpawnRate: 0.48
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0
-    coin2SpawnRate: 0.2
-    coin3SpawnRate: 0.15
+    coin1SpawnRate: 0.05
+    coin2SpawnRate: 0.25
+    coin3SpawnRate: 0.1
     powerupSpawnRate: 0
     diamondSpawnRate: 0.008
-    emptySpawnRate: 0.65
+    emptySpawnRate: 0.6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 855964298}
   - {fileID: 296938357}
   - {fileID: 1850757019}
   - {fileID: 1682657935}

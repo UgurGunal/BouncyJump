@@ -6,8 +6,8 @@ public class ComboManager : MonoBehaviour
     [Header("Combo Settings")]
     public float maxCombo = 1000f;
     [SerializeField] private float currentCombo = 0f; // Made private with SerializeField for inspector visibility
-    public float minDecrease = 80f; // Minimum decay rate per second
-    public float maxDecrease = 280f; // Maximum decay rate per second
+    public float minDecrease = 110f; // Minimum decay rate per second
+    public float maxDecrease = 300f; // Maximum decay rate per second
     
     [Header("Bonus Speed Limit")]
     public float speedLimitBonus = 3f; // Additional speed at max combo
@@ -24,8 +24,16 @@ public class ComboManager : MonoBehaviour
     public float wallVelocityMultiplier = 12f; // Multiplier for relative velocity
     public float wallComboMultiplier = 1f; // Multiplier for current combo
 
-    [Header("Wall Cooldown")]
-    public float wallCooldownDuration = 1.5f;
+    [Header("Wall Cooldown System")]
+    public bool useWallCooldownSystem = true; // Enable/disable individual wall cooldown system
+    public float leftWallCooldown = 0f; // Current cooldown for left wall
+    public float rightWallCooldown = 0f; // Current cooldown for right wall
+    public float wallCooldownDuration = 1.5f; // Duration of wall cooldown
+
+    [Header("Alternating Wall Combo System")]
+    public bool useAlternatingWallCombo = false; // Disabled by default, using cooldown system instead
+    public enum WallComboState { BothActive, LeftOnly, RightOnly }
+    private WallComboState currentWallComboState = WallComboState.BothActive;
 
     [Header("Debug")]
     public bool showDebugLogs = false;
@@ -181,10 +189,13 @@ public class ComboManager : MonoBehaviour
             return;
         }
         
-        if (relativeVelocity < 0f)
+        // Use absolute value to handle negative speeds properly
+        float absRelativeVelocity = Mathf.Abs(relativeVelocity);
+        
+        if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Negative relative velocity for wall: {relativeVelocity}");
+                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -196,8 +207,8 @@ public class ComboManager : MonoBehaviour
             return;
         }
         
-        // Calculate combo as relative velocity X × wallVelocityMultiplier
-        float calculatedCombo = relativeVelocity * wallVelocityMultiplier;
+        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
         
@@ -217,7 +228,7 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+            //Debug.Log($"Wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2})");
         }
     }
 
@@ -231,10 +242,13 @@ public class ComboManager : MonoBehaviour
             return;
         }
         
-        if (relativeVelocity < 0f)
+        // Use absolute value to handle negative speeds properly
+        float absRelativeVelocity = Mathf.Abs(relativeVelocity);
+        
+        if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Negative relative velocity for wall: {relativeVelocity}");
+                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -246,8 +260,8 @@ public class ComboManager : MonoBehaviour
             return;
         }
         
-        // Calculate combo as relative velocity X × wallVelocityMultiplier
-        float calculatedCombo = relativeVelocity * wallVelocityMultiplier;
+        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
         
@@ -267,7 +281,143 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Wall combo with custom cooldown: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
+            //Debug.Log($"Wall combo with custom cooldown: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2})");
+        }
+    }
+
+    // New alternating wall combo system: only one wall type can give combo at a time
+    public void WallComboIncrementAlternating(GameObject wall, float relativeVelocity)
+    {
+        if (wall == null)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning("WallComboIncrementAlternating called with null wall!");
+            return;
+        }
+        
+        // Use absolute value to handle negative speeds properly
+        float absRelativeVelocity = Mathf.Abs(relativeVelocity);
+        
+        if (absRelativeVelocity <= 0f)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
+            return;
+        }
+        
+        // Get the wall side from the SideWall component
+        SideWall sideWall = wall.GetComponent<SideWall>();
+        if (sideWall == null)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning($"Wall {wall.name} doesn't have SideWall component!");
+            return;
+        }
+        
+        // Check if this wall type is allowed to give combo based on current state
+        if (!CanWallGiveCombo(sideWall.wallSide))
+        {
+            if (showDebugLogs)
+                //Debug.Log($"Wall {sideWall.wallSide} cannot give combo in current state: {currentWallComboState}");
+            return;
+        }
+        
+        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
+        
+        float oldCombo = currentCombo;
+        
+        // Add base combo from wall bounce
+        AddCombo(calculatedCombo);
+        
+        // Multiply current combo by wallComboMultiplier
+        if (wallComboMultiplier != 1.0f)
+        {
+            currentCombo *= wallComboMultiplier;
+            currentCombo = Mathf.Min(maxCombo, currentCombo);
+        }
+        
+        // Update the wall combo state based on which wall was hit
+        UpdateWallComboState(sideWall.wallSide);
+        
+        if (showDebugLogs)
+        {
+            //Debug.Log($"Alternating wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2}, New State: {currentWallComboState})");
+        }
+    }
+
+    // New individual wall cooldown system: each wall has its own cooldown
+    public void WallComboIncrementWithIndividualCooldown(GameObject wall, float relativeVelocity, float customDuration = -1f)
+    {
+        if (wall == null)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning("WallComboIncrementWithIndividualCooldown called with null wall!");
+            return;
+        }
+        
+        // Use absolute value to handle negative speeds properly
+        float absRelativeVelocity = Mathf.Abs(relativeVelocity);
+        
+        if (absRelativeVelocity <= 0f)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
+            return;
+        }
+        
+        // Get the wall side from the SideWall component
+        SideWall sideWall = wall.GetComponent<SideWall>();
+        if (sideWall == null)
+        {
+            if (showDebugLogs)
+                //Debug.LogWarning($"Wall {wall.name} doesn't have SideWall component!");
+            return;
+        }
+        
+        // Check if this wall is on cooldown
+        bool wasOnCooldown = IsWallOnIndividualCooldown(sideWall.wallSide);
+        
+        if (wasOnCooldown)
+        {
+            // Wall is on cooldown - reset its cooldown to full duration without giving combo
+            SetWallIndividualCooldown(sideWall.wallSide);
+            ResetOppositeWallCooldown(sideWall.wallSide);
+            
+            if (showDebugLogs)
+                //Debug.Log($"Wall {sideWall.wallSide} was on cooldown - cooldown reset to full duration, no combo added");
+            return;
+        }
+        
+        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
+        
+        float oldCombo = currentCombo;
+        
+        // Add base combo from wall bounce
+        AddCombo(calculatedCombo);
+        
+        // Multiply current combo by wallComboMultiplier
+        if (wallComboMultiplier != 1.0f)
+        {
+            currentCombo *= wallComboMultiplier;
+            currentCombo = Mathf.Min(maxCombo, currentCombo);
+        }
+        
+        // Set cooldown for this wall and reset the opposite wall's cooldown
+        if (customDuration > 0f)
+        {
+            SetWallIndividualCooldownWithDuration(sideWall.wallSide, customDuration);
+        }
+        else
+        {
+            SetWallIndividualCooldown(sideWall.wallSide);
+        }
+        ResetOppositeWallCooldown(sideWall.wallSide);
+        
+        if (showDebugLogs)
+        {
+            //Debug.Log($"Individual wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2}, Left CD: {leftWallCooldown:F1}, Right CD: {rightWallCooldown:F1})");
         }
     }
     
@@ -372,6 +522,19 @@ public class ComboManager : MonoBehaviour
             
         currentCombo = 0f;
         wallCooldowns.Clear();
+        
+        // Reset individual wall cooldowns
+        if (useWallCooldownSystem)
+        {
+            leftWallCooldown = 0f;
+            rightWallCooldown = 0f;
+        }
+        
+        // Reset alternating wall combo state
+        if (useAlternatingWallCombo)
+        {
+            currentWallComboState = WallComboState.BothActive;
+        }
     }
     
     // Additional utility methods
@@ -398,6 +561,154 @@ public class ComboManager : MonoBehaviour
         //Debug.Log($"Test: Combo is now {currentCombo}");
     }
     
+    // Helper methods for alternating wall combo system
+    private bool CanWallGiveCombo(SideWall.WallSide wallSide)
+    {
+        if (!useAlternatingWallCombo)
+            return true; // If alternating system is disabled, all walls can give combo
+            
+        switch (currentWallComboState)
+        {
+            case WallComboState.BothActive:
+                return true; // Both walls can give combo initially
+            case WallComboState.LeftOnly:
+                return wallSide == SideWall.WallSide.Left; // Only left wall can give combo
+            case WallComboState.RightOnly:
+                return wallSide == SideWall.WallSide.Right; // Only right wall can give combo
+            default:
+                return true;
+        }
+    }
+    
+    private void UpdateWallComboState(SideWall.WallSide hitWallSide)
+    {
+        if (!useAlternatingWallCombo)
+            return; // Don't update state if alternating system is disabled
+            
+        switch (currentWallComboState)
+        {
+            case WallComboState.BothActive:
+                // After first hit, switch to only the opposite wall being active
+                if (hitWallSide == SideWall.WallSide.Left)
+                    currentWallComboState = WallComboState.RightOnly;
+                else if (hitWallSide == SideWall.WallSide.Right)
+                    currentWallComboState = WallComboState.LeftOnly;
+                break;
+                
+            case WallComboState.LeftOnly:
+                // If left wall was hit, now only right wall can give combo
+                if (hitWallSide == SideWall.WallSide.Left)
+                    currentWallComboState = WallComboState.RightOnly;
+                break;
+                
+            case WallComboState.RightOnly:
+                // If right wall was hit, now only left wall can give combo
+                if (hitWallSide == SideWall.WallSide.Right)
+                    currentWallComboState = WallComboState.LeftOnly;
+                break;
+        }
+    }
+    
+    // Public method to get current wall combo state (for debugging)
+    public WallComboState GetCurrentWallComboState()
+    {
+        return currentWallComboState;
+    }
+    
+    // Public method to manually set wall combo state (for testing)
+    public void SetWallComboState(WallComboState newState)
+    {
+        currentWallComboState = newState;
+    }
+    
+    // Helper methods for individual wall cooldown system
+    private bool IsWallOnIndividualCooldown(SideWall.WallSide wallSide)
+    {
+        if (!useWallCooldownSystem)
+            return false; // If cooldown system is disabled, walls are never on cooldown
+            
+        switch (wallSide)
+        {
+            case SideWall.WallSide.Left:
+                return leftWallCooldown > Time.time;
+            case SideWall.WallSide.Right:
+                return rightWallCooldown > Time.time;
+            default:
+                return false;
+        }
+    }
+    
+    public void SetWallIndividualCooldown(SideWall.WallSide wallSide)
+    {
+        if (!useWallCooldownSystem)
+            return;
+            
+        switch (wallSide)
+        {
+            case SideWall.WallSide.Left:
+                leftWallCooldown = Time.time + wallCooldownDuration;
+                break;
+            case SideWall.WallSide.Right:
+                rightWallCooldown = Time.time + wallCooldownDuration;
+                break;
+        }
+    }
+    
+    public void SetWallIndividualCooldownWithDuration(SideWall.WallSide wallSide, float duration)
+    {
+        if (!useWallCooldownSystem)
+            return;
+            
+        switch (wallSide)
+        {
+            case SideWall.WallSide.Left:
+                leftWallCooldown = Time.time + duration;
+                break;
+            case SideWall.WallSide.Right:
+                rightWallCooldown = Time.time + duration;
+                break;
+        }
+    }
+    
+    public void ResetOppositeWallCooldown(SideWall.WallSide hitWallSide)
+    {
+        if (!useWallCooldownSystem)
+            return;
+            
+        switch (hitWallSide)
+        {
+            case SideWall.WallSide.Left:
+                // Hit left wall, reset right wall cooldown
+                rightWallCooldown = 0f;
+                break;
+            case SideWall.WallSide.Right:
+                // Hit right wall, reset left wall cooldown
+                leftWallCooldown = 0f;
+                break;
+        }
+    }
+    
+    // Public methods to get cooldown status (for debugging)
+    public bool IsLeftWallOnCooldown()
+    {
+        return IsWallOnIndividualCooldown(SideWall.WallSide.Left);
+    }
+    
+    public bool IsRightWallOnCooldown()
+    {
+        return IsWallOnIndividualCooldown(SideWall.WallSide.Right);
+    }
+    
+    public float GetLeftWallCooldownRemaining()
+    {
+        return Mathf.Max(0f, leftWallCooldown - Time.time);
+    }
+    
+    public float GetRightWallCooldownRemaining()
+    {
+        return Mathf.Max(0f, rightWallCooldown - Time.time);
+    }
+
     void OnDestroy()
     {
         if (Instance == this)

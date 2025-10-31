@@ -288,10 +288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 0
   minForce: 1
-  maxForce: 8
+  maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 1.5
+  wallCooldownDuration: 0.8
 --- !u!61 &403864759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -437,10 +437,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 1
   minForce: 1
-  maxForce: 8
+  maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 1.5
+  wallCooldownDuration: 0.8
 --- !u!61 &522469670
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -613,6 +613,7 @@ MonoBehaviour:
   shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
+  timerDestroyDistance: 4.4
 --- !u!251 &734456005
 PlatformEffector2D:
   m_ObjectHideFlags: 0
