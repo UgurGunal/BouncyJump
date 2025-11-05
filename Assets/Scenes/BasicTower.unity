@@ -169,11 +169,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   parallaxObjects:
   - target: {fileID: 60219933}
-    parallaxFactor: 0
+    parallaxFactor: -0.035
     spriteHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 1053119560}
-    parallaxFactor: 0
+    parallaxFactor: -0.035
     spriteHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 863554778}

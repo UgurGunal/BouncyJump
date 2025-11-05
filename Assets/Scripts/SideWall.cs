@@ -15,6 +15,11 @@ public class SideWall : MonoBehaviour
     public bool enableComboSystem = true; // Set to true if you want combo functionality
     private float wallCooldownDuration = 0.8f; // Public variable to manage cooldown duration
 
+    [Header("Punish System")]
+    private float punishTimeWindow = 0.3f; // Time window in seconds to trigger punish (restart cooldown)
+    private float cooldownStartTime = -1f; // Track when this wall entered cooldown (-1 means not on cooldown)
+    private bool wasOnCooldownLastFrame = false; // Track cooldown state from previous frame
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
@@ -23,8 +28,46 @@ public class SideWall : MonoBehaviour
             // Use relative velocity from collision for more accurate speed calculation
             float playerSpeed = Mathf.Abs(collision.relativeVelocity.x);
 
-            // Check if this wall can give combo (for trail effect)
-            bool canGiveCombo = CanWallGiveCombo();
+            // Check if wall is currently on cooldown (before trying to add combo)
+            bool isOnCooldown = IsWallOnCooldown();
+            
+            // Check punish system: if wall is on cooldown and hit within punish window, restart cooldown
+            if (isOnCooldown && cooldownStartTime >= 0f)
+            {
+                float timeSinceCooldownStart = Time.time - cooldownStartTime;
+                if (timeSinceCooldownStart < punishTimeWindow)
+                {
+                    // Restart the cooldown timer
+                    RestartWallCooldown();
+                    // Don't add combo, just apply reduced bounce force
+                    if (playerSpeed >= minSpeedForBounce)
+                    {
+                        float bounceForce = CalculateBounceForce(playerSpeed) * 0.4f;
+                        float bounceDirection = (wallSide == WallSide.Left) ? 1f : -1f;
+                        player.BounceFromWall(bounceForce, bounceDirection);
+                    }
+                    player.SetTouchingSideWall(true);
+                    return; // Exit early, don't process combo addition
+                }
+            }
+            
+            // Track cooldown state before trying to add combo
+            bool wasOnCooldownBefore = isOnCooldown;
+            
+            // Add combo from wall bounce with custom cooldown logic (check this first)
+            bool comboAdded = false;
+            if (enableComboSystem)
+            {
+                comboAdded = AddWallComboWithCooldown(playerSpeed);
+            }
+            
+            // Track when cooldown starts (when combo was added and wall goes into cooldown)
+            bool isOnCooldownAfter = IsWallOnCooldown();
+            if (!wasOnCooldownBefore && isOnCooldownAfter)
+            {
+                // Wall just entered cooldown (combo was added), record the time
+                cooldownStartTime = Time.time;
+            }
             
             // Only apply bounce force if player speed is above minimum threshold
             if (playerSpeed >= minSpeedForBounce)
@@ -35,19 +78,18 @@ public class SideWall : MonoBehaviour
                 // Determine bounce direction
                 float bounceDirection = (wallSide == WallSide.Left) ? 1f : -1f;
                 
-                if (!canGiveCombo){
-                    bounceForce = bounceForce * 0.7f;
+                // Reduce bounce force if combo was NOT actually added
+                if (!comboAdded){
+                    bounceForce = bounceForce * 0.4f;
                 }
                 // Apply bounce using player's method
                 player.BounceFromWall(bounceForce, bounceDirection);
             }
             
-            
-            // Add combo from wall bounce with custom cooldown logic
-            bool comboAdded = false;
-            if (enableComboSystem)
+            // Only trigger dust particles if combo was actually added
+            if (comboAdded)
             {
-                comboAdded = AddWallComboWithCooldown(playerSpeed);
+                player.TriggerWallDustParticles(wallSide, playerSpeed);
             }
             
             player.SetTouchingSideWall(true);
@@ -318,5 +360,60 @@ public class SideWall : MonoBehaviour
         }
         
         return false; // Default to not on cooldown if we can't determine the state
+    }
+
+    // Restart the wall cooldown timer (used for punish system)
+    private void RestartWallCooldown()
+    {
+        try
+        {
+            // Use reflection to safely access ComboManager
+            System.Type comboManagerType = System.Type.GetType("ComboManager");
+            if (comboManagerType != null)
+            {
+                var instanceProperty = comboManagerType.GetProperty("Instance");
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    if (instance != null)
+                    {
+                        // Check if wall cooldown system is enabled
+                        var useWallCooldownProperty = comboManagerType.GetField("useWallCooldownSystem");
+                        bool useWallCooldown = false;
+                        
+                        if (useWallCooldownProperty != null)
+                            useWallCooldown = (bool)useWallCooldownProperty.GetValue(instance);
+                        
+                        if (useWallCooldown)
+                        {
+                            // Restart cooldown using SetWallIndividualCooldownWithDuration
+                            var restartMethod = comboManagerType.GetMethod("SetWallIndividualCooldownWithDuration");
+                            if (restartMethod != null)
+                            {
+                                restartMethod.Invoke(instance, new object[] { wallSide, wallCooldownDuration });
+                                // Update cooldown start time to now
+                                cooldownStartTime = Time.time;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception)
+        {
+            // ComboManager not available
+        }
+    }
+
+    void Update()
+    {
+        // Reset cooldown tracking when wall is no longer on cooldown
+        bool isOnCooldown = IsWallOnCooldown();
+        if (!isOnCooldown && wasOnCooldownLastFrame)
+        {
+            // Wall just exited cooldown
+            cooldownStartTime = -1f;
+        }
+        wasOnCooldownLastFrame = isOnCooldown;
     }
 } 

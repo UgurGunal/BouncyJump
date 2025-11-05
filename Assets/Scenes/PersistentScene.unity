@@ -2475,7 +2475,7 @@ Transform:
   m_GameObject: {fileID: 1240411528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2511,6 +2511,7 @@ MonoBehaviour:
   minPlatformSquishScale: 0.7
   maxPlatformSquishScale: 0.95
   platformScaleEffectDuration: 0.15
+  wallDustParticleSystemPrefab: {fileID: 4567572648451383697, guid: f632936c552238c42bb17ba8e0ae8e9c, type: 3}
 --- !u!96 &1240411534
 TrailRenderer:
   serializedVersion: 3

@@ -248,11 +248,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   parallaxObjects:
   - target: {fileID: 584390786}
-    parallaxFactor: 0
+    parallaxFactor: -0.036
     spriteHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 1105971200}
-    parallaxFactor: 0
+    parallaxFactor: -0.036
     spriteHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 986354471}
@@ -314,7 +314,6 @@ MonoBehaviour:
   maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 0.8
 --- !u!61 &584390788
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -347,7 +346,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.017898977, y: 0}
+  m_Offset: {x: 0.011411548, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -358,7 +357,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0642018, y: 14.457143}
+  m_Size: {x: 2.0771768, y: 14.457143}
   m_EdgeRadius: 0
 --- !u!212 &584390789
 SpriteRenderer:
@@ -631,7 +630,6 @@ MonoBehaviour:
   maxForce: 8.5
   playerMaxSpeed: 9
   enableComboSystem: 1
-  wallCooldownDuration: 0.8
 --- !u!61 &1105971202
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -664,7 +662,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017899036, y: 0}
+  m_Offset: {x: -0.012232959, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -675,7 +673,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0642018, y: 14.457143}
+  m_Size: {x: 2.0755339, y: 14.457143}
   m_EdgeRadius: 0
 --- !u!212 &1105971203
 SpriteRenderer:
