@@ -27,6 +27,11 @@ public class SideWall : MonoBehaviour
         {
             // Use relative velocity from collision for more accurate speed calculation
             float playerSpeed = Mathf.Abs(collision.relativeVelocity.x);
+            
+            // Debug: Show collision speed (relative velocity magnitude and components)
+            float collisionSpeed = collision.relativeVelocity.magnitude;
+            Vector2 relativeVel = collision.relativeVelocity;
+            Debug.Log($"[SideWall] Collision with {wallSide} wall - Speed: {collisionSpeed:F2} m/s | Relative Velocity: ({relativeVel.x:F2}, {relativeVel.y:F2})");
 
             // Check if wall is currently on cooldown (before trying to add combo)
             bool isOnCooldown = IsWallOnCooldown();
@@ -90,6 +95,29 @@ public class SideWall : MonoBehaviour
             if (comboAdded)
             {
                 player.TriggerWallDustParticles(wallSide, playerSpeed);
+                
+                // Play wall bounce sound effect when combo is added from wall bounce
+                // Pitch and volume shift based on collision speed: lerp between speed 6 and speed 16
+                if (SoundEffectsManager.Instance != null)
+                {
+                    float minSpeed = 6f;
+                    float maxSpeed = 16f;
+                    float minPitch = 0.9f;
+                    float maxPitch = 1.2f;
+                    float minVolume = 0.8f;
+                    float maxVolume = 0.1f;
+                    
+                    // Calculate pitch and volume based on collision speed
+                    float speedRatio = Mathf.Clamp01((collisionSpeed - minSpeed) / (maxSpeed - minSpeed));
+                    float basePitch = Mathf.Lerp(minPitch, maxPitch, speedRatio);
+                    float volume = Mathf.Lerp(minVolume, maxVolume, speedRatio);
+                    
+                    // Add random variance of ±0.1 to make sounds less repetitive
+                    float pitchVariance = Random.Range(-0.1f, 0.1f);
+                    float pitch = basePitch + pitchVariance;
+                    
+                    SoundEffectsManager.Instance.PlaySound("wall", volume, pitch);
+                }
             }
             
             player.SetTouchingSideWall(true);

@@ -158,6 +158,15 @@ public class Platform : MonoBehaviour
             // Apply jump with bonus: platform jump force + combo jump bonus
             float totalJumpForce = jumpForce + jumpBonus;
             player.Jump(totalJumpForce);
+            
+            // Play platform collision sound effect
+            if (SoundEffectsManager.Instance != null)
+            {
+                // Add random variance of ±0.1 to make sounds less repetitive
+                float pitchVariance = Random.Range(-0.1f, 0.1f);
+                float pitch = 1f + pitchVariance; // Base pitch of 1.0 with variance
+                SoundEffectsManager.Instance.PlaySound("platform", -1f, pitch);
+            }
 
             //Debug.Log($"Jump Applied - Force: {totalJumpForce:F2}, Base: {jumpForce:F2}, Bonus: {jumpBonus:F2}, RelativeVelocity: {relativeVelocity:F2}");
         }

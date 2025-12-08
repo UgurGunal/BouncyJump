@@ -28,8 +28,8 @@ public class PlayerBallController : MonoBehaviour
     public float maxPlatformSquishScale = 0.95f; // Maximum Y scale (minimum squish) - 0.9 = 10% reduction
     public float platformScaleEffectDuration = 0.15f; // Duration of the platform scale effect in seconds
 
-    [Header("Wall Dust Particles")]
-    public ParticleSystem wallDustParticleSystemPrefab; // Particle system prefab to instantiate on each collision
+    [Header("Wall Bounce Particles")]
+    public ParticleSystem wallDustParticleSystemPrefab; // Particle system prefab to instantiate on each collision (spawns at wall)
 
 
 
@@ -304,7 +304,7 @@ public class PlayerBallController : MonoBehaviour
         if (wallSide == SideWall.WallSide.Right)
         {
             // Right wall: X position = 0.26
-            position.x = 0.25f;
+            position.x = 0.23f;
             
             // Also invert the rotation if needed (for cone/circle shapes)
             Vector3 rotation = shape.rotation;
@@ -550,5 +550,4 @@ public class PlayerBallController : MonoBehaviour
         
         //Debug.Log($"Player revived at position: {revivePosition}");
     }
-
 }

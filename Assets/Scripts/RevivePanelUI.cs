@@ -166,6 +166,12 @@ public class RevivePanelUI : MonoBehaviour
             {
                 PointsManager.Instance.ResumeSession();
             }
+            
+            // Resume the music from where it stopped when player revives
+            if (MusicManager.Instance != null)
+            {
+                MusicManager.Instance.ResumeMusic();
+            }
         }
         else
         {

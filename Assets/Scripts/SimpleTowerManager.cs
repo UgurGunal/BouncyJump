@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SimpleTowerManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class SimpleTowerManager : MonoBehaviour
     
     [Header("Current Selection")]
     public int currentTowerIndex = 0;
+    
+    [Header("Home Screen UI")]
+    public Image homeScreenTowerImage;
     
     private static SimpleTowerManager instance;
     public static SimpleTowerManager Instance
@@ -54,6 +59,19 @@ public class SimpleTowerManager : MonoBehaviour
         
         // Initialize towers bought list
         RefreshTowersBought();
+        
+        // Ensure home screen visuals match current selection
+        UpdateHomeScreenTowerImage();
+    }
+    
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+    
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
     
     public SimpleTower GetCurrentTower()
@@ -74,6 +92,8 @@ public class SimpleTowerManager : MonoBehaviour
             PlayerPrefs.Save();
             
             Debug.Log($"Selected tower: {allTowers[currentTowerIndex].towerName}");
+            
+            UpdateHomeScreenTowerImage();
         }
         else if (!IsTowerBought(towerIndex))
         {
@@ -103,7 +123,47 @@ public class SimpleTowerManager : MonoBehaviour
     public Sprite GetCurrentTowerImage()
     {
         SimpleTower currentTower = GetCurrentTower();
-        return currentTower?.towerImage;
+        return currentTower?.shopTowerImage;
+    }
+    
+    public Sprite GetCurrentHomeTowerImage()
+    {
+        SimpleTower currentTower = GetCurrentTower();
+        if (currentTower == null)
+        {
+            return null;
+        }
+        
+        // Fall back to shop image if no dedicated home image is assigned
+        return currentTower.homeTowerImage != null ? currentTower.homeTowerImage : currentTower.shopTowerImage;
+    }
+    
+    public void UpdateHomeScreenTowerImage()
+    {
+        if (homeScreenTowerImage == null)
+        {
+            // Attempt to locate the home screen tower image in the active scene
+            GameObject towerImageObject = GameObject.Find("TowerImage");
+            if (towerImageObject != null)
+            {
+                homeScreenTowerImage = towerImageObject.GetComponent<Image>();
+            }
+            
+            if (homeScreenTowerImage == null)
+            {
+                return;
+            }
+        }
+        
+        Sprite imageToUse = GetCurrentHomeTowerImage();
+        homeScreenTowerImage.sprite = imageToUse;
+        homeScreenTowerImage.enabled = imageToUse != null;
+        
+        // Preserve aspect so sprites do not stretch unexpectedly
+        if (!homeScreenTowerImage.preserveAspect)
+        {
+            homeScreenTowerImage.preserveAspect = true;
+        }
     }
     
     public bool IsTowerBought(int towerIndex)
@@ -224,6 +284,13 @@ public class SimpleTowerManager : MonoBehaviour
         RefreshTowersBought();
         return new List<int>(towersBought);
     }
+    
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Force the manager to re-link to the home screen image in the newly loaded scene
+        homeScreenTowerImage = null;
+        UpdateHomeScreenTowerImage();
+    }
 }
 
 [System.Serializable]
@@ -231,7 +298,10 @@ public class SimpleTower
 {
     [Header("Tower Information")]
     public string towerName = "Tower 1";
-    public Sprite towerImage; // For home screen display when this tower is active
+    [Tooltip("Image shown in shop listings for this tower.")]
+    public Sprite shopTowerImage; // Shop image
+    [Tooltip("Image used on the home screen when this tower is active. If left empty, the shop image will be used instead.")]
+    public Sprite homeTowerImage;
     
     [Header("Pricing")]
     public int goldPrice = 0; // Cost in gold

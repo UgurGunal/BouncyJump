@@ -4,6 +4,8 @@ using System.Collections;
 public class PowerupCollectable : MonoBehaviour
 {
     public float yDestroyOffset = 10f; // Offset for destruction below player
+    public float powerupDuration = 5f;
+    public float powerupPerSecond = 100f;
     private Transform playerTransform;
 
     private void Start()
@@ -23,6 +25,10 @@ public class PowerupCollectable : MonoBehaviour
             if (PointsManager.Instance != null)
             {
                 PointsManager.Instance.AddPowerup();
+            }
+            if (ComboManager.Instance != null)
+            {
+                ComboManager.Instance.ApplyComboPowerup(powerupDuration, powerupPerSecond);
             }
             Destroy(gameObject);
         }

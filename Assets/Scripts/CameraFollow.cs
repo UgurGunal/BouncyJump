@@ -138,6 +138,12 @@ public class CameraFollow : MonoBehaviour
             PointsManager.Instance.EndSession();
         }
         
+        // Fade out and pause the music when player dies (smooth fade over 1 second)
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.FadeOutAndPauseMusic();
+        }
+        
         // Pause the game immediately
         Time.timeScale = 0f; 
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class ComboManager : MonoBehaviour
@@ -431,6 +432,28 @@ public class ComboManager : MonoBehaviour
         }
         
         currentCombo = Mathf.Min(maxCombo, currentCombo + amount);
+    }
+
+    public void ApplyComboPowerup(float duration, float comboPerSecond)
+    {
+        if (duration <= 0f || comboPerSecond <= 0f)
+        {
+            return;
+        }
+
+        StartCoroutine(ComboPowerupRoutine(duration, comboPerSecond));
+    }
+
+    private IEnumerator ComboPowerupRoutine(float duration, float comboPerSecond)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float deltaTime = Time.deltaTime;
+            AddCombo(comboPerSecond * deltaTime);
+            elapsed += deltaTime;
+            yield return null;
+        }
     }
 
     private bool IsWallOnCooldown(GameObject wall)
