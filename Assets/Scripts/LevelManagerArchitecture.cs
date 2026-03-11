@@ -17,7 +17,7 @@ using UnityEngine;
 /// 
 /// GamePersistentScene:
 /// ├── PointsManager (global progress tracking)
-/// ├── SimpleTowerManager (tower selection/currency)
+/// ├── TowerManager (tower selection/currency)
 /// ├── Player + Camera (common game objects)
 /// └── Game UI (common interface)
 /// 
@@ -162,10 +162,10 @@ public class LevelManagerArchitecture : MonoBehaviour
         
         // Check for persistent managers
         bool pointsManagerPersistent = PointsManager.Instance != null;
-        bool towerManagerPersistent = SimpleTowerManager.Instance != null;
+        bool towerManagerPersistent = TowerManager.Instance != null;
         
         Debug.Log($"PointsManager (persistent): {(pointsManagerPersistent ? "✅ Found" : "❌ Missing")}");
-        Debug.Log($"SimpleTowerManager (persistent): {(towerManagerPersistent ? "✅ Found" : "❌ Missing")}");
+        Debug.Log($"TowerManager (persistent): {(towerManagerPersistent ? "✅ Found" : "❌ Missing")}");
         
         Debug.Log("============================================");
     }

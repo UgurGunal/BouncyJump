@@ -12,7 +12,7 @@ using UnityEngine;
 /// - Total Memory: ~4-8MB for active gameplay
 /// 
 /// Advantages:
-/// + Single instance of managers (PointsManager, SimpleTowerManager)
+/// + Single instance of managers (PointsManager, TowerManager)
 /// + No object duplication across scenes
 /// + Faster scene transitions (no instantiation overhead)
 /// + Consistent object references (no FindObjectOfType needed)
@@ -131,11 +131,11 @@ public class MemoryPerformanceAnalysis : MonoBehaviour
         
         // Check for manager instances
         var pointsManager = FindObjectOfType<PointsManager>();
-        var towerManager = FindObjectOfType<SimpleTowerManager>();
+        var towerManager = FindObjectOfType<TowerManager>();
         var shopManager = FindObjectOfType<TowerShopManager>();
         
         Debug.Log($"PointsManager instances: {(pointsManager != null ? "Found" : "Not Found")}");
-        Debug.Log($"SimpleTowerManager instances: {(towerManager != null ? "Found" : "Not Found")}");
+        Debug.Log($"TowerManager instances: {(towerManager != null ? "Found" : "Not Found")}");
         Debug.Log($"TowerShopManager instances: {(shopManager != null ? "Found" : "Not Found")}");
         Debug.Log($"======================");
     }

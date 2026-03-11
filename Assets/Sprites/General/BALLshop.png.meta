@@ -1,0 +1,2874 @@
+fileFormatVersion: 2
+guid: 9e87ec49ce3dc2a4d871dde99e9c7d20
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BALLshop_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1728
+        width: 264
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d65243a0e0fb9b340bf9f16ead3f31c5
+      internalID: -947418571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_1
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 1818
+        width: 140
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68be3aeb908a3414ba86c33c1db11923
+      internalID: 123316129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1820
+        width: 138
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3312da31d21883248a112a2dd781259a
+      internalID: -1701754129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_3
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1818
+        width: 138
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b920dc2394d644c83e3c3f1879b51f
+      internalID: -842906342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_4
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 1818
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e2fec2b55de45c488144e6af1c08062
+      internalID: 1064482722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_5
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 1818
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7b31ae52388c4d4184debb6a2e22350
+      internalID: 1717687825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_6
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1820
+        width: 138
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe4030e5d133a64ea4850b4e6ed909a
+      internalID: 204011841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_7
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 1886
+        width: 224
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dee740c123eea194d8633e93d1b3666e
+      internalID: 24933847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_8
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 1886
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e423d6f3484a3ec48b0164428e1d3955
+      internalID: -1520060638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_9
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1875
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c8c98c0ae1a194cac41ef11389acf7
+      internalID: 166063837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_10
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 1668
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a6b9562d976644db6c7a497329cc28
+      internalID: 442932279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_11
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1668
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4884f4c729c9f5d408cc7cf62020961c
+      internalID: 70132372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_12
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1671
+        width: 140
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8b99c860fcb5b42a596712647b09b6
+      internalID: -1720652855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_13
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 1670
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8782993f54c1664ca16dc43bd9bd817
+      internalID: 502478491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_14
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 1671
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b570aff4f8f2fa34095ab0e9ec941796
+      internalID: -1053149938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_15
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1671
+        width: 139
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbdfecd14b36775409da455ee9313bb2
+      internalID: -1267729583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_16
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 1805
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13f0409c8109af741b6e20a9a37d35dc
+      internalID: 1287517546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_17
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 1805
+        width: 222
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73e7cca130be2049a9e2891c95313b0
+      internalID: -402745558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_18
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1794
+        width: 208
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b0a0fdff29387c43932ba4a0cf72d00
+      internalID: -1083556982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_19
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 1722
+        width: 222
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 324aa781746912540b861ddba9b6c3c4
+      internalID: 1781542762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_20
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 1724
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f5242427458c8747b73da3f96247980
+      internalID: -66686296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_21
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1714
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50d57f565b135fd44bf3e01c152917bc
+      internalID: 769781057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_22
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1406
+        width: 264
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3819d156f6a2a5f48a629435275134dd
+      internalID: -2102593934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_23
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1518
+        width: 136
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c652b100925b84da71d616fa0959df
+      internalID: -1354204534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_24
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1521
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2a8e73404044144bc068407f45ff2e
+      internalID: -514880031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_25
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1518
+        width: 137
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d00783fef1bcad49baeca57121d14d1
+      internalID: 351401095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_26
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 1521
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934109010a090dd488b100ed1e52b268
+      internalID: 28544532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_27
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1521
+        width: 144
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c22a35fbb7cb584494d6a410efc67f1
+      internalID: -1112942920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_28
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1522
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125448bb1979d034a8a45b3f0896a794
+      internalID: -178765618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_29
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 1642
+        width: 223
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7620111cc0a6c0544b420546d337a559
+      internalID: -1587433010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_30
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1643
+        width: 222
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023be5136d31fdb4a98d771785bdddb5
+      internalID: -711745716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_31
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 1634
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821a0017b0ed1044e8e4a89f511eb155
+      internalID: -1803214976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_32
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 1560
+        width: 223
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee7a89b0e153a9243b2857fe45bed91d
+      internalID: -913071669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_33
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 1562
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 630ef6ba8f84f6e44a0f337ca186318c
+      internalID: 1454966840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_34
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 1552
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ed1aadcd6a1e8e4382e4783d564f129
+      internalID: -412579673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_35
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 1368
+        width: 140
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f24fe1aa11ada241b0c6081a153bb2b
+      internalID: -2090155849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_36
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 1369
+        width: 137
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e769eb4a2ff876a41aafb0aeca9b7b82
+      internalID: 1094483917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_37
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1368
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1df0cf841258f8c45a88d9c755ddea9c
+      internalID: 2097259584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_38
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 1368
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c0b55e523e511418ff6cb5b2ddad0d
+      internalID: 255682832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_39
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 1368
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0860af17d15bccb49bba5ef4ebfee3bd
+      internalID: -1616128130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_40
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1369
+        width: 144
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d85ceb810599fc46b3c140255aa9fc5
+      internalID: -1831372399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_41
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 1477
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a79697f5f52c234dad29d0c40cf5033
+      internalID: -534395429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_42
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1479
+        width: 222
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbb92f002ca52d045ba32680602df25c
+      internalID: 920376378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_43
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1469
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02c90098e2b75434299fba69d294eeea
+      internalID: -1507287943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_44
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 1392
+        width: 222
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1727efe89f6d07f4f839ca4227a03008
+      internalID: -1673641523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_45
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1393
+        width: 222
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d275d57aba5399458518eeee58fccd2
+      internalID: -1464009563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_46
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 1383
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5a2195b80962648a50ab9ba449a85c
+      internalID: 139747509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_47
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1211
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec084732d8d86804da06ff0df1fe06a4
+      internalID: 1032383093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_48
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1211
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c454792b4d8dd314a8f3d4733bfe5daa
+      internalID: 1715534025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_49
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1212
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46d4f1b6b1106e34abdbc442956becec
+      internalID: 42243452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_50
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 1212
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2f735a95384214681865bc2ed067a4
+      internalID: 910193370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_51
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 1212
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75f2f14cb67895d4296bb7e327944735
+      internalID: -2102578024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_53
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1212
+        width: 138
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69940275982c52e4ba989e21f9897372
+      internalID: -1407554657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_55
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1308
+        width: 225
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2f0a1be2af2b044b8b9b8562840984
+      internalID: 1886025227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_56
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 1299
+        width: 222
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a0b235277f0dec4697132cf6660a34a
+      internalID: 117594382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_57
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 1299
+        width: 208
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3fda6b7f293a0b4fb573ac609a55012
+      internalID: 1893333287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_59
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 1217
+        width: 222
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b51a702fc0ffac43bd5603f66344d0a
+      internalID: -1945929398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_60
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 1211
+        width: 225
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a014b05d84132594a88923ca834e8c4e
+      internalID: 1982278672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_62
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 1080
+        width: 146
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542792395992e6e4eabd3093ace4600c
+      internalID: -1473835544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_63
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 1084
+        width: 132
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c33d92a5791cfc74db36c7fdb3dd433a
+      internalID: 744703297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_68
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 1050
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52c0f889ac056524baf62f7e5daf0184
+      internalID: 1803474785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_69
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1050
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dae3d312843ed047a46ae0a1dd7d1bf
+      internalID: 1809363357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_70
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1051
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8964ba707971a54468271cc67433d5ad
+      internalID: -1242731546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_71
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 1051
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a1c38aa592ba545b3c2d279368f9e1
+      internalID: -1309363731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_72
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 1050
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bc00b1dbf8c9454ca950955db3b10da
+      internalID: -1017378700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_73
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1050
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62aa8b1b3df22ec48a6b42bbf9bf1775
+      internalID: 1786284386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_74
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 1081
+        width: 57
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e18b3fb4eee37341897e9088bfb14ea
+      internalID: -1177505956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_75
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1121
+        width: 228
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af1d8918e09228b4098bdc1453140178
+      internalID: -1159558567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_76
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 931
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e29ddabdc564017479f4f9c03e3bccc3
+      internalID: -845589134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_77
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 934
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b4c4e449dec31c418ccec2469ea1406
+      internalID: 256290020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_78
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 894
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5ff7711dbfe6e44afbe5451b6e3b7e
+      internalID: 1673483344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_79
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 903
+        width: 136
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a4df48d469e4c4f9b17119b342385e
+      internalID: 921048804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_80
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 894
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ad1ba5040d5a474e9f09ab594329c25
+      internalID: -1409157755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_81
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 894
+        width: 135
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdfc5cb913fd9f046ab3124ea56936ee
+      internalID: -1191343863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_82
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 895
+        width: 139
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad2b3835ad5691546b161c146306823d
+      internalID: -580139216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_83
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 894
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bac6dbe90e806a14bbb442f443bc5b2e
+      internalID: -1666121364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_84
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 956
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cdbd3eee24f76541bf78420851c37ad
+      internalID: -2024970081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_85
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 958
+        width: 207
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18adf410d77133b49ab277e20c4c7c9a
+      internalID: 1111751429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_86
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 781
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f52b607d9ef71647ab2900116f53d35
+      internalID: 452438970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_87
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 789
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c39ba47be248443479c419ebc82980ed
+      internalID: 1012820293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_88
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 868
+        width: 223
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d5f2fddc3d3e44d9510d6c398e0400
+      internalID: 1194721527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_89
+      rect:
+        serializedVersion: 2
+        x: 1778
+        y: 861
+        width: 231
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3bbdab86ebd91a439f2de933701061e
+      internalID: 433827672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_90
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 686
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518af79e405064640bc4e931f08662d2
+      internalID: -152883806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_92
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 768
+        width: 223
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adc76f741de545345a74b42bb5c0df9e
+      internalID: 1724665217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_93
+      rect:
+        serializedVersion: 2
+        x: 1774
+        y: 762
+        width: 223
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee94b1872ed47cc4c80546225c6b1f53
+      internalID: 1924332045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_94
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 635
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8675cac1c2037114d8d70fe7375ea088
+      internalID: 391027254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_95
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 642
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8816c5a6ca37d0c4eaf27436ebffac22
+      internalID: 580799404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_96
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 684
+        width: 134
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b4b808aa062374449742e1a919a87ad
+      internalID: 1975692995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_99
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 687
+        width: 139
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93227ec9bb14cda419e30b13727d132a
+      internalID: 78814540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_100
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 687
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b668f1baa754c9342a7a50190c699a90
+      internalID: -1879590569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_101
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 687
+        width: 138
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3fe1b57a32e2c418d61eed3503ddcf
+      internalID: 585274227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_102
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 687
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 041d7104f585d0d459379e8cb53037ba
+      internalID: -1788940907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_103
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 486
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3d2c6d6261b4b14db9ed7ba9f78ab05
+      internalID: -446218791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_104
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 500
+        width: 137
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d408b89abc72c54bb336fbc86177448
+      internalID: 607057543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_105
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 522
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d36c811247297f748a2032a38c0e0d1b
+      internalID: -635699483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_107
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 522
+        width: 137
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 285354c5598ae6d46a1699969edde03e
+      internalID: 1666113224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_108
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 520
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb5f8b9ca33da446a593f479d26c75b
+      internalID: -87719134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_109
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 522
+        width: 136
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f361edc1113d62459e8f899112a1b7e
+      internalID: -2007302637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_110
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 520
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f774119bf61899a46b08c1d8e8fed335
+      internalID: 1112029468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_111
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 522
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af0a81bc6690b2a40bc16155f4127186
+      internalID: 72159403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_113
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 371
+        width: 144
+        height: 147
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9e61e06cdc3ef4b9f85fd9f04eab1a
+      internalID: 795515246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_116
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 372
+        width: 140
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1455b868613a00a45b7086334f3d4356
+      internalID: -942576426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_117
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 372
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38e1142d04bcea469ee6c80c7a2f8d9
+      internalID: -1916949236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_118
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 372
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105d3602176e76246a119e3c47ba8e53
+      internalID: 1824327702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_119
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 372
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a2bfb1eefe46c447ba4395a6423bdb0
+      internalID: -715302984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_120
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 372
+        width: 134
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef8b971cd84404d47b4fbe246525ca7c
+      internalID: -1868496850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_122
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 348
+        width: 138
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1af4927b9964e24dbcaae3fa654c884
+      internalID: 59054164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_124
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 350
+        width: 138
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae23182a986fbc84ca6d31221192d497
+      internalID: -206694922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_128
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 216
+        width: 139
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff0af63569a6c046a51b4bc55f13e36
+      internalID: -1016761768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_129
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 201
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f609d5ee66500842818a1190db2a8a7
+      internalID: -1328387733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_130
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 198
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c79ae176bcd950f4c8901cb3dba3c2db
+      internalID: -743520298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_131
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 214
+        width: 164
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646d5a452e41cab4cb52b71afae59686
+      internalID: 1567461231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_132
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 212
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb8005a6ea6112408144c4c3835fd7d
+      internalID: 1184564739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_133
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 214
+        width: 136
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 954942345359ecf4a9eacbee33ec7f81
+      internalID: -610038831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_134
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 210
+        width: 137
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23d4c446dc0001d4b806870d8e95e4f9
+      internalID: 531391160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_135
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 48
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d405ef8a0a710b469ed822afec61226
+      internalID: -1806791727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_136
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 54
+        width: 136
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc7d246a5bc68b4db09ebaadf1ed8fd
+      internalID: 580491604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_137
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 50
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355f4b9edcd9bc94a9f568b1b37a7706
+      internalID: 1433605555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_138
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 50
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 787e38cc56e8cb04b936674402913252
+      internalID: -1049857223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_139
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 51
+        width: 137
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b75548b1360805d48bdb789dce21ff86
+      internalID: 965366888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_140
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 56
+        width: 138
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88dbacaa8352904ba4cacf0c03d0ed1
+      internalID: 1815149035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_141
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 50
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0739aff753d94d4a97d030685c63274
+      internalID: -446093218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_142
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 53
+        width: 131
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 012446244b6581d43bac96e7ddd35b64
+      internalID: -2102731226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BALLshop_52
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 210
+        width: 144
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2ecef78071e7d442bc619dc4a3b971b
+      internalID: 1987530405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BALLshop_0: -947418571
+      BALLshop_1: 123316129
+      BALLshop_10: 442932279
+      BALLshop_100: -1879590569
+      BALLshop_101: 585274227
+      BALLshop_102: -1788940907
+      BALLshop_103: -446218791
+      BALLshop_104: 607057543
+      BALLshop_105: -635699483
+      BALLshop_106: -1247235192
+      BALLshop_107: 1666113224
+      BALLshop_108: -87719134
+      BALLshop_109: -2007302637
+      BALLshop_11: 70132372
+      BALLshop_110: 1112029468
+      BALLshop_111: 72159403
+      BALLshop_112: 2089272532
+      BALLshop_113: 795515246
+      BALLshop_114: 307217208
+      BALLshop_115: -417952439
+      BALLshop_116: -942576426
+      BALLshop_117: -1916949236
+      BALLshop_118: 1824327702
+      BALLshop_119: -715302984
+      BALLshop_12: -1720652855
+      BALLshop_120: -1868496850
+      BALLshop_121: -673175620
+      BALLshop_122: 59054164
+      BALLshop_123: 102497322
+      BALLshop_124: -206694922
+      BALLshop_125: 628958701
+      BALLshop_126: -1637780503
+      BALLshop_127: 2031393450
+      BALLshop_128: -1016761768
+      BALLshop_129: -1328387733
+      BALLshop_13: 502478491
+      BALLshop_130: -743520298
+      BALLshop_131: 1567461231
+      BALLshop_132: 1184564739
+      BALLshop_133: -610038831
+      BALLshop_134: 531391160
+      BALLshop_135: -1806791727
+      BALLshop_136: 580491604
+      BALLshop_137: 1433605555
+      BALLshop_138: -1049857223
+      BALLshop_139: 965366888
+      BALLshop_14: -1053149938
+      BALLshop_140: 1815149035
+      BALLshop_141: -446093218
+      BALLshop_142: -2102731226
+      BALLshop_15: -1267729583
+      BALLshop_16: 1287517546
+      BALLshop_17: -402745558
+      BALLshop_18: -1083556982
+      BALLshop_19: 1781542762
+      BALLshop_2: -1701754129
+      BALLshop_20: -66686296
+      BALLshop_21: 769781057
+      BALLshop_22: -2102593934
+      BALLshop_23: -1354204534
+      BALLshop_24: -514880031
+      BALLshop_25: 351401095
+      BALLshop_26: 28544532
+      BALLshop_27: -1112942920
+      BALLshop_28: -178765618
+      BALLshop_29: -1587433010
+      BALLshop_3: -842906342
+      BALLshop_30: -711745716
+      BALLshop_31: -1803214976
+      BALLshop_32: -913071669
+      BALLshop_33: 1454966840
+      BALLshop_34: -412579673
+      BALLshop_35: -2090155849
+      BALLshop_36: 1094483917
+      BALLshop_37: 2097259584
+      BALLshop_38: 255682832
+      BALLshop_39: -1616128130
+      BALLshop_4: 1064482722
+      BALLshop_40: -1831372399
+      BALLshop_41: -534395429
+      BALLshop_42: 920376378
+      BALLshop_43: -1507287943
+      BALLshop_44: -1673641523
+      BALLshop_45: -1464009563
+      BALLshop_46: 139747509
+      BALLshop_47: 1032383093
+      BALLshop_48: 1715534025
+      BALLshop_49: 42243452
+      BALLshop_5: 1717687825
+      BALLshop_50: 910193370
+      BALLshop_51: -2102578024
+      BALLshop_52: 1987530405
+      BALLshop_53: -1407554657
+      BALLshop_54: -537579325
+      BALLshop_55: 1886025227
+      BALLshop_56: 117594382
+      BALLshop_57: 1893333287
+      BALLshop_58: -481313499
+      BALLshop_59: -1945929398
+      BALLshop_6: 204011841
+      BALLshop_60: 1982278672
+      BALLshop_61: -332121355
+      BALLshop_62: -1473835544
+      BALLshop_63: 744703297
+      BALLshop_64: -2038672297
+      BALLshop_65: 1758256828
+      BALLshop_66: -2117267321
+      BALLshop_67: 505415973
+      BALLshop_68: 1803474785
+      BALLshop_69: 1809363357
+      BALLshop_7: 24933847
+      BALLshop_70: -1242731546
+      BALLshop_71: -1309363731
+      BALLshop_72: -1017378700
+      BALLshop_73: 1786284386
+      BALLshop_74: -1177505956
+      BALLshop_75: -1159558567
+      BALLshop_76: -845589134
+      BALLshop_77: 256290020
+      BALLshop_78: 1673483344
+      BALLshop_79: 921048804
+      BALLshop_8: -1520060638
+      BALLshop_80: -1409157755
+      BALLshop_81: -1191343863
+      BALLshop_82: -580139216
+      BALLshop_83: -1666121364
+      BALLshop_84: -2024970081
+      BALLshop_85: 1111751429
+      BALLshop_86: 452438970
+      BALLshop_87: 1012820293
+      BALLshop_88: 1194721527
+      BALLshop_89: 433827672
+      BALLshop_9: 166063837
+      BALLshop_90: -152883806
+      BALLshop_91: 1314366989
+      BALLshop_92: 1724665217
+      BALLshop_93: 1924332045
+      BALLshop_94: 391027254
+      BALLshop_95: 580799404
+      BALLshop_96: 1975692995
+      BALLshop_97: 794642857
+      BALLshop_98: -610002239
+      BALLshop_99: 78814540
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

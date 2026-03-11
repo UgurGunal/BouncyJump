@@ -15,7 +15,7 @@ public class HomeScreenUI : MonoBehaviour
     public TowerShopManager shopManager;
     
     [Header("Tower Integration")]
-    public SimpleTowerManager simpleTowerManager;
+    public TowerManager towerManager;
 
     void Start()
     {
@@ -45,15 +45,21 @@ public class HomeScreenUI : MonoBehaviour
             buyDiamondButton.onClick.AddListener(OnBuyDiamondButtonClick);
         }
 
-        // Initialize managers if not assigned
+        // Initialize managers if not assigned (search inactive so we find manager on disabled shop panel)
         if (shopManager == null)
         {
             shopManager = FindObjectOfType<TowerShopManager>();
+            if (shopManager == null)
+            {
+                TowerShopManager[] found = FindObjectsOfType<TowerShopManager>(true);
+                if (found != null && found.Length > 0)
+                    shopManager = found[0];
+            }
         }
         
-        if (simpleTowerManager == null)
+        if (towerManager == null)
         {
-            simpleTowerManager = SimpleTowerManager.Instance;
+            towerManager = TowerManager.Instance;
         }
     }
 
@@ -61,9 +67,9 @@ public class HomeScreenUI : MonoBehaviour
     {
         Debug.Log("Play button clicked - Loading current tower scene");
         
-        if (simpleTowerManager != null)
+        if (towerManager != null)
         {
-            string sceneToLoad = simpleTowerManager.GetCurrentTowerSceneName();
+            string sceneToLoad = towerManager.GetCurrentTowerSceneName();
             Debug.Log($"Loading scene: {sceneToLoad}");
             
             try
@@ -88,7 +94,7 @@ public class HomeScreenUI : MonoBehaviour
         }
         else
         {
-            Debug.LogError("SimpleTowerManager not found!");
+            Debug.LogError("TowerManager not found!");
         }
     }
 

@@ -55,10 +55,10 @@ public class ShopTestHelper : MonoBehaviour
     public void ResetAllData()
     {
         // Clear all tower purchases using the index-based system
-        SimpleTowerManager simpleTowerManager = SimpleTowerManager.Instance;
-        if (simpleTowerManager != null && simpleTowerManager.allTowers != null)
+        TowerManager towerManager = TowerManager.Instance;
+        if (towerManager != null && towerManager.allTowers != null)
         {
-            for (int i = 0; i < simpleTowerManager.allTowers.Length; i++)
+            for (int i = 0; i < towerManager.allTowers.Length; i++)
             {
                 PlayerPrefs.DeleteKey($"TowerPurchased_{i}");
             }
@@ -90,16 +90,16 @@ public class ShopTestHelper : MonoBehaviour
     public void UnlockAllTowers()
     {
         // Buy all towers using the new system
-        SimpleTowerManager simpleTowerManager = SimpleTowerManager.Instance;
-        if (simpleTowerManager != null && simpleTowerManager.allTowers != null)
+        TowerManager towerManager = TowerManager.Instance;
+        if (towerManager != null && towerManager.allTowers != null)
         {
-            for (int i = 0; i < simpleTowerManager.allTowers.Length; i++)
+            for (int i = 0; i < towerManager.allTowers.Length; i++)
             {
                 // Mark as purchased without deducting currency (for testing)
                 PlayerPrefs.SetInt($"TowerPurchased_{i}", 1);
             }
             PlayerPrefs.Save();
-            simpleTowerManager.RefreshTowersBought();
+            towerManager.RefreshTowersBought();
         }
         
         Debug.Log("All towers unlocked!");

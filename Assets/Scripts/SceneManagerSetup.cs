@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 /// 
 /// 1. GamePersistentScene (Game-Only Persistent) - Contains:
 ///    - Common game objects (Player controller, Camera, UI canvases)
-///    - Game managers (PointsManager, SimpleTowerManager, AudioManager, etc.)
+///    - Game managers (PointsManager, TowerManager, AudioManager, etc.)
 ///    - Objects needed in ALL tower scenes but NOT in main menu
 /// 
 /// 2. HomeScene (Main Menu) - Contains:
@@ -25,8 +25,8 @@ using UnityEngine.SceneManagement;
 /// 1. Create "GamePersistentScene":
 ///    - Create new scene named "GamePersistentScene"
 ///    - Add common game objects (Player prefab, Main Camera, Game UI Canvas)
-///    - Add all game managers (PointsManager, SimpleTowerManager, AudioManager, etc.)
-///    - Configure all tower data in SimpleTowerManager
+///    - Add all game managers (PointsManager, TowerManager, AudioManager, etc.)
+///    - Configure all tower data in TowerManager
 ///    - These objects will exist in ALL tower scenes but NOT in main menu
 ///    - Save scene
 /// 
@@ -88,7 +88,7 @@ public class SceneManagerSetup : MonoBehaviour
         
         // Check for managers
         Debug.Log($"PointsManager.Instance: {(PointsManager.Instance != null ? "Found" : "Missing")}");
-        Debug.Log($"SimpleTowerManager.Instance: {(SimpleTowerManager.Instance != null ? "Found" : "Missing")}");
+        Debug.Log($"TowerManager.Instance: {(TowerManager.Instance != null ? "Found" : "Missing")}");
         Debug.Log($"PersistentLoader.AreGameManagersLoaded(): {PersistentLoader.AreGameManagersLoaded()}");
         Debug.Log($"=========================");
     }
