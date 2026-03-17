@@ -181,7 +181,7 @@ public class LevelManagerArchitecture : MonoBehaviour
         if (sceneName.ToLower().Contains("home") || sceneName.ToLower().Contains("menu"))
         {
             Debug.Log("MENU SCENE - Should have:");
-            Debug.Log("✅ TowerShopManager (scene-specific)");
+            Debug.Log("✅ ShopManager (scene-specific)");
             Debug.Log("✅ HomeScreenUI (scene-specific)");
             Debug.Log("✅ PersistentLoader (loads GamePersistentScene for gameplay)");
             Debug.Log("❌ No LevelManager needed");

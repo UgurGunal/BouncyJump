@@ -28,11 +28,9 @@ public class PlayerBallController : MonoBehaviour
     public float maxPlatformSquishScale = 0.95f; // Maximum Y scale (minimum squish) - 0.9 = 10% reduction
     public float platformScaleEffectDuration = 0.15f; // Duration of the platform scale effect in seconds
 
-    [Header("Wall Bounce Particles")]
-    public ParticleSystem wallDustParticleSystemPrefab; // Particle system prefab to instantiate on each collision (spawns at wall)
-
-
-
+    [Header("Particles")]
+    [Tooltip("Handles wall dust and player bounce particles. Optional, but recommended.")]
+    public PlayerParticleController particleController;
     private Rigidbody2D rb;
     private float moveInput = 0f;
     private bool isTouchingSideWall = false;
@@ -44,7 +42,6 @@ public class PlayerBallController : MonoBehaviour
     private bool isScaleEffectActive = false; // Track if scale effect is currently active
     private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
     private TrailRenderer trailRenderer; // Reference to trail renderer component
-    private Vector3 originalParticlePosition; // Store original particle system position (from prefab)
 
     void Start()
     {
@@ -59,13 +56,6 @@ public class PlayerBallController : MonoBehaviour
         {
             trailRenderer.emitting = true;
             SetupTrailRenderer();
-        }
-        
-        // Store original particle system position from prefab if it exists
-        if (wallDustParticleSystemPrefab != null)
-        {
-            var shape = wallDustParticleSystemPrefab.shape;
-            originalParticlePosition = shape.position;
         }
         
         // Store original scale for restoration
@@ -289,96 +279,10 @@ public class PlayerBallController : MonoBehaviour
     // Called by SideWall to trigger dust particles on wall collision
     public void TriggerWallDustParticles(SideWall.WallSide wallSide, float collisionSpeed)
     {
-        if (wallDustParticleSystemPrefab == null) return;
-
-        // Instantiate a new particle system instance at the player's position
-        // Don't parent it so particles are independent of player movement
-        ParticleSystem particleInstance = Instantiate(wallDustParticleSystemPrefab, transform.position, Quaternion.identity);
-        
-        // Get the shape module to adjust position
-        var shape = particleInstance.shape;
-        
-        // Set specific X positions based on wall side
-        Vector3 position = originalParticlePosition;
-        
-        if (wallSide == SideWall.WallSide.Right)
+        if (particleController != null)
         {
-            // Right wall: X position = 0.26
-            position.x = 0.23f;
-            
-            // Also invert the rotation if needed (for cone/circle shapes)
-            Vector3 rotation = shape.rotation;
-            rotation.z = -rotation.z; // Flip rotation around Z axis
-            shape.rotation = rotation;
+            particleController.TriggerWallDustParticles(wallSide, collisionSpeed);
         }
-        else
-        {
-            // Left wall: X position = -0.28
-            position.x = -0.28f;
-            
-            // Reset rotation for left wall
-            Vector3 rotation = shape.rotation;
-            rotation.z = Mathf.Abs(rotation.z); // Ensure positive rotation for left wall
-            shape.rotation = rotation;
-        }
-        
-        // Apply the position
-        shape.position = position;
-        
-        // Get the texture sheet animation module to flip sprites
-        var textureSheetAnimation = particleInstance.textureSheetAnimation;
-        
-        if (wallSide == SideWall.WallSide.Right)
-        {
-            // Flip sprites horizontally for right wall
-            textureSheetAnimation.flipU = 1f; // 1 = flipped, 0 = not flipped
-        }
-        else
-        {
-            // Left wall - keep normal orientation
-            textureSheetAnimation.flipU = 0f;
-        }
-        
-        // Calculate particle count based on collision speed
-        // Speed 3 = 1 particle, Speed 10+ = 5 particles
-        float minSpeed = 8f;
-        float maxSpeed = 12f;
-        float minParticles = 1f;
-        float maxParticles = 5f;
-        
-        // Clamp speed and calculate particle count
-        float clampedSpeed = Mathf.Clamp(collisionSpeed, minSpeed, maxSpeed);
-        float speedRatio = (clampedSpeed - minSpeed) / (maxSpeed - minSpeed);
-        int particleCount = Mathf.RoundToInt(Mathf.Lerp(minParticles, maxParticles, speedRatio));
-        
-        // Ensure we have at least 1 particle
-        particleCount = Mathf.Max(1, particleCount);
-        
-        // Make sure the particle system is ready (stop and clear any existing particles)
-        particleInstance.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
-        // Instead of modifying bursts, directly emit the calculated number of particles
-        // This is more reliable than trying to modify burst settings
-        particleInstance.Emit(particleCount);
-        
-        // Play the particle system to ensure it's active
-        particleInstance.Play();
-        
-        // Destroy the particle system after it finishes playing
-        // Get the maximum lifetime from the main module
-        var main = particleInstance.main;
-        float maxLifetime = main.startLifetime.constantMax;
-        if (maxLifetime <= 0)
-        {
-            maxLifetime = main.startLifetime.constant; // Fallback to constant if max is 0
-        }
-        if (maxLifetime <= 0)
-        {
-            maxLifetime = 2f; // Default fallback
-        }
-        
-        // Destroy after lifetime + small buffer
-        Destroy(particleInstance.gameObject, maxLifetime + 0.5f);
     }
 
     // Public methods to control combo speed system

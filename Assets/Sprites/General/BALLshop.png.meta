@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 224
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,10 +134,10 @@ TextureImporter:
       name: BALLshop_1
       rect:
         serializedVersion: 2
-        x: 330
-        y: 1818
-        width: 140
-        height: 138
+        x: 333
+        y: 1820
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,8 +157,8 @@ TextureImporter:
         serializedVersion: 2
         x: 486
         y: 1820
-        width: 138
-        height: 142
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: BALLshop_3
       rect:
         serializedVersion: 2
-        x: 642
-        y: 1818
-        width: 138
-        height: 139
+        x: 643
+        y: 1820
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,9 +198,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 802
-        y: 1818
+        y: 1820
         width: 137
-        height: 138
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,9 +219,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 959
-        y: 1818
-        width: 139
-        height: 139
+        y: 1820
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: BALLshop_6
       rect:
         serializedVersion: 2
-        x: 1116
-        y: 1820
-        width: 138
-        height: 136
+        x: 1118
+        y: 1819
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,10 +344,10 @@ TextureImporter:
       name: BALLshop_11
       rect:
         serializedVersion: 2
-        x: 486
-        y: 1668
-        width: 138
-        height: 138
+        x: 487
+        y: 1670
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,10 +365,10 @@ TextureImporter:
       name: BALLshop_12
       rect:
         serializedVersion: 2
-        x: 642
-        y: 1671
-        width: 140
-        height: 136
+        x: 646
+        y: 1670
+        width: 137
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,9 +428,9 @@ TextureImporter:
       name: BALLshop_15
       rect:
         serializedVersion: 2
-        x: 1116
+        x: 1118
         y: 1671
-        width: 139
+        width: 137
         height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -680,9 +680,9 @@ TextureImporter:
       name: BALLshop_27
       rect:
         serializedVersion: 2
-        x: 954
+        x: 958
         y: 1521
-        width: 144
+        width: 137
         height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -701,9 +701,9 @@ TextureImporter:
       name: BALLshop_28
       rect:
         serializedVersion: 2
-        x: 1116
+        x: 1118
         y: 1522
-        width: 140
+        width: 138
         height: 140
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1584,9 +1584,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 334
-        y: 894
+        y: 896
         width: 136
-        height: 138
+        height: 136
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1607,7 +1607,7 @@ TextureImporter:
         x: 498
         y: 903
         width: 136
-        height: 141
+        height: 136
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2110,10 +2110,10 @@ TextureImporter:
         serializedVersion: 2
         x: 499
         y: 522
-        width: 137
+        width: 136
         height: 144
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2385,8 +2385,8 @@ TextureImporter:
         y: 216
         width: 139
         height: 154
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

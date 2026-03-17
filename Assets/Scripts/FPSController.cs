@@ -1,11 +1,34 @@
 using UnityEngine;
+using TMPro;
 
 public class FPSController : MonoBehaviour
 {
+    public static FPSController Instance;
+
     [Header("FPS Settings")]
     [SerializeField] private int targetFPS = 60;
-    [SerializeField] private bool enableVSync = true;
+    [SerializeField] private bool enableVSync = false;
     [SerializeField] private bool enableOnStart = true;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI fpsText;
+    [SerializeField] private float updateInterval = 0.2f;
+
+    private float timeAccumulator;
+    private int frames;
+    private float currentFps;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -15,61 +38,59 @@ public class FPSController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the target FPS for the game
-    /// </summary>
-    /// <param name="fps">Target FPS (30, 60, 90, 120, etc.)</param>
+    void Update()
+    {
+        timeAccumulator += Time.unscaledDeltaTime;
+        frames++;
+
+        if (timeAccumulator >= updateInterval)
+        {
+            currentFps = frames / timeAccumulator;
+
+            if (fpsText != null)
+            {
+                fpsText.text = $"{currentFps:0} FPS";
+            }
+
+            timeAccumulator = 0f;
+            frames = 0;
+        }
+    }
+
     public void SetTargetFPS(int fps)
     {
-        targetFPS = Mathf.Clamp(fps, 30, 120); // Clamp between 30 and 120 FPS
-        
+        targetFPS = Mathf.Clamp(fps, 30, 120);
+
         if (enableVSync)
         {
-            // Use VSync for consistent frame timing
             QualitySettings.vSyncCount = 1;
-            Application.targetFrameRate = -1; // Let VSync handle it
+            Application.targetFrameRate = -1;
         }
         else
         {
-            // Use target frame rate without VSync
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = targetFPS;
         }
-        
+
         Debug.Log($"FPS Controller: Target FPS set to {targetFPS} (VSync: {enableVSync})");
     }
 
-    /// <summary>
-    /// Enables or disables VSync
-    /// </summary>
-    /// <param name="enable">Whether to enable VSync</param>
     public void SetVSync(bool enable)
     {
         enableVSync = enable;
-        SetTargetFPS(targetFPS); // Reapply settings
+        SetTargetFPS(targetFPS);
     }
 
-    /// <summary>
-    /// Gets the current target FPS
-    /// </summary>
-    /// <returns>Current target FPS</returns>
     public int GetTargetFPS()
     {
         return targetFPS;
     }
 
-    /// <summary>
-    /// Gets the current actual FPS
-    /// </summary>
-    /// <returns>Current actual FPS</returns>
     public float GetCurrentFPS()
     {
-        return 1f / Time.unscaledDeltaTime;
+        return currentFps;
     }
 
-    /// <summary>
-    /// Resets to default settings (60 FPS, VSync enabled)
-    /// </summary>
     public void ResetToDefault()
     {
         targetFPS = 60;
@@ -77,9 +98,6 @@ public class FPSController : MonoBehaviour
         SetTargetFPS(targetFPS);
     }
 
-    /// <summary>
-    /// Optimized settings for mobile (30 FPS, VSync enabled)
-    /// </summary>
     public void SetMobileOptimized()
     {
         targetFPS = 30;
@@ -87,9 +105,6 @@ public class FPSController : MonoBehaviour
         SetTargetFPS(targetFPS);
     }
 
-    /// <summary>
-    /// High performance settings (60 FPS, VSync enabled)
-    /// </summary>
     public void SetHighPerformance()
     {
         targetFPS = 60;
@@ -97,9 +112,6 @@ public class FPSController : MonoBehaviour
         SetTargetFPS(targetFPS);
     }
 
-    /// <summary>
-    /// Ultra performance settings (90 FPS, VSync disabled)
-    /// </summary>
     public void SetUltraPerformance()
     {
         targetFPS = 90;

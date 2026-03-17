@@ -1,0 +1,375 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BallDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::BallDatabase
+  balls:
+  - ballName: ball1
+    inGameSprite: {fileID: 123316129, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 0
+    isUnlockedByDefault: 1
+  - ballName: ball2
+    inGameSprite: {fileID: -1701754129, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball3
+    inGameSprite: {fileID: -842906342, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball4
+    inGameSprite: {fileID: 1064482722, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball5
+    inGameSprite: {fileID: 1717687825, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball6
+    inGameSprite: {fileID: 204011841, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball7
+    inGameSprite: {fileID: 442932279, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball8
+    inGameSprite: {fileID: 70132372, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball9
+    inGameSprite: {fileID: -1720652855, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball10
+    inGameSprite: {fileID: 502478491, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball11
+    inGameSprite: {fileID: -1053149938, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball12
+    inGameSprite: {fileID: -1267729583, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball13
+    inGameSprite: {fileID: -1354204534, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball14
+    inGameSprite: {fileID: -514880031, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball15
+    inGameSprite: {fileID: 351401095, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball16
+    inGameSprite: {fileID: 28544532, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 800
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball17
+    inGameSprite: {fileID: -1112942920, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 800
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball18
+    inGameSprite: {fileID: -178765618, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball19
+    inGameSprite: {fileID: -2090155849, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball20
+    inGameSprite: {fileID: 1094483917, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball21
+    inGameSprite: {fileID: 2097259584, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1250
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball22
+    inGameSprite: {fileID: 255682832, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball23
+    inGameSprite: {fileID: -1616128130, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball24
+    inGameSprite: {fileID: -1831372399, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball25
+    inGameSprite: {fileID: 1032383093, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball26
+    inGameSprite: {fileID: 1715534025, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball27
+    inGameSprite: {fileID: 42243452, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball28
+    inGameSprite: {fileID: 910193370, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball29
+    inGameSprite: {fileID: -2102578024, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball30
+    inGameSprite: {fileID: -1407554657, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball31
+    inGameSprite: {fileID: 1803474785, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball32
+    inGameSprite: {fileID: 1809363357, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball33
+    inGameSprite: {fileID: -1242731546, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball34
+    inGameSprite: {fileID: -1309363731, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball35
+    inGameSprite: {fileID: -1017378700, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball36
+    inGameSprite: {fileID: 1786284386, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball37
+    inGameSprite: {fileID: 1673483344, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball38
+    inGameSprite: {fileID: 921048804, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 7500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball39
+    inGameSprite: {fileID: -1409157755, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 7500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball40
+    inGameSprite: {fileID: -1191343863, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 10000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball41
+    inGameSprite: {fileID: -580139216, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 15000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball42
+    inGameSprite: {fileID: -1666121364, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 25000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: premium_ball1
+    inGameSprite: {fileID: 1975692995, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball2
+    inGameSprite: {fileID: -152883806, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball3
+    inGameSprite: {fileID: 78814540, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball4
+    inGameSprite: {fileID: -1879590569, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball5
+    inGameSprite: {fileID: 585274227, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball6
+    inGameSprite: {fileID: -1788940907, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball7
+    inGameSprite: {fileID: -635699483, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball8
+    inGameSprite: {fileID: 1666113224, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball9
+    inGameSprite: {fileID: -87719134, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball10
+    inGameSprite: {fileID: -2007302637, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 100
+    isUnlockedByDefault: 0
+  - ballName: premium_ball11
+    inGameSprite: {fileID: 1112029468, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 100
+    isUnlockedByDefault: 0
+  - ballName: premium_ball12
+    inGameSprite: {fileID: 72159403, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 100
+    isUnlockedByDefault: 0
+  - ballName: premium_ball13
+    inGameSprite: {fileID: 795515246, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball14
+    inGameSprite: {fileID: -942576426, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball15
+    inGameSprite: {fileID: -1916949236, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball16
+    inGameSprite: {fileID: 1824327702, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball17
+    inGameSprite: {fileID: -715302984, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball18
+    inGameSprite: {fileID: -1868496850, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball19
+    inGameSprite: {fileID: 1567461231, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball20
+    inGameSprite: {fileID: 1987530405, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball21
+    inGameSprite: {fileID: 1184564739, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball22
+    inGameSprite: {fileID: -610038831, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball23
+    inGameSprite: {fileID: 531391160, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball24
+    inGameSprite: {fileID: -1016761768, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball25
+    inGameSprite: {fileID: 1433605555, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball26
+    inGameSprite: {fileID: -1049857223, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball27
+    inGameSprite: {fileID: 965366888, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball28
+    inGameSprite: {fileID: 1815149035, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball29
+    inGameSprite: {fileID: -446093218, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball30
+    inGameSprite: {fileID: -2102731226, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 0
+    diamondPrice: 2000
+    isUnlockedByDefault: 0

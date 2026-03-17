@@ -168,6 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 15132396}
+  - component: {fileID: 15132397}
   m_Layer: 5
   m_Name: Ball35
   m_TagString: Untagged
@@ -192,11 +193,109 @@ RectTransform:
   - {fileID: 69082374}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &15132397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15132395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball35
+  ballIndex: 34
+  buyButton: {fileID: 69082375}
+  originalBuyButtonSprite: {fileID: -711745716, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 392424871}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &15475291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15475292}
+  - component: {fileID: 15475294}
+  - component: {fileID: 15475293}
+  m_Layer: 5
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &15475292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15475291}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1336795466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &15475293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15475291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.50980395, b: 0.24705882, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &15475294
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15475291}
+  m_CullTransparentMesh: 1
 --- !u!1 &19390881
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +1026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 59455310}
+  - component: {fileID: 59455311}
   m_Layer: 5
   m_Name: Ball39
   m_TagString: Untagged
@@ -951,11 +1051,34 @@ RectTransform:
   - {fileID: 1886313457}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &59455311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59455309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball39
+  ballIndex: 38
+  buyButton: {fileID: 1886313458}
+  originalBuyButtonSprite: {fileID: 1454966840, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1607855217}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &64471554
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64471555}
+  - component: {fileID: 64471556}
   m_Layer: 5
   m_Name: Ball11
   m_TagString: Untagged
@@ -989,11 +1113,34 @@ RectTransform:
   - {fileID: 318538832}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &64471556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64471554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball11
+  ballIndex: 52
+  buyButton: {fileID: 318538833}
+  originalBuyButtonSprite: {fileID: -1803214976, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 152275305}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &64526194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64526195}
+  - component: {fileID: 64526196}
   m_Layer: 5
   m_Name: Ball31
   m_TagString: Untagged
@@ -1027,11 +1175,34 @@ RectTransform:
   - {fileID: 233337887}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &64526196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64526194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball31
+  ballIndex: 30
+  buyButton: {fileID: 233337888}
+  originalBuyButtonSprite: {fileID: -66686296, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 152480065}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &64697869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64697870}
+  - component: {fileID: 64697871}
   m_Layer: 5
   m_Name: Ball4
   m_TagString: Untagged
@@ -1065,11 +1237,34 @@ RectTransform:
   - {fileID: 1689661729}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &64697871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64697869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball4
+  ballIndex: 3
+  buyButton: {fileID: 1689661730}
+  originalBuyButtonSprite: {fileID: 24933847, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1570810166}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &67626946
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,9 +2303,9 @@ RectTransform:
   - {fileID: 2069182188}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 890.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &116557103
@@ -3369,8 +3564,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -110}
-  m_SizeDelta: {x: 274.3914, y: 50}
+  m_AnchoredPosition: {x: 561.7468, y: -112}
+  m_SizeDelta: {x: 252.69, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &181504168
 MonoBehaviour:
@@ -3392,7 +3587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 200,300
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8183274fcb0c52e47a75b1ca904bf418, type: 2}
   m_sharedMaterial: {fileID: 436284049137795315, guid: 8183274fcb0c52e47a75b1ca904bf418, type: 2}
@@ -3419,8 +3614,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 56
+  m_fontSizeBase: 56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3478,6 +3673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 181565878}
+  - component: {fileID: 181565879}
   m_Layer: 5
   m_Name: Ball41
   m_TagString: Untagged
@@ -3502,11 +3698,34 @@ RectTransform:
   - {fileID: 1658382639}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &181565879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181565877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball41
+  ballIndex: 40
+  buyButton: {fileID: 1658382640}
+  originalBuyButtonSprite: {fileID: -1945929398, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 224462370}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &196893790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3711,6 +3930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200441172}
+  - component: {fileID: 200441173}
   m_Layer: 5
   m_Name: Ball12
   m_TagString: Untagged
@@ -3735,11 +3955,34 @@ RectTransform:
   - {fileID: 312678031}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &200441173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200441171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball12
+  ballIndex: 11
+  buyButton: {fileID: 312678032}
+  originalBuyButtonSprite: {fileID: -1587433010, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1351308887}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &204056110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,7 +4018,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 32, y: -66}
-  m_SizeDelta: {x: 357.1016, y: 143.00002}
+  m_SizeDelta: {x: 354, y: 137}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &204056112
 MonoBehaviour:
@@ -3815,6 +4058,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204056110}
   m_CullTransparentMesh: 1
+--- !u!1 &204735813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 204735814}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &204735814
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204735813}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 966078753}
+  m_Father: {fileID: 1294730040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &207168760
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,6 +4223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 213043364}
+  - component: {fileID: 213043365}
   m_Layer: 5
   m_Name: Ball18
   m_TagString: Untagged
@@ -3968,11 +4248,34 @@ RectTransform:
   - {fileID: 1145962393}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &213043365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213043363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball18
+  ballIndex: 59
+  buyButton: {fileID: 1145962394}
+  originalBuyButtonSprite: {fileID: 1893333287, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1590832197}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &224462368
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,6 +4990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244517469}
+  - component: {fileID: 244517470}
   m_Layer: 5
   m_Name: Ball6
   m_TagString: Untagged
@@ -4711,11 +5015,442 @@ RectTransform:
   - {fileID: 92319650}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &244517470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244517468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball6
+  ballIndex: 5
+  buyButton: {fileID: 92319651}
+  originalBuyButtonSprite: {fileID: 24933847, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1821671496}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &251692620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 251692622}
+  - component: {fileID: 251692621}
+  m_Layer: 0
+  m_Name: BallsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &251692621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251692620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc765d4a8d90ca44a9afd9617294778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballDatabase: {fileID: 11400000, guid: c81c72d194441774e910b72a0e19724f, type: 2}
+  allBalls:
+  - ballName: ball1
+    inGameSprite: {fileID: 123316129, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 1
+  - ballName: ball2
+    inGameSprite: {fileID: -1701754129, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball3
+    inGameSprite: {fileID: -842906342, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball4
+    inGameSprite: {fileID: 1064482722, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball5
+    inGameSprite: {fileID: 1717687825, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball6
+    inGameSprite: {fileID: 204011841, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 200
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball7
+    inGameSprite: {fileID: 442932279, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball8
+    inGameSprite: {fileID: 70132372, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball9
+    inGameSprite: {fileID: -1720652855, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 400
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball10
+    inGameSprite: {fileID: 502478491, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball11
+    inGameSprite: {fileID: -1053149938, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball12
+    inGameSprite: {fileID: -1267729583, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball13
+    inGameSprite: {fileID: -1354204534, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball14
+    inGameSprite: {fileID: -514880031, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball15
+    inGameSprite: {fileID: 351401095, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 600
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball16
+    inGameSprite: {fileID: 28544532, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 800
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball17
+    inGameSprite: {fileID: -1112942920, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 800
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball18
+    inGameSprite: {fileID: -178765618, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball19
+    inGameSprite: {fileID: -2090155849, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball20
+    inGameSprite: {fileID: 1094483917, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball21
+    inGameSprite: {fileID: 2097259584, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1250
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball22
+    inGameSprite: {fileID: 255682832, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball23
+    inGameSprite: {fileID: -1616128130, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball24
+    inGameSprite: {fileID: -1831372399, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 1500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball25
+    inGameSprite: {fileID: 1032383093, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball26
+    inGameSprite: {fileID: 1715534025, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball27
+    inGameSprite: {fileID: 42243452, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball28
+    inGameSprite: {fileID: 910193370, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball29
+    inGameSprite: {fileID: -2102578024, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball30
+    inGameSprite: {fileID: -1407554657, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 2000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball31
+    inGameSprite: {fileID: 1803474785, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball32
+    inGameSprite: {fileID: 1809363357, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball33
+    inGameSprite: {fileID: -1242731546, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 3500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball34
+    inGameSprite: {fileID: -1309363731, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball35
+    inGameSprite: {fileID: -1017378700, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball36
+    inGameSprite: {fileID: 1786284386, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball37
+    inGameSprite: {fileID: 1673483344, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 5000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball38
+    inGameSprite: {fileID: 921048804, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 7500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball39
+    inGameSprite: {fileID: -1409157755, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 7500
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball40
+    inGameSprite: {fileID: -1191343863, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 10000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball41
+    inGameSprite: {fileID: -580139216, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 15000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: ball42
+    inGameSprite: {fileID: -1666121364, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+    goldPrice: 25000
+    diamondPrice: 0
+    isUnlockedByDefault: 0
+  - ballName: premium_ball1
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball2
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball3
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 25
+    isUnlockedByDefault: 0
+  - ballName: premium_ball4
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball5
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball6
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 50
+    isUnlockedByDefault: 0
+  - ballName: premium_ball7
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball8
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball9
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 75
+    isUnlockedByDefault: 0
+  - ballName: premium_ball10
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 100
+    isUnlockedByDefault: 0
+  - ballName: premium_ball11
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 100
+    isUnlockedByDefault: 0
+  - ballName: premium_ball12
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball13
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball14
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball15
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 200
+    isUnlockedByDefault: 0
+  - ballName: premium_ball16
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball17
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball18
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 250
+    isUnlockedByDefault: 0
+  - ballName: premium_ball19
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball20
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball21
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 300
+    isUnlockedByDefault: 0
+  - ballName: premium_ball22
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball23
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball24
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 500
+    isUnlockedByDefault: 0
+  - ballName: premium_ball25
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball26
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball27
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball28
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball29
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 1000
+    isUnlockedByDefault: 0
+  - ballName: premium_ball30
+    inGameSprite: {fileID: 0}
+    goldPrice: 0
+    diamondPrice: 2000
+    isUnlockedByDefault: 0
+  ballsBought: 
+  currentBallIndex: 0
+--- !u!4 &251692622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251692620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 515.1979, y: 1099.2858, z: -18.507618}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &257088290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5032,6 +5767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 273623320}
+  - component: {fileID: 273623321}
   m_Layer: 5
   m_Name: Ball27
   m_TagString: Untagged
@@ -5056,11 +5792,34 @@ RectTransform:
   - {fileID: 1178931203}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &273623321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273623319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball27
+  ballIndex: 68
+  buyButton: {fileID: 1178931204}
+  originalBuyButtonSprite: {fileID: 139747509, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 281690977}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &276672899
 GameObject:
   m_ObjectHideFlags: 0
@@ -5838,6 +6597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318378588}
+  - component: {fileID: 318378589}
   m_Layer: 5
   m_Name: Ball6
   m_TagString: Untagged
@@ -5862,11 +6622,34 @@ RectTransform:
   - {fileID: 118141719}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &318378589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318378587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball6
+  ballIndex: 47
+  buyButton: {fileID: 118141720}
+  originalBuyButtonSprite: {fileID: -1083556982, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 257088292}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &318538831
 GameObject:
   m_ObjectHideFlags: 0
@@ -6395,9 +7178,9 @@ RectTransform:
   - {fileID: 808327696}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 541.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348646443
@@ -6429,6 +7212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 360184884}
+  - component: {fileID: 360184885}
   m_Layer: 5
   m_Name: Ball15
   m_TagString: Untagged
@@ -6453,11 +7237,34 @@ RectTransform:
   - {fileID: 1195255154}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &360184885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360184883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball15
+  ballIndex: 56
+  buyButton: {fileID: 1195255155}
+  originalBuyButtonSprite: {fileID: -412579673, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1867782615}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &365321795
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,7 +7372,6 @@ MonoBehaviour:
   playButton: {fileID: 2046909805}
   shopButton: {fileID: 1205519011}
   towersButton: {fileID: 881768685}
-  buyGoldButton: {fileID: 529368396}
   buyDiamondButton: {fileID: 801090432}
   shopManager: {fileID: 549225028}
   towerManager: {fileID: 1047187397}
@@ -7060,6 +7866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405328317}
+  - component: {fileID: 405328318}
   m_Layer: 5
   m_Name: Ball5
   m_TagString: Untagged
@@ -7084,11 +7891,34 @@ RectTransform:
   - {fileID: 242110857}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &405328318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405328316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball5
+  ballIndex: 4
+  buyButton: {fileID: 242110858}
+  originalBuyButtonSprite: {fileID: 24933847, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 243268551}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &410130632
 GameObject:
   m_ObjectHideFlags: 0
@@ -7438,6 +8268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438603151}
+  - component: {fileID: 438603152}
   m_Layer: 5
   m_Name: Ball37
   m_TagString: Untagged
@@ -7462,11 +8293,34 @@ RectTransform:
   - {fileID: 1187292154}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &438603152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438603150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball37
+  ballIndex: 36
+  buyButton: {fileID: 1187292155}
+  originalBuyButtonSprite: {fileID: -711745716, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 123422188}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &452930601
 GameObject:
   m_ObjectHideFlags: 0
@@ -7746,6 +8600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459464913}
+  - component: {fileID: 459464914}
   m_Layer: 5
   m_Name: Ball22
   m_TagString: Untagged
@@ -7770,11 +8625,34 @@ RectTransform:
   - {fileID: 155408805}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &459464914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459464912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball22
+  ballIndex: 21
+  buyButton: {fileID: 155408806}
+  originalBuyButtonSprite: {fileID: -1520060638, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 93480462}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &463287206
 GameObject:
   m_ObjectHideFlags: 0
@@ -8159,9 +9037,9 @@ RectTransform:
   - {fileID: 1986053259}
   m_Father: {fileID: 1028105478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2760, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &488240505
@@ -8235,6 +9113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 488854260}
+  - component: {fileID: 488854261}
   m_Layer: 5
   m_Name: Ball42
   m_TagString: Untagged
@@ -8259,11 +9138,34 @@ RectTransform:
   - {fileID: 1327895622}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &488854261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488854259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball42
+  ballIndex: 41
+  buyButton: {fileID: 1327895623}
+  originalBuyButtonSprite: {fileID: -1464009563, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1675889815}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &491183378
 GameObject:
   m_ObjectHideFlags: 0
@@ -8273,6 +9175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 491183379}
+  - component: {fileID: 491183380}
   m_Layer: 5
   m_Name: Ball18
   m_TagString: Untagged
@@ -8297,11 +9200,34 @@ RectTransform:
   - {fileID: 1996659379}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &491183380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491183378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball18
+  ballIndex: 17
+  buyButton: {fileID: 1996659380}
+  originalBuyButtonSprite: {fileID: -1673641523, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 591444394}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &503681914
 GameObject:
   m_ObjectHideFlags: 0
@@ -8311,6 +9237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 503681915}
+  - component: {fileID: 503681916}
   m_Layer: 5
   m_Name: Ball20
   m_TagString: Untagged
@@ -8335,11 +9262,34 @@ RectTransform:
   - {fileID: 67626947}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &503681916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503681914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball20
+  ballIndex: 19
+  buyButton: {fileID: 67626948}
+  originalBuyButtonSprite: {fileID: -1673641523, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 936250946}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &508104691
 GameObject:
   m_ObjectHideFlags: 0
@@ -8424,6 +9374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 510408849}
+  - component: {fileID: 510408850}
   m_Layer: 5
   m_Name: Ball19
   m_TagString: Untagged
@@ -8448,11 +9399,34 @@ RectTransform:
   - {fileID: 305277075}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &510408850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510408848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball19
+  ballIndex: 60
+  buyButton: {fileID: 305277076}
+  originalBuyButtonSprite: {fileID: 1982278672, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 71053866}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &520360636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8608,7 +9582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &529368392
@@ -8741,8 +9715,9 @@ GameObject:
   m_Component:
   - component: {fileID: 549225027}
   - component: {fileID: 549225028}
+  - component: {fileID: 549225029}
   m_Layer: 0
-  m_Name: TowerShopManager
+  m_Name: ShopManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8773,6 +9748,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bf9cbce80f099947b390dc5a8302196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopPanel: {fileID: 1668169732}
+  closeShopButton: {fileID: 1397898505}
+  goldText: {fileID: 181504168}
+  diamondText: {fileID: 1192498884}
+  towerManager: {fileID: 1047187397}
+--- !u!114 &549225029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549225025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a29bfccf8ea254dacf54d9b92ad674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 1668169732}
@@ -10501,9 +11493,9 @@ RectTransform:
   - {fileID: 1055288512}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1588.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623850648
@@ -10610,6 +11602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636945062}
+  - component: {fileID: 636945063}
   m_Layer: 5
   m_Name: Ball38
   m_TagString: Untagged
@@ -10634,11 +11627,34 @@ RectTransform:
   - {fileID: 96259480}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &636945063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636945061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball38
+  ballIndex: 37
+  buyButton: {fileID: 96259481}
+  originalBuyButtonSprite: {fileID: 1454966840, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 2132570966}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &639068624
 GameObject:
   m_ObjectHideFlags: 0
@@ -10782,9 +11798,9 @@ RectTransform:
   - {fileID: 1841169560}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1239.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654454043
@@ -11191,9 +12207,9 @@ RectTransform:
   - {fileID: 491183379}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1840, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &717104022
@@ -11837,6 +12853,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 761683688}
+  - component: {fileID: 761683689}
   m_Layer: 5
   m_Name: Ball30
   m_TagString: Untagged
@@ -11861,11 +12878,34 @@ RectTransform:
   - {fileID: 1771888748}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &761683689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761683687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball30
+  ballIndex: 29
+  buyButton: {fileID: 1771888749}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 316382702}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &772829151
 GameObject:
   m_ObjectHideFlags: 0
@@ -12504,9 +13544,9 @@ RectTransform:
   - {fileID: 213043364}
   m_Father: {fileID: 1028105478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1840, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &804509448
@@ -12850,6 +13890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818280056}
+  - component: {fileID: 818280057}
   m_Layer: 5
   m_Name: Ball10
   m_TagString: Untagged
@@ -12874,11 +13915,34 @@ RectTransform:
   - {fileID: 1971314892}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &818280057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818280055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball10
+  ballIndex: 51
+  buyButton: {fileID: 1971314893}
+  originalBuyButtonSprite: {fileID: -1803214976, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 230683154}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &823084078
 GameObject:
   m_ObjectHideFlags: 0
@@ -13345,6 +14409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 873219359}
+  - component: {fileID: 873219360}
   m_Layer: 5
   m_Name: Ball14
   m_TagString: Untagged
@@ -13369,11 +14434,34 @@ RectTransform:
   - {fileID: 2001275074}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &873219360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873219358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball14
+  ballIndex: 13
+  buyButton: {fileID: 2001275075}
+  originalBuyButtonSprite: {fileID: -913071669, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1621520444}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &881768681
 GameObject:
   m_ObjectHideFlags: 0
@@ -13578,6 +14666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887796490}
+  - component: {fileID: 887796491}
   m_Layer: 5
   m_Name: Ball30
   m_TagString: Untagged
@@ -13602,11 +14691,34 @@ RectTransform:
   - {fileID: 1130408616}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &887796491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887796489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball30
+  ballIndex: 71
+  buyButton: {fileID: 1130408617}
+  originalBuyButtonSprite: {fileID: -1159558567, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 415428988}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &902781760
 GameObject:
   m_ObjectHideFlags: 0
@@ -13616,6 +14728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902781761}
+  - component: {fileID: 902781762}
   m_Layer: 5
   m_Name: Ball4
   m_TagString: Untagged
@@ -13640,11 +14753,34 @@ RectTransform:
   - {fileID: 1600381626}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &902781762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902781760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball4
+  ballIndex: 45
+  buyButton: {fileID: 1600381627}
+  originalBuyButtonSprite: {fileID: -1083556982, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1424820878}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &906451182
 GameObject:
   m_ObjectHideFlags: 0
@@ -13820,7 +14956,7 @@ MonoBehaviour:
   m_Horizontal: 1
   m_Vertical: 0
   m_MovementType: 1
-  m_Elasticity: 0.1
+  m_Elasticity: 0.02
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
@@ -14081,6 +15217,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936250944}
   m_CullTransparentMesh: 1
+--- !u!1 &941759607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941759608}
+  - component: {fileID: 941759610}
+  - component: {fileID: 941759609}
+  m_Layer: 5
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &941759608
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941759607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1294730040}
+  - {fileID: 1440180740}
+  m_Father: {fileID: 1252753625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &941759609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941759607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.10980393, g: 0.2509804, b: 0.42352945, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &941759610
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941759607}
+  m_CullTransparentMesh: 1
 --- !u!1 &962742331
 GameObject:
   m_ObjectHideFlags: 0
@@ -14155,6 +15368,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962742331}
+  m_CullTransparentMesh: 1
+--- !u!1 &966078752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966078753}
+  - component: {fileID: 966078755}
+  - component: {fileID: 966078754}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &966078753
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966078752}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 204735814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &966078754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966078752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.50980395, b: 0.24705882, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &966078755
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966078752}
   m_CullTransparentMesh: 1
 --- !u!1 &976630044
 GameObject:
@@ -14315,8 +15603,8 @@ RectTransform:
   - {fileID: 318378588}
   m_Father: {fileID: 1028105478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
@@ -14525,6 +15813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020397638}
+  - component: {fileID: 1020397639}
   m_Layer: 5
   m_Name: Ball7
   m_TagString: Untagged
@@ -14549,11 +15838,34 @@ RectTransform:
   - {fileID: 1822669659}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1020397639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020397637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball7
+  ballIndex: 48
+  buyButton: {fileID: 1822669660}
+  originalBuyButtonSprite: {fileID: 769781057, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 811762755}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1025054754
 GameObject:
   m_ObjectHideFlags: 0
@@ -14957,7 +16269,7 @@ GameObject:
   - component: {fileID: 1047187396}
   - component: {fileID: 1047187397}
   m_Layer: 0
-  m_Name: MyTowersManager
+  m_Name: TowersManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15999,6 +17311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124714760}
+  - component: {fileID: 1124714761}
   m_Layer: 5
   m_Name: Ball13
   m_TagString: Untagged
@@ -16023,11 +17336,34 @@ RectTransform:
   - {fileID: 196893791}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1124714761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124714759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball13
+  ballIndex: 12
+  buyButton: {fileID: 196893792}
+  originalBuyButtonSprite: {fileID: -913071669, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 368794133}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1130408615
 GameObject:
   m_ObjectHideFlags: 0
@@ -16765,6 +18101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165285567}
+  - component: {fileID: 1165285568}
   m_Layer: 5
   m_Name: Ball1
   m_TagString: Untagged
@@ -16789,11 +18126,34 @@ RectTransform:
   - {fileID: 1188586682}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1165285568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165285566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball1
+  ballIndex: 0
+  buyButton: {fileID: 1188586683}
+  originalBuyButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 962742333}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1168979246
 GameObject:
   m_ObjectHideFlags: 0
@@ -17033,6 +18393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1176080108}
+  - component: {fileID: 1176080109}
   m_Layer: 5
   m_Name: Ball2
   m_TagString: Untagged
@@ -17057,11 +18418,34 @@ RectTransform:
   - {fileID: 1683099783}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1176080109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176080107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball2
+  ballIndex: 43
+  buyButton: {fileID: 1683099784}
+  originalBuyButtonSprite: {fileID: 166063837, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1987051877}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1178931202
 GameObject:
   m_ObjectHideFlags: 0
@@ -17606,8 +18990,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 171.21817, y: -110}
-  m_SizeDelta: {x: 203.4616, y: 50}
+  m_AnchoredPosition: {x: 171.21817, y: -112}
+  m_SizeDelta: {x: 184.2551, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1192498884
 MonoBehaviour:
@@ -17656,8 +19040,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 56
+  m_fontSizeBase: 56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18164,6 +19548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209555861}
+  - component: {fileID: 1209555862}
   m_Layer: 5
   m_Name: Ball32
   m_TagString: Untagged
@@ -18188,11 +19573,34 @@ RectTransform:
   - {fileID: 262755211}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1209555862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209555860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball32
+  ballIndex: 31
+  buyButton: {fileID: 262755212}
+  originalBuyButtonSprite: {fileID: -66686296, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 19390883}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1220712784
 GameObject:
   m_ObjectHideFlags: 0
@@ -18348,7 +19756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1233896233
@@ -18360,6 +19768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1233896234}
+  - component: {fileID: 1233896235}
   m_Layer: 5
   m_Name: Ball36
   m_TagString: Untagged
@@ -18384,11 +19793,34 @@ RectTransform:
   - {fileID: 1839472531}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1233896235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233896233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball36
+  ballIndex: 35
+  buyButton: {fileID: 1839472532}
+  originalBuyButtonSprite: {fileID: -711745716, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1813779992}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1239152984
 GameObject:
   m_ObjectHideFlags: 0
@@ -18398,6 +19830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239152985}
+  - component: {fileID: 1239152986}
   m_Layer: 5
   m_Name: Ball16
   m_TagString: Untagged
@@ -18422,11 +19855,34 @@ RectTransform:
   - {fileID: 109001607}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1239152986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239152984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball16
+  ballIndex: 15
+  buyButton: {fileID: 109001608}
+  originalBuyButtonSprite: {fileID: -534395429, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 2070867508}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1246035351
 GameObject:
   m_ObjectHideFlags: 0
@@ -18580,6 +20036,7 @@ RectTransform:
   m_Children:
   - {fileID: 555152236}
   - {fileID: 1668169733}
+  - {fileID: 941759608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -18616,10 +20073,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -18659,6 +20116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1252810200}
+  - component: {fileID: 1252810201}
   m_Layer: 5
   m_Name: Ball29
   m_TagString: Untagged
@@ -18683,11 +20141,34 @@ RectTransform:
   - {fileID: 1922634402}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1252810201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252810199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball29
+  ballIndex: 70
+  buyButton: {fileID: 1922634403}
+  originalBuyButtonSprite: {fileID: 139747509, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 733991252}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1263682091
 GameObject:
   m_ObjectHideFlags: 0
@@ -18856,8 +20337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 430, y: -62}
-  m_SizeDelta: {x: 447.1272, y: 156.1399}
+  m_AnchoredPosition: {x: 441.4354, y: -68}
+  m_SizeDelta: {x: 373, y: 141}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1267226374
 MonoBehaviour:
@@ -18906,6 +20387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267322677}
+  - component: {fileID: 1267322678}
   m_Layer: 5
   m_Name: Ball26
   m_TagString: Untagged
@@ -18930,11 +20412,34 @@ RectTransform:
   - {fileID: 621741045}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1267322678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267322676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball26
+  ballIndex: 25
+  buyButton: {fileID: 621741046}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 136467887}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1271218393
 GameObject:
   m_ObjectHideFlags: 0
@@ -18944,6 +20449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1271218394}
+  - component: {fileID: 1271218395}
   m_Layer: 5
   m_Name: Ball5
   m_TagString: Untagged
@@ -18968,11 +20474,34 @@ RectTransform:
   - {fileID: 1085964562}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1271218395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271218393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball5
+  ballIndex: 46
+  buyButton: {fileID: 1085964563}
+  originalBuyButtonSprite: {fileID: -1083556982, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 158327655}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1271460280
 GameObject:
   m_ObjectHideFlags: 0
@@ -19094,6 +20623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1277839511}
+  - component: {fileID: 1277839512}
   m_Layer: 5
   m_Name: Ball23
   m_TagString: Untagged
@@ -19118,11 +20648,34 @@ RectTransform:
   - {fileID: 608975892}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1277839512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277839510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball23
+  ballIndex: 22
+  buyButton: {fileID: 608975893}
+  originalBuyButtonSprite: {fileID: -1520060638, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1112053273}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1280278740
 GameObject:
   m_ObjectHideFlags: 0
@@ -19332,6 +20885,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284967959}
   m_CullTransparentMesh: 1
+--- !u!1 &1294730039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294730040}
+  - component: {fileID: 1294730041}
+  m_Layer: 5
+  m_Name: MusicSlider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1294730040
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294730039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1839923299}
+  - {fileID: 204735814}
+  - {fileID: 1336795466}
+  m_Father: {fileID: 941759608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 9, y: 530}
+  m_SizeDelta: {x: 160, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1294730041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294730039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 15475293}
+  m_FillRect: {fileID: 966078753}
+  m_HandleRect: {fileID: 15475292}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1300453470
 GameObject:
   m_ObjectHideFlags: 0
@@ -19446,9 +21089,9 @@ RectTransform:
   - {fileID: 1311284420}
   m_Father: {fileID: 1028105478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 920, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1306136048
@@ -19552,9 +21195,9 @@ RectTransform:
   - {fileID: 1233896234}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4600, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1306418069
@@ -19750,6 +21393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1311284420}
+  - component: {fileID: 1311284421}
   m_Layer: 5
   m_Name: Ball12
   m_TagString: Untagged
@@ -19774,11 +21418,34 @@ RectTransform:
   - {fileID: 1220712785}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1311284421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311284419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball12
+  ballIndex: 53
+  buyButton: {fileID: 1220712786}
+  originalBuyButtonSprite: {fileID: -412579673, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 2136096714}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1311713844
 GameObject:
   m_ObjectHideFlags: 0
@@ -20124,6 +21791,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327895621}
   m_CullTransparentMesh: 1
+--- !u!1 &1336795465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336795466}
+  m_Layer: 5
+  m_Name: Handle Slide Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1336795466
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336795465}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 15475292}
+  m_Father: {fileID: 1294730040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1340142111
 GameObject:
   m_ObjectHideFlags: 0
@@ -20133,6 +21836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340142112}
+  - component: {fileID: 1340142113}
   m_Layer: 5
   m_Name: Ball34
   m_TagString: Untagged
@@ -20157,11 +21861,34 @@ RectTransform:
   - {fileID: 1952724424}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1340142113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340142111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball34
+  ballIndex: 33
+  buyButton: {fileID: 1952724425}
+  originalBuyButtonSprite: {fileID: -711745716, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 2022085212}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1349564762
 GameObject:
   m_ObjectHideFlags: 0
@@ -20505,9 +22232,9 @@ RectTransform:
   - {fileID: 1952849002}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1937.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1366504795
@@ -20659,6 +22386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1391254354}
+  - component: {fileID: 1391254355}
   m_Layer: 5
   m_Name: Ball1
   m_TagString: Untagged
@@ -20683,11 +22411,34 @@ RectTransform:
   - {fileID: 851144847}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1391254355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391254353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball1
+  ballIndex: 42
+  buyButton: {fileID: 851144848}
+  originalBuyButtonSprite: {fileID: 166063837, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1476950127}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1392271663
 GameObject:
   m_ObjectHideFlags: 0
@@ -20873,7 +22624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -102, y: -155}
+  m_AnchoredPosition: {x: -110, y: -130}
   m_SizeDelta: {x: 152.04327, y: 140.00002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1397898505
@@ -20940,7 +22691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 596142821, guid: f764abf1f8631b445bcecf90e63ff35f, type: 3}
+  m_Sprite: {fileID: -617370771, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20967,6 +22718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404807923}
+  - component: {fileID: 1404807924}
   m_Layer: 5
   m_Name: Ball24
   m_TagString: Untagged
@@ -20991,11 +22743,34 @@ RectTransform:
   - {fileID: 1902169099}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1404807924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404807922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball24
+  ballIndex: 23
+  buyButton: {fileID: 1902169100}
+  originalBuyButtonSprite: {fileID: -1520060638, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 727020167}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1410150264
 GameObject:
   m_ObjectHideFlags: 0
@@ -21005,6 +22780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410150265}
+  - component: {fileID: 1410150266}
   m_Layer: 5
   m_Name: Ball26
   m_TagString: Untagged
@@ -21029,11 +22805,34 @@ RectTransform:
   - {fileID: 2120547869}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1410150266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410150264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball26
+  ballIndex: 67
+  buyButton: {fileID: 2120547870}
+  originalBuyButtonSprite: {fileID: 139747509, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1038331460}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1418446320
 GameObject:
   m_ObjectHideFlags: 0
@@ -21564,6 +23363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1439124907}
+  - component: {fileID: 1439124908}
   m_Layer: 5
   m_Name: Ball23
   m_TagString: Untagged
@@ -21588,11 +23388,168 @@ RectTransform:
   - {fileID: 1029517732}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1439124908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439124906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball23
+  ballIndex: 64
+  buyButton: {fileID: 1029517733}
+  originalBuyButtonSprite: {fileID: -1507287943, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 636721420}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1440180739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1440180740}
+  - component: {fileID: 1440180742}
+  - component: {fileID: 1440180741}
+  m_Layer: 5
+  m_Name: MusicText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1440180740
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440180739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941759608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 630}
+  m_SizeDelta: {x: 276.9035, y: 75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1440180741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440180739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Music
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8183274fcb0c52e47a75b1ca904bf418, type: 2}
+  m_sharedMaterial: {fileID: 436284049137795315, guid: 8183274fcb0c52e47a75b1ca904bf418, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 80
+  m_fontSizeBase: 80
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1440180742
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440180739}
+  m_CullTransparentMesh: 1
 --- !u!1 &1454450791
 GameObject:
   m_ObjectHideFlags: 0
@@ -21800,6 +23757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1468643456}
+  - component: {fileID: 1468643457}
   m_Layer: 5
   m_Name: Ball20
   m_TagString: Untagged
@@ -21824,11 +23782,34 @@ RectTransform:
   - {fileID: 207168761}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1468643457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468643455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball20
+  ballIndex: 61
+  buyButton: {fileID: 207168762}
+  originalBuyButtonSprite: {fileID: 1982278672, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 365321797}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1471822535
 GameObject:
   m_ObjectHideFlags: 0
@@ -22071,6 +24052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489992413}
+  - component: {fileID: 1489992414}
   m_Layer: 5
   m_Name: Ball29
   m_TagString: Untagged
@@ -22095,11 +24077,34 @@ RectTransform:
   - {fileID: 595029145}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1489992414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489992412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball29
+  ballIndex: 28
+  buyButton: {fileID: 595029146}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1203869095}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1491539935
 GameObject:
   m_ObjectHideFlags: 0
@@ -22184,6 +24189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1495083167}
+  - component: {fileID: 1495083168}
   m_Layer: 5
   m_Name: Ball3
   m_TagString: Untagged
@@ -22208,11 +24214,34 @@ RectTransform:
   - {fileID: 1970864491}
   m_Father: {fileID: 993717891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1495083168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495083166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball3
+  ballIndex: 44
+  buyButton: {fileID: 1970864492}
+  originalBuyButtonSprite: {fileID: 166063837, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 373781583}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1498460102
 GameObject:
   m_ObjectHideFlags: 0
@@ -22571,9 +24600,9 @@ RectTransform:
   - {fileID: 761683688}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3680, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1541474583
@@ -23323,6 +25352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1597940187}
+  - component: {fileID: 1597940188}
   m_Layer: 5
   m_Name: Ball9
   m_TagString: Untagged
@@ -23347,11 +25377,34 @@ RectTransform:
   - {fileID: 976630045}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1597940188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597940186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball9
+  ballIndex: 50
+  buyButton: {fileID: 976630046}
+  originalBuyButtonSprite: {fileID: 769781057, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1079480811}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1600381625
 GameObject:
   m_ObjectHideFlags: 0
@@ -24246,6 +26299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1634219517}
+  - component: {fileID: 1634219518}
   m_Layer: 5
   m_Name: Ball25
   m_TagString: Untagged
@@ -24270,11 +26324,34 @@ RectTransform:
   - {fileID: 230731772}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1634219518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634219516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball25
+  ballIndex: 66
+  buyButton: {fileID: 230731773}
+  originalBuyButtonSprite: {fileID: 139747509, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1545844721}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1637138817
 GameObject:
   m_ObjectHideFlags: 0
@@ -24284,6 +26361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637138818}
+  - component: {fileID: 1637138819}
   m_Layer: 5
   m_Name: Ball19
   m_TagString: Untagged
@@ -24308,11 +26386,34 @@ RectTransform:
   - {fileID: 621239952}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1637138819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637138817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball19
+  ballIndex: 18
+  buyButton: {fileID: 621239953}
+  originalBuyButtonSprite: {fileID: -1673641523, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1396184801}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1646170255
 GameObject:
   m_ObjectHideFlags: 0
@@ -24517,6 +26618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667298994}
+  - component: {fileID: 1667298995}
   m_Layer: 5
   m_Name: Ball8
   m_TagString: Untagged
@@ -24541,11 +26643,34 @@ RectTransform:
   - {fileID: 1776052577}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1667298995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667298993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball8
+  ballIndex: 7
+  buyButton: {fileID: 1776052578}
+  originalBuyButtonSprite: {fileID: 1781542762, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 334716883}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1668169732
 GameObject:
   m_ObjectHideFlags: 0
@@ -24779,6 +26904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1679388822}
+  - component: {fileID: 1679388823}
   m_Layer: 5
   m_Name: Ball10
   m_TagString: Untagged
@@ -24803,11 +26929,34 @@ RectTransform:
   - {fileID: 141100752}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1679388823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679388821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball10
+  ballIndex: 9
+  buyButton: {fileID: 141100753}
+  originalBuyButtonSprite: {fileID: -1587433010, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 479221344}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1679811683
 GameObject:
   m_ObjectHideFlags: 0
@@ -25012,6 +27161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684835645}
+  - component: {fileID: 1684835646}
   m_Layer: 5
   m_Name: Ball28
   m_TagString: Untagged
@@ -25036,11 +27186,34 @@ RectTransform:
   - {fileID: 1880769082}
   m_Father: {fileID: 1776279902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1684835646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684835644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball28
+  ballIndex: 69
+  buyButton: {fileID: 1880769083}
+  originalBuyButtonSprite: {fileID: 139747509, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1275474832}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1689661728
 GameObject:
   m_ObjectHideFlags: 0
@@ -25245,6 +27418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1712150063}
+  - component: {fileID: 1712150064}
   m_Layer: 5
   m_Name: Ball8
   m_TagString: Untagged
@@ -25269,11 +27443,34 @@ RectTransform:
   - {fileID: 1418446321}
   m_Father: {fileID: 1306136047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1712150064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712150062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball8
+  ballIndex: 49
+  buyButton: {fileID: 1418446322}
+  originalBuyButtonSprite: {fileID: 769781057, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1284967961}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1717904451
 GameObject:
   m_ObjectHideFlags: 0
@@ -25694,6 +27891,7 @@ GameObject:
   - component: {fileID: 1728776746}
   - component: {fileID: 1728776745}
   - component: {fileID: 1728776744}
+  - component: {fileID: 1728776747}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -25802,6 +28000,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728776742}
   m_CullTransparentMesh: 1
+--- !u!114 &1728776747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728776742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5108fbc373c6b2c4a9c46dd0204ba835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diamondCost: 2000
+  goldAmount: 400000
 --- !u!1 &1733379642
 GameObject:
   m_ObjectHideFlags: 0
@@ -26036,6 +28248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752915865}
+  - component: {fileID: 1752915866}
   m_Layer: 5
   m_Name: Ball17
   m_TagString: Untagged
@@ -26060,11 +28273,34 @@ RectTransform:
   - {fileID: 2121401091}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1752915866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752915864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball17
+  ballIndex: 16
+  buyButton: {fileID: 2121401092}
+  originalBuyButtonSprite: {fileID: -534395429, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1140761786}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1757513924
 GameObject:
   m_ObjectHideFlags: 0
@@ -26614,9 +28850,9 @@ RectTransform:
   - {fileID: 887796490}
   m_Father: {fileID: 1028105478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3680, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1776279903
@@ -27065,6 +29301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1821770379}
+  - component: {fileID: 1821770380}
   m_Layer: 5
   m_Name: Ball40
   m_TagString: Untagged
@@ -27089,11 +29326,34 @@ RectTransform:
   - {fileID: 803631193}
   m_Father: {fileID: 2031890009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1821770380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821770378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball40
+  ballIndex: 39
+  buyButton: {fileID: 803631194}
+  originalBuyButtonSprite: {fileID: 920376378, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1964036686}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1822669658
 GameObject:
   m_ObjectHideFlags: 0
@@ -27247,9 +29507,9 @@ RectTransform:
   - {fileID: 1246035352}
   m_Father: {fileID: 1471822536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.5, y: -400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1824952087
@@ -27281,6 +29541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825875038}
+  - component: {fileID: 1825875039}
   m_Layer: 5
   m_Name: Ball33
   m_TagString: Untagged
@@ -27305,11 +29566,34 @@ RectTransform:
   - {fileID: 452930602}
   m_Father: {fileID: 1306418068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1825875039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825875037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball33
+  ballIndex: 32
+  buyButton: {fileID: 452930603}
+  originalBuyButtonSprite: {fileID: -66686296, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 611109575}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1828903606
 GameObject:
   m_ObjectHideFlags: 0
@@ -27420,7 +29704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 514, y: -140}
+  m_AnchoredPosition: {x: 512, y: -140}
   m_SizeDelta: {x: 81.02307, y: 74}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1838424530
@@ -27624,6 +29908,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839472530}
+  m_CullTransparentMesh: 1
+--- !u!1 &1839923298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1839923299}
+  - component: {fileID: 1839923301}
+  - component: {fileID: 1839923300}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1839923299
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839923298}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1294730040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1839923300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839923298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1839923301
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839923298}
   m_CullTransparentMesh: 1
 --- !u!1 &1840088871
 GameObject:
@@ -27859,8 +30218,8 @@ RectTransform:
   - {fileID: 244517469}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
@@ -28010,6 +30369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857592614}
+  - component: {fileID: 1857592615}
   m_Layer: 5
   m_Name: Ball25
   m_TagString: Untagged
@@ -28034,11 +30394,34 @@ RectTransform:
   - {fileID: 373581075}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1857592615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857592613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball25
+  ballIndex: 24
+  buyButton: {fileID: 373581076}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1808604937}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1867782613
 GameObject:
   m_ObjectHideFlags: 0
@@ -28126,6 +30509,7 @@ GameObject:
   - component: {fileID: 1871369926}
   - component: {fileID: 1871369925}
   - component: {fileID: 1871369924}
+  - component: {fileID: 1871369927}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -28234,6 +30618,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871369922}
   m_CullTransparentMesh: 1
+--- !u!114 &1871369927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871369922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5108fbc373c6b2c4a9c46dd0204ba835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diamondCost: 50
+  goldAmount: 6000
 --- !u!1 &1878610289
 GameObject:
   m_ObjectHideFlags: 0
@@ -28269,7 +30667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 109, y: -139}
+  m_AnchoredPosition: {x: 112, y: -139}
   m_SizeDelta: {x: 81.02307, y: 74}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1878610291
@@ -28873,6 +31271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1905343502}
+  - component: {fileID: 1905343503}
   m_Layer: 5
   m_Name: Ball11
   m_TagString: Untagged
@@ -28897,11 +31296,34 @@ RectTransform:
   - {fileID: 32447942}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1905343503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905343501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball11
+  ballIndex: 10
+  buyButton: {fileID: 32447943}
+  originalBuyButtonSprite: {fileID: -1587433010, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1771162763}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1910023084
 GameObject:
   m_ObjectHideFlags: 0
@@ -29106,6 +31528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1933982193}
+  - component: {fileID: 1933982194}
   m_Layer: 5
   m_Name: Ball13
   m_TagString: Untagged
@@ -29130,11 +31553,34 @@ RectTransform:
   - {fileID: 1977950600}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1933982194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933982192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball13
+  ballIndex: 54
+  buyButton: {fileID: 1977950601}
+  originalBuyButtonSprite: {fileID: -412579673, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 320656990}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1946322696
 GameObject:
   m_ObjectHideFlags: 0
@@ -29144,6 +31590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1946322697}
+  - component: {fileID: 1946322698}
   m_Layer: 5
   m_Name: Ball14
   m_TagString: Untagged
@@ -29168,11 +31615,34 @@ RectTransform:
   - {fileID: 601114178}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1946322698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946322696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball14
+  ballIndex: 55
+  buyButton: {fileID: 601114179}
+  originalBuyButtonSprite: {fileID: -412579673, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1581149850}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1952724423
 GameObject:
   m_ObjectHideFlags: 0
@@ -29422,6 +31892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957411115}
+  - component: {fileID: 1957411116}
   m_Layer: 5
   m_Name: Ball21
   m_TagString: Untagged
@@ -29446,11 +31917,34 @@ RectTransform:
   - {fileID: 150934626}
   m_Father: {fileID: 2121799707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1957411116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957411114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball21
+  ballIndex: 20
+  buyButton: {fileID: 150934627}
+  originalBuyButtonSprite: {fileID: 1886025227, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 2026087044}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1964036684
 GameObject:
   m_ObjectHideFlags: 0
@@ -29895,6 +32389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1980137838}
+  - component: {fileID: 1980137839}
   m_Layer: 5
   m_Name: Ball21
   m_TagString: Untagged
@@ -29919,11 +32414,34 @@ RectTransform:
   - {fileID: 1620268764}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1980137839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980137837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball21
+  ballIndex: 62
+  buyButton: {fileID: 1620268765}
+  originalBuyButtonSprite: {fileID: 1982278672, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1308878153}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1985706013
 GameObject:
   m_ObjectHideFlags: 0
@@ -30008,6 +32526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986053259}
+  - component: {fileID: 1986053260}
   m_Layer: 5
   m_Name: Ball24
   m_TagString: Untagged
@@ -30032,11 +32551,34 @@ RectTransform:
   - {fileID: 26824169}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1986053260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986053258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball24
+  ballIndex: 65
+  buyButton: {fileID: 26824170}
+  originalBuyButtonSprite: {fileID: -1507287943, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1621300428}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1987051875
 GameObject:
   m_ObjectHideFlags: 0
@@ -30121,6 +32663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1990742880}
+  - component: {fileID: 1990742881}
   m_Layer: 5
   m_Name: Ball7
   m_TagString: Untagged
@@ -30145,11 +32688,34 @@ RectTransform:
   - {fileID: 1769800917}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1990742881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990742879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball7
+  ballIndex: 6
+  buyButton: {fileID: 1769800918}
+  originalBuyButtonSprite: {fileID: 1781542762, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 303692501}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1990785109
 GameObject:
   m_ObjectHideFlags: 0
@@ -30477,6 +33043,7 @@ GameObject:
   - component: {fileID: 2001490347}
   - component: {fileID: 2001490346}
   - component: {fileID: 2001490345}
+  - component: {fileID: 2001490348}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -30585,6 +33152,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001490343}
   m_CullTransparentMesh: 1
+--- !u!114 &2001490348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001490343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5108fbc373c6b2c4a9c46dd0204ba835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diamondCost: 10
+  goldAmount: 1000
 --- !u!1 &2003109466
 GameObject:
   m_ObjectHideFlags: 0
@@ -30699,9 +33280,9 @@ RectTransform:
   - {fileID: 200441172}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 920, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2012390140
@@ -30925,6 +33506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022721838}
+  - component: {fileID: 2022721839}
   m_Layer: 5
   m_Name: Ball16
   m_TagString: Untagged
@@ -30949,11 +33531,34 @@ RectTransform:
   - {fileID: 520360637}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2022721839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022721837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball16
+  ballIndex: 57
+  buyButton: {fileID: 520360638}
+  originalBuyButtonSprite: {fileID: 1893333287, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 751090278}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2026087042
 GameObject:
   m_ObjectHideFlags: 0
@@ -31068,9 +33673,9 @@ RectTransform:
   - {fileID: 488854260}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5520, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2031890010
@@ -31384,6 +33989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2046872901}
+  - component: {fileID: 2046872902}
   m_Layer: 5
   m_Name: Ball2
   m_TagString: Untagged
@@ -31408,11 +34014,34 @@ RectTransform:
   - {fileID: 557038336}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2046872902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046872900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball2
+  ballIndex: 1
+  buyButton: {fileID: 557038337}
+  originalBuyButtonSprite: {fileID: 24933847, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1990785111}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2046909801
 GameObject:
   m_ObjectHideFlags: 0
@@ -31751,6 +34380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054545080}
+  - component: {fileID: 2054545081}
   m_Layer: 5
   m_Name: Ball17
   m_TagString: Untagged
@@ -31775,11 +34405,34 @@ RectTransform:
   - {fileID: 656951187}
   m_Father: {fileID: 804509447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2054545081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054545079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball17
+  ballIndex: 58
+  buyButton: {fileID: 656951188}
+  originalBuyButtonSprite: {fileID: 1893333287, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1612244425}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2057087952
 GameObject:
   m_ObjectHideFlags: 0
@@ -32292,6 +34945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2072379256}
+  - component: {fileID: 2072379257}
   m_Layer: 5
   m_Name: Ball15
   m_TagString: Untagged
@@ -32316,11 +34970,34 @@ RectTransform:
   - {fileID: 906451183}
   m_Father: {fileID: 717104021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2072379257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072379255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball15
+  ballIndex: 14
+  buyButton: {fileID: 906451184}
+  originalBuyButtonSprite: {fileID: -913071669, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1828903608}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2078117765
 GameObject:
   m_ObjectHideFlags: 0
@@ -32330,6 +35007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078117766}
+  - component: {fileID: 2078117767}
   m_Layer: 5
   m_Name: Ball28
   m_TagString: Untagged
@@ -32354,11 +35032,34 @@ RectTransform:
   - {fileID: 1078251250}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2078117767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078117765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball28
+  ballIndex: 27
+  buyButton: {fileID: 1078251251}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1491539937}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2078590586
 GameObject:
   m_ObjectHideFlags: 0
@@ -32700,6 +35401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2084077755}
+  - component: {fileID: 2084077756}
   m_Layer: 5
   m_Name: Ball22
   m_TagString: Untagged
@@ -32724,11 +35426,34 @@ RectTransform:
   - {fileID: 21216921}
   m_Father: {fileID: 488240504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -475}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2084077756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084077754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: premium_ball22
+  ballIndex: 63
+  buyButton: {fileID: 21216922}
+  originalBuyButtonSprite: {fileID: -1507287943, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 335357300}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2106816013
 GameObject:
   m_ObjectHideFlags: 0
@@ -33083,9 +35808,9 @@ RectTransform:
   - {fileID: 1404807923}
   m_Father: {fileID: 1498460103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2760, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 820, y: 630}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2121799708
@@ -33159,6 +35884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124302172}
+  - component: {fileID: 2124302173}
   m_Layer: 5
   m_Name: Ball3
   m_TagString: Untagged
@@ -33183,11 +35909,34 @@ RectTransform:
   - {fileID: 1454450792}
   m_Father: {fileID: 1847674188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2124302173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124302171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball3
+  ballIndex: 2
+  buyButton: {fileID: 1454450793}
+  originalBuyButtonSprite: {fileID: 24933847, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 615474847}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2129127315
 GameObject:
   m_ObjectHideFlags: 0
@@ -33200,6 +35949,7 @@ GameObject:
   - component: {fileID: 2129127319}
   - component: {fileID: 2129127318}
   - component: {fileID: 2129127317}
+  - component: {fileID: 2129127320}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -33308,6 +36058,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129127315}
   m_CullTransparentMesh: 1
+--- !u!114 &2129127320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129127315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5108fbc373c6b2c4a9c46dd0204ba835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diamondCost: 300
+  goldAmount: 45000
 --- !u!1 &2132570964
 GameObject:
   m_ObjectHideFlags: 0
@@ -33392,6 +36156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132932695}
+  - component: {fileID: 2132932696}
   m_Layer: 5
   m_Name: Ball9
   m_TagString: Untagged
@@ -33416,11 +36181,34 @@ RectTransform:
   - {fileID: 612781480}
   m_Father: {fileID: 2012390139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2132932696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132932694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball9
+  ballIndex: 8
+  buyButton: {fileID: 612781481}
+  originalBuyButtonSprite: {fileID: 1781542762, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1351857931}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2136096712
 GameObject:
   m_ObjectHideFlags: 0
@@ -33580,6 +36368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138543103}
+  - component: {fileID: 2138543104}
   m_Layer: 5
   m_Name: Ball27
   m_TagString: Untagged
@@ -33604,11 +36393,34 @@ RectTransform:
   - {fileID: 487122250}
   m_Father: {fileID: 1541474582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 680, y: -165}
-  m_SizeDelta: {x: 270, y: 310}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2138543104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138543102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576656b004e01104db88ce34f10529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballName: ball27
+  ballIndex: 26
+  buyButton: {fileID: 487122251}
+  originalBuyButtonSprite: {fileID: -402745558, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectButtonSprite: {fileID: 1724665217, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedButtonSprite: {fileID: 1924332045, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundImage: {fileID: 1757513926}
+  backgroundNormalSprite: {fileID: -947418571, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  backgroundSelectedSprite: {fileID: -2102593934, guid: 9e87ec49ce3dc2a4d871dde99e9c7d20, type: 3}
+  selectedTintColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  normalTintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -33619,4 +36431,5 @@ SceneRoots:
   - {fileID: 367518260}
   - {fileID: 549225027}
   - {fileID: 1047187396}
+  - {fileID: 251692622}
   - {fileID: 1717904453}

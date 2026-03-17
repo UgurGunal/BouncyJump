@@ -18,8 +18,16 @@ public class SoundEffectsManager : MonoBehaviour
     [Range(0f, 1f)]
     public float masterVolume = 1f;
     
-    [Header("Sound Effects Library")]
-    [Tooltip("Define your sound effects here. Key is the sound name, Value is the AudioClip")]
+    [Header("Core Sound Effects (always used)")]
+    [Tooltip("Wall bounce sound effect (name is always 'wall').")]
+    public AudioClip wallClip;
+    [Tooltip("Coin pickup sound effect (name is always 'coin').")]
+    public AudioClip coinClip;
+    [Tooltip("Bouncy platform sound effect (name is always 'bouncyPlatform').")]
+    public AudioClip bouncyPlatformClip;
+
+    [Header("Additional Sound Effects (optional)")]
+    [Tooltip("Optional extra sound effects. You can leave this empty if you only use wall/coin/bouncyPlatform.")]
     public List<SoundEffect> soundEffects = new List<SoundEffect>();
     
     [System.Serializable]
@@ -86,6 +94,13 @@ public class SoundEffectsManager : MonoBehaviour
     private void BuildSoundEffectDictionary()
     {
         soundEffectDictionary = new Dictionary<string, SoundEffect>();
+
+        // Always register the three core sounds with fixed names if clips are assigned.
+        AddCoreSound("wall", wallClip);
+        AddCoreSound("coin", coinClip);
+        AddCoreSound("bouncyPlatform", bouncyPlatformClip);
+
+        // Register any additional sounds from the list.
         foreach (var soundEffect in soundEffects)
         {
             if (soundEffect != null && !string.IsNullOrEmpty(soundEffect.name))
@@ -99,6 +114,21 @@ public class SoundEffectsManager : MonoBehaviour
                     soundEffectDictionary[soundEffect.name] = soundEffect;
                 }
             }
+        }
+    }
+
+    void AddCoreSound(string name, AudioClip clip)
+    {
+        if (clip == null) return;
+
+        if (!soundEffectDictionary.ContainsKey(name))
+        {
+            soundEffectDictionary[name] = new SoundEffect
+            {
+                name = name,
+                clip = clip,
+                volume = 1f
+            };
         }
     }
 

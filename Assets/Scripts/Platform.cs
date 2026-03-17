@@ -21,6 +21,10 @@ public class Platform : MonoBehaviour
     public float destroyDistance = 8f; // Distance below player to instantly destroy platform
     public float timerDestroyDistance = 4.4f; // Distance below player to start timer-based destruction
 
+    [Header("Audio")]
+    [Tooltip("If true, play the bouncy platform sound instead of the normal platform sound when the player jumps on this platform.")]
+    public bool isBouncyPlatform = false;
+
     private Transform playerTransform;
     private bool isDestroying = false;
     private float destroyTimer;
@@ -165,7 +169,8 @@ public class Platform : MonoBehaviour
                 // Add random variance of ±0.1 to make sounds less repetitive
                 float pitchVariance = Random.Range(-0.1f, 0.1f);
                 float pitch = 1f + pitchVariance; // Base pitch of 1.0 with variance
-                SoundEffectsManager.Instance.PlaySound("platform", -1f, pitch);
+                string soundName = isBouncyPlatform ? "bouncyPlatform" : "platform";
+                SoundEffectsManager.Instance.PlaySound(soundName, -1f, pitch);
             }
 
             //Debug.Log($"Jump Applied - Force: {totalJumpForce:F2}, Base: {jumpForce:F2}, Bonus: {jumpBonus:F2}, RelativeVelocity: {relativeVelocity:F2}");

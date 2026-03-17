@@ -8,11 +8,10 @@ public class HomeScreenUI : MonoBehaviour
     public Button playButton;
     public Button shopButton;
     public Button towersButton;
-    public Button buyGoldButton;
     public Button buyDiamondButton;
 
     [Header("Shop Integration")]
-    public TowerShopManager shopManager;
+    public ShopManager shopManager;
     
     [Header("Tower Integration")]
     public TowerManager towerManager;
@@ -35,11 +34,6 @@ public class HomeScreenUI : MonoBehaviour
             towersButton.onClick.AddListener(OnTowersButtonClick);
         }
         
-        if (buyGoldButton != null)
-        {
-            buyGoldButton.onClick.AddListener(OnBuyGoldButtonClick);
-        }
-        
         if (buyDiamondButton != null)
         {
             buyDiamondButton.onClick.AddListener(OnBuyDiamondButtonClick);
@@ -48,10 +42,10 @@ public class HomeScreenUI : MonoBehaviour
         // Initialize managers if not assigned (search inactive so we find manager on disabled shop panel)
         if (shopManager == null)
         {
-            shopManager = FindObjectOfType<TowerShopManager>();
+            shopManager = FindObjectOfType<ShopManager>();
             if (shopManager == null)
             {
-                TowerShopManager[] found = FindObjectsOfType<TowerShopManager>(true);
+                ShopManager[] found = FindObjectsOfType<ShopManager>(true);
                 if (found != null && found.Length > 0)
                     shopManager = found[0];
             }
@@ -118,15 +112,25 @@ public class HomeScreenUI : MonoBehaviour
         }
     }
 
-    void OnBuyGoldButtonClick()
-    {
-        Debug.Log("Buy Gold button clicked - TODO: Implement gold purchase");
-        // TODO: Implement gold purchase functionality
-    }
+    // Mock diamond amounts (replace with real IAP / ad rewards later)
+    const int MockDiamondsFromAd = 5;
+    const int MockDiamondsFromIAP = 50;
 
     void OnBuyDiamondButtonClick()
     {
-        Debug.Log("Buy Diamond button clicked - TODO: Implement diamond purchase");
-        // TODO: Implement diamond purchase functionality
+        if (shopManager == null) return;
+        // Mock: for now grant diamonds as if user watched an ad. Wire IAP to MockPurchaseDiamondsWithRealMoney when ready.
+        shopManager.MockGrantDiamondsFromAd(MockDiamondsFromAd);
+        var currencyDisplay = FindObjectOfType<HomeScreenCurrencyDisplay>();
+        if (currencyDisplay != null) currencyDisplay.RefreshCurrencyDisplay();
+    }
+
+    /// <summary>Call this from an IAP success handler or a separate "Buy with real money" button.</summary>
+    public void OnBuyDiamondsWithRealMoney()
+    {
+        if (shopManager == null) return;
+        shopManager.MockPurchaseDiamondsWithRealMoney(MockDiamondsFromIAP);
+        var currencyDisplay = FindObjectOfType<HomeScreenCurrencyDisplay>();
+        if (currencyDisplay != null) currencyDisplay.RefreshCurrencyDisplay();
     }
 }

@@ -13,12 +13,12 @@ public class ShopTestHelper : MonoBehaviour
     public int goldToAdd = 1000;
     public int diamondsToAdd = 100;
     
-    private TowerShopManager shopManager;
+    private ShopManager shopManager;
     
     void Start()
     {
         // Find shop manager
-        shopManager = FindObjectOfType<TowerShopManager>();
+        shopManager = FindObjectOfType<ShopManager>();
         
         // Setup test buttons
         if (addGoldButton != null)
@@ -63,15 +63,26 @@ public class ShopTestHelper : MonoBehaviour
                 PlayerPrefs.DeleteKey($"TowerPurchased_{i}");
             }
         }
+
+        // Clear all ball purchases using the index-based system
+        BallManager ballManager = BallManager.Instance;
+        if (ballManager != null && ballManager.BallCount > 0)
+        {
+            for (int i = 0; i < ballManager.BallCount; i++)
+            {
+                PlayerPrefs.DeleteKey($"BallPurchased_{i}");
+            }
+        }
         
         // Reset currency
         PlayerPrefs.DeleteKey("PlayerGold");
         PlayerPrefs.DeleteKey("PlayerDiamonds");
         PlayerPrefs.DeleteKey("PlayerCurrency"); // Keep for backwards compatibility
         
-        // Reset selected tower
+        // Reset selected tower & ball
         PlayerPrefs.DeleteKey("CurrentTowerIndex");
         PlayerPrefs.DeleteKey("SelectedTower"); // Legacy key
+        PlayerPrefs.DeleteKey("CurrentBallIndex");
         
         PlayerPrefs.Save();
         

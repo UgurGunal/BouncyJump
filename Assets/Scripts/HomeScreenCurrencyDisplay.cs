@@ -12,16 +12,16 @@ public class HomeScreenCurrencyDisplay : MonoBehaviour
     public float updateInterval = 1f; // Update every second if not updating every frame
     
     private float lastUpdateTime;
-    private TowerShopManager shopManager;
+    private ShopManager shopManager;
     
     void Start()
     {
         // Find the shop manager to get currency methods
-        shopManager = FindObjectOfType<TowerShopManager>();
+        shopManager = FindObjectOfType<ShopManager>();
         
         if (shopManager == null)
         {
-            Debug.LogWarning("TowerShopManager not found! Currency display may not work.");
+            Debug.LogWarning("ShopManager not found! Currency display may not work.");
         }
         
         // Initial update

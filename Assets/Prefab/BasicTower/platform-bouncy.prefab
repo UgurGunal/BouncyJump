@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ba32a9389a3e24486cfa31b54b2cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 21
+  jumpForce: 22
   comboBonus: 0.008
   velocityThreshold: 5
   contactNormalThreshold: 0
@@ -174,3 +174,4 @@ MonoBehaviour:
   enableDistanceDestroy: 1
   destroyDistance: 8
   timerDestroyDistance: 5
+  isBouncyPlatform: 1

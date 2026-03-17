@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 ///    - Objects needed in ALL tower scenes but NOT in main menu
 /// 
 /// 2. HomeScene (Main Menu) - Contains:
-///    - HomeScreenUI, TowerShopManager, HomeScreenCurrencyDisplay
+///    - HomeScreenUI, ShopManager, HomeScreenCurrencyDisplay
 ///    - All managers needed for main menu functionality
 ///    - PersistentLoader (auto-detects as MainMenu, no persistent scenes loaded)
 /// 

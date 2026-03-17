@@ -21,13 +21,13 @@ public class TowerBuyButton : MonoBehaviour
     public Color normalTintColor = Color.white; // Normal color
     
     private TowerManager towerManager;
-    private TowerShopManager shopManager;
+    private ShopManager shopManager;
     private Image buttonImage;
     
     void Start()
     {
         towerManager = TowerManager.Instance;
-        shopManager = FindObjectOfType<TowerShopManager>();
+        shopManager = FindObjectOfType<ShopManager>();
         
         if (buyButton != null)
         {
@@ -110,21 +110,18 @@ public class TowerBuyButton : MonoBehaviour
             {
                 buttonImage.sprite = selectedSprite;
                 buttonImage.color = selectedTintColor;
-                SetNativeSize(selectedSprite);
                 buyButton.interactable = true;
             }
             else if (isBought && !isSelected && selectSprite != null)
             {
                 buttonImage.sprite = selectSprite;
                 buttonImage.color = normalTintColor;
-                SetNativeSize(selectSprite);
                 buyButton.interactable = true;
             }
             else if (!isBought && buySprite != null)
             {
                 buttonImage.sprite = buySprite;
                 buttonImage.color = normalTintColor;
-                SetNativeSize(buySprite);
                 buyButton.interactable = true;
             }
             else
@@ -139,13 +136,5 @@ public class TowerBuyButton : MonoBehaviour
     public void RefreshButton()
     {
         UpdateButtonState();
-    }
-    
-    void SetNativeSize(Sprite sprite)
-    {
-        if (buttonImage != null && sprite != null)
-        {
-            buttonImage.SetNativeSize();
-        }
     }
 }

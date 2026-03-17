@@ -132,11 +132,11 @@ public class MemoryPerformanceAnalysis : MonoBehaviour
         // Check for manager instances
         var pointsManager = FindObjectOfType<PointsManager>();
         var towerManager = FindObjectOfType<TowerManager>();
-        var shopManager = FindObjectOfType<TowerShopManager>();
+        var shopManager = FindObjectOfType<ShopManager>();
         
         Debug.Log($"PointsManager instances: {(pointsManager != null ? "Found" : "Not Found")}");
         Debug.Log($"TowerManager instances: {(towerManager != null ? "Found" : "Not Found")}");
-        Debug.Log($"TowerShopManager instances: {(shopManager != null ? "Found" : "Not Found")}");
+        Debug.Log($"ShopManager instances: {(shopManager != null ? "Found" : "Not Found")}");
         Debug.Log($"======================");
     }
     
