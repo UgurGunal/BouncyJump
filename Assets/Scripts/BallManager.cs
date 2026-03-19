@@ -3,22 +3,44 @@ using System.Collections.Generic;
 
 public class BallManager : MonoBehaviour
 {
-    [Header("All Balls")]
-    [Tooltip("Optional: assign a Ball Database asset to share ball data (including in-game sprites) with CurrentBallVisualizer in the game scene. If set, this list is used instead of All Balls below.")]
-    public BallDatabase ballDatabase;
-    [Tooltip("Used only when Ball Database is not set.")]
-    public Ball[] allBalls;
+    [Header("Balls (no .asset at runtime)")]
+    [Tooltip("Main list of balls. Assign balls directly here (Inspector) so Android doesn't depend on BallDatabase assets.")]
+    public Ball[] balls;
 
-    /// <summary>Effective ball list: from ballDatabase if assigned, otherwise allBalls.</summary>
-    Ball[] Balls => (ballDatabase != null && ballDatabase.balls != null && ballDatabase.balls.Length > 0) ? ballDatabase.balls : allBalls;
+    [Header("Optional migration")]
+    [Tooltip("Optional: keep your old BallDatabase assigned so OnValidate can copy its balls into the 'balls' array above.")]
+    public BallDatabase ballDatabase;
+
+    private static readonly Ball[] EmptyBalls = new Ball[0];
+
+    /// <summary>Effective ball list (prefers serialized 'balls' array).</summary>
+    Ball[] Balls
+    {
+        get
+        {
+            if (balls != null && balls.Length > 0)
+                return balls;
+
+            // Migration fallback for Editor convenience (Android will still work as long as 'balls' is filled).
+            if (ballDatabase != null && ballDatabase.balls != null && ballDatabase.balls.Length > 0)
+                return ballDatabase.balls;
+
+            return EmptyBalls;
+        }
+    }
+
     /// <summary>Number of balls (for reset loops etc.).</summary>
-    public int BallCount => Balls?.Length ?? 0;
+    public int BallCount => Balls.Length;
 
     [Header("Balls Bought")]
     public List<int> ballsBought = new List<int>();
 
     [Header("Current Selection")]
     public int currentBallIndex = 0;
+
+    [Header("Save Data (PlayerPrefs)")]
+    [Tooltip("If you change the ball list/order, bump this value to reset purchase keys so only defaults are unlocked.")]
+    public int ballShopSaveVersion = 1;
 
     private static BallManager instance;
     public static BallManager Instance
@@ -57,15 +79,82 @@ public class BallManager : MonoBehaviour
 
     void Start()
     {
-        currentBallIndex = PlayerPrefs.GetInt("CurrentBallIndex", 0);
-
-        if (Balls != null && Balls.Length > 0 && currentBallIndex >= Balls.Length)
+        if (BallCount <= 0)
         {
-            currentBallIndex = 0;
+            Debug.LogError("BallManager: balls array is empty. On Android this means no ball data, so buying won't work.");
         }
+
+        int defaultUnlockedIndex = GetFirstUnlockedByDefaultIndex();
+
+        // Reset old purchase keys when ball config changes, so only defaults are unlocked.
+        int savedVersion = PlayerPrefs.GetInt("BallShopSaveVersion", 0);
+        if (savedVersion != ballShopSaveVersion)
+        {
+            ResetBallPurchaseKeys();
+            PlayerPrefs.SetInt("BallShopSaveVersion", ballShopSaveVersion);
+        }
+
+        currentBallIndex = PlayerPrefs.GetInt("CurrentBallIndex", defaultUnlockedIndex);
+        if (currentBallIndex < 0 || currentBallIndex >= BallCount)
+        {
+            currentBallIndex = defaultUnlockedIndex;
+            PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
+        }
+
+        // If saved selection is locked, force default unlocked.
+        if (!IsBallBought(currentBallIndex))
+        {
+            currentBallIndex = defaultUnlockedIndex;
+            PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
+        }
+
+        PlayerPrefs.Save();
 
         RefreshBallsBought();
     }
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        // Copy from the old BallDatabase only when the balls array isn't correctly populated.
+        if (ballDatabase == null || ballDatabase.balls == null || ballDatabase.balls.Length == 0)
+            return;
+
+        bool needsCopy = (balls == null || balls.Length == 0);
+        if (!needsCopy && balls.Length != ballDatabase.balls.Length)
+            needsCopy = true;
+
+        // If any element is null, treat the array as incomplete.
+        if (!needsCopy)
+        {
+            int checkCount = Mathf.Min(balls.Length, ballDatabase.balls.Length);
+            for (int i = 0; i < checkCount; i++)
+            {
+                if (balls[i] == null)
+                {
+                    needsCopy = true;
+                    break;
+                }
+            }
+        }
+
+        if (needsCopy)
+        {
+            balls = ballDatabase.balls;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+
+    [ContextMenu("Copy Balls From BallDatabase")]
+    private void CopyBallsFromBallDatabase()
+    {
+        if (ballDatabase == null || ballDatabase.balls == null)
+            return;
+
+        balls = ballDatabase.balls;
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
+#endif
 
     public Ball GetCurrentBall()
     {
@@ -110,7 +199,11 @@ public class BallManager : MonoBehaviour
     {
         if (ballIndex >= 0 && ballIndex < Balls.Length)
         {
-            return PlayerPrefs.GetInt($"BallPurchased_{ballIndex}", Balls[ballIndex].isUnlockedByDefault ? 1 : 0) == 1;
+            // Default-unlocked balls are ALWAYS available, even if old PlayerPrefs exists.
+            if (Balls[ballIndex] != null && Balls[ballIndex].isUnlockedByDefault)
+                return true;
+
+            return PlayerPrefs.GetInt($"BallPurchased_{ballIndex}", 0) == 1;
         }
         return false;
     }
@@ -188,6 +281,24 @@ public class BallManager : MonoBehaviour
             }
         }
         Debug.Log($"Balls bought: {ballsBought.Count} out of {Balls.Length}");
+    }
+
+    private int GetFirstUnlockedByDefaultIndex()
+    {
+        for (int i = 0; i < BallCount; i++)
+        {
+            if (Balls[i] != null && Balls[i].isUnlockedByDefault)
+                return i;
+        }
+        return 0;
+    }
+
+    private void ResetBallPurchaseKeys()
+    {
+        for (int i = 0; i < BallCount; i++)
+        {
+            PlayerPrefs.DeleteKey($"BallPurchased_{i}");
+        }
     }
 }
 

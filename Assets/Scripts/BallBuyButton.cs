@@ -5,7 +5,7 @@ public class BallBuyButton : MonoBehaviour
 {
     [Header("Ball Settings")]
     public string ballName = "DefaultBall"; // Must match ball name in BallManager
-    public int ballIndex = 0;               // Index of this ball in BallManager.allBalls
+    public int ballIndex = 0;               // Index of this ball in BallManager.balls
 
     [Header("UI References")]
     [Tooltip("The buy/select button. Image is auto-resolved from this Button's GameObject.")]
@@ -82,16 +82,14 @@ public class BallBuyButton : MonoBehaviour
         if (!isBought)
         {
             ballManager.BuyBall(ballIndex);
-            Debug.Log($"Attempting to buy ball {ballName}");
         }
         else if (isBought && !isSelected)
         {
             ballManager.SetCurrentBall(ballIndex);
-            Debug.Log($"Selected ball {ballName}");
+            // Selection visual will refresh via BallManager events.
         }
         else if (isSelected)
         {
-            Debug.Log($"Ball {ballName} is already selected!");
             return;
         }
 

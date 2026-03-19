@@ -116,6 +116,12 @@ public class SimpleTowerGenerator : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+        if (levelManager == null)
+        {
+            // During scene transitions/singleton reinitialization, LevelManager may be momentarily missing.
+            levelManager = LevelManager.Instance;
+            if (levelManager == null) return;
+        }
 
         // Check for level change
         int newLevel = levelManager.GetCurrentLevel(lastSpawnedPlatformY);

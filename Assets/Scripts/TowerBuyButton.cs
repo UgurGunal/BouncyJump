@@ -15,6 +15,10 @@ public class TowerBuyButton : MonoBehaviour
     public Sprite originalBuyButtonSprite; // Original buy button sprite (for not bought towers)
     public Sprite selectButtonSprite; // When tower is bought but not selected
     public Sprite selectedButtonSprite; // When tower is bought and selected
+
+    [Header("Sprite Size")]
+    [Tooltip("When true, the button image will resize to the sprite's native size whenever the sprite changes.")]
+    public bool resizeToNativeSizeOnSpriteChange = true;
     
     [Header("Visual Effects")]
     public Color selectedTintColor = new Color(0.7f, 0.7f, 0.7f, 1f); // Darker tint for selected button
@@ -23,6 +27,20 @@ public class TowerBuyButton : MonoBehaviour
     private TowerManager towerManager;
     private ShopManager shopManager;
     private Image buttonImage;
+
+    private void ApplySprite(Sprite sprite, Color color)
+    {
+        if (buttonImage == null) return;
+
+        buttonImage.sprite = sprite;
+        buttonImage.color = color;
+
+        if (resizeToNativeSizeOnSpriteChange && sprite != null)
+        {
+            // Resizes the RectTransform to match the sprite's native pixel size.
+            buttonImage.SetNativeSize();
+        }
+    }
     
     void Start()
     {
@@ -108,20 +126,17 @@ public class TowerBuyButton : MonoBehaviour
         {
             if (isBought && isSelected && selectedSprite != null)
             {
-                buttonImage.sprite = selectedSprite;
-                buttonImage.color = selectedTintColor;
+                ApplySprite(selectedSprite, selectedTintColor);
                 buyButton.interactable = true;
             }
             else if (isBought && !isSelected && selectSprite != null)
             {
-                buttonImage.sprite = selectSprite;
-                buttonImage.color = normalTintColor;
+                ApplySprite(selectSprite, normalTintColor);
                 buyButton.interactable = true;
             }
             else if (!isBought && buySprite != null)
             {
-                buttonImage.sprite = buySprite;
-                buttonImage.color = normalTintColor;
+                ApplySprite(buySprite, normalTintColor);
                 buyButton.interactable = true;
             }
             else

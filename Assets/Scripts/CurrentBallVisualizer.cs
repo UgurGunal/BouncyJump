@@ -11,10 +11,6 @@ public class CurrentBallVisualizer : MonoBehaviour
     [Tooltip("World-space SpriteRenderer for the ball (e.g. on the Player).")]
     public SpriteRenderer targetSpriteRenderer;
 
-    [Header("Ball data")]
-    [Tooltip("Same Ball Database asset assigned to BallManager in Home scene. Sprites are read from here.")]
-    public BallDatabase ballDatabase;
-
     void OnEnable()
     {
         ApplyCurrentBallVisual();
@@ -37,16 +33,7 @@ public class CurrentBallVisualizer : MonoBehaviour
             }
         }
 
-        // 2) Fallback to PlayerPrefs + BallDatabase (e.g. when no BallManager in this scene)
-        if (ballDatabase == null || ballDatabase.balls == null || ballDatabase.balls.Length == 0)
-            return;
-
-        int index = PlayerPrefs.GetInt("CurrentBallIndex", 0);
-        if (index < 0 || index >= ballDatabase.balls.Length)
-            index = 0;
-
-        Sprite sprite = ballDatabase.balls[index].inGameSprite;
-        targetSpriteRenderer.sprite = sprite;
-        targetSpriteRenderer.enabled = sprite != null;
+        // 2) No BallManager available: can't resolve sprite without ball data.
+        // This should not happen because BallManager is persisted from the Home scene.
     }
 }

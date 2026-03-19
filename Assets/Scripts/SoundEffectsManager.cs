@@ -26,6 +26,13 @@ public class SoundEffectsManager : MonoBehaviour
     [Tooltip("Bouncy platform sound effect (name is always 'bouncyPlatform').")]
     public AudioClip bouncyPlatformClip;
 
+    [Header("Coin Sound Settings")]
+    [Tooltip("Base pitch used for coin collection sounds (before random variance).")]
+    public float coinPitchBase = 1f;
+
+    [Tooltip("Random upward pitch shift applied to coin sounds. A value of 0.1 means the pitch is between base and base + 0.1.")]
+    public float coinPitchRandomVariance = 0.01f;
+
     [Header("Additional Sound Effects (optional)")]
     [Tooltip("Optional extra sound effects. You can leave this empty if you only use wall/coin/bouncyPlatform.")]
     public List<SoundEffect> soundEffects = new List<SoundEffect>();
@@ -174,6 +181,19 @@ public class SoundEffectsManager : MonoBehaviour
         source.volume = finalVolume * masterVolume;
         source.pitch = pitchOverride >= 0f ? Mathf.Clamp(pitchOverride, 0.5f, 3f) : 1f;
         source.Play();
+    }
+
+    /// <summary>
+    /// Plays the coin pickup sound using the pitch settings exposed in the Inspector.
+    /// </summary>
+    /// <param name="volumeOverride">Optional volume override (0-1). If not provided, uses the sound effect's default volume.</param>
+    public void PlayCoinSound(float volumeOverride = -1f)
+    {
+        // Pitch only shifts upward (base to base + variance).
+        float upwardShift = Mathf.Max(0f, coinPitchRandomVariance);
+        float pitch = coinPitchBase + Random.Range(0f, upwardShift);
+        pitch = Mathf.Clamp(pitch, 0.5f, 3f);
+        PlaySound("coin", volumeOverride, pitch);
     }
 
     /// <summary>

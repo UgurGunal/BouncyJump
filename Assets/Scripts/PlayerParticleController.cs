@@ -77,9 +77,18 @@ public class PlayerParticleController : MonoBehaviour
 
         shape.position = position;
 
-        // Flip sprites based on wall side
-        var textureSheetAnimation = particleInstance.textureSheetAnimation;
-        textureSheetAnimation.flipU = (wallSide == SideWall.WallSide.Right) ? 1f : 0f;
+        // Flip sprites based on wall side.
+        // Note: TextureSheetAnimationModule.flipU is deprecated; use ParticleSystemRenderer.flip.x instead.
+        // Kept here intentionally for the particle instance flip logic.
+        // (We flip the renderer instead of using TextureSheetAnimationModule.flipU.)
+
+        var renderer = particleInstance.GetComponent<ParticleSystemRenderer>();
+        if (renderer != null)
+        {
+            Vector2 flip = renderer.flip;
+            flip.x = (wallSide == SideWall.WallSide.Right) ? 1f : 0f;
+            renderer.flip = flip;
+        }
 
         // Calculate particle count based on collision speed
         float minSpeed = 8f;

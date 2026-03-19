@@ -86,6 +86,12 @@ public class ParallaxController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (cameraTransform == null)
+        {
+            // Can happen before InitializeAfterCameraFound() finishes.
+            return;
+        }
+
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
         foreach (var obj in parallaxObjects)
         {

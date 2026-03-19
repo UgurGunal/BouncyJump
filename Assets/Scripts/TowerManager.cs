@@ -13,6 +13,10 @@ public class TowerManager : MonoBehaviour
     
     [Header("Current Selection")]
     public int currentTowerIndex = 0;
+
+    [Header("Save Data (PlayerPrefs)")]
+    [Tooltip("Used to detect when the shop config changed. When this value differs from the stored value, tower purchase keys are reset.")]
+    public int towerShopSaveVersion = 1;
     
     [Header("Home Screen UI")]
     public Image homeScreenTowerImage;
@@ -55,13 +59,38 @@ public class TowerManager : MonoBehaviour
     
     void Start()
     {
-        // Load saved tower selection
-        currentTowerIndex = PlayerPrefs.GetInt("CurrentTowerIndex", 0);
+        if (allTowers == null || allTowers.Length == 0)
+        {
+            Debug.LogError("TowerManager: allTowers is not assigned or empty.");
+            return;
+        }
+
+        int defaultUnlockedIndex = GetFirstUnlockedByDefaultIndex();
+
+        // If the save version changed (or the player never had this key), wipe purchase keys
+        // so only towers marked `isUnlockedByDefault=true` appear bought on startup.
+        int savedVersion = PlayerPrefs.GetInt("TowerShopSaveVersion", 0);
+        if (savedVersion != towerShopSaveVersion)
+        {
+            ResetTowerPurchaseKeys();
+            PlayerPrefs.SetInt("TowerShopSaveVersion", towerShopSaveVersion);
+        }
+
+        // Load saved tower selection, but always fall back to a valid default-unlocked tower.
+        currentTowerIndex = PlayerPrefs.GetInt("CurrentTowerIndex", defaultUnlockedIndex);
+        if (!IsTowerBought(currentTowerIndex))
+        {
+            currentTowerIndex = defaultUnlockedIndex;
+            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
+        }
+
+        PlayerPrefs.Save();
         
         // Ensure index is valid
         if (currentTowerIndex >= allTowers.Length)
         {
-            currentTowerIndex = 0;
+            currentTowerIndex = defaultUnlockedIndex;
+            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
         }
         
         // Initialize towers bought list
@@ -69,6 +98,9 @@ public class TowerManager : MonoBehaviour
         
         // Ensure home screen visuals match current selection
         UpdateHomeScreenTowerImage();
+
+        // Ensure all shop buttons refresh after PlayerPrefs initialization/reset.
+        OnSelectionChanged?.Invoke();
     }
     
     void OnEnable()
@@ -271,6 +303,26 @@ public class TowerManager : MonoBehaviour
             }
         }
         Debug.Log($"Towers bought: {towersBought.Count} out of {allTowers.Length}");
+    }
+
+    private int GetFirstUnlockedByDefaultIndex()
+    {
+        for (int i = 0; i < allTowers.Length; i++)
+        {
+            if (allTowers[i] != null && allTowers[i].isUnlockedByDefault)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void ResetTowerPurchaseKeys()
+    {
+        for (int i = 0; i < allTowers.Length; i++)
+        {
+            PlayerPrefs.DeleteKey($"TowerPurchased_{i}");
+        }
     }
     
     public List<int> GetTowersBought()

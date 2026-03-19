@@ -29,10 +29,7 @@ public class CoinCollectable : MonoBehaviour
             // Play coin collection sound effect with pitch variance
             if (SoundEffectsManager.Instance != null)
             {
-                // Add random variance of ±0.1 to make sounds less repetitive
-                float pitchVariance = Random.Range(-0.02f, 0.02f);
-                float pitch = 1f + pitchVariance; // Base pitch of 1.0 with variance
-                SoundEffectsManager.Instance.PlaySound("coin", -1f, pitch);
+                SoundEffectsManager.Instance.PlayCoinSound(-1f);
             }
             
             Destroy(gameObject);
