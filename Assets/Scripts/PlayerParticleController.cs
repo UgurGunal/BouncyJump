@@ -66,7 +66,7 @@ public class PlayerParticleController : MonoBehaviour
         }
         else
         {
-            position.x = -0.3f;
+            position.x = -0.35f;
 
             // Reset rotation for left wall (no X flip)
             Vector3 rotation = shape.rotation;
