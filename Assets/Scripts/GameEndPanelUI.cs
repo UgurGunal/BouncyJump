@@ -14,6 +14,8 @@ public class GameEndPanelUI : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI totalDiamondsText;
     public TextMeshProUGUI maxHeightText;
+    [Tooltip("Optional: best height ever for the tower you played (persisted). Same number scale as max height (×5). Leave unassigned if unused.")]
+    public TextMeshProUGUI towerBestHeightText;
     public TextMeshProUGUI maxLevelText;
     public TextMeshProUGUI totalEarnedCoinsText;
     public Button mainMenuButton;
@@ -87,9 +89,16 @@ public class GameEndPanelUI : MonoBehaviour
         coinsText.text = PointsManager.Instance.CoinsCollected.ToString();
         totalDiamondsText.text = PointsManager.Instance.GemsCollected.ToString();
         
-        // Display max reached height (multiplied by 5 as per your UI format)
+        // Display max reached height this session (multiplied by 5 as per your UI format)
         int displayHeight = Mathf.RoundToInt(PointsManager.Instance.HighestHeightReached * 5);
-        maxHeightText.text = displayHeight.ToString("N0");
+        if (maxHeightText != null)
+            maxHeightText.text = displayHeight.ToString("N0");
+
+        // Per-tower best height (persisted): update if this run beat the record, then show
+        int towerIndex = TowerHeightHighScore.GetCurrentTowerIndexFromSave();
+        TowerHeightHighScore.TryRecordHeight(towerIndex, PointsManager.Instance.HighestHeightReached);
+        if (towerBestHeightText != null)
+            towerBestHeightText.text = TowerHeightHighScore.GetBestDisplayHeight(towerIndex).ToString("N0");
 
         // Display max reached level (1-based)
         if (LevelManager.Instance != null)
