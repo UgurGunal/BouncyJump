@@ -948,7 +948,7 @@ MonoBehaviour:
     coin2SpawnRate: 0
     coin3SpawnRate: 0
     powerupSpawnRate: 0
-    diamondSpawnRate: 0.002
+    diamondSpawnRate: 0.005
     emptySpawnRate: 0.75
   - cameraSpeed: 3
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 9f22275646b175b40a61bb9d3cb60c5d, type: 3}
@@ -963,7 +963,7 @@ MonoBehaviour:
     coin2SpawnRate: 0.08
     coin3SpawnRate: 0
     powerupSpawnRate: 0
-    diamondSpawnRate: 0.003
+    diamondSpawnRate: 0.005
     emptySpawnRate: 0.65
   - cameraSpeed: 3.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 92d7d0fae1eb4f0409c923e5e7842c33, type: 3}
@@ -978,7 +978,7 @@ MonoBehaviour:
     coin2SpawnRate: 0.16
     coin3SpawnRate: 0
     powerupSpawnRate: 0
-    diamondSpawnRate: 0.004
+    diamondSpawnRate: 0.006
     emptySpawnRate: 0.62
   - cameraSpeed: 3.8
     longPlatformPrefab: {fileID: 6595305194927341745, guid: b7111518dc659ac4697f060aac3f8ac9, type: 3}
@@ -993,7 +993,7 @@ MonoBehaviour:
     coin2SpawnRate: 0.24
     coin3SpawnRate: 0
     powerupSpawnRate: 0
-    diamondSpawnRate: 0.005
+    diamondSpawnRate: 0.007
     emptySpawnRate: 0.56
 --- !u!1 &2125827021
 GameObject:

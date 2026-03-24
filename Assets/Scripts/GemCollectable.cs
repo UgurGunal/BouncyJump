@@ -25,6 +25,10 @@ public class GemCollectable : MonoBehaviour
             {
                 PointsManager.Instance.AddGem(gemValue);
             }
+
+            if (SoundEffectsManager.Instance != null)
+                SoundEffectsManager.Instance.PlayDiamondSound(-1f);
+
             Destroy(gameObject);
         }
     }

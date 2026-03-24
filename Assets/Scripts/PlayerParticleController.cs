@@ -56,7 +56,7 @@ public class PlayerParticleController : MonoBehaviour
 
         if (wallSide == SideWall.WallSide.Right)
         {
-            position.x = 0.25f;
+            position.x = 0.28f;
 
             // Flip rotation for right wall: mirror in Z and rotate 180° around X to invert emission direction
             Vector3 rotation = shape.rotation;

@@ -25,6 +25,10 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip coinClip;
     [Tooltip("Bouncy platform sound effect (name is always 'bouncyPlatform').")]
     public AudioClip bouncyPlatformClip;
+    [Tooltip("Diamond/gem pickup (name is always 'diamond').")]
+    public AudioClip diamondClip;
+    [Tooltip("Endgame panel count tick (name: endgameCountdown). Played N times per count animation; pitch always 1.")]
+    public AudioClip endgameCountdownClip;
 
     [Header("Coin Sound Settings")]
     [Tooltip("Base pitch used for coin collection sounds (before random variance).")]
@@ -32,6 +36,12 @@ public class SoundEffectsManager : MonoBehaviour
 
     [Tooltip("Random upward pitch shift applied to coin sounds. A value of 0.1 means the pitch is between base and base + 0.1.")]
     public float coinPitchRandomVariance = 0.01f;
+
+    [Header("Diamond Sound Settings")]
+    [Tooltip("Base pitch for diamond pickup (before random variance).")]
+    public float diamondPitchBase = 1f;
+    [Tooltip("Random upward pitch shift for diamond pickup.")]
+    public float diamondPitchRandomVariance = 0.01f;
 
     [Header("Additional Sound Effects (optional)")]
     [Tooltip("Optional extra sound effects. You can leave this empty if you only use wall/coin/bouncyPlatform.")]
@@ -95,6 +105,19 @@ public class SoundEffectsManager : MonoBehaviour
         }
     }
 
+    /// <summary>One shot of the endgame count tick at pitch 1 (uses pooled AudioSource).</summary>
+    public void PlayEndgameCountdownOneShot(float volumeOverride = -1f)
+    {
+        if (!HasEndgameCountdownClip())
+            return;
+        PlaySound("endgameCountdown", volumeOverride, 1f);
+    }
+
+    public bool HasEndgameCountdownClip()
+    {
+        return endgameCountdownClip != null;
+    }
+
     /// <summary>
     /// Build a dictionary for quick sound effect lookups
     /// </summary>
@@ -106,6 +129,8 @@ public class SoundEffectsManager : MonoBehaviour
         AddCoreSound("wall", wallClip);
         AddCoreSound("coin", coinClip);
         AddCoreSound("bouncyPlatform", bouncyPlatformClip);
+        AddCoreSound("diamond", diamondClip);
+        AddCoreSound("endgameCountdown", endgameCountdownClip);
 
         // Register any additional sounds from the list.
         foreach (var soundEffect in soundEffects)
@@ -194,6 +219,17 @@ public class SoundEffectsManager : MonoBehaviour
         float pitch = coinPitchBase + Random.Range(0f, upwardShift);
         pitch = Mathf.Clamp(pitch, 0.5f, 3f);
         PlaySound("coin", volumeOverride, pitch);
+    }
+
+    /// <summary>
+    /// Plays the diamond/gem pickup sound (same pattern as coins: slight upward pitch variance).
+    /// </summary>
+    public void PlayDiamondSound(float volumeOverride = -1f)
+    {
+        float upwardShift = Mathf.Max(0f, diamondPitchRandomVariance);
+        float pitch = diamondPitchBase + Random.Range(0f, upwardShift);
+        pitch = Mathf.Clamp(pitch, 0.5f, 3f);
+        PlaySound("diamond", volumeOverride, pitch);
     }
 
     /// <summary>
