@@ -6,9 +6,10 @@ public class HomeScreenUI : MonoBehaviour
 {
     [Header("UI Elements")]
     public Button playButton;
+    public Button settingsButton;
     public Button shopButton;
-    public Button towersButton;
     public Button buyDiamondButton;
+    public Button buyGoldButton;
 
     [Header("Shop Integration")]
     public ShopManager shopManager;
@@ -24,19 +25,25 @@ public class HomeScreenUI : MonoBehaviour
             playButton.onClick.AddListener(OnPlayButtonClick);
         }
         
+        if (settingsButton != null)
+        {
+            settingsButton.onClick.AddListener(OnSettingsButtonClick);
+        }
+        
         if (shopButton != null)
         {
             shopButton.onClick.AddListener(OnShopButtonClick);
         }
         
-        if (towersButton != null)
-        {
-            towersButton.onClick.AddListener(OnTowersButtonClick);
-        }
-        
+        // Buy diamond / buy gold shortcuts only open the shop for now (same as shop button).
         if (buyDiamondButton != null)
         {
-            buyDiamondButton.onClick.AddListener(OnBuyDiamondButtonClick);
+            buyDiamondButton.onClick.AddListener(OnShopButtonClick);
+        }
+
+        if (buyGoldButton != null)
+        {
+            buyGoldButton.onClick.AddListener(OnShopButtonClick);
         }
 
         // Initialize managers if not assigned (search inactive so we find manager on disabled shop panel)
@@ -92,15 +99,15 @@ public class HomeScreenUI : MonoBehaviour
         }
     }
 
-    void OnShopButtonClick()
+    void OnSettingsButtonClick()
     {
-        Debug.Log("Shop button clicked - TODO: Implement general shop functionality");
-        // TODO: Implement general shop functionality (if different from tower shop)
+        Debug.Log("Settings button clicked - TODO: Implement settings panel");
+        // TODO: Implement settings (audio, etc.)
     }
 
-    void OnTowersButtonClick()
+    void OnShopButtonClick()
     {
-        Debug.Log("Towers button clicked - Opening tower shop panel");
+        Debug.Log("Shop button clicked - Opening shop panel");
         
         if (shopManager != null)
         {
@@ -112,18 +119,8 @@ public class HomeScreenUI : MonoBehaviour
         }
     }
 
-    // Mock diamond amounts (replace with real IAP / ad rewards later)
-    const int MockDiamondsFromAd = 5;
+    // Mock amount for IAP path (replace with real purchase payload when ready).
     const int MockDiamondsFromIAP = 50;
-
-    void OnBuyDiamondButtonClick()
-    {
-        if (shopManager == null) return;
-        // Mock: for now grant diamonds as if user watched an ad. Wire IAP to MockPurchaseDiamondsWithRealMoney when ready.
-        shopManager.MockGrantDiamondsFromAd(MockDiamondsFromAd);
-        var currencyDisplay = FindObjectOfType<HomeScreenCurrencyDisplay>();
-        if (currencyDisplay != null) currencyDisplay.RefreshCurrencyDisplay();
-    }
 
     /// <summary>Call this from an IAP success handler or a separate "Buy with real money" button.</summary>
     public void OnBuyDiamondsWithRealMoney()

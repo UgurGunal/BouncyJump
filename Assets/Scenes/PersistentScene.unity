@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9924528, g: 0.6502438, b: 0.3876183, a: 1}
+  m_Color: {r: 0.9924528, g: 0.59458464, b: 0.30522597, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3653,7 +3653,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 6}
-  m_SizeDelta: {x: 82, y: 68}
+  m_SizeDelta: {x: 78, y: 68}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1244682234
 MonoBehaviour:
@@ -3675,9 +3675,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1416069291, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: -765484676, guid: 329763185e63d394daa66adb4fb01470, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -9638,9 +9638,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1918008505, guid: 2da28c5e4f2852148ab698e49c6805ec, type: 3}
+  m_Sprite: {fileID: -1656556213, guid: 329763185e63d394daa66adb4fb01470, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -10237,11 +10237,23 @@ MonoBehaviour:
   loopMusic: 1
   sceneMusicList:
   - sceneName: BasicTower
-    musicClip: {fileID: 8300000, guid: 2705eee652ab8aa4e98b45551117cee7, type: 3}
+    musicClip: {fileID: 8300000, guid: 4991c02c7b7b989478e7cf47da96e476, type: 3}
     volume: 0.4
-  - sceneName: HomeScene
-    musicClip: {fileID: 0}
-    volume: 1
+  - sceneName: OldTower
+    musicClip: {fileID: 8300000, guid: 55276765e417c2f4083424bb5ddfd42e, type: 3}
+    volume: 0.4
+  - sceneName: IronTower
+    musicClip: {fileID: 8300000, guid: 6815c6e0cccc6374f97baebae8f6fade, type: 3}
+    volume: 0.4
+  - sceneName: RoyalTower
+    musicClip: {fileID: 8300000, guid: bf6cb824fd7666f4d99fb7df927bd86b, type: 3}
+    volume: 0.4
+  - sceneName: AmazonTower
+    musicClip: {fileID: 8300000, guid: f2c1ccfd037ea51478019fc49e67d21f, type: 3}
+    volume: 0.4
+  - sceneName: ElectricTower
+    musicClip: {fileID: 8300000, guid: bb7f959bfeaf27e40bfda92cbe5b43cb, type: 3}
+    volume: 0.4
   defaultMusic: {fileID: 0}
   defaultMusicVolume: 1
 --- !u!114 &1862026786
