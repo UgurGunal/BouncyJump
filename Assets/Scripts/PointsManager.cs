@@ -141,8 +141,20 @@ public class PointsManager : MonoBehaviour
             _currencySaved = true; // Mark this session as processed
         }
     }
-    
 
+    /// <summary>
+    /// Same gold/diamond persistence and tower best-height update as the game-over flow (<see cref="GameEndPanelUI"/>),
+    /// for leaving mid-run (e.g. pause → home). Safe if <see cref="EndSession"/> was already called (e.g. after death).
+    /// </summary>
+    public void FinalizeRunRewardsForMenuExit()
+    {
+        if (_sessionActive)
+            EndSession();
+
+        int towerIndex = TowerHeightHighScore.GetCurrentTowerIndexFromSave();
+        TowerHeightHighScore.TryRecordHeight(towerIndex, HighestHeightReached);
+        AccumulateSessionCurrency();
+    }
 
     public void ResumeSession()
     {

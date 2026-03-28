@@ -17,7 +17,7 @@ public class MusicManager : MonoBehaviour
     public float fadeDuration = 0.5f;
     
     [Range(0f, 1f)]
-    public float masterVolume = 1f;
+    public float masterVolume = 0.5f;
     
     [Tooltip("Should music loop?")]
     public bool loopMusic = true;
@@ -79,7 +79,9 @@ public class MusicManager : MonoBehaviour
     {
         // Subscribe to scene loaded events
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+
+        SetMasterVolume(AudioVolumeSettings.GetMusicVolume());
+
         // Play music for the current scene
         PlayMusicForCurrentScene();
     }

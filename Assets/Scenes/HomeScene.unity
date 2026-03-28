@@ -4363,7 +4363,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.481
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7793,6 +7793,8 @@ MonoBehaviour:
   buyGoldShopContentAnchoredY: 2450
   buyDiamondShopContentAnchoredY: 3100
   towerManager: {fileID: 1047187397}
+  musicVolumeSlider: {fileID: 1900289789}
+  sfxVolumeSlider: {fileID: 219445485}
 --- !u!4 &367518260
 Transform:
   m_ObjectHideFlags: 0
@@ -32064,7 +32066,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.481
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

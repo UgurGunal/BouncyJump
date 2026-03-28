@@ -25,6 +25,12 @@ public class HomeScreenUI : MonoBehaviour
     [Header("Tower Integration")]
     public TowerManager towerManager;
 
+    [Header("Settings — volume (0–1, saved for all scenes)")]
+    [Tooltip("Maps to MusicManager master volume. Works even when the manager is in another scene (saved in PlayerPrefs).")]
+    public Slider musicVolumeSlider;
+    [Tooltip("Maps to SoundEffectsManager master volume.")]
+    public Slider sfxVolumeSlider;
+
     void Start()
     {
         // Set up button listeners
@@ -67,6 +73,24 @@ public class HomeScreenUI : MonoBehaviour
         if (towerManager == null)
         {
             towerManager = TowerManager.Instance;
+        }
+
+        if (musicVolumeSlider != null)
+        {
+            musicVolumeSlider.minValue = 0f;
+            musicVolumeSlider.maxValue = 1f;
+            musicVolumeSlider.wholeNumbers = false;
+            musicVolumeSlider.SetValueWithoutNotify(AudioVolumeSettings.GetMusicVolume());
+            musicVolumeSlider.onValueChanged.AddListener(AudioVolumeSettings.SetMusicVolume);
+        }
+
+        if (sfxVolumeSlider != null)
+        {
+            sfxVolumeSlider.minValue = 0f;
+            sfxVolumeSlider.maxValue = 1f;
+            sfxVolumeSlider.wholeNumbers = false;
+            sfxVolumeSlider.SetValueWithoutNotify(AudioVolumeSettings.GetSfxVolume());
+            sfxVolumeSlider.onValueChanged.AddListener(AudioVolumeSettings.SetSfxVolume);
         }
     }
 

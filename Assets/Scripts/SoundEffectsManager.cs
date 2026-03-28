@@ -16,7 +16,7 @@ public class SoundEffectsManager : MonoBehaviour
     
     [Header("Volume Settings")]
     [Range(0f, 1f)]
-    public float masterVolume = 1f;
+    public float masterVolume = 0.5f;
     
     [Header("Core Sound Effects (always used)")]
     [Tooltip("Wall bounce sound effect (name is always 'wall').")]
@@ -86,8 +86,7 @@ public class SoundEffectsManager : MonoBehaviour
 
     void Start()
     {
-        // Apply initial volume settings
-        ApplyMasterVolume();
+        SetMasterVolume(AudioVolumeSettings.GetSfxVolume());
     }
 
     /// <summary>
