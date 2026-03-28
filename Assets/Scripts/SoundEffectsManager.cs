@@ -25,6 +25,10 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip coinClip;
     [Tooltip("Bouncy platform sound effect (name is always 'bouncyPlatform').")]
     public AudioClip bouncyPlatformClip;
+    [Tooltip("Anvil underside collision sound effect (name is always 'anvil').")]
+    public AudioClip anvilClip;
+    [Tooltip("Chest collision sound effect (name is always 'chest').")]
+    public AudioClip chestClip;
     [Tooltip("Diamond/gem pickup (name is always 'diamond').")]
     public AudioClip diamondClip;
     [Tooltip("Endgame panel count tick (name: endgameCountdown). Played N times per count animation; pitch always 1.")]
@@ -129,6 +133,8 @@ public class SoundEffectsManager : MonoBehaviour
         AddCoreSound("wall", wallClip);
         AddCoreSound("coin", coinClip);
         AddCoreSound("bouncyPlatform", bouncyPlatformClip);
+        AddCoreSound("anvil", anvilClip);
+        AddCoreSound("chest", chestClip);
         AddCoreSound("diamond", diamondClip);
         AddCoreSound("endgameCountdown", endgameCountdownClip);
 

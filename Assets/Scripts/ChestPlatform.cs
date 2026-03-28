@@ -285,6 +285,12 @@ public class ChestPlatform : MonoBehaviour
         if (isOpened || isAnimating) return;
         
         isAnimating = true;
+
+        // Play chest sound only when opening is actually triggered.
+        if (SoundEffectsManager.Instance != null)
+        {
+            SoundEffectsManager.Instance.PlaySound("chest");
+        }
         
         // Start the opening animation directly by name
         if (chestAnimator != null)

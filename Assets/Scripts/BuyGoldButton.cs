@@ -4,7 +4,9 @@ using UnityEngine.UI;
 /// <summary>
 /// Add this to any "Buy Gold" button. Set diamondCost and goldAmount in the Inspector
 /// (or use multiple instances for different packs). Purchase logic is in ShopManager.
+/// Awake order is after ShopManager so scroll listeners on the same button run first.
 /// </summary>
+[DefaultExecutionOrder(50)]
 public class BuyGoldButton : MonoBehaviour
 {
     [Header("Pack")]

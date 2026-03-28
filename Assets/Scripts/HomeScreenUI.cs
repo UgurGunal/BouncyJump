@@ -7,12 +7,20 @@ public class HomeScreenUI : MonoBehaviour
     [Header("UI Elements")]
     public Button playButton;
     public Button settingsButton;
+    [Tooltip("Panel shown when Settings is pressed. Assign your settings root GameObject; keep it disabled in the scene if it should start hidden.")]
+    public GameObject settingsPanel;
+    [Tooltip("Optional: close button on the settings panel. You can also leave this empty and use the Button’s On Click → HomeScreenUI.CloseSettingsPanel.")]
+    public Button settingsCloseButton;
     public Button shopButton;
     public Button buyDiamondButton;
     public Button buyGoldButton;
 
     [Header("Shop Integration")]
     public ShopManager shopManager;
+    [Tooltip("Scroll amount: positive = how far down to scroll (e.g. 2450), OR use negative for exact Content anchored Y (e.g. -2450).")]
+    public float buyGoldShopContentAnchoredY;
+    [Tooltip("Scroll amount: positive = how far down to scroll, or negative = exact Content Y.")]
+    public float buyDiamondShopContentAnchoredY;
     
     [Header("Tower Integration")]
     public TowerManager towerManager;
@@ -29,22 +37,20 @@ public class HomeScreenUI : MonoBehaviour
         {
             settingsButton.onClick.AddListener(OnSettingsButtonClick);
         }
+
+        if (settingsCloseButton != null)
+            settingsCloseButton.onClick.AddListener(OnSettingsCloseClick);
         
         if (shopButton != null)
         {
             shopButton.onClick.AddListener(OnShopButtonClick);
         }
         
-        // Buy diamond / buy gold shortcuts only open the shop for now (same as shop button).
         if (buyDiamondButton != null)
-        {
-            buyDiamondButton.onClick.AddListener(OnShopButtonClick);
-        }
+            buyDiamondButton.onClick.AddListener(OnBuyDiamondShopClick);
 
         if (buyGoldButton != null)
-        {
-            buyGoldButton.onClick.AddListener(OnShopButtonClick);
-        }
+            buyGoldButton.onClick.AddListener(OnBuyGoldShopClick);
 
         // Initialize managers if not assigned (search inactive so we find manager on disabled shop panel)
         if (shopManager == null)
@@ -101,8 +107,22 @@ public class HomeScreenUI : MonoBehaviour
 
     void OnSettingsButtonClick()
     {
-        Debug.Log("Settings button clicked - TODO: Implement settings panel");
-        // TODO: Implement settings (audio, etc.)
+        if (settingsPanel != null)
+            settingsPanel.SetActive(true);
+        else
+            Debug.LogWarning("HomeScreenUI: Assign Settings Panel to show the settings menu.");
+    }
+
+    void OnSettingsCloseClick()
+    {
+        CloseSettingsPanel();
+    }
+
+    /// <summary>Hides the settings panel. Safe to call from the close button’s On Click () in the Inspector.</summary>
+    public void CloseSettingsPanel()
+    {
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
     }
 
     void OnShopButtonClick()
@@ -117,6 +137,26 @@ public class HomeScreenUI : MonoBehaviour
         {
             Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
         }
+    }
+
+    void OnBuyGoldShopClick()
+    {
+        if (shopManager == null)
+        {
+            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
+            return;
+        }
+        shopManager.OpenShop(buyGoldShopContentAnchoredY);
+    }
+
+    void OnBuyDiamondShopClick()
+    {
+        if (shopManager == null)
+        {
+            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
+            return;
+        }
+        shopManager.OpenShop(buyDiamondShopContentAnchoredY);
     }
 
     // Mock amount for IAP path (replace with real purchase payload when ready).

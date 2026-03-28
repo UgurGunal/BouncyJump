@@ -24,11 +24,18 @@ public class Platform : MonoBehaviour
     [Header("Audio")]
     [Tooltip("If true, play the bouncy platform sound instead of the normal platform sound when the player jumps on this platform.")]
     public bool isBouncyPlatform = false;
+    [Tooltip("If true, play anvil sound when the player collides with this platform from below.")]
+    public bool isAnvil = false;
+    [Tooltip("Optional: only this collider can trigger anvil audio. Leave empty to allow any collider on this platform.")]
+    public Collider2D anvilAudioCollider;
+    [Tooltip("Minimum time between anvil sound plays to avoid duplicate triggers from multi-collider contact.")]
+    public float anvilSoundCooldown = 0.08f;
 
     private Transform playerTransform;
     private bool isDestroying = false;
     private float destroyTimer;
     private Vector3 originalPosition;
+    private float lastAnvilSoundTime = -999f;
 
     private void Start()
     {
@@ -115,6 +122,8 @@ public class Platform : MonoBehaviour
 
     private void HandleJump(PlayerBallController player, Rigidbody2D rb, Collision2D collision)
     {
+        TryPlayAnvilCollision(rb, collision);
+
         // Simplified and more reliable detection
         bool isOnTop = false;
 
@@ -175,6 +184,41 @@ public class Platform : MonoBehaviour
 
             //Debug.Log($"Jump Applied - Force: {totalJumpForce:F2}, Base: {jumpForce:F2}, Bonus: {jumpBonus:F2}, RelativeVelocity: {relativeVelocity:F2}");
         }
+    }
+
+    private void TryPlayAnvilCollision(Rigidbody2D rb, Collision2D collision)
+    {
+        if (!isAnvil || SoundEffectsManager.Instance == null)
+            return;
+
+        if (Time.time - lastAnvilSoundTime < anvilSoundCooldown)
+            return;
+
+        if (!IsAllowedAnvilAudioCollider(collision))
+            return;
+
+        SoundEffectsManager.Instance.PlaySound("anvil");
+        lastAnvilSoundTime = Time.time;
+    }
+
+    private bool IsAllowedAnvilAudioCollider(Collision2D collision)
+    {
+        // If no specific collider is chosen, allow any collider on this platform.
+        if (anvilAudioCollider == null)
+            return true;
+
+        // On this callback, otherCollider is the collider that belongs to this platform.
+        if (collision.otherCollider == anvilAudioCollider)
+            return true;
+
+        // Fallback through contact points for edge cases with compound colliders.
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.otherCollider == anvilAudioCollider)
+                return true;
+        }
+
+        return false;
     }
 
     private void IncrementPlatformCombo(float relativeVelocity)

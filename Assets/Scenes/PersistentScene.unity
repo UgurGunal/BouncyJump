@@ -10273,6 +10273,8 @@ MonoBehaviour:
   wallClip: {fileID: 8300000, guid: 602a298f66c54014a9497fdd67d11d8d, type: 3}
   coinClip: {fileID: 8300000, guid: e3630469ad65a3142b5227dd5780a6f2, type: 3}
   bouncyPlatformClip: {fileID: 8300000, guid: 2000eb60c86d3aa42a757ba5459da9ee, type: 3}
+  anvilClip: {fileID: 8300000, guid: da861feca949f9a43b4c1a6464a21f17, type: 3}
+  chestClip: {fileID: 8300000, guid: 05bd3052a04c1834c896925724e61290, type: 3}
   diamondClip: {fileID: 8300000, guid: 8c3a55ecee8ca7e4983bcffb842044e5, type: 3}
   endgameCountdownClip: {fileID: 8300000, guid: fc6986a39dd2d124b89b22272a1162f7, type: 3}
   coinPitchBase: 1
