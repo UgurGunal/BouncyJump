@@ -24,10 +24,21 @@ public class RevivePanelUI : MonoBehaviour
     private PlayerBallController _playerController;
     private CameraFollow _cameraFollow;
     private float _currentCountdownTime;
+    private bool _countdownPausedForAd;
+    private UnityRewardedAdsManager _adsEventsSource;
+
+    /// <summary>No Inspector reference needed: <see cref="UnityRewardedAdsManager"/> registers itself as <c>Instance</c> in Awake (singleton).</summary>
+    static UnityRewardedAdsManager Ads => UnityRewardedAdsManager.Instance;
 
     void Awake()
     {
         panelObject.SetActive(false);
+    }
+
+    static string RevivePlacementId()
+    {
+        var mgr = Ads;
+        return mgr != null ? mgr.GetReviveRewardedAdUnitId() : "";
     }
 
     void Start()
@@ -44,9 +55,14 @@ public class RevivePanelUI : MonoBehaviour
             return;
         }
 
-        pay3DiamondButton.onClick.AddListener(OnPay3DiamondClick);
-        watchAdButton.onClick.AddListener(OnWatchAdClick);
-        quitButton.onClick.AddListener(OnQuitClick);
+        if (pay3DiamondButton != null)
+            pay3DiamondButton.onClick.AddListener(OnPay3DiamondClick);
+        if (watchAdButton != null)
+            watchAdButton.onClick.AddListener(OnWatchAdClick);
+        if (quitButton != null)
+            quitButton.onClick.AddListener(OnQuitClick);
+
+        EnsureRewardedAdsEventsSubscribed();
 
         _playerController = FindObjectOfType<PlayerBallController>();
         _cameraFollow = FindObjectOfType<CameraFollow>();
@@ -60,8 +76,116 @@ public class RevivePanelUI : MonoBehaviour
         StartCoroutine(ScaleAnimation());
         
         _currentCountdownTime = reviveCountdownDuration;
+        _countdownPausedForAd = false;
         UpdateDiamondButtonState();
+        PrepareReviveRewardedAd();
+        RefreshWatchAdButtonState();
         StartCoroutine(CountdownCoroutine());
+        StartCoroutine(EnsureWatchAdReadyWhilePanelOpenRoutine());
+    }
+
+    /// <summary>Waits for singleton manager, init, and ad load — fixes inactive button when init or load finishes after the panel opens.</summary>
+    IEnumerator EnsureWatchAdReadyWhilePanelOpenRoutine()
+    {
+        float wait = 0f;
+        while (Ads == null && wait < 20f)
+        {
+            wait += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (Ads == null)
+        {
+            Debug.LogWarning("RevivePanelUI: No UnityRewardedAdsManager found. Add it to Home (DDOL) or duplicate in this scene. Watch-ad stays disabled.");
+            RefreshWatchAdButtonState();
+            yield break;
+        }
+
+        EnsureRewardedAdsEventsSubscribed();
+
+        wait = 0f;
+        while (!Ads.IsInitialized && wait < 45f && panelObject.activeInHierarchy)
+        {
+            wait += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (!Ads.IsInitialized)
+        {
+            Debug.LogWarning("RevivePanelUI: Unity Ads did not finish initializing. Check Game IDs on UnityRewardedAdsManager.");
+            RefreshWatchAdButtonState();
+            yield break;
+        }
+
+        string placement = RevivePlacementId();
+        if (string.IsNullOrEmpty(placement))
+        {
+            RefreshWatchAdButtonState();
+            yield break;
+        }
+
+        Ads.LoadPlacement(placement);
+
+        wait = 0f;
+        while (!Ads.IsPlacementReady(placement) && wait < 30f && panelObject.activeInHierarchy)
+        {
+            wait += Time.unscaledDeltaTime;
+            RefreshWatchAdButtonState();
+            yield return null;
+        }
+
+        RefreshWatchAdButtonState();
+    }
+
+    void EnsureRewardedAdsEventsSubscribed()
+    {
+        var mgr = Ads;
+        if (mgr == null)
+            return;
+        if (_adsEventsSource == mgr)
+            return;
+        if (_adsEventsSource != null)
+            _adsEventsSource.PlacementBecameReady -= OnRewardedPlacementReady;
+        _adsEventsSource = mgr;
+        _adsEventsSource.PlacementBecameReady += OnRewardedPlacementReady;
+    }
+
+    void OnDestroy()
+    {
+        if (_adsEventsSource != null)
+        {
+            _adsEventsSource.PlacementBecameReady -= OnRewardedPlacementReady;
+            _adsEventsSource = null;
+        }
+    }
+
+    void OnRewardedPlacementReady(string adUnitId)
+    {
+        if (adUnitId != RevivePlacementId())
+            return;
+        RefreshWatchAdButtonState();
+    }
+
+    void PrepareReviveRewardedAd()
+    {
+        EnsureRewardedAdsEventsSubscribed();
+        var mgr = Ads;
+        if (mgr == null || !mgr.IsInitialized)
+            return;
+        string placement = RevivePlacementId();
+        if (string.IsNullOrEmpty(placement))
+            return;
+        mgr.LoadPlacement(placement);
+    }
+
+    void RefreshWatchAdButtonState()
+    {
+        if (watchAdButton == null)
+            return;
+        var mgr = Ads;
+        string placement = RevivePlacementId();
+        bool ready = mgr != null && !string.IsNullOrEmpty(placement) && mgr.IsPlacementReady(placement);
+        watchAdButton.interactable = ready && !_countdownPausedForAd;
     }
 
     private IEnumerator ScaleAnimation()
@@ -88,6 +212,7 @@ public class RevivePanelUI : MonoBehaviour
 
     void HideRevivePanel()
     {
+        _countdownPausedForAd = false;
         panelObject.SetActive(false);
         StopAllCoroutines();
     }
@@ -105,6 +230,9 @@ public class RevivePanelUI : MonoBehaviour
     {
         while (_currentCountdownTime > 0)
         {
+            while (_countdownPausedForAd)
+                yield return null;
+
             _currentCountdownTime -= Time.unscaledDeltaTime;
             if (countdownSlider != null)
             { 
@@ -127,8 +255,31 @@ public class RevivePanelUI : MonoBehaviour
 
     void OnWatchAdClick()
     {
-        HideRevivePanel();
-        StartCoroutine(ReviveCountdown());
+        var mgr = Ads;
+        string placement = RevivePlacementId();
+        if (mgr == null || string.IsNullOrEmpty(placement) || !mgr.IsPlacementReady(placement))
+        {
+            Debug.Log("RevivePanelUI: Rewarded ad not ready.");
+            return;
+        }
+
+        _countdownPausedForAd = true;
+        RefreshWatchAdButtonState();
+
+        mgr.ShowRewarded(placement, OnReviveRewardedAdFinished);
+    }
+
+    void OnReviveRewardedAdFinished(bool userEarnedReward)
+    {
+        _countdownPausedForAd = false;
+        UpdateDiamondButtonState();
+        RefreshWatchAdButtonState();
+
+        if (userEarnedReward)
+        {
+            HideRevivePanel();
+            StartCoroutine(ReviveCountdown());
+        }
     }
 
     void OnQuitClick()
