@@ -151,6 +151,8 @@ public class UnityRewardedAdsManager : MonoBehaviour,
     public void OnInitializationComplete()
     {
         _initialized = true;
+        LoadPlacement(GetShopRewardedAdUnitId());
+        LoadPlacement(GetReviveRewardedAdUnitId());
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

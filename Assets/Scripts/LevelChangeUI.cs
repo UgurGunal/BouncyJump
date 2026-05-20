@@ -40,16 +40,21 @@ public class LevelChangeUI : MonoBehaviour
 
     public void ShowLevelChange(int level)
     {
-        StopAllCoroutines();
-        StartCoroutine(AnimateLevelChange(level));
+        ShowLevelChange(level, Color.white);
     }
 
-    private IEnumerator AnimateLevelChange(int level)
+    public void ShowLevelChange(int level, Color textColor)
     {
-        // Set the text
+        StopAllCoroutines();
+        StartCoroutine(AnimateLevelChange(level, textColor));
+    }
+
+    private IEnumerator AnimateLevelChange(int level, Color textColor)
+    {
         if (levelText != null)
         {
             levelText.text = string.Format(levelTextFormat, level);
+            SetLevelTextAlpha(textColor, 0f);
         }
 
         // Fade in
@@ -59,13 +64,13 @@ public class LevelChangeUI : MonoBehaviour
             while (elapsedTime < fadeInDuration)
             {
                 elapsedTime += Time.deltaTime;
-                levelText.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeInDuration);
+                float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeInDuration);
+                SetLevelTextAlpha(textColor, alpha);
                 yield return null;
             }
-            levelText.alpha = 1f;
+            SetLevelTextAlpha(textColor, 1f);
         }
 
-        // Display duration
         yield return new WaitForSeconds(displayDuration);
 
         // Fade out
@@ -75,10 +80,17 @@ public class LevelChangeUI : MonoBehaviour
             while (elapsedTime < fadeOutDuration)
             {
                 elapsedTime += Time.deltaTime;
-                levelText.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeOutDuration);
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeOutDuration);
+                SetLevelTextAlpha(textColor, alpha);
                 yield return null;
             }
-            levelText.alpha = 0f;
+            SetLevelTextAlpha(textColor, 0f);
         }
+    }
+
+    void SetLevelTextAlpha(Color rgb, float alpha)
+    {
+        if (levelText == null) return;
+        levelText.color = new Color(rgb.r, rgb.g, rgb.b, alpha);
     }
 }

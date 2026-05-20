@@ -105,6 +105,8 @@ public class HomeScreenUI : MonoBehaviour
             
             try
             {
+                // Ensure PersistentScene reloads after returning from Home (avoids stale load flag).
+                PersistentLoader.ResetForRestart();
                 SceneManager.LoadScene(sceneToLoad);
             }
             catch (System.Exception e)

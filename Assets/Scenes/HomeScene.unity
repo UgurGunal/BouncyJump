@@ -27734,8 +27734,8 @@ MonoBehaviour:
   testMode: 1
   androidShopRewardedAdUnitId: Rewarded_Android
   iOSShopRewardedAdUnitId: Rewarded_iOS
-  androidReviveRewardedAdUnitId: Rewarded_Revive_Android
-  iOSReviveRewardedAdUnitId: Rewarded_Revive_iOS
+  androidReviveRewardedAdUnitId: Revive_Android
+  iOSReviveRewardedAdUnitId: Revive_iOS
 --- !u!4 &1676533785
 Transform:
   m_ObjectHideFlags: 0

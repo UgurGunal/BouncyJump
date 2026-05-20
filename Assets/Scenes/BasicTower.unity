@@ -1002,6 +1002,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.75
+    levelChangeTextColor: {r: 0.68943393, g: 0.84701884, b: 0.98490566, a: 1}
   - cameraSpeed: 3
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 9f22275646b175b40a61bb9d3cb60c5d, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 4d0c0687d55d51342bfff84282b69c97, type: 3}
@@ -1017,6 +1018,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.65
+    levelChangeTextColor: {r: 0.49236736, g: 0.97735846, b: 0.94292116, a: 1}
   - cameraSpeed: 3.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 92d7d0fae1eb4f0409c923e5e7842c33, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: dfcc21364b3ac0846908ef2fa04e1953, type: 3}
@@ -1032,6 +1034,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.006
     emptySpawnRate: 0.62
+    levelChangeTextColor: {r: 1, g: 0.8969003, b: 0.51886785, a: 1}
   - cameraSpeed: 3.8
     longPlatformPrefab: {fileID: 6595305194927341745, guid: b7111518dc659ac4697f060aac3f8ac9, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: a049950fafe759d4aaaafc3d45f2f7cf, type: 3}
@@ -1047,6 +1050,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.007
     emptySpawnRate: 0.56
+    levelChangeTextColor: {r: 0.610388, g: 0.97735846, b: 0.7370802, a: 1}
 --- !u!1 &2125827021
 GameObject:
   m_ObjectHideFlags: 0

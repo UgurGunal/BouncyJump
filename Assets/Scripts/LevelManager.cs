@@ -58,6 +58,10 @@ public class LevelManager : MonoBehaviour
         public float powerupSpawnRate = 1f;
         public float diamondSpawnRate = 1f;
         public float emptySpawnRate = 5f;
+
+        [Header("Level Change UI")]
+        [Tooltip("Color of the brief LEVEL text shown when entering this level.")]
+        public Color levelChangeTextColor = Color.white;
     }
 
     public LevelData[] levels;
@@ -225,7 +229,7 @@ public class LevelManager : MonoBehaviour
         // Show level change UI
         if (LevelChangeUI.Instance != null)
         {
-            LevelChangeUI.Instance.ShowLevelChange(level);
+            LevelChangeUI.Instance.ShowLevelChange(level, levelData.levelChangeTextColor);
         }
         
         Debug.Log($"Level changed to {level}, Camera speed: {levelData.cameraSpeed}");

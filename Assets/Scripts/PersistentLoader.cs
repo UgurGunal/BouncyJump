@@ -9,93 +9,109 @@ public class PersistentLoader : MonoBehaviour
     [Header("Auto-load Settings")]
     public bool autoLoad = true;
     
-    private static bool gameManagersLoaded = false;
+    private static string persistentSceneName;
+    private static bool loadInProgress;
 
     void Awake()
     {
+        persistentSceneName = gamePersistentScene;
         if (autoLoad)
-        {
             LoadRequiredScenes();
-        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneUnloaded += HandleSceneUnloaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneUnloaded -= HandleSceneUnloaded;
     }
 
     void Start()
     {
-        // Ensure scenes are loaded even if Awake didn't run
         if (autoLoad)
-        {
             LoadRequiredScenes();
+    }
+
+    void HandleSceneUnloaded(Scene scene)
+    {
+        if (!string.IsNullOrEmpty(persistentSceneName) && scene.name == persistentSceneName)
+        {
+            loadInProgress = false;
+            Debug.Log($"[PersistentLoader] Persistent scene unloaded: {persistentSceneName}");
         }
     }
 
     public void LoadRequiredScenes()
     {
-        // Since this script only exists in game scenes, always load game persistent scene
         LoadGamePersistentScene();
     }
 
-
-
-
-
     void LoadGamePersistentScene()
     {
-        if (!gameManagersLoaded && !string.IsNullOrEmpty(gamePersistentScene))
+        if (string.IsNullOrEmpty(gamePersistentScene))
+            return;
+
+        persistentSceneName = gamePersistentScene;
+        Scene gameScene = SceneManager.GetSceneByName(gamePersistentScene);
+        if (gameScene.isLoaded)
+            return;
+
+        if (loadInProgress)
+            return;
+
+        loadInProgress = true;
+        Debug.Log($"[PersistentLoader] Loading game persistent scene: {gamePersistentScene}");
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(gamePersistentScene, LoadSceneMode.Additive);
+        loadOp.completed += _ =>
         {
-            Scene gameScene = SceneManager.GetSceneByName(gamePersistentScene);
-            if (!gameScene.isLoaded)
-            {
-                Debug.Log($"[PersistentLoader] Loading game persistent scene: {gamePersistentScene}");
-                SceneManager.LoadSceneAsync(gamePersistentScene, LoadSceneMode.Additive);
-                gameManagersLoaded = true;
-            }
-            else
-            {
-                Debug.Log($"[PersistentLoader] Game persistent scene {gamePersistentScene} already loaded");
-                gameManagersLoaded = true;
-            }
-        }
+            loadInProgress = false;
+            Debug.Log($"[PersistentLoader] Game persistent scene loaded: {gamePersistentScene}");
+        };
     }
 
     void UnloadGamePersistentScene()
     {
-        if (gameManagersLoaded && !string.IsNullOrEmpty(gamePersistentScene))
+        if (string.IsNullOrEmpty(gamePersistentScene))
+            return;
+
+        Scene gameScene = SceneManager.GetSceneByName(gamePersistentScene);
+        if (gameScene.isLoaded)
         {
-            Scene gameScene = SceneManager.GetSceneByName(gamePersistentScene);
-            if (gameScene.isLoaded)
-            {
-                Debug.Log($"[PersistentLoader] Unloading game persistent scene: {gamePersistentScene}");
-                SceneManager.UnloadSceneAsync(gamePersistentScene);
-                gameManagersLoaded = false;
-            }
+            Debug.Log($"[PersistentLoader] Unloading game persistent scene: {gamePersistentScene}");
+            SceneManager.UnloadSceneAsync(gamePersistentScene);
         }
     }
 
-    // Reset flags when application starts (for editor testing)
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void ResetStaticData()
     {
-        gameManagersLoaded = false;
+        persistentSceneName = null;
+        loadInProgress = false;
     }
 
-    // Public method to check status
     public static bool AreGameManagersLoaded()
     {
-        return gameManagersLoaded;
+        if (string.IsNullOrEmpty(persistentSceneName))
+            return false;
+
+        Scene gameScene = SceneManager.GetSceneByName(persistentSceneName);
+        return gameScene.isLoaded;
     }
     
-    // Public method to reset for scene restart
     public static void ResetForRestart()
     {
-        gameManagersLoaded = false;
-        Debug.Log("[PersistentLoader] Reset for scene restart - GamePersistentScene will be reloaded");
+        loadInProgress = false;
+        Debug.Log("[PersistentLoader] Reset for restart — persistent scene will load again on next tower scene");
     }
 
     // Manual control methods
     [ContextMenu("Force Load Game Persistent Scene")]
     public void ForceLoadGamePersistentScene()
     {
-        gameManagersLoaded = false;
+        loadInProgress = false;
         LoadRequiredScenes();
     }
 
@@ -110,7 +126,7 @@ public class PersistentLoader : MonoBehaviour
     {
         Debug.Log($"=== PERSISTENT LOADER DEBUG ===");
         Debug.Log($"Current Scene: {SceneManager.GetActiveScene().name}");
-        Debug.Log($"Game Managers Loaded: {gameManagersLoaded}");
+        Debug.Log($"Game Managers Loaded: {AreGameManagersLoaded()}");
         Debug.Log($"Loaded Scenes: {SceneManager.sceneCount}");
         
         for (int i = 0; i < SceneManager.sceneCount; i++)
