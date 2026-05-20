@@ -91,13 +91,14 @@ public class SimpleTowerGenerator : MonoBehaviour
     
     System.Collections.IEnumerator InitializeAfterTowerSceneLoaded()
     {
-        // Wait a moment for tower scene to fully load
-        yield return new WaitForSeconds(0.1f);
-        
-        // Auto-find references
+        float waitStart = Time.realtimeSinceStartup;
+        while (LevelManager.Instance == null && Time.realtimeSinceStartup - waitStart < 5f)
+            yield return null;
+
+        yield return new WaitForEndOfFrame();
+
         FindRequiredReferences();
-        
-        // Check if we have everything we need
+
         if (player == null || levelManager == null)
         {
             Debug.LogError("SimpleTowerGenerator: Missing required references after auto-find");
@@ -114,7 +115,7 @@ public class SimpleTowerGenerator : MonoBehaviour
         labelPool = new PrefabObjectPool(poolInactiveRoot, ReleaseLabelToPool);
         collectablePool = new PrefabObjectPool(poolInactiveRoot, ReleaseCollectableToPool);
 
-        InitializeHeightLabelState();
+        RefreshHeightLabelState();
         
         Debug.Log("[SimpleTowerGenerator] Initialization complete, starting content generation");
         
@@ -157,11 +158,11 @@ public class SimpleTowerGenerator : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-        if (levelManager == null)
+        if (levelManager == null || levelManager != LevelManager.Instance)
         {
-            // During scene transitions/singleton reinitialization, LevelManager may be momentarily missing.
             levelManager = LevelManager.Instance;
             if (levelManager == null) return;
+            RefreshHeightLabelState();
         }
 
         // Check for level change
@@ -372,7 +373,7 @@ public class SimpleTowerGenerator : MonoBehaviour
         collectablePool.Return(prefab, instance);
     }
 
-    void InitializeHeightLabelState()
+    void RefreshHeightLabelState()
     {
         heightLabelsSpawned = 0;
         maxHeightLabels = 0;
@@ -399,18 +400,19 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab)) return;
 
-        GameObject label = labelPool.Get(labelPrefab, platform.transform);
+        GameObject label = labelPool.Get(labelPrefab, generatedObjectsParent);
         if (label == null) return;
 
         if (label.GetComponent<HeightLabelMarker>() == null)
             label.AddComponent<HeightLabelMarker>();
 
         label.transform.localRotation = Quaternion.identity;
-        label.transform.localPosition = Vector3.zero;
+        label.transform.localScale = Vector3.one;
 
         Bounds platformBounds = GetPlatformBounds(platform);
         float labelCenterY = platformBounds.min.y + levelManager.heightLabelYOffset;
 
+        SpriteRenderer platformRenderer = platform.GetComponent<SpriteRenderer>();
         SpriteRenderer labelRenderer = label.GetComponent<SpriteRenderer>();
         if (labelRenderer != null)
             labelCenterY += labelRenderer.bounds.extents.y;
@@ -420,23 +422,37 @@ public class SimpleTowerGenerator : MonoBehaviour
         float platformX = platformBounds.center.x;
         float labelX = levelManager.GetClampedHeightLabelX(platformX);
 
-        label.transform.position = new Vector3(
+        Vector3 labelWorldPosition = new Vector3(
             labelX,
             labelCenterY,
             platform.transform.position.z);
+
+        label.transform.position = labelWorldPosition;
+        label.transform.SetParent(platform.transform, worldPositionStays: true);
+
+        if (labelRenderer != null)
+        {
+            if (platformRenderer != null)
+            {
+                labelRenderer.sortingLayerID = platformRenderer.sortingLayerID;
+                labelRenderer.sortingOrder = platformRenderer.sortingOrder + 2;
+            }
+            else
+                labelRenderer.sortingOrder = 3;
+        }
     }
 
     static Bounds GetPlatformBounds(GameObject platform)
     {
         Collider2D collider = platform.GetComponent<Collider2D>();
-        if (collider != null)
+        if (collider != null && collider.enabled)
             return collider.bounds;
 
         SpriteRenderer spriteRenderer = platform.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        if (spriteRenderer != null && spriteRenderer.enabled)
             return spriteRenderer.bounds;
 
-        return new Bounds(platform.transform.position, Vector3.zero);
+        return new Bounds(platform.transform.position, new Vector3(2f, 0.5f, 0f));
     }
 
     void SpawnCollectable(float xPosition, float yPosition, GameObject collectablePrefab)
