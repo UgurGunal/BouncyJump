@@ -1,0 +1,1557 @@
+fileFormatVersion: 2
+guid: 4979e5429bb81fa4694969f1d25fdcd4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 140
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tower2-AllSprites_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 11
+        width: 290
+        height: 2026
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82dfbe7c9a8f6f3469e44fd7c1d84da7
+      internalID: 18942051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_1
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 5
+        width: 587
+        height: 2038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9376f06e182d79f4d9f6eee0a1661e17
+      internalID: 32521455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_2
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 15
+        width: 150
+        height: 2022
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b3d65c649c8e2442b17a37f1824876b
+      internalID: -1560399721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_3
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1912
+        width: 307
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31397f167b8888b4ea7bd336e70f3fb8
+      internalID: -150924056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_4
+      rect:
+        serializedVersion: 2
+        x: 1517
+        y: 1912
+        width: 221
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6df45688fe14ea46b062c119db809a0
+      internalID: 1092167629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_5
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 1827
+        width: 310
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e75b12869fcc8f48b8d698f3836057a
+      internalID: 375852773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_6
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 1824
+        width: 227
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c37d8fab28097c4692e3383c6ac4852
+      internalID: 924826932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_7
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 1727
+        width: 308
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6dcb20c8e8c8ba4196233a72b2cb47c
+      internalID: -1164518800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_8
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 1727
+        width: 248
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c85c5caf10e8fe43999ef8f0660bccd
+      internalID: 846106656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_9
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1629
+        width: 319
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3c693aa94a4ff46883010cb521605b
+      internalID: 134443378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_10
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1629
+        width: 257
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b4f3a791801db4ca4731558fccbfea
+      internalID: 52560774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_11
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 1541
+        width: 329
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 710f62a28dd9fe54eac5c19181657341
+      internalID: 1469132861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_12
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 1544
+        width: 257
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 706ded89197106645af8bb9e3997ed36
+      internalID: 1805809704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_13
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 1333
+        width: 618
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 861bdedb4c496d241909aabd8985df6e
+      internalID: 1946317105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_14
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 1189
+        width: 638
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39a10d6a8f5964498f9864cbdf58b91
+      internalID: -565221337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_15
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 1084
+        width: 155
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803b0ae402c300b4ba9eae06950b504c
+      internalID: 222544894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_16
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 1070
+        width: 143
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6821f4a5e9a9ae4eb2cf00293cd1449
+      internalID: -2057851112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_17
+      rect:
+        serializedVersion: 2
+        x: 1484
+        y: 1070
+        width: 143
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1de318fd6c0093b46bab66a38cf368f2
+      internalID: 1762901341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_18
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 1084
+        width: 155
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c18c97e53aa5e1c489feba98d5b1eeb7
+      internalID: -918655486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_19
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 1084
+        width: 155
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53765bec265c2da4a96b3fb2012074a5
+      internalID: 1715718617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_20
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 986
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26d8602068373b4ba137fa2a8f2ee0d
+      internalID: 2038023468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_21
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 986
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8863c214f29968548b5067ffa47d4f4e
+      internalID: 915907853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_22
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 986
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 870fac8a57933c14b8b9a213c7910b3f
+      internalID: 748261862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_23
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 986
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1145eb8cee4d7c942867dfadd633e4e8
+      internalID: 1052753660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_24
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 986
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49de698bb23534545a6cf3bb1dbb8848
+      internalID: 1346269919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_25
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 902
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70f4bcaf4d9412741a79db74ce103d1f
+      internalID: 682052502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_26
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 902
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3610d9f6f8a2fe04783dd9837e1622ba
+      internalID: 2079150148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_27
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 902
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f072da62076b2b6409d32493d9f80649
+      internalID: -1222846266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_28
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 902
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5211bb899d1aedf40b98161782744097
+      internalID: -39185440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_29
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 902
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b615dd3b945961c43ae3441124c21bd0
+      internalID: 1484934059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_30
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 818
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e96638b687023346b4cabd11462a436
+      internalID: 1025924097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_31
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 818
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a85edc60348314468a86b44da4f027e
+      internalID: 1936652275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_32
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 818
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1941b2cb8a0468045ae1c2cf9729bc3a
+      internalID: -898080323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_33
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 818
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a575cb1df2b7a9d4495db5aff9ae4c1a
+      internalID: -422915274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_34
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 818
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e0ce4e5f957e9b4a9971be1fc355f09
+      internalID: 127610740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_35
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 720
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a8fc7b8b6627242b0c481a4878fb7c
+      internalID: 185918265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_36
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 720
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e760aef0b84abc46a742545037c8b7b
+      internalID: 1858212238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_37
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 720
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebae0871104958042849c8b1a3f5f9c0
+      internalID: 1066644127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_38
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 720
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0080f2fc21221614fa3426903423760d
+      internalID: -179289278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_39
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 720
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36f7dbbc11120b418c0a710708aaaa4
+      internalID: -1020564912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_40
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 622
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e166e82810519a8419ed0b12a7509325
+      internalID: 1773548600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_41
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 622
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e1076f3173582c47b140600793bf147
+      internalID: 1072055485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_42
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 622
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14395b699843dea41b5847c252e4df9c
+      internalID: 167930020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_43
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 622
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdbf5db2f3f3dd941b86549d860cfd3c
+      internalID: 1549645237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_44
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 622
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9709317cf6141374daa5efa62eb4bc79
+      internalID: 1032148033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_45
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 524
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5453a4dff06b4b24c9dc524a9c238684
+      internalID: 614449643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_46
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 524
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0701090f9e02c43b8e8e854f9fd4ce
+      internalID: 1156639456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_47
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 524
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f78ecece9b8f584daabb67927c768e0
+      internalID: -81636540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_48
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 524
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56dd3b120c8256c42a0973a83e939204
+      internalID: 1016303072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_49
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 524
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46e90f8a1d7bcf447851937893ea13a7
+      internalID: -1856424585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_50
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 426
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600a8f53521233a4caf6b97d39ff9fb9
+      internalID: -102588812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_51
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 426
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46d7efe02b606e4088b891aedb6caf9
+      internalID: 1110243013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_52
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 426
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 241195fd41e5b5f47803681d5874c4e9
+      internalID: 22330296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_53
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 426
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d59ca5d8c6cd24f8113e69a68c16ca
+      internalID: -1223768285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_54
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 426
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90803e38bec7bd64a86b64d0ba377124
+      internalID: -1501540297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_55
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 328
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 337c08a4dea618548b423d17b2ff8d66
+      internalID: 1921414569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_56
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 328
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd51458bc43827c4690e4ac30d99b573
+      internalID: 1719611153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_57
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 328
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b5f68bf8681e742a0d0d012b9daf40
+      internalID: 1075348879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_58
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 328
+        width: 137
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ed79c9484d17d14f8b7d36adf7e85ee
+      internalID: 764218627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_59
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 328
+        width: 137
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f7432316561b141aee5c5ee576e12c
+      internalID: -489845670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_60
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 230
+        width: 163
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c277e16716496c4ba7b8443c547ff12
+      internalID: -1290949920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_61
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 230
+        width: 163
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b25ee6769c7f004f9a1f8ce942234e9
+      internalID: -904487140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_62
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 230
+        width: 163
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e182fe42503d14eaa61312226b48eb
+      internalID: 1200664554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_63
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 230
+        width: 163
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64525e8aac7cd1b48ac1d75762f4b207
+      internalID: -1220530422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower2-AllSprites_64
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 230
+        width: 163
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915123eb39332844aa298d6a5a37fe8f
+      internalID: -2133009727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Tower2-AllSprites_0: 18942051
+      Tower2-AllSprites_1: 32521455
+      Tower2-AllSprites_10: 52560774
+      Tower2-AllSprites_11: 1469132861
+      Tower2-AllSprites_12: 1805809704
+      Tower2-AllSprites_13: 1946317105
+      Tower2-AllSprites_14: -565221337
+      Tower2-AllSprites_15: 222544894
+      Tower2-AllSprites_16: -2057851112
+      Tower2-AllSprites_17: 1762901341
+      Tower2-AllSprites_18: -918655486
+      Tower2-AllSprites_19: 1715718617
+      Tower2-AllSprites_2: -1560399721
+      Tower2-AllSprites_20: 2038023468
+      Tower2-AllSprites_21: 915907853
+      Tower2-AllSprites_22: 748261862
+      Tower2-AllSprites_23: 1052753660
+      Tower2-AllSprites_24: 1346269919
+      Tower2-AllSprites_25: 682052502
+      Tower2-AllSprites_26: 2079150148
+      Tower2-AllSprites_27: -1222846266
+      Tower2-AllSprites_28: -39185440
+      Tower2-AllSprites_29: 1484934059
+      Tower2-AllSprites_3: -150924056
+      Tower2-AllSprites_30: 1025924097
+      Tower2-AllSprites_31: 1936652275
+      Tower2-AllSprites_32: -898080323
+      Tower2-AllSprites_33: -422915274
+      Tower2-AllSprites_34: 127610740
+      Tower2-AllSprites_35: 185918265
+      Tower2-AllSprites_36: 1858212238
+      Tower2-AllSprites_37: 1066644127
+      Tower2-AllSprites_38: -179289278
+      Tower2-AllSprites_39: -1020564912
+      Tower2-AllSprites_4: 1092167629
+      Tower2-AllSprites_40: 1773548600
+      Tower2-AllSprites_41: 1072055485
+      Tower2-AllSprites_42: 167930020
+      Tower2-AllSprites_43: 1549645237
+      Tower2-AllSprites_44: 1032148033
+      Tower2-AllSprites_45: 614449643
+      Tower2-AllSprites_46: 1156639456
+      Tower2-AllSprites_47: -81636540
+      Tower2-AllSprites_48: 1016303072
+      Tower2-AllSprites_49: -1856424585
+      Tower2-AllSprites_5: 375852773
+      Tower2-AllSprites_50: -102588812
+      Tower2-AllSprites_51: 1110243013
+      Tower2-AllSprites_52: 22330296
+      Tower2-AllSprites_53: -1223768285
+      Tower2-AllSprites_54: -1501540297
+      Tower2-AllSprites_55: 1921414569
+      Tower2-AllSprites_56: 1719611153
+      Tower2-AllSprites_57: 1075348879
+      Tower2-AllSprites_58: 764218627
+      Tower2-AllSprites_59: -489845670
+      Tower2-AllSprites_6: 924826932
+      Tower2-AllSprites_60: -1290949920
+      Tower2-AllSprites_61: -904487140
+      Tower2-AllSprites_62: 1200664554
+      Tower2-AllSprites_63: -1220530422
+      Tower2-AllSprites_64: -2133009727
+      Tower2-AllSprites_7: -1164518800
+      Tower2-AllSprites_8: 846106656
+      Tower2-AllSprites_9: 134443378
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

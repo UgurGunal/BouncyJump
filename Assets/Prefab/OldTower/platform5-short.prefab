@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 536344329, guid: 9079b5c8b95c66f48ac7de0512ee587d, type: 3}
+  m_Sprite: {fileID: 1092167629, guid: 4979e5429bb81fa4694969f1d25fdcd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6214286, y: 0.45}
+  m_Size: {x: 1.5785714, y: 0.4642857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,8 +123,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6714286, y: 0.47142857}
-    newSize: {x: 1.6214286, y: 0.45}
+    oldSize: {x: 1.5785714, y: 0.4642857}
+    newSize: {x: 1.5785714, y: 0.4642857}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -174,3 +174,7 @@ MonoBehaviour:
   enableDistanceDestroy: 1
   destroyDistance: 6
   timerDestroyDistance: 5
+  isBouncyPlatform: 0
+  isAnvil: 0
+  anvilAudioCollider: {fileID: 0}
+  anvilSoundCooldown: 0.08
