@@ -97,32 +97,23 @@ public class ChestPlatform : MonoBehaviour
     public bool enableComboSystem = false; // Set to true if you want combo functionality
     
     [Header("Platform Destruction Settings")]
-    public bool enableTimerDestroy = true; // Enable/disable timer-based destruction
-    public float destroyTime = 3f; // Time in seconds before destruction after player passes
-    public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
-    public bool enableDistanceDestroy = true; // Enable/disable distance-based destruction
-    public float destroyDistance = 8f; // Distance below player to instantly destroy platform
+    [Tooltip("Only destruction mode: removes chest when the player is this far above its highest Y (not a timer).")]
+    public bool enableDistanceDestroy = true;
+    public float destroyDistance = 8f;
     
     private bool isOpened = false;
     private bool isAnimating = false;
     private Transform playerTransform;
-    private Vector3 originalPosition;
-    
-    // Platform destruction variables
-    private bool isDestroying = false;
-    private float destroyTimer;
+    private float destroyReferenceY;
     
     private void Start()
     {
         // Find the player by tag
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             playerTransform = playerObject.transform;
-        }
-        
-        // Store original position
-        originalPosition = transform.position;
+
+        destroyReferenceY = transform.position.y;
         
         // Set initial sprite
         if (chestSpriteRenderer != null && closedSprite != null)
@@ -162,46 +153,10 @@ public class ChestPlatform : MonoBehaviour
             }
         }
 
-        // Check for distance-based destruction (always active if enabled)
-        if (enableDistanceDestroy && playerTransform.position.y > transform.position.y + destroyDistance)
-        {
+        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
+
+        if (enableDistanceDestroy && playerTransform.position.y > destroyReferenceY + destroyDistance)
             Destroy(gameObject);
-            return;
-        }
-
-        // Check if the player has passed the platform (for timer-based destruction)
-        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y)
-        {
-            isDestroying = true;
-            destroyTimer = destroyTime;
-        }
-
-        // If the platform is in the process of being destroyed (timer-based)
-        if (isDestroying)
-        {
-            destroyTimer -= Time.fixedDeltaTime;
-
-            if (destroyTimer <= 0f)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                float shakeStartTime = destroyTime * (2.0f / 3.0f);
-                if (destroyTimer <= shakeStartTime)
-                {
-                    // Calculate the progress of the shake (from 0 to 1) over the last 2/3 of the time
-                    float shakeProgress = 1f - (destroyTimer / shakeStartTime);
-                    float currentShakeMagnitude = shakeMagnitude * shakeProgress;
-                    transform.position = originalPosition + Random.insideUnitSphere * currentShakeMagnitude;
-                }
-                else
-                {
-                    // If not shaking yet, ensure the position is the original one
-                    transform.position = originalPosition;
-                }
-            }
-        }
     }
     
     private void OnCollisionEnter2D(Collision2D collision)

@@ -831,12 +831,13 @@ MonoBehaviour:
   velocityThreshold: 4
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 1
-  destroyTime: 3.8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 5
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 0
   isAnvil: 0
   anvilAudioCollider: {fileID: 0}
@@ -1128,7 +1129,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
     emptySpawnRate: 0.58
-    levelChangeTextColor: {r: 0.90188676, g: 0.53309315, b: 0.18888573, a: 1}
+    levelChangeTextColor: {r: 0.96981126, g: 0.592725, b: 0.23970805, a: 1}
   - cameraSpeed: 3.2
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 377e78ccc17969246afb531d6dce5edf, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 1ade88712a782254b94468e86038d6ed, type: 3}
@@ -1148,7 +1149,7 @@ MonoBehaviour:
   - cameraSpeed: 3.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 7f1ef498163422943a69a352c95d5424, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6a7b83345c58b6b41be9ea1edaa8f46a, type: 3}
-    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 9b06b41db071b1a4a9d41028d0de5874, type: 3}
+    specialPlatformPrefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
     specialPlatform2Prefab: {fileID: 6595305194927341745, guid: 4a057d970e7e36d46afe645449347091, type: 3}
     longPlatformSpawnRate: 0.48
     shortPlatformSpawnRate: 0.48

@@ -168,12 +168,13 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 1
-  destroyTime: 2.2
-  shakeMagnitude: 0.06
   enableDistanceDestroy: 1
-  destroyDistance: 6
-  timerDestroyDistance: 5
+  destroyDistance: 7
+  enableFalling: 1
+  fallMinSpeed: 1.25
+  fallMaxSpeed: 7
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 0
   isAnvil: 0
   anvilAudioCollider: {fileID: 0}

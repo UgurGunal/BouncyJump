@@ -1,4 +1,3 @@
-using System.Reflection;
 using UnityEngine;
 
 [RequireComponent(typeof(Platform))]
@@ -17,14 +16,11 @@ public class MovingPlatform : MonoBehaviour
     private const float minXPosition = -2f;
     private const float maxXPosition = 2f;
 
-    private Platform platformComponent;
     private Rigidbody2D cachedRigidbody;
 
     private bool hasDecided;
     private bool isMovingPlatform;
     private float currentDirection;
-
-    private static FieldInfo originalPositionField;
 
     /// <summary>
     /// Returns true if this instance has been initialized as a moving platform.
@@ -33,13 +29,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        platformComponent = GetComponent<Platform>();
         cachedRigidbody = GetComponent<Rigidbody2D>();
-
-        if (originalPositionField == null)
-        {
-            originalPositionField = typeof(Platform).GetField("originalPosition", BindingFlags.NonPublic | BindingFlags.Instance);
-        }
     }
 
     private void Start()
@@ -107,16 +97,6 @@ public class MovingPlatform : MonoBehaviour
         else
         {
             transform.position = currentPosition;
-        }
-
-        SyncOriginalPositionWithPlatform(currentPosition);
-    }
-
-    private void SyncOriginalPositionWithPlatform(Vector3 value)
-    {
-        if (platformComponent != null && originalPositionField != null)
-        {
-            originalPositionField.SetValue(platformComponent, value);
         }
     }
 

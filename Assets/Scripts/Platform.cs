@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    static readonly List<Platform> ActivePlatforms = new List<Platform>();
     [Header("Jump Settings")]
     public float jumpForce = 14f;
     public float comboBonus = 0.005f; // Multiplier for current combo to jump bonus
@@ -14,12 +16,23 @@ public class Platform : MonoBehaviour
     public bool enableComboSystem = false; // Set to true if you want combo functionality
 
     [Header("Destruction Settings")]
-    public bool enableTimerDestroy = true; // Enable/disable timer-based destruction
-    public float destroyTime = 3f; // Time in seconds before destruction after player passes
-    public float shakeMagnitude = 0.1f; // The maximum magnitude of the shake effect
-    public bool enableDistanceDestroy = true; // Enable/disable distance-based destruction
-    public float destroyDistance = 8f; // Distance below player to instantly destroy platform
-    public float timerDestroyDistance = 4.4f; // Distance below player to start timer-based destruction
+    [Tooltip("Only destruction mode: removes platform when the player is this far above the platform's highest Y (not a timer).")]
+    public bool enableDistanceDestroy = true;
+    [Tooltip("Vertical gap (world units) between player and the platform's peak Y before Destroy is called.")]
+    public float destroyDistance = 8f;
+
+    [Header("Falling Settings")]
+    [Tooltip("When enabled, platform falls downward after the player lands on it.")]
+    public bool enableFalling = false;
+    [Tooltip("Downward speed at the moment falling starts.")]
+    public float fallMinSpeed = 1f;
+    [Tooltip("Downward speed reached after acceleration time.")]
+    public float fallMaxSpeed = 6f;
+    [Tooltip("Seconds to accelerate from min to max fall speed.")]
+    public float fallAccelerationTime = 1.5f;
+    [Tooltip("Darken sprites toward black when falling (0 = none, 1 = fully black).")]
+    [Range(0f, 1f)]
+    public float fallTintStrength = 0.15f;
 
     [Header("Audio")]
     [Tooltip("If true, play the bouncy platform sound instead of the normal platform sound when the player jumps on this platform.")]
@@ -32,83 +45,119 @@ public class Platform : MonoBehaviour
     public float anvilSoundCooldown = 0.08f;
 
     private Transform playerTransform;
-    private bool isDestroying = false;
-    private float destroyTimer;
-    private Vector3 originalPosition;
     private float lastAnvilSoundTime = -999f;
+    private bool isFalling;
+    private float fallElapsedTime;
+    private float destroyReferenceY;
+    private SpriteRenderer[] spriteRenderers;
+    private Color[] originalSpriteColors;
+
+    private void OnEnable()
+    {
+        ActivePlatforms.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActivePlatforms.Remove(this);
+    }
 
     private void Start()
     {
-        // Find the player by tag
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             playerTransform = playerObject.transform;
-        }
 
-        // Store the original position for the shake effect
-        originalPosition = transform.position;
+        destroyReferenceY = transform.position.y;
+        CacheSpriteRenderers();
+    }
+
+    void CacheSpriteRenderers()
+    {
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        originalSpriteColors = new Color[spriteRenderers.Length];
+        for (int i = 0; i < spriteRenderers.Length; i++)
+            originalSpriteColors[i] = spriteRenderers[i].color;
+    }
+
+    public void StartFalling()
+    {
+        if (!enableFalling || isFalling)
+            return;
+
+        isFalling = true;
+        fallElapsedTime = 0f;
+        ApplyFallTint();
+    }
+
+    void ApplyFallTint()
+    {
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+            CacheSpriteRenderers();
+
+        if (fallTintStrength <= 0f)
+            return;
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] == null)
+                continue;
+
+            Color baseColor = originalSpriteColors[i];
+            spriteRenderers[i].color = Color.Lerp(baseColor, Color.black, fallTintStrength);
+        }
+    }
+
+    static void TriggerFallForPlatformsBelow(float collidedPlatformY)
+    {
+        for (int i = ActivePlatforms.Count - 1; i >= 0; i--)
+        {
+            Platform platform = ActivePlatforms[i];
+            if (platform == null)
+            {
+                ActivePlatforms.RemoveAt(i);
+                continue;
+            }
+
+            if (platform.transform.position.y < collidedPlatformY)
+                platform.StartFalling();
+        }
     }
 
     private void FixedUpdate()
     {
-        // If the player hasn't been found yet, try to find it again
         if (playerTransform == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
-            {
                 playerTransform = playerObject.transform;
-            }
             else
-            {
-                // If player is still not found, do nothing.
                 return;
-            }
         }
 
-        // Check for distance-based destruction (always active if enabled)
-        if (enableDistanceDestroy && playerTransform.position.y > transform.position.y + destroyDistance)
+        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
+
+        if (enableDistanceDestroy && ShouldDestroyByDistance())
         {
             Destroy(gameObject);
             return;
         }
 
-        // Check if the player has passed the platform (for timer-based destruction)
-        if (enableTimerDestroy && !isDestroying && playerTransform.position.y > transform.position.y - timerDestroyDistance)
-        {
-            isDestroying = true;
-            destroyTimer = destroyTime;
-        }
+        if (!isFalling)
+            return;
 
-        // If the platform is in the process of being destroyed (timer-based)
-        if (isDestroying)
-        {
-            destroyTimer -= Time.fixedDeltaTime;
-
-            if (destroyTimer <= 0f)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                float shakeStartTime = destroyTime * (2.0f / 3.0f);
-                if (destroyTimer <= shakeStartTime)
-                {
-                    // Calculate the progress of the shake (from 0 to 1) over the last 2/3 of the time
-                    float shakeProgress = 1f - (destroyTimer / shakeStartTime);
-                    float currentShakeMagnitude = shakeMagnitude * shakeProgress;
-                    transform.position = originalPosition + Random.insideUnitSphere * currentShakeMagnitude;
-                }
-                else
-                {
-                    // If not shaking yet, ensure the position is the original one
-                    transform.position = originalPosition;
-                }
-            }
-        }
+        fallElapsedTime += Time.fixedDeltaTime;
+        float t = fallAccelerationTime > 0f
+            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
+            : 1f;
+        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
+        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
     }
 
+    bool ShouldDestroyByDistance()
+    {
+        return playerTransform.position.y > destroyReferenceY + destroyDistance;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -124,10 +173,8 @@ public class Platform : MonoBehaviour
     {
         TryPlayAnvilCollision(rb, collision);
 
-        // Simplified and more reliable detection
         bool isOnTop = false;
 
-        // Method 1: Contact normal detection (very lenient)
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (contact.normal.y < contactNormalThreshold)
@@ -137,52 +184,36 @@ public class Platform : MonoBehaviour
             }
         }
 
-        // Method 2: Simple position check (if normal detection fails)
         if (!isOnTop)
-        {
             isOnTop = player.transform.position.y > transform.position.y;
-        }
 
-        // Method 3: Very lenient velocity check
         bool isNotMovingUp = rb.velocity.y <= velocityThreshold;
 
-        // Debug information
-        // Debug.Log($"Platform Collision - IsOnTop: {isOnTop}, IsNotMovingUp: {isNotMovingUp}, PlayerY: {player.transform.position.y:F2}, PlatformY: {transform.position.y:F2}, VelocityY: {rb.velocity.y:F2}");
-
-        // Jump if player is on top AND not moving upward
         if (isOnTop && isNotMovingUp)
         {
-            // Calculate relative velocity for combo increment
             float relativeVelocity = Mathf.Abs(collision.relativeVelocity.y);
 
-            // Increment combo if combo system is enabled
             if (enableComboSystem)
-            {
                 IncrementPlatformCombo(relativeVelocity);
-            }
 
-            // Calculate jump bonus using current combo value (if combo system is enabled)
             float jumpBonus = 0f;
             if (enableComboSystem)
-            {
                 jumpBonus = GetComboBonus();
-            }
 
-            // Apply jump with bonus: platform jump force + combo jump bonus
             float totalJumpForce = jumpForce + jumpBonus;
             player.Jump(totalJumpForce);
-            
-            // Play platform collision sound effect
+
             if (SoundEffectsManager.Instance != null)
             {
-                // Add random variance of ±0.1 to make sounds less repetitive
                 float pitchVariance = Random.Range(-0.1f, 0.1f);
-                float pitch = 1f + pitchVariance; // Base pitch of 1.0 with variance
+                float pitch = 1f + pitchVariance;
                 string soundName = isBouncyPlatform ? "bouncyPlatform" : "platform";
                 SoundEffectsManager.Instance.PlaySound(soundName, -1f, pitch);
             }
 
-            //Debug.Log($"Jump Applied - Force: {totalJumpForce:F2}, Base: {jumpForce:F2}, Bonus: {jumpBonus:F2}, RelativeVelocity: {relativeVelocity:F2}");
+            float collidedPlatformY = transform.position.y;
+            StartFalling();
+            TriggerFallForPlatformsBelow(collidedPlatformY);
         }
     }
 
@@ -203,15 +234,12 @@ public class Platform : MonoBehaviour
 
     private bool IsAllowedAnvilAudioCollider(Collision2D collision)
     {
-        // If no specific collider is chosen, allow any collider on this platform.
         if (anvilAudioCollider == null)
             return true;
 
-        // On this callback, otherCollider is the collider that belongs to this platform.
         if (collision.otherCollider == anvilAudioCollider)
             return true;
 
-        // Fallback through contact points for edge cases with compound colliders.
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (contact.otherCollider == anvilAudioCollider)
@@ -223,10 +251,8 @@ public class Platform : MonoBehaviour
 
     private void IncrementPlatformCombo(float relativeVelocity)
     {
-        // Try to increment combo safely without direct ComboManager reference
         try
         {
-            // Use reflection to safely access ComboManager
             System.Type comboManagerType = System.Type.GetType("ComboManager");
             if (comboManagerType != null)
             {
@@ -238,27 +264,20 @@ public class Platform : MonoBehaviour
                     {
                         var platformComboMethod = comboManagerType.GetMethod("PlatformComboIncrement");
                         if (platformComboMethod != null)
-                        {
                             platformComboMethod.Invoke(instance, new object[] { relativeVelocity });
-                            //Debug.Log($"Platform Combo Incremented - Velocity: {relativeVelocity:F2}");
-                        }
                     }
                 }
             }
         }
         catch (System.Exception)
         {
-            // ComboManager not available
-            //Debug.Log($"ComboManager not found - No combo incremented: {ex.Message}");
         }
     }
 
     private float GetComboBonus()
     {
-        // Try to get combo bonus safely without direct ComboManager reference
         try
         {
-            // Use reflection to safely access ComboManager
             System.Type comboManagerType = System.Type.GetType("ComboManager");
             if (comboManagerType != null)
             {
@@ -280,13 +299,11 @@ public class Platform : MonoBehaviour
         }
         catch (System.Exception)
         {
-            // ComboManager not available, return 0 bonus
         }
 
         return 0f;
     }
 
-    // Public methods to control combo system manually
     public void SetComboBonus(float bonus)
     {
         comboBonus = bonus;
@@ -297,7 +314,6 @@ public class Platform : MonoBehaviour
         enableComboSystem = enable;
     }
 
-    // Public methods to adjust collision detection
     public void SetVelocityThreshold(float threshold)
     {
         velocityThreshold = threshold;
