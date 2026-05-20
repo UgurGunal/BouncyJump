@@ -47,9 +47,7 @@ public class PrefabObjectPool
 
         instance.SetActive(false);
         instance.transform.SetParent(inactiveRoot, false);
-        instance.transform.localPosition = Vector3.zero;
-        instance.transform.localRotation = Quaternion.identity;
-        instance.transform.localScale = Vector3.one;
+        ResetLocalTransform(instance.transform);
 
         int key = prefab.GetInstanceID();
         if (!pools.TryGetValue(key, out Queue<GameObject> queue))
@@ -59,5 +57,12 @@ public class PrefabObjectPool
         }
 
         queue.Enqueue(instance);
+    }
+
+    static void ResetLocalTransform(Transform target)
+    {
+        target.localPosition = Vector3.zero;
+        target.localRotation = Quaternion.identity;
+        target.localScale = Vector3.one;
     }
 }

@@ -411,11 +411,18 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void ApplyHeightLabelTransform(GameObject label, GameObject platform)
     {
-        label.transform.SetParent(platform.transform, false);
+        Transform platformTransform = platform.transform;
+        label.transform.SetParent(platformTransform, false);
         label.transform.localRotation = Quaternion.identity;
-        label.transform.localScale = Vector3.one;
 
-        Bounds platformBounds = GetPlatformBounds(platform);
+        // Counteract platform X scale so the label keeps its intended size/position as a child.
+        float platformScaleX = platformTransform.localScale.x;
+        if (Mathf.Abs(platformScaleX) < 0.0001f)
+            platformScaleX = 1f;
+        label.transform.localScale = new Vector3(1f / platformScaleX, 1f, 1f);
+
+        GetPlatformSurfaceLocal(platform, out float localBottomY);
+
         SpriteRenderer platformRenderer = platform.GetComponent<SpriteRenderer>();
         SpriteRenderer labelRenderer = label.GetComponent<SpriteRenderer>();
 
@@ -423,14 +430,17 @@ public class SimpleTowerGenerator : MonoBehaviour
         if (labelRenderer != null && labelRenderer.sprite != null)
             labelHalfHeight = labelRenderer.sprite.bounds.extents.y;
 
-        float worldCenterY = platformBounds.min.y
+        float localY = localBottomY
             + levelManager.heightLabelYOffset
             + labelHalfHeight
             + levelManager.heightLabelYPadding;
 
-        float labelX = levelManager.GetClampedHeightLabelX(platformBounds.center.x);
-        Vector3 worldPosition = new Vector3(labelX, worldCenterY, platform.transform.position.z);
-        label.transform.localPosition = platform.transform.InverseTransformPoint(worldPosition);
+        float clampedWorldX = levelManager.GetClampedHeightLabelX(platformTransform.position.x);
+        Vector3 localClampedPoint = platformTransform.InverseTransformPoint(
+            new Vector3(clampedWorldX, platformTransform.position.y, platformTransform.position.z));
+        float localX = localClampedPoint.x;
+
+        label.transform.localPosition = new Vector3(localX, localY, 0f);
 
         if (labelRenderer == null)
             return;
@@ -444,17 +454,21 @@ public class SimpleTowerGenerator : MonoBehaviour
             labelRenderer.sortingOrder = 3;
     }
 
-    static Bounds GetPlatformBounds(GameObject platform)
+    /// <summary>Bottom edge and horizontal center in platform local space (for child labels).</summary>
+    static void GetPlatformSurfaceLocal(GameObject platform, out float localBottomY)
     {
-        Collider2D collider = platform.GetComponent<Collider2D>();
-        if (collider != null && collider.enabled)
-            return collider.bounds;
+        localBottomY = 0f;
+
+        BoxCollider2D box = platform.GetComponent<BoxCollider2D>();
+        if (box != null)
+        {
+            localBottomY = box.offset.y - box.size.y * 0.5f;
+            return;
+        }
 
         SpriteRenderer spriteRenderer = platform.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && spriteRenderer.enabled)
-            return spriteRenderer.bounds;
-
-        return new Bounds(platform.transform.position, new Vector3(2f, 0.5f, 0f));
+        if (spriteRenderer != null && spriteRenderer.sprite != null)
+            localBottomY = spriteRenderer.sprite.bounds.min.y;
     }
 
     void SpawnCollectable(float xPosition, float yPosition, GameObject collectablePrefab)
