@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SimpleTowerGenerator : MonoBehaviour
 {
+    public static SimpleTowerGenerator Instance { get; private set; }
+
     [Header("References")]
     [Tooltip("Player will be auto-found if not assigned")]
     public Transform player;
@@ -47,16 +49,44 @@ public class SimpleTowerGenerator : MonoBehaviour
     public int initialPlatformCount = 10;
 
     private Transform generatedObjectsParent;
+    private Transform poolInactiveRoot;
+    private PrefabObjectPool platformPool;
+    private PrefabObjectPool labelPool;
+    private PrefabObjectPool collectablePool;
     private float lastSpawnedPlatformY = -3f;
     private int currentLevel = -1;
     private float nextHeightLabelThreshold;
     private int heightLabelsSpawned;
     private int maxHeightLabels;
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
+
     void Start()
     {
-        // Use coroutine to wait for tower scene to load and find references
         StartCoroutine(InitializeAfterTowerSceneLoaded());
+    }
+
+    public GameObject SpawnPooledCollectable(GameObject prefab, Vector3 worldPosition)
+    {
+        if (prefab == null || collectablePool == null)
+            return null;
+
+        GameObject collectable = collectablePool.Get(prefab, generatedObjectsParent);
+        if (collectable == null)
+            return null;
+
+        collectable.transform.position = worldPosition;
+        collectable.transform.rotation = Quaternion.identity;
+        return collectable;
     }
     
     System.Collections.IEnumerator InitializeAfterTowerSceneLoaded()
@@ -75,8 +105,14 @@ public class SimpleTowerGenerator : MonoBehaviour
             yield break;
         }
 
-        // Create parent for generated objects
         generatedObjectsParent = new GameObject("GeneratedObjects").transform;
+        poolInactiveRoot = new GameObject("PooledInactive").transform;
+        poolInactiveRoot.SetParent(transform);
+        poolInactiveRoot.gameObject.SetActive(false);
+
+        platformPool = new PrefabObjectPool(poolInactiveRoot, ReleasePlatformToPool);
+        labelPool = new PrefabObjectPool(poolInactiveRoot, ReleaseLabelToPool);
+        collectablePool = new PrefabObjectPool(poolInactiveRoot, ReleaseCollectableToPool);
 
         InitializeHeightLabelState();
         
@@ -267,12 +303,73 @@ public class SimpleTowerGenerator : MonoBehaviour
         if (platformPrefab == null) return null;
 
         Vector3 platformPosition = new Vector3(xPosition, yPosition, 0);
-        GameObject newPlatform = Instantiate(platformPrefab, platformPosition, Quaternion.identity);
-        newPlatform.transform.SetParent(generatedObjectsParent);
+        GameObject newPlatform = platformPool.Get(platformPrefab, generatedObjectsParent);
+        if (newPlatform == null) return null;
 
-        // Set platform scale
-        newPlatform.transform.localScale = new Vector3(scaleX, newPlatform.transform.localScale.y, newPlatform.transform.localScale.z);
+        Vector3 scale = new Vector3(scaleX, newPlatform.transform.localScale.y, newPlatform.transform.localScale.z);
+
+        ChestPlatform chestPlatform = newPlatform.GetComponent<ChestPlatform>();
+        if (chestPlatform != null)
+            chestPlatform.ResetForSpawn(platformPosition, scale);
+        else
+        {
+            Platform platform = newPlatform.GetComponent<Platform>();
+            if (platform != null)
+                platform.ResetForSpawn(platformPosition, scale);
+            else
+            {
+                newPlatform.transform.position = platformPosition;
+                newPlatform.transform.localScale = scale;
+            }
+        }
+
         return newPlatform;
+    }
+
+    void ReleasePlatformToPool(GameObject prefab, GameObject instance)
+    {
+        if (instance == null || prefab == null)
+            return;
+
+        ReleaseLabelChildren(instance);
+
+        ChestPlatform chestPlatform = instance.GetComponent<ChestPlatform>();
+        if (chestPlatform != null)
+            chestPlatform.PrepareForPool();
+        else
+        {
+            Platform platform = instance.GetComponent<Platform>();
+            if (platform != null)
+                platform.PrepareForPool();
+        }
+
+        platformPool.Return(prefab, instance);
+    }
+
+    void ReleaseLabelChildren(GameObject platformInstance)
+    {
+        for (int i = platformInstance.transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = platformInstance.transform.GetChild(i);
+            if (child.GetComponent<HeightLabelMarker>() == null)
+                continue;
+
+            PooledInstance pooled = child.GetComponent<PooledInstance>();
+            if (pooled != null && pooled.SourcePrefab != null)
+                labelPool.Return(pooled.SourcePrefab, child.gameObject);
+            else
+                Destroy(child.gameObject);
+        }
+    }
+
+    void ReleaseLabelToPool(GameObject prefab, GameObject instance)
+    {
+        labelPool.Return(prefab, instance);
+    }
+
+    void ReleaseCollectableToPool(GameObject prefab, GameObject instance)
+    {
+        collectablePool.Return(prefab, instance);
     }
 
     void InitializeHeightLabelState()
@@ -302,7 +399,12 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab)) return;
 
-        GameObject label = Instantiate(labelPrefab, platform.transform);
+        GameObject label = labelPool.Get(labelPrefab, platform.transform);
+        if (label == null) return;
+
+        if (label.GetComponent<HeightLabelMarker>() == null)
+            label.AddComponent<HeightLabelMarker>();
+
         label.transform.localRotation = Quaternion.identity;
         label.transform.localPosition = Vector3.zero;
 
@@ -342,8 +444,11 @@ public class SimpleTowerGenerator : MonoBehaviour
         if (!enableCollectableSpawning || collectablePrefab == null) return;
 
         Vector3 collectablePosition = new Vector3(xPosition, yPosition, 0);
-        GameObject newCollectable = Instantiate(collectablePrefab, collectablePosition, Quaternion.identity);
-        newCollectable.transform.SetParent(generatedObjectsParent);
+        GameObject newCollectable = collectablePool.Get(collectablePrefab, generatedObjectsParent);
+        if (newCollectable == null) return;
+
+        newCollectable.transform.position = collectablePosition;
+        newCollectable.transform.rotation = Quaternion.identity;
     }
 
     void OnLevelChanged(int newLevel)

@@ -64,20 +64,69 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-            playerTransform = playerObject.transform;
-
+        EnsurePlayerReference();
         destroyReferenceY = transform.position.y;
         CacheSpriteRenderers();
     }
 
+    void EnsurePlayerReference()
+    {
+        if (playerTransform != null)
+            return;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+            playerTransform = playerObject.transform;
+    }
+
     void CacheSpriteRenderers()
     {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        spriteRenderers = GetComponents<SpriteRenderer>();
         originalSpriteColors = new Color[spriteRenderers.Length];
         for (int i = 0; i < spriteRenderers.Length; i++)
             originalSpriteColors[i] = spriteRenderers[i].color;
+    }
+
+    public void ResetForSpawn(Vector3 worldPosition, Vector3 localScale)
+    {
+        isFalling = false;
+        fallElapsedTime = 0f;
+        lastAnvilSoundTime = -999f;
+        transform.position = worldPosition;
+        transform.localScale = localScale;
+        transform.rotation = Quaternion.identity;
+        destroyReferenceY = worldPosition.y;
+        RestoreSpriteColors();
+    }
+
+    public void PrepareForPool()
+    {
+        isFalling = false;
+        fallElapsedTime = 0f;
+        RestoreSpriteColors();
+    }
+
+    void RestoreSpriteColors()
+    {
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+            CacheSpriteRenderers();
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] == null)
+                continue;
+
+            spriteRenderers[i].color = originalSpriteColors[i];
+        }
+    }
+
+    void Despawn()
+    {
+        PooledInstance pooled = GetComponent<PooledInstance>();
+        if (pooled != null)
+            pooled.Release();
+        else
+            Destroy(gameObject);
     }
 
     public void StartFalling()
@@ -108,7 +157,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    static void TriggerFallForPlatformsBelow(float collidedPlatformY)
+    public static void TriggerFallForPlatformsBelow(float collidedPlatformY)
     {
         for (int i = ActivePlatforms.Count - 1; i >= 0; i--)
         {
@@ -126,20 +175,15 @@ public class Platform : MonoBehaviour
 
     private void FixedUpdate()
     {
+        EnsurePlayerReference();
         if (playerTransform == null)
-        {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-                playerTransform = playerObject.transform;
-            else
-                return;
-        }
+            return;
 
         destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
 
         if (enableDistanceDestroy && ShouldDestroyByDistance())
         {
-            Destroy(gameObject);
+            Despawn();
             return;
         }
 
@@ -214,6 +258,7 @@ public class Platform : MonoBehaviour
             float collidedPlatformY = transform.position.y;
             StartFalling();
             TriggerFallForPlatformsBelow(collidedPlatformY);
+            ChestPlatform.TriggerFallForChestsBelow(collidedPlatformY);
         }
     }
 

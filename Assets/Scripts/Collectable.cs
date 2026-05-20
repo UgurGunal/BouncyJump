@@ -6,22 +6,32 @@ public class Collectable : MonoBehaviour
     public float yDestroyOffset = 10f;
     private Transform playerTransform;
 
-    private void Start()
+    void OnEnable()
     {
+        EnsurePlayerReference();
+        StopAllCoroutines();
+        StartCoroutine(CheckDistanceToPlayer());
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void EnsurePlayerReference()
+    {
+        if (playerTransform != null)
+            return;
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             playerTransform = playerObject.transform;
-            StartCoroutine(CheckDistanceToPlayer());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+            PooledInstance.ReleaseOrDestroy(gameObject);
     }
 
     private IEnumerator CheckDistanceToPlayer()
@@ -31,9 +41,7 @@ public class Collectable : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             if (playerTransform != null && playerTransform.position.y - transform.position.y > yDestroyOffset)
-            {
-                Destroy(gameObject);
-            }
+                PooledInstance.ReleaseOrDestroy(gameObject);
         }
     }
 }

@@ -6,9 +6,14 @@ using System.Collections.Generic;
 
 public class ChestPlatform : MonoBehaviour
 {
+    static readonly List<ChestPlatform> ActiveChestPlatforms = new List<ChestPlatform>();
+
     [Header("Animation Settings")]
     public Animator chestAnimator;
-    public string openAnimationTrigger = "Open";
+    [Tooltip("Animator state played when the chest opens (e.g. ChestOpen).")]
+    public string openAnimatorStateName = "ChestOpen";
+    [Tooltip("Animator state when closed. Leave empty to use default state on layer 0.")]
+    public string closedAnimatorStateName = "";
     public SpriteRenderer chestSpriteRenderer;
     public Sprite closedSprite;
     public Sprite openedSprite;
@@ -97,66 +102,212 @@ public class ChestPlatform : MonoBehaviour
     public bool enableComboSystem = false; // Set to true if you want combo functionality
     
     [Header("Platform Destruction Settings")]
-    [Tooltip("Only destruction mode: removes chest when the player is this far above its highest Y (not a timer).")]
+    [Tooltip("Only destruction mode: removes chest when the player is this far above its highest Y.")]
     public bool enableDistanceDestroy = true;
     public float destroyDistance = 8f;
+
+    [Header("Falling Settings")]
+    public bool enableFalling = false;
+    public float fallMinSpeed = 1f;
+    public float fallMaxSpeed = 6f;
+    public float fallAccelerationTime = 1.5f;
+    [Range(0f, 1f)]
+    public float fallTintStrength = 0.15f;
     
     private bool isOpened = false;
     private bool isAnimating = false;
+    private bool isFalling;
+    private float fallElapsedTime;
     private Transform playerTransform;
     private float destroyReferenceY;
-    
-    private void Start()
+    private readonly List<GameObject> activeSpawnedCollectables = new List<GameObject>();
+    private SpriteRenderer[] spriteRenderers;
+    private Color[] originalSpriteColors;
+
+    void OnEnable()
     {
-        // Find the player by tag
+        ActiveChestPlatforms.Add(this);
+    }
+
+    void OnDisable()
+    {
+        ActiveChestPlatforms.Remove(this);
+    }
+
+    void Start()
+    {
+        EnsurePlayerReference();
+        destroyReferenceY = transform.position.y;
+        CacheSpriteRenderers();
+        ResetChestVisualState();
+    }
+
+    public void ResetForSpawn(Vector3 worldPosition, Vector3 localScale)
+    {
+        isFalling = false;
+        fallElapsedTime = 0f;
+        transform.position = worldPosition;
+        transform.localScale = localScale;
+        transform.rotation = Quaternion.identity;
+        destroyReferenceY = worldPosition.y;
+        ClearSpawnedCollectables();
+        RestoreSpriteColors();
+        ResetChestVisualState();
+    }
+
+    public void PrepareForPool()
+    {
+        isFalling = false;
+        fallElapsedTime = 0f;
+        ClearSpawnedCollectables();
+        RestoreSpriteColors();
+        ResetChestVisualState();
+    }
+
+    void EnsurePlayerReference()
+    {
+        if (playerTransform != null)
+            return;
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
             playerTransform = playerObject.transform;
+    }
 
-        destroyReferenceY = transform.position.y;
-        
-        // Set initial sprite
-        if (chestSpriteRenderer != null && closedSprite != null)
+    void CacheSpriteRenderers()
+    {
+        if (chestSpriteRenderer != null)
+            spriteRenderers = new[] { chestSpriteRenderer };
+        else
+            spriteRenderers = GetComponents<SpriteRenderer>();
+
+        originalSpriteColors = new Color[spriteRenderers.Length];
+        for (int i = 0; i < spriteRenderers.Length; i++)
+            originalSpriteColors[i] = spriteRenderers[i].color;
+    }
+
+    void RestoreSpriteColors()
+    {
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+            CacheSpriteRenderers();
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
         {
-            chestSpriteRenderer.sprite = closedSprite;
+            if (spriteRenderers[i] == null)
+                continue;
+
+            spriteRenderers[i].color = originalSpriteColors[i];
         }
-        
-        // Ensure animator starts in the correct state
+    }
+
+    public void StartFalling()
+    {
+        if (!enableFalling || isFalling)
+            return;
+
+        isFalling = true;
+        fallElapsedTime = 0f;
+        ApplyFallTint();
+    }
+
+    void ApplyFallTint()
+    {
+        if (fallTintStrength <= 0f)
+            return;
+
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+            CacheSpriteRenderers();
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] == null)
+                continue;
+
+            spriteRenderers[i].color = Color.Lerp(originalSpriteColors[i], Color.black, fallTintStrength);
+        }
+    }
+
+    public static void TriggerFallForChestsBelow(float collidedPlatformY)
+    {
+        for (int i = ActiveChestPlatforms.Count - 1; i >= 0; i--)
+        {
+            ChestPlatform chest = ActiveChestPlatforms[i];
+            if (chest == null)
+            {
+                ActiveChestPlatforms.RemoveAt(i);
+                continue;
+            }
+
+            if (chest.transform.position.y < collidedPlatformY)
+                chest.StartFalling();
+        }
+    }
+
+    void Despawn()
+    {
+        PooledInstance pooled = GetComponent<PooledInstance>();
+        if (pooled != null)
+            pooled.Release();
+        else
+            Destroy(gameObject);
+    }
+
+    void ClearSpawnedCollectables()
+    {
+        StopAllCoroutines();
+
+        for (int i = activeSpawnedCollectables.Count - 1; i >= 0; i--)
+        {
+            if (activeSpawnedCollectables[i] != null)
+                PooledInstance.ReleaseOrDestroy(activeSpawnedCollectables[i]);
+        }
+
+        activeSpawnedCollectables.Clear();
+    }
+
+    void ResetChestVisualState()
+    {
+        isOpened = false;
+        isAnimating = false;
+
+        if (chestSpriteRenderer != null && closedSprite != null)
+            chestSpriteRenderer.sprite = closedSprite;
+
         if (chestAnimator != null)
         {
-            // Force the animator to play the default state (should be idle/empty)
-            chestAnimator.Play(0, 0, 0f); // Play first state (index 0) on layer 0, starting at 0% progress
-            
-            // Alternative: If you have a specific idle state name, use this:
-            // chestAnimator.Play("Idle", 0, 0f);
-            
-            // Alternative: Stop all animations and reset to default
-            // chestAnimator.StopPlayback();
-            // chestAnimator.StartPlayback();
+            chestAnimator.Rebind();
+            chestAnimator.Update(0f);
+
+            if (string.IsNullOrEmpty(closedAnimatorStateName))
+                chestAnimator.Play(0, 0, 0f);
+            else
+                chestAnimator.Play(closedAnimatorStateName, 0, 0f);
         }
     }
     
     private void FixedUpdate()
     {
-        // If the player hasn't been found yet, try to find it again
+        EnsurePlayerReference();
         if (playerTransform == null)
-        {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                playerTransform = playerObject.transform;
-            }
-            else
-            {
-                // If player is still not found, do nothing.
-                return;
-            }
-        }
+            return;
 
         destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
 
         if (enableDistanceDestroy && playerTransform.position.y > destroyReferenceY + destroyDistance)
-            Destroy(gameObject);
+        {
+            Despawn();
+            return;
+        }
+
+        if (!isFalling)
+            return;
+
+        fallElapsedTime += Time.fixedDeltaTime;
+        float t = fallAccelerationTime > 0f
+            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
+            : 1f;
+        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
+        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -227,11 +378,15 @@ public class ChestPlatform : MonoBehaviour
             // Play platform collision sound effect
             if (SoundEffectsManager.Instance != null)
             {
-                // Add random variance of ±0.1 to make sounds less repetitive
                 float pitchVariance = Random.Range(-0.1f, 0.1f);
-                float pitch = 1f + pitchVariance; // Base pitch of 1.0 with variance
+                float pitch = 1f + pitchVariance;
                 SoundEffectsManager.Instance.PlaySound("platform", -1f, pitch);
             }
+
+            float collidedPlatformY = transform.position.y;
+            StartFalling();
+            Platform.TriggerFallForPlatformsBelow(collidedPlatformY);
+            TriggerFallForChestsBelow(collidedPlatformY);
         }
     }
     
@@ -248,14 +403,8 @@ public class ChestPlatform : MonoBehaviour
         }
         
         // Start the opening animation directly by name
-        if (chestAnimator != null)
-        {
-            // Play the ChestOpen animation once
-            chestAnimator.Play("ChestOpen", 0, 0f); // Play "ChestOpen" on layer 0, starting at 0% progress
-            
-            // Alternative: If you want to ensure it plays from the beginning each time
-            // chestAnimator.Play("ChestOpen");
-        }
+        if (chestAnimator != null && !string.IsNullOrEmpty(openAnimatorStateName))
+            chestAnimator.Play(openAnimatorStateName, 0, 0f);
         
         // Start coroutine to spawn collectables with delay
         StartCoroutine(SpawnCollectablesWithDelay());
@@ -530,25 +679,11 @@ public class ChestPlatform : MonoBehaviour
     
 
     
-    // Reset chest state (useful for testing or respawning)
     public void ResetChest()
     {
-        isOpened = false;
-        isAnimating = false;
-        
-        if (chestSpriteRenderer != null && closedSprite != null)
-        {
-            chestSpriteRenderer.sprite = closedSprite;
-        }
-        
-        if (chestAnimator != null)
-        {
-            // Reset the animator to the default state
-            chestAnimator.Play(0, 0, 0f); // Go back to first state (index 0)
-            
-            // Alternative: If you have a specific idle state name
-            // chestAnimator.Play("Idle", 0, 0f);
-        }
+        ClearSpawnedCollectables();
+        RestoreSpriteColors();
+        ResetChestVisualState();
     }
     
     // Platform combo system methods
@@ -700,10 +835,17 @@ public class ChestPlatform : MonoBehaviour
         float yVariance = Random.Range(-0.2f, 0.2f);
         spawnPosition += new Vector3(0f, yVariance, 0);
         
-        // Instantiate the collectable with slight position variance
-        GameObject collectable = Instantiate(prefab, spawnPosition, Quaternion.identity);
-        
-        // Make coin non-collectable temporarily and start movement sequence
+        GameObject collectable = null;
+        if (SimpleTowerGenerator.Instance != null)
+            collectable = SimpleTowerGenerator.Instance.SpawnPooledCollectable(prefab, spawnPosition);
+
+        if (collectable == null)
+            collectable = Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+        if (collectable == null)
+            return;
+
+        activeSpawnedCollectables.Add(collectable);
         StartCoroutine(CoinSpawnSequence(collectable, spawnPosition));
     }
     

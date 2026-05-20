@@ -8,14 +8,26 @@ public class PowerupCollectable : MonoBehaviour
     public float powerupPerSecond = 100f;
     private Transform playerTransform;
 
-    private void Start()
+    void OnEnable()
     {
+        EnsurePlayerReference();
+        StopAllCoroutines();
+        StartCoroutine(CheckDistanceToPlayer());
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void EnsurePlayerReference()
+    {
+        if (playerTransform != null)
+            return;
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             playerTransform = playerObject.transform;
-            StartCoroutine(CheckDistanceToPlayer());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +42,7 @@ public class PowerupCollectable : MonoBehaviour
             {
                 ComboManager.Instance.ApplyComboPowerup(powerupDuration, powerupPerSecond);
             }
-            Destroy(gameObject);
+            PooledInstance.ReleaseOrDestroy(gameObject);
         }
     }
 
@@ -38,12 +50,10 @@ public class PowerupCollectable : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f); // Check every second
+            yield return new WaitForSeconds(1f);
 
             if (playerTransform != null && playerTransform.position.y - transform.position.y > yDestroyOffset)
-            {
-                Destroy(gameObject);
-            }
+                PooledInstance.ReleaseOrDestroy(gameObject);
         }
     }
 }
