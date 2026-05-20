@@ -400,46 +400,48 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab)) return;
 
-        GameObject label = labelPool.Get(labelPrefab, generatedObjectsParent);
+        GameObject label = labelPool.Get(labelPrefab, platform.transform);
         if (label == null) return;
 
         if (label.GetComponent<HeightLabelMarker>() == null)
             label.AddComponent<HeightLabelMarker>();
 
+        ApplyHeightLabelTransform(label, platform);
+    }
+
+    void ApplyHeightLabelTransform(GameObject label, GameObject platform)
+    {
+        label.transform.SetParent(platform.transform, false);
         label.transform.localRotation = Quaternion.identity;
         label.transform.localScale = Vector3.one;
 
         Bounds platformBounds = GetPlatformBounds(platform);
-        float labelCenterY = platformBounds.min.y + levelManager.heightLabelYOffset;
-
         SpriteRenderer platformRenderer = platform.GetComponent<SpriteRenderer>();
         SpriteRenderer labelRenderer = label.GetComponent<SpriteRenderer>();
-        if (labelRenderer != null)
-            labelCenterY += labelRenderer.bounds.extents.y;
 
-        labelCenterY += levelManager.heightLabelYPadding;
+        float labelHalfHeight = 0f;
+        if (labelRenderer != null && labelRenderer.sprite != null)
+            labelHalfHeight = labelRenderer.sprite.bounds.extents.y;
 
-        float platformX = platformBounds.center.x;
-        float labelX = levelManager.GetClampedHeightLabelX(platformX);
+        float worldCenterY = platformBounds.min.y
+            + levelManager.heightLabelYOffset
+            + labelHalfHeight
+            + levelManager.heightLabelYPadding;
 
-        Vector3 labelWorldPosition = new Vector3(
-            labelX,
-            labelCenterY,
-            platform.transform.position.z);
+        float labelX = levelManager.GetClampedHeightLabelX(platformBounds.center.x);
+        Vector3 worldPosition = new Vector3(labelX, worldCenterY, platform.transform.position.z);
+        label.transform.localPosition = platform.transform.InverseTransformPoint(worldPosition);
 
-        label.transform.position = labelWorldPosition;
-        label.transform.SetParent(platform.transform, worldPositionStays: true);
+        if (labelRenderer == null)
+            return;
 
-        if (labelRenderer != null)
+        if (platformRenderer != null)
         {
-            if (platformRenderer != null)
-            {
-                labelRenderer.sortingLayerID = platformRenderer.sortingLayerID;
-                labelRenderer.sortingOrder = platformRenderer.sortingOrder + 2;
-            }
-            else
-                labelRenderer.sortingOrder = 3;
+            labelRenderer.sortingLayerID = platformRenderer.sortingLayerID;
+            labelRenderer.sortingOrder = platformRenderer.sortingOrder + 2;
         }
+        else
+            labelRenderer.sortingOrder = 3;
     }
 
     static Bounds GetPlatformBounds(GameObject platform)
