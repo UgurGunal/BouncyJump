@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 0
   minForce: 1
-  maxForce: 8.5
+  maxForce: 9
   playerMaxSpeed: 9
   enableComboSystem: 1
 --- !u!61 &403864759
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallSide: 1
   minForce: 1
-  maxForce: 8.5
+  maxForce: 9
   playerMaxSpeed: 9
   enableComboSystem: 1
 --- !u!61 &522469670
@@ -613,6 +613,9 @@ MonoBehaviour:
   destroyDistance: 8
   timerDestroyDistance: 4.4
   isBouncyPlatform: 0
+  isAnvil: 0
+  anvilAudioCollider: {fileID: 0}
+  anvilSoundCooldown: 0.08
 --- !u!251 &734456005
 PlatformEffector2D:
   m_ObjectHideFlags: 0

@@ -20,6 +20,26 @@ public class LevelManager : MonoBehaviour
     public GameObject powerupPrefab;
     public GameObject diamondPrefab;
 
+    [Header("Height Labels (Optional — per tower)")]
+    [Tooltip("When off, platforms spawn without height labels. Configure separately on each tower's LevelManager.")]
+    public bool enableHeightLabels = false;
+    [Tooltip("Optional cap: max display height for labels (100, 200, …). 0 = use every entry in Height Label Prefabs.")]
+    public float towerHeight = 0f;
+    [Tooltip("Display-height interval for which platform gets a label (100, 200, 300, …). Label position uses the platform's real X/Y, not these exact heights.")]
+    public float heightLabelInterval = 100f;
+    [Tooltip("Used only to test when a platform has passed a milestone (display height = world Y × this). Matches HUD (×5).")]
+    public float heightDisplayMultiplier = 5f;
+    [Tooltip("Prefab for 100 label (index 0), 200 (index 1), etc.")]
+    public GameObject[] heightLabelPrefabs;
+    [Tooltip("Extra gap above the platform bottom edge (world units). 0 = bottom of label flush with lower border.")]
+    public float heightLabelYOffset = 0f;
+    [Tooltip("Fine-tune label Y after border alignment (negative = slightly lower).")]
+    public float heightLabelYPadding = -0.2f;
+    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform 1.8 → label 1.4).")]
+    public float heightLabelMaxX = 1.4f;
+    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform -1.5 → label -1.4).")]
+    public float heightLabelMinX = -1.4f;
+
     [System.Serializable]
     public class LevelData
     {
@@ -151,6 +171,45 @@ public class LevelManager : MonoBehaviour
     public LevelData GetCurrentLevelData()
     {
         return GetLevelData(currentLevel);
+    }
+
+    public bool AreHeightLabelsEnabled()
+    {
+        return enableHeightLabels
+            && heightLabelPrefabs != null
+            && heightLabelPrefabs.Length > 0
+            && heightLabelInterval > 0f
+            && heightDisplayMultiplier > 0f;
+    }
+
+    public int GetMaxHeightLabelCount()
+    {
+        if (!AreHeightLabelsEnabled()) return 0;
+
+        int prefabCount = heightLabelPrefabs.Length;
+        if (heightLabelInterval <= 0f)
+            return prefabCount;
+
+        int fromTowerHeight = Mathf.Max(0, Mathf.FloorToInt(towerHeight / heightLabelInterval));
+        if (fromTowerHeight <= 0)
+            return prefabCount;
+
+        return Mathf.Min(prefabCount, fromTowerHeight);
+    }
+
+    public bool TryGetHeightLabelPrefab(int labelIndex, out GameObject prefab)
+    {
+        prefab = null;
+        if (!AreHeightLabelsEnabled() || labelIndex < 0 || labelIndex >= heightLabelPrefabs.Length)
+            return false;
+
+        prefab = heightLabelPrefabs[labelIndex];
+        return prefab != null;
+    }
+
+    public float GetClampedHeightLabelX(float platformX)
+    {
+        return Mathf.Clamp(platformX, heightLabelMinX, heightLabelMaxX);
     }
 
     void UpdateLevelSettings(int level)

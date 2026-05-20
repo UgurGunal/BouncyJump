@@ -45,10 +45,13 @@ public class SimpleTowerGenerator : MonoBehaviour
     [Header("Initial Content Settings")]
     [Tooltip("Number of initial platforms to spawn")]
     public int initialPlatformCount = 10;
-    
+
     private Transform generatedObjectsParent;
     private float lastSpawnedPlatformY = -3f;
     private int currentLevel = -1;
+    private float nextHeightLabelThreshold;
+    private int heightLabelsSpawned;
+    private int maxHeightLabels;
 
     void Start()
     {
@@ -74,6 +77,8 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         // Create parent for generated objects
         generatedObjectsParent = new GameObject("GeneratedObjects").transform;
+
+        InitializeHeightLabelState();
         
         Debug.Log("[SimpleTowerGenerator] Initialization complete, starting content generation");
         
@@ -206,7 +211,8 @@ public class SimpleTowerGenerator : MonoBehaviour
         float platformScaleX = Random.Range(minPlatformScaleX, maxPlatformScaleX);
 
         // Spawn platform
-        SpawnPlatform(platformX, platformY, platformPrefab, platformScaleX);
+        GameObject newPlatform = SpawnPlatform(platformX, platformY, platformPrefab, platformScaleX);
+        TrySpawnHeightLabel(newPlatform);
 
         // Spawn collectable
         SpawnCollectableForPlatform(levelData, platformY);
@@ -256,9 +262,9 @@ public class SimpleTowerGenerator : MonoBehaviour
         }
     }
 
-    void SpawnPlatform(float xPosition, float yPosition, GameObject platformPrefab, float scaleX = 1f)
+    GameObject SpawnPlatform(float xPosition, float yPosition, GameObject platformPrefab, float scaleX = 1f)
     {
-        if (platformPrefab == null) return;
+        if (platformPrefab == null) return null;
 
         Vector3 platformPosition = new Vector3(xPosition, yPosition, 0);
         GameObject newPlatform = Instantiate(platformPrefab, platformPosition, Quaternion.identity);
@@ -266,6 +272,69 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         // Set platform scale
         newPlatform.transform.localScale = new Vector3(scaleX, newPlatform.transform.localScale.y, newPlatform.transform.localScale.z);
+        return newPlatform;
+    }
+
+    void InitializeHeightLabelState()
+    {
+        heightLabelsSpawned = 0;
+        maxHeightLabels = 0;
+        nextHeightLabelThreshold = 100f;
+
+        if (levelManager == null || !levelManager.AreHeightLabelsEnabled()) return;
+
+        nextHeightLabelThreshold = levelManager.heightLabelInterval;
+        maxHeightLabels = levelManager.GetMaxHeightLabelCount();
+    }
+
+    void TrySpawnHeightLabel(GameObject platform)
+    {
+        if (platform == null || levelManager == null) return;
+        if (!levelManager.AreHeightLabelsEnabled() || heightLabelsSpawned >= maxHeightLabels) return;
+
+        float platformWorldY = platform.transform.position.y;
+        float displayHeight = platformWorldY * levelManager.heightDisplayMultiplier;
+        if (displayHeight < nextHeightLabelThreshold) return;
+
+        int labelIndex = heightLabelsSpawned;
+        heightLabelsSpawned++;
+        nextHeightLabelThreshold += levelManager.heightLabelInterval;
+
+        if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab)) return;
+
+        GameObject label = Instantiate(labelPrefab, platform.transform);
+        label.transform.localRotation = Quaternion.identity;
+        label.transform.localPosition = Vector3.zero;
+
+        Bounds platformBounds = GetPlatformBounds(platform);
+        float labelCenterY = platformBounds.min.y + levelManager.heightLabelYOffset;
+
+        SpriteRenderer labelRenderer = label.GetComponent<SpriteRenderer>();
+        if (labelRenderer != null)
+            labelCenterY += labelRenderer.bounds.extents.y;
+
+        labelCenterY += levelManager.heightLabelYPadding;
+
+        float platformX = platformBounds.center.x;
+        float labelX = levelManager.GetClampedHeightLabelX(platformX);
+
+        label.transform.position = new Vector3(
+            labelX,
+            labelCenterY,
+            platform.transform.position.z);
+    }
+
+    static Bounds GetPlatformBounds(GameObject platform)
+    {
+        Collider2D collider = platform.GetComponent<Collider2D>();
+        if (collider != null)
+            return collider.bounds;
+
+        SpriteRenderer spriteRenderer = platform.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            return spriteRenderer.bounds;
+
+        return new Bounds(platform.transform.position, Vector3.zero);
     }
 
     void SpawnCollectable(float xPosition, float yPosition, GameObject collectablePrefab)
