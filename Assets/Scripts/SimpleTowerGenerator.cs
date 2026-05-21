@@ -58,6 +58,7 @@ public class SimpleTowerGenerator : MonoBehaviour
     private float nextHeightLabelThreshold;
     private int heightLabelsSpawned;
     private int maxHeightLabels;
+    private GameObject pendingHeightLabelPlatform;
 
     void Awake()
     {
@@ -385,6 +386,7 @@ public class SimpleTowerGenerator : MonoBehaviour
         heightLabelsSpawned = 0;
         maxHeightLabels = 0;
         nextHeightLabelThreshold = 100f;
+        pendingHeightLabelPlatform = null;
 
         if (levelManager == null || !levelManager.AreHeightLabelsEnabled()) return;
 
@@ -397,18 +399,38 @@ public class SimpleTowerGenerator : MonoBehaviour
         if (platform == null || levelManager == null) return;
         if (!levelManager.AreHeightLabelsEnabled() || heightLabelsSpawned >= maxHeightLabels) return;
 
-        float platformWorldY = platform.transform.position.y;
-        float displayHeight = platformWorldY * levelManager.heightDisplayMultiplier;
-        if (displayHeight < nextHeightLabelThreshold) return;
+        float displayHeight = platform.transform.position.y * levelManager.heightDisplayMultiplier;
 
-        int labelIndex = heightLabelsSpawned;
-        heightLabelsSpawned++;
-        nextHeightLabelThreshold += levelManager.heightLabelInterval;
+        if (displayHeight < nextHeightLabelThreshold)
+        {
+            pendingHeightLabelPlatform = platform;
+            return;
+        }
 
-        if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab)) return;
+        while (displayHeight >= nextHeightLabelThreshold && heightLabelsSpawned < maxHeightLabels)
+        {
+            if (pendingHeightLabelPlatform != null)
+            {
+                SpawnHeightLabelOnPlatform(pendingHeightLabelPlatform, heightLabelsSpawned);
+                heightLabelsSpawned++;
+            }
+
+            pendingHeightLabelPlatform = null;
+            nextHeightLabelThreshold += levelManager.heightLabelInterval;
+        }
+
+        if (heightLabelsSpawned < maxHeightLabels && displayHeight < nextHeightLabelThreshold)
+            pendingHeightLabelPlatform = platform;
+    }
+
+    void SpawnHeightLabelOnPlatform(GameObject platform, int labelIndex)
+    {
+        if (!levelManager.TryGetHeightLabelPrefab(labelIndex, out GameObject labelPrefab))
+            return;
 
         GameObject label = labelPool.Get(labelPrefab, platform.transform);
-        if (label == null) return;
+        if (label == null)
+            return;
 
         if (label.GetComponent<HeightLabelMarker>() == null)
             label.AddComponent<HeightLabelMarker>();

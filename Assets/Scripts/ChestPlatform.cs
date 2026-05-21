@@ -86,6 +86,14 @@ public class ChestPlatform : MonoBehaviour
     
     [Header("Spawn Position Settings")]
     public float spawnHeightOffset = 0.4f; // Height above platform to spawn collectables (increased to avoid platform collisions)
+
+    [Header("Chest Collectable Launch")]
+    [Tooltip("How long the coin arc animation takes (seconds).")]
+    public float collectableLaunchDuration = 0.9f;
+    [Tooltip("Seconds after spawn before the coin collider turns on (can collect). Usually ≤ launch duration.")]
+    public float collectableColliderEnableDelay = 0.9f;
+    [Tooltip("Peak height of the coin arc above the straight path (world units).")]
+    public float collectableArcHeight = 2.6f;
     
     [Header("Debug Options")]
     public bool enableDebugLogging = false; // Enable to see timing information
@@ -784,6 +792,11 @@ public class ChestPlatform : MonoBehaviour
         if (launch == null)
             launch = collectable.AddComponent<ChestCollectableLaunch>();
 
-        launch.BeginLaunch(spawnPosition, targetPosition);
+        launch.BeginLaunch(
+            spawnPosition,
+            targetPosition,
+            collectableLaunchDuration,
+            collectableColliderEnableDelay,
+            collectableArcHeight);
     }
 }

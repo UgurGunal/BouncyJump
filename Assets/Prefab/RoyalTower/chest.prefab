@@ -239,6 +239,9 @@ MonoBehaviour:
   range6Spawn5Prob: 14
   range6Spawn6Prob: 6
   spawnHeightOffset: 0.4
+  collectableLaunchDuration: 0.8
+  collectableColliderEnableDelay: 0.3
+  collectableArcHeight: 2.6
   enableDebugLogging: 0
   jumpForce: 15
   comboBonus: 0.006

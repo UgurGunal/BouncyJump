@@ -1060,7 +1060,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
     emptySpawnRate: 0.72
-    levelChangeTextColor: {r: 1, g: 0.4660377, b: 0.46967, a: 1}
+    levelChangeTextColor: {r: 0.9924528, g: 0.3951085, b: 0.39950067, a: 1}
   - cameraSpeed: 3.6
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 95fcb9b7d28b46c45a4211ae298ede38, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: a9a70720ea78a8545b6847bce2b33757, type: 3}
