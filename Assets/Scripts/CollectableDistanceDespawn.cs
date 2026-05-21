@@ -11,7 +11,6 @@ public class CollectableDistanceDespawn : MonoBehaviour
 
     Transform playerTransform;
     bool suppressDistanceDestroy;
-    float destroyReferenceY;
     Coroutine distanceCheckRoutine;
 
     public void SetDistanceDestroySuppressed(bool suppressed)
@@ -27,9 +26,7 @@ public class CollectableDistanceDespawn : MonoBehaviour
         if (!isActiveAndEnabled)
             return;
 
-        destroyReferenceY = transform.position.y;
-        StopDistanceCheck();
-        distanceCheckRoutine = StartCoroutine(CheckDistanceToPlayer());
+        RestartDistanceCheck();
     }
 
     void OnEnable()
@@ -38,7 +35,11 @@ public class CollectableDistanceDespawn : MonoBehaviour
         if (suppressDistanceDestroy)
             return;
 
-        destroyReferenceY = transform.position.y;
+        RestartDistanceCheck();
+    }
+
+    void RestartDistanceCheck()
+    {
         StopDistanceCheck();
         distanceCheckRoutine = StartCoroutine(CheckDistanceToPlayer());
     }
@@ -76,7 +77,7 @@ public class CollectableDistanceDespawn : MonoBehaviour
         {
             if (!suppressDistanceDestroy
                 && playerTransform != null
-                && playerTransform.position.y - destroyReferenceY > yDestroyOffset)
+                && transform.position.y < playerTransform.position.y - yDestroyOffset)
             {
                 PooledInstance.ReleaseOrDestroy(gameObject);
                 yield break;

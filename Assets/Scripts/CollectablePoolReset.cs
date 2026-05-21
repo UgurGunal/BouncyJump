@@ -22,7 +22,10 @@ public static class CollectablePoolReset
 
         ChestCollectableLaunch launch = collectable.GetComponent<ChestCollectableLaunch>();
         if (launch != null)
+        {
             launch.StopLaunch();
+            Object.Destroy(launch);
+        }
 
         ChestCollectableLaunch.EnsureColliderEnabled(collectable);
         CollectableSpawnHelper.SetDistanceDestroySuppressed(collectable, false);
