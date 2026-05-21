@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1905336848, guid: 58ded9dd1ba7a7f4d8df39fe251f7c30, type: 3}
+  m_Sprite: {fileID: 505862977, guid: bd69394ebc09775468598277dd545979, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,8 +123,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.022403687}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.3}
-    oldSize: {x: 1.1428572, y: 0.9071429}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.1428572, y: 0.6571429}
     newSize: {x: 1.1428572, y: 0.6571429}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -186,14 +186,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestAnimator: {fileID: 799421559491578898}
-  openAnimationTrigger: ChestOpen
-  chestSpriteRenderer: {fileID: 0}
-  closedSprite: {fileID: 1905336848, guid: 58ded9dd1ba7a7f4d8df39fe251f7c30, type: 3}
-  openedSprite: {fileID: -680601116, guid: 58ded9dd1ba7a7f4d8df39fe251f7c30, type: 3}
-  coin1Prefab: {fileID: 6595305194927341745, guid: 3a4951f52ff2bf6458fa62f8a8b3469e, type: 3}
-  coin2Prefab: {fileID: 6595305194927341745, guid: 55e9def79a43dd944a576e389cf08b1d, type: 3}
-  coin3Prefab: {fileID: 6595305194927341745, guid: a7102f6a972d56440b018f3ff752ff5e, type: 3}
-  diamond1Prefab: {fileID: 6595305194927341745, guid: 558b18c7716ad6d49a4216525e556faa, type: 3}
+  openAnimatorStateName: ChestOpen
+  closedAnimatorStateName: 
+  chestSpriteRenderer: {fileID: 6543918908782215984}
+  closedSprite: {fileID: 505862977, guid: bd69394ebc09775468598277dd545979, type: 3}
+  openedSprite: {fileID: 151792654, guid: bd69394ebc09775468598277dd545979, type: 3}
+  coin1Prefab: {fileID: 6595305194927341745, guid: 2fc9cb9f09d913c428525279aaab1131, type: 3}
+  coin2Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
+  coin3Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
+  diamond1Prefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
   diamond2Prefab: {fileID: 6595305194927341745, guid: ed60038291882f543be4060a041e8905, type: 3}
   useSpawnChoiceSystem: 1
   range1Max: 200
@@ -244,8 +245,10 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 3
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
-  destroyDistance: 8
+  destroyDistance: 7
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15

@@ -120,7 +120,6 @@ public class ChestPlatform : MonoBehaviour
     private float fallElapsedTime;
     private Transform playerTransform;
     private float destroyReferenceY;
-    private readonly List<GameObject> activeSpawnedCollectables = new List<GameObject>();
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalSpriteColors;
 
@@ -254,15 +253,8 @@ public class ChestPlatform : MonoBehaviour
 
     void ClearSpawnedCollectables()
     {
+        // Chest coins/diamonds live in the world like tower collectables — do not return them to the pool.
         StopAllCoroutines();
-
-        for (int i = activeSpawnedCollectables.Count - 1; i >= 0; i--)
-        {
-            if (activeSpawnedCollectables[i] != null)
-                PooledInstance.ReleaseOrDestroy(activeSpawnedCollectables[i]);
-        }
-
-        activeSpawnedCollectables.Clear();
     }
 
     void ResetChestVisualState()
@@ -618,67 +610,6 @@ public class ChestPlatform : MonoBehaviour
     
 
     
-    private IEnumerator MoveCoinToPosition(GameObject collectable, Vector3 startPos, Vector3 endPos)
-    {
-        if (collectable == null) yield break;
-        
-        float startTime = Time.time;
-        float moveDuration = 0.9f; // Reduced from 0.8f for faster movement
-        
-        // Declare horizontalPos outside the loop so it can be used for final position
-        Vector3 horizontalPos = startPos;
-        
-        while (Time.time < startTime + moveDuration && collectable != null)
-        {
-            float progress = (Time.time - startTime) / moveDuration;
-            progress = Mathf.Clamp01(progress);
-            
-            // Apply speed curve: slower start, slower upward, normal falling
-            float speedCurve;
-            if (progress < 0.3f) // First 30% - slower start
-            {
-                speedCurve = Mathf.Pow(progress / 0.3f, 1.5f) * 0.3f; // Slower initial movement
-            }
-            else if (progress < 0.7f) // 30% to 70% - slower upward movement
-            {
-                speedCurve = 0.3f + Mathf.Pow((progress - 0.3f) / 0.4f, 0.7f) * 0.4f; // Slower upward phase
-            }
-            else // 70% to 100% - slower falling speed
-            {
-                speedCurve = 0.7f + Mathf.Pow((progress - 0.7f) / 0.3f, 0.6f) * 0.3f; // Slower falling curve
-            }
-            
-            // Use smooth progress for arc movement to prevent lag/teleporting
-            horizontalPos = Vector3.Lerp(startPos, endPos, speedCurve);
-            
-            // Create smooth arc: goes up then down
-            float arcHeight = 2.6f;
-            
-            // Use smooth arc calculation that matches the speed curve
-            float arcProgress = speedCurve; // Use speedCurve instead of raw progress for smooth arc
-            float height = Mathf.Sin(arcProgress * Mathf.PI) * arcHeight;
-            horizontalPos.y += height;
-            
-            collectable.transform.position = horizontalPos;
-            
-            yield return null;
-        }
-        
-        // Ensure final position is set and respects boundaries
-        if (collectable != null)
-        {
-            // Use the last calculated position from the movement loop to prevent teleportation
-            Vector3 finalPosition = horizontalPos; // Use last calculated position instead of endPos
-            finalPosition.x = Mathf.Clamp(finalPosition.x, -1.5f, 1.5f);
-            
-            collectable.transform.position = finalPosition;
-        }
-    }
-    
-
-    
-
-    
     public void ResetChest()
     {
         ClearSpawnedCollectables();
@@ -837,40 +768,22 @@ public class ChestPlatform : MonoBehaviour
         
         GameObject collectable = null;
         if (SimpleTowerGenerator.Instance != null)
-            collectable = SimpleTowerGenerator.Instance.SpawnPooledCollectable(prefab, spawnPosition);
+            collectable = SimpleTowerGenerator.Instance.SpawnPooledCollectable(prefab, spawnPosition, deferDistanceDestroy: true);
 
         if (collectable == null)
+        {
             collectable = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            CollectableSpawnHelper.SetDistanceDestroySuppressed(collectable, true);
+        }
 
         if (collectable == null)
             return;
 
-        activeSpawnedCollectables.Add(collectable);
-        StartCoroutine(CoinSpawnSequence(collectable, spawnPosition));
-    }
-    
-    private IEnumerator CoinSpawnSequence(GameObject collectable, Vector3 startPosition)
-    {
-        // Disable collider to make coin non-collectable and prevent platform collisions
-        Collider2D coinCollider = collectable.GetComponent<Collider2D>();
-        if (coinCollider != null)
-        {
-            coinCollider.enabled = false;
-        }
-        
-        // Calculate random target position
         Vector3 targetPosition = CalculateRandomTargetPosition();
-        
-        // Start movement to final position immediately
-        StartCoroutine(MoveCoinToPosition(collectable, startPosition, targetPosition));
-        
-        // Wait for movement to complete before making coin collectable
-        yield return new WaitForSeconds(0.4f); // Reduced from 0.8f for faster collectability
-        
-        // Re-enable collider to make coin collectable
-        if (coinCollider != null)
-        {
-            coinCollider.enabled = true;
-        }
+        ChestCollectableLaunch launch = collectable.GetComponent<ChestCollectableLaunch>();
+        if (launch == null)
+            launch = collectable.AddComponent<ChestCollectableLaunch>();
+
+        launch.BeginLaunch(spawnPosition, targetPosition);
     }
 }

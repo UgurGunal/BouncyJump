@@ -75,17 +75,23 @@ public class SimpleTowerGenerator : MonoBehaviour
         StartCoroutine(InitializeAfterTowerSceneLoaded());
     }
 
-    public GameObject SpawnPooledCollectable(GameObject prefab, Vector3 worldPosition)
+    public GameObject SpawnPooledCollectable(GameObject prefab, Vector3 worldPosition, bool deferDistanceDestroy = false)
     {
         if (prefab == null || collectablePool == null)
             return null;
 
-        GameObject collectable = collectablePool.Get(prefab, generatedObjectsParent);
+        GameObject collectable = collectablePool.Get(prefab, generatedObjectsParent, activate: false);
         if (collectable == null)
             return null;
 
+        CollectablePoolReset.PrepareForSpawn(collectable);
         collectable.transform.position = worldPosition;
         collectable.transform.rotation = Quaternion.identity;
+
+        if (deferDistanceDestroy)
+            CollectableSpawnHelper.SetDistanceDestroySuppressed(collectable, true);
+
+        collectable.SetActive(true);
         return collectable;
     }
     
@@ -370,6 +376,7 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void ReleaseCollectableToPool(GameObject prefab, GameObject instance)
     {
+        CollectablePoolReset.PrepareForPool(instance);
         collectablePool.Return(prefab, instance);
     }
 

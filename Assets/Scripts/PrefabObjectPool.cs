@@ -14,7 +14,7 @@ public class PrefabObjectPool
         releaseHandler = onRelease;
     }
 
-    public GameObject Get(GameObject prefab, Transform parent)
+    public GameObject Get(GameObject prefab, Transform parent, bool activate = true)
     {
         if (prefab == null)
             return null;
@@ -26,16 +26,19 @@ public class PrefabObjectPool
         {
             instance = queue.Dequeue();
             instance.transform.SetParent(parent, false);
-            instance.SetActive(true);
         }
         else
         {
-            instance = UnityEngine.Object.Instantiate(prefab, parent);
+            instance = UnityEngine.Object.Instantiate(prefab, parent, false);
+            instance.SetActive(false);
             PooledInstance pooled = instance.GetComponent<PooledInstance>();
             if (pooled == null)
                 pooled = instance.AddComponent<PooledInstance>();
             pooled.Initialize(prefab, releaseHandler);
         }
+
+        if (activate)
+            instance.SetActive(true);
 
         return instance;
     }
@@ -43,6 +46,9 @@ public class PrefabObjectPool
     public void Return(GameObject prefab, GameObject instance)
     {
         if (prefab == null || instance == null)
+            return;
+
+        if (!instance.activeInHierarchy && instance.transform.parent == inactiveRoot)
             return;
 
         instance.SetActive(false);

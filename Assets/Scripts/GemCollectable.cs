@@ -1,58 +1,32 @@
 using UnityEngine;
-using System.Collections;
 
 public class GemCollectable : MonoBehaviour
 {
-    public int gemValue = 1; // Default value for the gem
-    public float yDestroyOffset = 10f; // Offset for destruction below player
-    private Transform playerTransform;
+    public int gemValue = 1;
+    public float yDestroyOffset = 10f;
 
-    void OnEnable()
+    CollectableDistanceDespawn distanceDespawn;
+
+    void Awake()
     {
-        EnsurePlayerReference();
-        StopAllCoroutines();
-        StartCoroutine(CheckDistanceToPlayer());
-    }
+        distanceDespawn = GetComponent<CollectableDistanceDespawn>();
+        if (distanceDespawn == null)
+            distanceDespawn = gameObject.AddComponent<CollectableDistanceDespawn>();
 
-    void OnDisable()
-    {
-        StopAllCoroutines();
-    }
-
-    void EnsurePlayerReference()
-    {
-        if (playerTransform != null)
-            return;
-
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-            playerTransform = playerObject.transform;
+        distanceDespawn.yDestroyOffset = yDestroyOffset;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            if (PointsManager.Instance != null)
-            {
-                PointsManager.Instance.AddGem(gemValue);
-            }
+        if (!other.CompareTag("Player"))
+            return;
 
-            if (SoundEffectsManager.Instance != null)
-                SoundEffectsManager.Instance.PlayDiamondSound(-1f);
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.AddGem(gemValue);
 
-            PooledInstance.ReleaseOrDestroy(gameObject);
-        }
-    }
+        if (SoundEffectsManager.Instance != null)
+            SoundEffectsManager.Instance.PlayDiamondSound(-1f);
 
-    private IEnumerator CheckDistanceToPlayer()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-
-            if (playerTransform != null && playerTransform.position.y - transform.position.y > yDestroyOffset)
-                PooledInstance.ReleaseOrDestroy(gameObject);
-        }
+        PooledInstance.ReleaseOrDestroy(gameObject);
     }
 }
