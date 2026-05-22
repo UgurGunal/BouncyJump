@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6595305194927341745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.505645, y: -0.0031518992, z: 0}
+  m_LocalPosition: {x: 0.512, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1000955376, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: -139322900, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.7714286, y: 0.55714285}
+  m_Size: {x: 1.7357143, y: 0.51428574}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,8 +123,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.7714286, y: 0.55714285}
-    newSize: {x: 1.7714286, y: 0.55714285}
+    oldSize: {x: 1.7357143, y: 0.51428574}
+    newSize: {x: 1.7357143, y: 0.51428574}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -168,9 +168,14 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 2.8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
+  isBouncyPlatform: 0
+  isAnvil: 0
+  anvilAudioCollider: {fileID: 0}
+  anvilSoundCooldown: 0.08

@@ -244,12 +244,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -903509792, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: -1911995131, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6785715, y: 14.028571}
+  m_Size: {x: 1.6642857, y: 14.042857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -306,8 +306,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6785715, y: 14.028571}
-    newSize: {x: 1.6785715, y: 14.028571}
+    oldSize: {x: 1.6642857, y: 14.042857}
+    newSize: {x: 1.6642857, y: 14.042857}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -453,12 +453,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -482323620, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: -129311126, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.385714, y: 0.65}
+  m_Size: {x: 4.364286, y: 0.6571429}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -496,12 +496,13 @@ MonoBehaviour:
   velocityThreshold: 4
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 0
   isAnvil: 0
   anvilAudioCollider: {fileID: 0}
@@ -564,12 +565,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: 1058427918, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: -812802989, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.2, y: 14.15}
+  m_Size: {x: 4.2, y: 14.157143}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -650,12 +651,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -903509792, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: -1911995131, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6785715, y: 14.028571}
+  m_Size: {x: 1.6642857, y: 14.042857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -712,8 +713,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6785715, y: 14.028571}
-    newSize: {x: 1.6785715, y: 14.028571}
+    oldSize: {x: 1.6642857, y: 14.042857}
+    newSize: {x: 1.6642857, y: 14.042857}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -932,11 +933,80 @@ MonoBehaviour:
   levelHeight: 200
   player: {fileID: 0}
   cameraFollow: {fileID: 0}
-  coin1Prefab: {fileID: 6595305194927341745, guid: c9eba924c438d924ba4372efb68512e2, type: 3}
-  coin2Prefab: {fileID: 6595305194927341745, guid: 254fb7155b7beed4285e406c1efdf9c1, type: 3}
-  coin3Prefab: {fileID: 6595305194927341745, guid: 361945b8c32051e4a9a1fad5a55b687f, type: 3}
-  powerupPrefab: {fileID: 6595305194927341745, guid: 584cb05d3575bd74791d1b37cf4c9329, type: 3}
-  diamondPrefab: {fileID: 6595305194927341745, guid: 584cb05d3575bd74791d1b37cf4c9329, type: 3}
+  coin1Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
+  coin2Prefab: {fileID: 6595305194927341745, guid: a774a5e1be604154793b1912d9a1a23f, type: 3}
+  coin3Prefab: {fileID: 6595305194927341745, guid: c04eb569ae7223142b071c0ba6dda77b, type: 3}
+  powerupPrefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
+  diamondPrefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
+  enableHeightLabels: 1
+  towerHeight: 0
+  heightLabelInterval: 100
+  heightDisplayMultiplier: 5
+  heightLabelPrefabs:
+  - {fileID: 4490854985402721342, guid: 2fe987142b692e4408982188672c1b28, type: 3}
+  - {fileID: 4490854985402721342, guid: 3d03b3c471f31714983f4ffc8bcd943d, type: 3}
+  - {fileID: 4490854985402721342, guid: c876de5304cbd6c4f8198d321bfbddf7, type: 3}
+  - {fileID: 4490854985402721342, guid: ecaa31d86cd286042a3d85b4282f73b8, type: 3}
+  - {fileID: 4490854985402721342, guid: 494bc8a3ae6351d4face0222dacd7b36, type: 3}
+  - {fileID: 4490854985402721342, guid: 79ed2fb174f683842b651c78a4c048b0, type: 3}
+  - {fileID: 4490854985402721342, guid: 65ed688a575a67e44a87ba27aecfd213, type: 3}
+  - {fileID: 4490854985402721342, guid: 038c48ad8c935a9449e3f02fdc610b2c, type: 3}
+  - {fileID: 4490854985402721342, guid: 635376a5ed522704fbe157fb1a933e27, type: 3}
+  - {fileID: 4490854985402721342, guid: 0f95e170434f6fa4ca966c1042bf4f5a, type: 3}
+  - {fileID: 4490854985402721342, guid: 6c67bcc2a57fa7e41826a2ad21178840, type: 3}
+  - {fileID: 4490854985402721342, guid: 1d4205865204f144084488f6d7b4789d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1dd31a0ace1a71b46b5e39bd2850a348, type: 3}
+  - {fileID: 4490854985402721342, guid: 26be7416c6302b74cab9f111f2809ee9, type: 3}
+  - {fileID: 4490854985402721342, guid: 51ef0f592c6b6af438bf2af316eeda05, type: 3}
+  - {fileID: 4490854985402721342, guid: a06e65abb40c60e41a556548b7030d0e, type: 3}
+  - {fileID: 4490854985402721342, guid: 462e1fc1b92a26043946661a298950c2, type: 3}
+  - {fileID: 4490854985402721342, guid: fd71db35b4f9f004b8c9613802a55aec, type: 3}
+  - {fileID: 4490854985402721342, guid: 665df09135746c540917c15e893d6f01, type: 3}
+  - {fileID: 4490854985402721342, guid: 396b0eaeab3cabf4ba8a7e6181e5a0bb, type: 3}
+  - {fileID: 4490854985402721342, guid: e643c2fee4cfe0f49834a411d4ff6787, type: 3}
+  - {fileID: 4490854985402721342, guid: 08724e6d9e7904543ae30847f55efd3c, type: 3}
+  - {fileID: 4490854985402721342, guid: 95f5b8891761f9a44b7fad8b233ee8c3, type: 3}
+  - {fileID: 4490854985402721342, guid: bbd0990aeb9a0d24399ed7883711f80b, type: 3}
+  - {fileID: 4490854985402721342, guid: 77fd5c20ca170ab43bb786ec839528f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 74b212a03e9d6d64fa6c14a106d79582, type: 3}
+  - {fileID: 4490854985402721342, guid: 9a71212a344dedb44a6ccd3493bf9428, type: 3}
+  - {fileID: 4490854985402721342, guid: 0b5e5bb03b118274191ca8e96a3cdfb0, type: 3}
+  - {fileID: 4490854985402721342, guid: f5e8c1f48dc17f74daccbeca11beea53, type: 3}
+  - {fileID: 4490854985402721342, guid: f78e0fab84e983041a46921ba8aa514d, type: 3}
+  - {fileID: 4490854985402721342, guid: b7fe5cfe23286b945b4a133239327403, type: 3}
+  - {fileID: 4490854985402721342, guid: 72c586338863d3040a0696bb9fa05d01, type: 3}
+  - {fileID: 4490854985402721342, guid: e24f75419439e4d4d95f84bd3288b6d1, type: 3}
+  - {fileID: 4490854985402721342, guid: dd5c8767409987945ba9f0462df1cf5a, type: 3}
+  - {fileID: 4490854985402721342, guid: 78ab7c7578972324eb7ff61c18bdbb3c, type: 3}
+  - {fileID: 4490854985402721342, guid: 57a1edf4ec0f81745a9413fd11eace63, type: 3}
+  - {fileID: 4490854985402721342, guid: 7eb2e741a44ed004cbcee345ad1811b1, type: 3}
+  - {fileID: 4490854985402721342, guid: 15525c191f4a26940b0b7dfb0d060474, type: 3}
+  - {fileID: 4490854985402721342, guid: feb03890ab80647418f47fdf9fe2eff6, type: 3}
+  - {fileID: 4490854985402721342, guid: a6d7989b68bdc824abc9de1c628f241b, type: 3}
+  - {fileID: 4490854985402721342, guid: e643c2fee4cfe0f49834a411d4ff6787, type: 3}
+  - {fileID: 4490854985402721342, guid: 08724e6d9e7904543ae30847f55efd3c, type: 3}
+  - {fileID: 4490854985402721342, guid: 95f5b8891761f9a44b7fad8b233ee8c3, type: 3}
+  - {fileID: 4490854985402721342, guid: bbd0990aeb9a0d24399ed7883711f80b, type: 3}
+  - {fileID: 4490854985402721342, guid: 77fd5c20ca170ab43bb786ec839528f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 74b212a03e9d6d64fa6c14a106d79582, type: 3}
+  - {fileID: 4490854985402721342, guid: 9a71212a344dedb44a6ccd3493bf9428, type: 3}
+  - {fileID: 4490854985402721342, guid: 0b5e5bb03b118274191ca8e96a3cdfb0, type: 3}
+  - {fileID: 4490854985402721342, guid: f5e8c1f48dc17f74daccbeca11beea53, type: 3}
+  - {fileID: 4490854985402721342, guid: f78e0fab84e983041a46921ba8aa514d, type: 3}
+  - {fileID: 4490854985402721342, guid: 6c67bcc2a57fa7e41826a2ad21178840, type: 3}
+  - {fileID: 4490854985402721342, guid: 1d4205865204f144084488f6d7b4789d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1dd31a0ace1a71b46b5e39bd2850a348, type: 3}
+  - {fileID: 4490854985402721342, guid: 26be7416c6302b74cab9f111f2809ee9, type: 3}
+  - {fileID: 4490854985402721342, guid: 51ef0f592c6b6af438bf2af316eeda05, type: 3}
+  - {fileID: 4490854985402721342, guid: a06e65abb40c60e41a556548b7030d0e, type: 3}
+  - {fileID: 4490854985402721342, guid: 462e1fc1b92a26043946661a298950c2, type: 3}
+  - {fileID: 4490854985402721342, guid: fd71db35b4f9f004b8c9613802a55aec, type: 3}
+  - {fileID: 4490854985402721342, guid: 665df09135746c540917c15e893d6f01, type: 3}
+  - {fileID: 4490854985402721342, guid: 396b0eaeab3cabf4ba8a7e6181e5a0bb, type: 3}
+  heightLabelYOffset: 0
+  heightLabelYPadding: -0.2
+  heightLabelMaxX: 1.4
+  heightLabelMinX: -1.4
   levels:
   - cameraSpeed: 2.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 2b0c4c445f8de5c4e8df6b0c46a18f7f, type: 3}
@@ -953,6 +1023,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.002
     emptySpawnRate: 0.84
+    levelChangeTextColor: {r: 0.45770738, g: 0.69585514, b: 0.8113208, a: 1}
   - cameraSpeed: 3.3
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 0fe33d2789e9621418f5dc5c575bd757, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 6c8e813356854a841a767b012fa8049f, type: 3}
@@ -968,6 +1039,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.003
     emptySpawnRate: 0.78
+    levelChangeTextColor: {r: 0.5006408, g: 0.86863106, b: 0.9245283, a: 1}
   - cameraSpeed: 3.7
     longPlatformPrefab: {fileID: 6595305194927341745, guid: e50f2f45de81d134e89e478f7133d70b, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 90d19c36c3707fb4a89106d41dae305e, type: 3}
@@ -983,6 +1055,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
     emptySpawnRate: 0.74
+    levelChangeTextColor: {r: 0.6775436, g: 0.78903353, b: 0.79622644, a: 1}
   - cameraSpeed: 4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 92c4b163b18139b419d972c8efa4eccc, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: b731768740d301d489e526c017b248dc, type: 3}
@@ -998,6 +1071,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.7
+    levelChangeTextColor: {r: 0.37312207, g: 0.69739026, b: 0.8415094, a: 1}
   - cameraSpeed: 4.5
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 08026af7727cc564c935a2ef8a04ea03, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 7ce3cdd1afa14624ab78b8b16d51108f, type: 3}
@@ -1013,6 +1087,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.65
+    levelChangeTextColor: {r: 0.71359915, g: 0.78377014, b: 0.79622644, a: 1}
   - cameraSpeed: 4.8
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 8d952f8c720f252468a323ccd0760f9e, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: bdd74320cee14ac4a8c39299566f5d90, type: 3}
@@ -1028,6 +1103,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.65
+    levelChangeTextColor: {r: 0.31982192, g: 0.6959147, b: 0.81886786, a: 1}
 --- !u!1 &2125827021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,12 +1162,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -200
-  m_Sprite: {fileID: 2144155137, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
+  m_Sprite: {fileID: 1940827074, guid: f5762e009b254c745b41c4ff7242ebd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0642858, y: 14.421429}
+  m_Size: {x: 1.0642858, y: 14.414286}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

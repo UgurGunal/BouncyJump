@@ -113,19 +113,19 @@ TextureImporter:
       name: Tower4-AllSprites2_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 33
-        width: 235
-        height: 1964
+        x: 13
+        y: 37
+        width: 233
+        height: 1966
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ca749f41d1eb264285ea8f6d7dc8df5
-      internalID: -903509792
+      spriteID: c48016c216fca624cb360c424ee35e93
+      internalID: -1911995131
       vertices: []
       indices: 
       edges: []
@@ -134,19 +134,19 @@ TextureImporter:
       name: Tower4-AllSprites2_1
       rect:
         serializedVersion: 2
-        x: 279
-        y: 18
+        x: 274
+        y: 28
         width: 588
-        height: 1981
+        height: 1980
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc36527f3c8e20c409e3b6c940fa49e3
-      internalID: 1058427918
+      spriteID: 267b86d0afe74bc42b9ddb119595ae9e
+      internalID: -812802989
       vertices: []
       indices: 
       edges: []
@@ -155,19 +155,19 @@ TextureImporter:
       name: Tower4-AllSprites2_2
       rect:
         serializedVersion: 2
-        x: 893
-        y: 13
+        x: 898
+        y: 16
         width: 149
-        height: 2019
+        height: 2018
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 630bbeffd009a684b8e79e72d63897a1
-      internalID: 2144155137
+      spriteID: 4877054f39811054a86fe242f7100238
+      internalID: 1940827074
       vertices: []
       indices: 
       edges: []
@@ -176,19 +176,19 @@ TextureImporter:
       name: Tower4-AllSprites2_3
       rect:
         serializedVersion: 2
-        x: 1107
-        y: 1920
-        width: 292
-        height: 79
+        x: 1249
+        y: 1928
+        width: 288
+        height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66740e4af13bf994ab911d1ef6167b5a
-      internalID: -1600826508
+      spriteID: f7ea6e2d3d788a644aec776c64f6a897
+      internalID: -1369049742
       vertices: []
       indices: 
       edges: []
@@ -197,19 +197,19 @@ TextureImporter:
       name: Tower4-AllSprites2_4
       rect:
         serializedVersion: 2
-        x: 1429
-        y: 1923
-        width: 219
-        height: 76
+        x: 1571
+        y: 1927
+        width: 215
+        height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a04d3cad28c93e44784c1f20a74eeb64
-      internalID: 1926694945
+      spriteID: a212d816f7bead948a34a9a652a8bf6b
+      internalID: -1001733896
       vertices: []
       indices: 
       edges: []
@@ -218,19 +218,19 @@ TextureImporter:
       name: Tower4-AllSprites2_5
       rect:
         serializedVersion: 2
-        x: 1098
-        y: 1814
-        width: 306
+        x: 1234
+        y: 1817
+        width: 299
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6725edaa1f7fbf4198fcdc232d706df
-      internalID: 1476339085
+      spriteID: 5a838ba0e7ab1444ba2f6e4c25a23765
+      internalID: 409621898
       vertices: []
       indices: 
       edges: []
@@ -239,19 +239,19 @@ TextureImporter:
       name: Tower4-AllSprites2_6
       rect:
         serializedVersion: 2
-        x: 1449
-        y: 1818
-        width: 255
+        x: 1583
+        y: 1821
+        width: 253
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c32559e74bf197c43bd4f98c8afc9b9e
-      internalID: -443880505
+      spriteID: ec504c19d0cc3734a8330c4ba6866320
+      internalID: -606040229
       vertices: []
       indices: 
       edges: []
@@ -260,19 +260,19 @@ TextureImporter:
       name: Tower4-AllSprites2_7
       rect:
         serializedVersion: 2
-        x: 1104
+        x: 1235
         y: 1704
-        width: 306
-        height: 78
+        width: 299
+        height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 714c51acf59517c499b20142a2a84c8a
-      internalID: -452711053
+      spriteID: 95467f866d6523e47a5ebd8923cb5a1e
+      internalID: 487808354
       vertices: []
       indices: 
       edges: []
@@ -281,19 +281,19 @@ TextureImporter:
       name: Tower4-AllSprites2_8
       rect:
         serializedVersion: 2
-        x: 1468
-        y: 1704
-        width: 232
-        height: 78
+        x: 1596
+        y: 1705
+        width: 230
+        height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d806469eb374452419c296ef448e0af8
-      internalID: 1863637115
+      spriteID: fd28608cf7e46b44c8268bbf11b03900
+      internalID: 1951013985
       vertices: []
       indices: 
       edges: []
@@ -302,19 +302,19 @@ TextureImporter:
       name: Tower4-AllSprites2_9
       rect:
         serializedVersion: 2
-        x: 1102
-        y: 1596
+        x: 1241
+        y: 1602
         width: 316
-        height: 74
+        height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d99937fe8b2c0844974e2cd4a282777
-      internalID: 717607615
+      spriteID: 470013d460559324fb120dd7ff440c03
+      internalID: -1333215618
       vertices: []
       indices: 
       edges: []
@@ -323,19 +323,19 @@ TextureImporter:
       name: Tower4-AllSprites2_10
       rect:
         serializedVersion: 2
-        x: 1458
-        y: 1596
-        width: 246
-        height: 74
+        x: 1600
+        y: 1602
+        width: 240
+        height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35c0e75c3623e26418c2060edd1bdf90
-      internalID: 1194771676
+      spriteID: f2bad0991fac861449fdeba3d95c4248
+      internalID: 675739643
       vertices: []
       indices: 
       edges: []
@@ -344,19 +344,19 @@ TextureImporter:
       name: Tower4-AllSprites2_11
       rect:
         serializedVersion: 2
-        x: 1104
-        y: 1494
-        width: 314
-        height: 79
+        x: 1602
+        y: 1556
+        width: 4
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe69d7d88b1b75e45b0f0c7c63798881
-      internalID: -1109654188
+      spriteID: 736e22f9bb8b61248a4e9d493728733d
+      internalID: 2098173131
       vertices: []
       indices: 
       edges: []
@@ -365,19 +365,19 @@ TextureImporter:
       name: Tower4-AllSprites2_12
       rect:
         serializedVersion: 2
-        x: 1462
-        y: 1494
-        width: 248
-        height: 78
+        x: 1251
+        y: 1481
+        width: 310
+        height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46735c114641f6e4e83e61ed636c7bc5
-      internalID: -1000955376
+      spriteID: 5cb247cbf2af85142b7d109552611e74
+      internalID: 2066584881
       vertices: []
       indices: 
       edges: []
@@ -386,19 +386,19 @@ TextureImporter:
       name: Tower4-AllSprites2_13
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 1395
-        width: 337
-        height: 76
+        x: 1609
+        y: 1480
+        width: 243
+        height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 550e2bc33f28b754782e15fcb0f8ebf4
-      internalID: -596653422
+      spriteID: 27e8beb75ef7fee47996ab3380e531f3
+      internalID: -139322900
       vertices: []
       indices: 
       edges: []
@@ -407,19 +407,19 @@ TextureImporter:
       name: Tower4-AllSprites2_14
       rect:
         serializedVersion: 2
-        x: 1461
-        y: 1395
-        width: 261
+        x: 1239
+        y: 1383
+        width: 333
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 269cceb0a8e8a7343b06c589f4bc8842
-      internalID: 1909585128
+      spriteID: 8f34b3935a6f81e4b913912ba1fa5695
+      internalID: -2012075520
       vertices: []
       indices: 
       edges: []
@@ -428,19 +428,19 @@ TextureImporter:
       name: Tower4-AllSprites2_15
       rect:
         serializedVersion: 2
-        x: 1098
-        y: 1222
-        width: 168
-        height: 71
+        x: 1604
+        y: 1383
+        width: 259
+        height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bf8b4a898766d2489a2aabba5a0516f
-      internalID: -790604138
+      spriteID: 133b488a16db6074d959120fb6241bd6
+      internalID: -684487082
       vertices: []
       indices: 
       edges: []
@@ -449,19 +449,880 @@ TextureImporter:
       name: Tower4-AllSprites2_16
       rect:
         serializedVersion: 2
-        x: 1308
-        y: 1226
-        width: 614
-        height: 91
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1096
+        y: 1215
+        width: 164
+        height: 71
+      alignment: 9
+      pivot: {x: 0.42, y: 0.35}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdca6ffae7bfce947a306bd0a4dc217a
-      internalID: -482323620
+      spriteID: 9023c08aed958e04688fc168632a9825
+      internalID: -25502301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_17
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 1225
+        width: 611
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 913b95536f3904845970162c0fdde1f1
+      internalID: -129311126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_18
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 965
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 255ba98c03c86094d9be8e4b031d2c31
+      internalID: 399131955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_19
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 965
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48f3a4f101eaf6e488c877ab7b7ec53b
+      internalID: 1756260251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_20
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 965
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95991d2a6883124fa6c3c02c4e7ca5a
+      internalID: 1683249275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_21
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 965
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae73b959d3643464198d7952071c53a7
+      internalID: 1136586538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_22
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 867
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b0c5333b8856f4c8471e54af07da57
+      internalID: 1222407851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_23
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 867
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff3edd92c044b5439d5186987c44dbe
+      internalID: 954529891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_24
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 867
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7da7a598c48b0b4582b3b18fa80fee2
+      internalID: -1021766119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_25
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 867
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ef74dd4f4a3d144a74cf05d2ca4973
+      internalID: -724992340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_26
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 771
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f034c676973ad840a5d19f9df5fe7ac
+      internalID: 1159158306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_27
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 771
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7175672170320c441bd9a7d4d56c7ce3
+      internalID: -1831482252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_28
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 771
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355c3facf1e2a034da40e6fcc2da4461
+      internalID: 1478683981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_29
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 771
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f87f3aa6892536549b3d2de3ec8efc9c
+      internalID: -1472997984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_30
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 678
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562c053dd169be04b8c8dac86ab93d8c
+      internalID: 1267848829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_31
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 678
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 666f0046f7c651d41b29fb0a8d91a7c4
+      internalID: -1751617820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_32
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 678
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327beb1262554b54b8620c430054959b
+      internalID: -1114540626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_33
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 678
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ae8a444048e8849836bc0978063aa7
+      internalID: 380785180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_34
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 577
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d35ff3901e906f469652a5972d929e4
+      internalID: -85873490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_35
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 577
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c8245ad682fb8840ad7a518415c4597
+      internalID: -1729652719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_36
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 577
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1aa3df45de78954d8656a692633721a
+      internalID: -1402854980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_37
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 577
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68f9d3a9dfca9224eb14890ba9adad41
+      internalID: -1417453425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_38
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 484
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1413de85539904a939d6593a9ff248
+      internalID: -1516385582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_39
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 484
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56baa9129a8a7bc4d84ebd094f923c39
+      internalID: -605239339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_40
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 484
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84962b6025ca8cc4db3d8c4df9fe0627
+      internalID: -1079697188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_41
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 484
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cecbf6fecae0534681cbb3339ca9de5
+      internalID: 256102500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_42
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 383
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29d070c3e8b043344a100e083754e849
+      internalID: 900230915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_43
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 383
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd4873e086f52b48b9ede6e46ca55c8
+      internalID: 1914425893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_44
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 383
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06dbe997af419524e8d094d3ad9a80d9
+      internalID: -1708524298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_45
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 383
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4230a9e0296a1b4448ec7b46a4e5184e
+      internalID: -1513254968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_46
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 285
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a4f0c9ef954aa4f8d307019f3d0d46
+      internalID: -757348289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_47
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 285
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb3f6057c89623942954059692577bcf
+      internalID: 253945305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_48
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 285
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0d3d3db965a6f4d9a86e165cbd8461
+      internalID: 394149696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_49
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 285
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335c762b8efa45c42821ffdcf26702d9
+      internalID: 2008385426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_50
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 186
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5da114c909603d14e9a0bc7c1fb8f51d
+      internalID: -796862010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_51
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 186
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5513d04d3206ac4eb6aee4897c3c1a1
+      internalID: -528525199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_52
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 186
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3649877d41aef984ea608c9783fbdef4
+      internalID: -237900483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_53
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 186
+        width: 136
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a61be7eaf61ad4cbc18536be779b83
+      internalID: 1111607164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_55
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 90
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7758754ae944a54999980dee59b88fe
+      internalID: 544100082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_56
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 90
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4420f7672551e1418fd66aa1f72aa69
+      internalID: -803084259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_57
+      rect:
+        serializedVersion: 2
+        x: 1431
+        y: 90
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7492d112c5d0374390fb6cd7e076216
+      internalID: 1578278012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower4-AllSprites2_58
+      rect:
+        serializedVersion: 2
+        x: 1605
+        y: 90
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc5c4f325e658534081d8142ff648b45
+      internalID: 154901701
       vertices: []
       indices: 
       edges: []
@@ -477,23 +1338,65 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tower4-AllSprites2_0: -903509792
-      Tower4-AllSprites2_1: 1058427918
-      Tower4-AllSprites2_10: 1194771676
-      Tower4-AllSprites2_11: -1109654188
-      Tower4-AllSprites2_12: -1000955376
-      Tower4-AllSprites2_13: -596653422
-      Tower4-AllSprites2_14: 1909585128
-      Tower4-AllSprites2_15: -790604138
-      Tower4-AllSprites2_16: -482323620
-      Tower4-AllSprites2_2: 2144155137
-      Tower4-AllSprites2_3: -1600826508
-      Tower4-AllSprites2_4: 1926694945
-      Tower4-AllSprites2_5: 1476339085
-      Tower4-AllSprites2_6: -443880505
-      Tower4-AllSprites2_7: -452711053
-      Tower4-AllSprites2_8: 1863637115
-      Tower4-AllSprites2_9: 717607615
+      Tower4-AllSprites2_0: -1911995131
+      Tower4-AllSprites2_1: -812802989
+      Tower4-AllSprites2_10: 675739643
+      Tower4-AllSprites2_11: 2098173131
+      Tower4-AllSprites2_12: 2066584881
+      Tower4-AllSprites2_13: -139322900
+      Tower4-AllSprites2_14: -2012075520
+      Tower4-AllSprites2_15: -684487082
+      Tower4-AllSprites2_16: -25502301
+      Tower4-AllSprites2_17: -129311126
+      Tower4-AllSprites2_18: 399131955
+      Tower4-AllSprites2_19: 1756260251
+      Tower4-AllSprites2_2: 1940827074
+      Tower4-AllSprites2_20: 1683249275
+      Tower4-AllSprites2_21: 1136586538
+      Tower4-AllSprites2_22: 1222407851
+      Tower4-AllSprites2_23: 954529891
+      Tower4-AllSprites2_24: -1021766119
+      Tower4-AllSprites2_25: -724992340
+      Tower4-AllSprites2_26: 1159158306
+      Tower4-AllSprites2_27: -1831482252
+      Tower4-AllSprites2_28: 1478683981
+      Tower4-AllSprites2_29: -1472997984
+      Tower4-AllSprites2_3: -1369049742
+      Tower4-AllSprites2_30: 1267848829
+      Tower4-AllSprites2_31: -1751617820
+      Tower4-AllSprites2_32: -1114540626
+      Tower4-AllSprites2_33: 380785180
+      Tower4-AllSprites2_34: -85873490
+      Tower4-AllSprites2_35: -1729652719
+      Tower4-AllSprites2_36: -1402854980
+      Tower4-AllSprites2_37: -1417453425
+      Tower4-AllSprites2_38: -1516385582
+      Tower4-AllSprites2_39: -605239339
+      Tower4-AllSprites2_4: -1001733896
+      Tower4-AllSprites2_40: -1079697188
+      Tower4-AllSprites2_41: 256102500
+      Tower4-AllSprites2_42: 900230915
+      Tower4-AllSprites2_43: 1914425893
+      Tower4-AllSprites2_44: -1708524298
+      Tower4-AllSprites2_45: -1513254968
+      Tower4-AllSprites2_46: -757348289
+      Tower4-AllSprites2_47: 253945305
+      Tower4-AllSprites2_48: 394149696
+      Tower4-AllSprites2_49: 2008385426
+      Tower4-AllSprites2_5: 409621898
+      Tower4-AllSprites2_50: -796862010
+      Tower4-AllSprites2_51: -528525199
+      Tower4-AllSprites2_52: -237900483
+      Tower4-AllSprites2_53: 1111607164
+      Tower4-AllSprites2_54: 1159322517
+      Tower4-AllSprites2_55: 544100082
+      Tower4-AllSprites2_56: -803084259
+      Tower4-AllSprites2_57: 1578278012
+      Tower4-AllSprites2_58: 154901701
+      Tower4-AllSprites2_6: -606040229
+      Tower4-AllSprites2_7: 487808354
+      Tower4-AllSprites2_8: 1951013985
+      Tower4-AllSprites2_9: -1333215618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
