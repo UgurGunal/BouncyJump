@@ -19,6 +19,10 @@ public class CameraFollow : MonoBehaviour
     [Header("Game Over Settings")]
     public float restartMargin = 0f;
 
+    [Header("Background Seam Fix (optional)")]
+    [Tooltip("Snap camera Y to pixels so parallax tiles stay aligned (orthographic only).")]
+    public bool snapCameraToPixelGrid = false;
+
     // Public property to access and modify constantSpeed
     public float ConstantSpeed
     {
@@ -111,6 +115,24 @@ public class CameraFollow : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, highestCameraY, transform.position.z);
         }
+
+        if (snapCameraToPixelGrid)
+            SnapCameraToPixelGrid();
+    }
+
+    void SnapCameraToPixelGrid()
+    {
+        if (mainCamera == null || !mainCamera.orthographic)
+            return;
+
+        float worldPixelSize = (2f * mainCamera.orthographicSize) / Mathf.Max(1, mainCamera.pixelHeight);
+        if (worldPixelSize <= 0f)
+            return;
+
+        Vector3 pos = transform.position;
+        pos.y = Mathf.Round(pos.y / worldPixelSize) * worldPixelSize;
+        transform.position = pos;
+        highestCameraY = Mathf.Max(highestCameraY, pos.y);
     }
 
     void CheckCameraBounds()
