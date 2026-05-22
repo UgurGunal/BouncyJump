@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro; // Assuming you are using TextMeshPro for UI text
 
 public class GameStatsUI : MonoBehaviour
@@ -28,7 +28,6 @@ public class GameStatsUI : MonoBehaviour
     {
         if (PointsManager.Instance == null)
         {
-            //Debug.LogWarning("GameStatsUI: PointsManager.Instance is null. Cannot update UI.");
             return;
         }
 

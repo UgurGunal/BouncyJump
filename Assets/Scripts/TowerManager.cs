@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -48,11 +48,9 @@ public class TowerManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            Debug.Log("TowerManager: Instance created");
         }
         else
         {
-            Debug.Log("TowerManager: Duplicate instance destroyed");
             Destroy(gameObject);
         }
     }
@@ -61,7 +59,6 @@ public class TowerManager : MonoBehaviour
     {
         if (allTowers == null || allTowers.Length == 0)
         {
-            Debug.LogError("TowerManager: allTowers is not assigned or empty.");
             return;
         }
 
@@ -130,14 +127,12 @@ public class TowerManager : MonoBehaviour
             PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
             PlayerPrefs.Save();
             
-            Debug.Log($"Selected tower: {allTowers[currentTowerIndex].towerName}");
             
             UpdateHomeScreenTowerImage();
             OnSelectionChanged?.Invoke();
         }
         else if (!IsTowerBought(towerIndex))
         {
-            Debug.LogWarning($"Cannot select tower {towerIndex} - not bought yet!");
         }
     }
     
@@ -151,7 +146,6 @@ public class TowerManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogWarning($"Tower with name '{towerName}' not found!");
     }
     
     public string GetCurrentTowerSceneName()
@@ -233,7 +227,6 @@ public class TowerManager : MonoBehaviour
             // Check if already bought
             if (IsTowerBought(towerIndex))
             {
-                Debug.Log($"Tower {tower.towerName} is already bought!");
                 return;
             }
             
@@ -258,12 +251,7 @@ public class TowerManager : MonoBehaviour
                 // Refresh bought towers list
                 RefreshTowersBought();
                 
-                Debug.Log($"Bought tower: {tower.towerName} for {tower.goldPrice} gold and {tower.diamondPrice} diamonds");
                 OnTowerPurchased?.Invoke();
-            }
-            else
-            {
-                Debug.Log($"Not enough currency! Need {tower.goldPrice} gold and {tower.diamondPrice} diamonds");
             }
         }
     }
@@ -302,7 +290,6 @@ public class TowerManager : MonoBehaviour
                 towersBought.Add(i);
             }
         }
-        Debug.Log($"Towers bought: {towersBought.Count} out of {allTowers.Length}");
     }
 
     private int GetFirstUnlockedByDefaultIndex()

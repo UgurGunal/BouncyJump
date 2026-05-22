@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SideWall : MonoBehaviour
 {
@@ -27,11 +27,7 @@ public class SideWall : MonoBehaviour
         {
             // Use relative velocity from collision for more accurate speed calculation
             float playerSpeed = Mathf.Abs(collision.relativeVelocity.x);
-            
-            // Debug: Show collision speed (relative velocity magnitude and components)
             float collisionSpeed = collision.relativeVelocity.magnitude;
-            Vector2 relativeVel = collision.relativeVelocity;
-            Debug.Log($"[SideWall] Collision with {wallSide} wall - Speed: {collisionSpeed:F2} m/s | Relative Velocity: ({relativeVel.x:F2}, {relativeVel.y:F2})");
 
             // Check if wall is currently on cooldown (before trying to add combo)
             bool isOnCooldown = IsWallOnCooldown();
@@ -112,7 +108,7 @@ public class SideWall : MonoBehaviour
                     float basePitch = Mathf.Lerp(minPitch, maxPitch, speedRatio);
                     float volume = Mathf.Lerp(minVolume, maxVolume, speedRatio);
                     
-                    // Add random variance of ±0.1 to make sounds less repetitive
+                    // Add random variance of Â±0.1 to make sounds less repetitive
                     float pitchVariance = Random.Range(-0.1f, 0.1f);
                     float pitch = basePitch + pitchVariance;
                     

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Memory and Performance Analysis for Scene Management Approaches
@@ -124,20 +124,12 @@ public class MemoryPerformanceAnalysis : MonoBehaviour
         long totalMemory = System.GC.GetTotalMemory(false);
         float memoryMB = totalMemory / (1024f * 1024f);
         
-        Debug.Log($"=== MEMORY ANALYSIS ===");
-        Debug.Log($"Current Scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
-        Debug.Log($"Total Memory: {memoryMB:F2} MB");
-        Debug.Log($"Loaded Scenes: {UnityEngine.SceneManagement.SceneManager.sceneCount}");
         
         // Check for manager instances
         var pointsManager = FindObjectOfType<PointsManager>();
         var towerManager = FindObjectOfType<TowerManager>();
         var shopManager = FindObjectOfType<ShopManager>();
         
-        Debug.Log($"PointsManager instances: {(pointsManager != null ? "Found" : "Not Found")}");
-        Debug.Log($"TowerManager instances: {(towerManager != null ? "Found" : "Not Found")}");
-        Debug.Log($"ShopManager instances: {(shopManager != null ? "Found" : "Not Found")}");
-        Debug.Log($"======================");
     }
     
     [ContextMenu("Simulate Scene Transition Time")]
@@ -151,7 +143,5 @@ public class MemoryPerformanceAnalysis : MonoBehaviour
         float endTime = Time.realtimeSinceStartup;
         float transitionTime = (endTime - startTime) * 1000f; // Convert to milliseconds
         
-        Debug.Log($"Simulated scene transition overhead: {transitionTime:F2}ms");
-        Debug.Log($"Found {managers.Length} MonoBehaviour components");
     }
 }

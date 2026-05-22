@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BallBuyButton : MonoBehaviour
@@ -72,7 +72,6 @@ public class BallBuyButton : MonoBehaviour
     {
         if (ballManager == null)
         {
-            Debug.LogError("BallManager not found!");
             return;
         }
 

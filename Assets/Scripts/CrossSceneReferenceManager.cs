@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 /// <summary>
@@ -49,7 +49,6 @@ public class CrossSceneReferenceManager : MonoBehaviour
             if (playerObject != null)
             {
                 player = playerObject.transform;
-                Debug.Log("[CrossSceneReferenceManager] Found Player");
             }
         }
         
@@ -58,7 +57,6 @@ public class CrossSceneReferenceManager : MonoBehaviour
             cameraFollow = FindObjectOfType<CameraFollow>();
             if (cameraFollow != null)
             {
-                Debug.Log("[CrossSceneReferenceManager] Found CameraFollow");
             }
         }
         
@@ -67,7 +65,6 @@ public class CrossSceneReferenceManager : MonoBehaviour
             mainCamera = Camera.main;
             if (mainCamera != null)
             {
-                Debug.Log("[CrossSceneReferenceManager] Found Main Camera");
             }
         }
     }

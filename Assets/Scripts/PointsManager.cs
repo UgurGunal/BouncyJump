@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PointsManager : MonoBehaviour
 {
@@ -45,11 +45,9 @@ public class PointsManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log("PointsManager: Instance created and marked as persistent");
         }
         else
         {
-            Debug.Log("PointsManager: Duplicate instance destroyed");
             Destroy(gameObject);
         }
     }
@@ -99,7 +97,6 @@ public class PointsManager : MonoBehaviour
         _sessionActive = true;
         _currentLevel = 0; // New: Reset level on session start
         _currencySaved = false; // Reset currency saved flag for new session
-        Debug.Log("Session Started!");
     }
 
     private bool _currencySaved = false; // Flag to prevent double-saving
@@ -107,7 +104,6 @@ public class PointsManager : MonoBehaviour
     public void EndSession()
     {
         _sessionActive = false;
-        Debug.Log($"Session Ended! Height: {_highestHeightReached:F2}, Session Coins: {_coinsCollected}, Total Earned Gold: {TotalEarnedCoins}, Gems: {_gemsCollected}, Level: {_currentLevel}, Time: {_sessionDuration:F2}s");
         // Note: Currency accumulation/saving is handled by GameEndPanelUI when it shows
     }
     
@@ -135,7 +131,6 @@ public class PointsManager : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + earnedDiamonds);
                 PlayerPrefs.Save();
                 
-                Debug.Log($"Session currency saved immediately - Gold: {currentGold} + {earnedGold} = {currentGold + earnedGold}, Diamonds: {currentDiamonds} + {earnedDiamonds} = {currentDiamonds + earnedDiamonds}");
             }
             
             _currencySaved = true; // Mark this session as processed
@@ -144,7 +139,7 @@ public class PointsManager : MonoBehaviour
 
     /// <summary>
     /// Same gold/diamond persistence and tower best-height update as the game-over flow (<see cref="GameEndPanelUI"/>),
-    /// for leaving mid-run (e.g. pause → home). Safe if <see cref="EndSession"/> was already called (e.g. after death).
+    /// for leaving mid-run (e.g. pause â†’ home). Safe if <see cref="EndSession"/> was already called (e.g. after death).
     /// </summary>
     public void FinalizeRunRewardsForMenuExit()
     {
@@ -161,27 +156,23 @@ public class PointsManager : MonoBehaviour
         // Resume session without resetting collected items
         _sessionStartTime = Time.time - _sessionDuration; // Adjust start time to maintain continuous duration
         _sessionActive = true;
-        Debug.Log("Session Resumed!");
     }
 
     // --- Collectable Methods ---
     public void AddCoin(int value)
     {
         _coinsCollected += value;
-        Debug.Log($"Coin collected! Value: {value}. Session Coins: {_coinsCollected}");
         // Note: Currency is saved at end of session based on TotalEarnedCoins calculation
     }
 
     public void AddPowerup()
     {
         _powerupsCollected++;
-        Debug.Log($"Powerup collected! Total Powerups: {_powerupsCollected}");
     }
 
     public void AddGem(int value)
     {
         _gemsCollected += value;
-        Debug.Log($"Gem collected! Value: {value}. Session Gems: {_gemsCollected}");
         // Note: Currency is saved at end of session
     }
 }

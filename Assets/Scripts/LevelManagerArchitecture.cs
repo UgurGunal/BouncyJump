@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Architecture Guide for LevelManager in Tower Game
@@ -16,24 +16,24 @@ using UnityEngine;
 /// ================
 /// 
 /// GamePersistentScene:
-/// ├── PointsManager (global progress tracking)
-/// ├── TowerManager (tower selection/currency)
-/// ├── Player + Camera (common game objects)
-/// └── Game UI (common interface)
+/// â”œâ”€â”€ PointsManager (global progress tracking)
+/// â”œâ”€â”€ TowerManager (tower selection/currency)
+/// â”œâ”€â”€ Player + Camera (common game objects)
+/// â””â”€â”€ Game UI (common interface)
 /// 
 /// BasicTowerScene:
-/// ├── LevelManager (Basic tower configuration)
-/// │   ├── Basic platform prefabs
-/// │   ├── Basic spawn rates
-/// │   └── Basic visual settings
-/// └── Basic-themed level objects
+/// â”œâ”€â”€ LevelManager (Basic tower configuration)
+/// â”‚   â”œâ”€â”€ Basic platform prefabs
+/// â”‚   â”œâ”€â”€ Basic spawn rates
+/// â”‚   â””â”€â”€ Basic visual settings
+/// â””â”€â”€ Basic-themed level objects
 /// 
 /// RoyalTowerScene:
-/// ├── LevelManager (Royal tower configuration)
-/// │   ├── Royal platform prefabs
-/// │   ├── Royal spawn rates (maybe harder?)
-/// │   └── Royal visual settings
-/// └── Royal-themed level objects
+/// â”œâ”€â”€ LevelManager (Royal tower configuration)
+/// â”‚   â”œâ”€â”€ Royal platform prefabs
+/// â”‚   â”œâ”€â”€ Royal spawn rates (maybe harder?)
+/// â”‚   â””â”€â”€ Royal visual settings
+/// â””â”€â”€ Royal-themed level objects
 /// 
 /// WHY THIS WORKS WELL:
 /// ====================
@@ -43,8 +43,8 @@ using UnityEngine;
 ///    - Tower-specific managers in tower scenes
 /// 
 /// 2. Designer Workflow:
-///    - Open BasicTowerScene → Configure basic settings
-///    - Open RoyalTowerScene → Configure royal settings
+///    - Open BasicTowerScene â†’ Configure basic settings
+///    - Open RoyalTowerScene â†’ Configure royal settings
 ///    - No need to manage separate asset files
 /// 
 /// 3. Runtime Efficiency:
@@ -61,24 +61,24 @@ using UnityEngine;
 /// =========================================
 /// 
 /// ScriptableObject Approach:
-/// ❌ TowerConfigSO for each tower
-/// ❌ LevelManager.LoadConfig(towerConfigSO) at runtime
-/// ❌ More complex, unnecessary for this use case
+/// âŒ TowerConfigSO for each tower
+/// âŒ LevelManager.LoadConfig(towerConfigSO) at runtime
+/// âŒ More complex, unnecessary for this use case
 /// 
 /// Single Global LevelManager:
-/// ❌ Huge config arrays for all towers
-/// ❌ Complex switching logic
-/// ❌ Hard to maintain and debug
+/// âŒ Huge config arrays for all towers
+/// âŒ Complex switching logic
+/// âŒ Hard to maintain and debug
 /// 
 /// IMPLEMENTATION DETAILS:
 /// =======================
 /// 
 /// LevelManager should:
-/// ✅ Be scene-specific (not in GamePersistentScene)
-/// ✅ Have singleton pattern for easy access
-/// ✅ Configure tower-specific settings
-/// ✅ Reference tower-specific prefabs
-/// ✅ Handle level progression within that tower
+/// âœ… Be scene-specific (not in GamePersistentScene)
+/// âœ… Have singleton pattern for easy access
+/// âœ… Configure tower-specific settings
+/// âœ… Reference tower-specific prefabs
+/// âœ… Handle level progression within that tower
 /// 
 /// Example LevelManager setup per tower:
 /// 
@@ -110,23 +110,17 @@ public class LevelManagerArchitecture : MonoBehaviour
     [ContextMenu("Validate Scene Architecture")]
     public void ValidateCurrentArchitecture()
     {
-        Debug.Log("=== LEVEL MANAGER ARCHITECTURE VALIDATION ===");
         
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log($"Current Scene: {sceneName}");
         
         // Check for LevelManager in current scene
         LevelManager levelManager = FindObjectOfType<LevelManager>();
         if (levelManager != null)
         {
-            Debug.Log("✅ LevelManager found in current scene");
-            Debug.Log($"   - Level Count: {levelManager.levelCount}");
-            Debug.Log($"   - Level Height: {levelManager.levelHeight}");
             
             // Check if it has tower-specific data
             if (levelManager.levels != null && levelManager.levels.Length > 0)
             {
-                Debug.Log($"✅ Level data configured ({levelManager.levels.Length} levels)");
                 
                 // Check first level for platform prefabs
                 var firstLevel = levelManager.levels[0];
@@ -136,27 +130,22 @@ public class LevelManagerArchitecture : MonoBehaviour
                 
                 if (hasPlatforms)
                 {
-                    Debug.Log("✅ Platform prefabs configured");
                 }
                 else
                 {
-                    Debug.LogWarning("⚠️ Platform prefabs not configured");
                 }
             }
             else
             {
-                Debug.LogWarning("⚠️ Level data not configured");
             }
         }
         else
         {
             if (sceneName.ToLower().Contains("home") || sceneName.ToLower().Contains("menu"))
             {
-                Debug.Log("✅ No LevelManager needed in menu scene");
             }
             else
             {
-                Debug.LogWarning("⚠️ LevelManager not found in game scene");
             }
         }
         
@@ -164,10 +153,7 @@ public class LevelManagerArchitecture : MonoBehaviour
         bool pointsManagerPersistent = PointsManager.Instance != null;
         bool towerManagerPersistent = TowerManager.Instance != null;
         
-        Debug.Log($"PointsManager (persistent): {(pointsManagerPersistent ? "✅ Found" : "❌ Missing")}");
-        Debug.Log($"TowerManager (persistent): {(towerManagerPersistent ? "✅ Found" : "❌ Missing")}");
         
-        Debug.Log("============================================");
     }
     
     [ContextMenu("Show Architecture Recommendations")]
@@ -175,26 +161,13 @@ public class LevelManagerArchitecture : MonoBehaviour
     {
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         
-        Debug.Log("=== ARCHITECTURE RECOMMENDATIONS ===");
-        Debug.Log($"For scene: {sceneName}");
         
         if (sceneName.ToLower().Contains("home") || sceneName.ToLower().Contains("menu"))
         {
-            Debug.Log("MENU SCENE - Should have:");
-            Debug.Log("✅ ShopManager (scene-specific)");
-            Debug.Log("✅ HomeScreenUI (scene-specific)");
-            Debug.Log("✅ PersistentLoader (loads GamePersistentScene for gameplay)");
-            Debug.Log("❌ No LevelManager needed");
         }
         else
         {
-            Debug.Log("TOWER SCENE - Should have:");
-            Debug.Log("✅ LevelManager (scene-specific, tower-themed)");
-            Debug.Log("✅ Tower-specific level objects");
-            Debug.Log("✅ PersistentLoader (loads GamePersistentScene)");
-            Debug.Log("❌ No duplicate managers from GamePersistentScene");
         }
         
-        Debug.Log("===================================");
     }
 }

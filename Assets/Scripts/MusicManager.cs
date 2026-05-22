@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
@@ -65,11 +65,9 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializeAudioSources();
             BuildSceneMusicDictionary();
-            Debug.Log("MusicManager: Instance created and marked as persistent");
         }
         else
         {
-            Debug.Log("MusicManager: Duplicate instance destroyed");
             Destroy(gameObject);
             return;
         }
@@ -120,7 +118,6 @@ public class MusicManager : MonoBehaviour
             {
                 if (sceneMusicDictionary.ContainsKey(sceneMusic.sceneName))
                 {
-                    Debug.LogWarning($"MusicManager: Duplicate scene name '{sceneMusic.sceneName}'. The first one will be used.");
                 }
                 else
                 {
@@ -178,10 +175,6 @@ public class MusicManager : MonoBehaviour
         {
             PlayMusic(defaultMusic, defaultMusicVolume);
         }
-        else
-        {
-            Debug.LogWarning($"MusicManager: No music found for scene '{activeSceneName}' and no default music is set.");
-        }
     }
 
     /// <summary>
@@ -193,7 +186,6 @@ public class MusicManager : MonoBehaviour
     {
         if (clip == null)
         {
-            Debug.LogWarning("MusicManager: Attempted to play null music clip");
             return;
         }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class BallManager : MonoBehaviour
@@ -66,12 +66,10 @@ public class BallManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            Debug.Log("BallManager: Instance created");
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.Log("BallManager: Duplicate instance destroyed");
             Destroy(gameObject);
             return;
         }
@@ -81,7 +79,6 @@ public class BallManager : MonoBehaviour
     {
         if (BallCount <= 0)
         {
-            Debug.LogError("BallManager: balls array is empty. On Android this means no ball data, so buying won't work.");
         }
 
         int defaultUnlockedIndex = GetFirstUnlockedByDefaultIndex();
@@ -173,12 +170,10 @@ public class BallManager : MonoBehaviour
             PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
             PlayerPrefs.Save();
 
-            Debug.Log($"Selected ball: {Balls[currentBallIndex].ballName}");
             OnSelectionChanged?.Invoke();
         }
         else if (!IsBallBought(ballIndex))
         {
-            Debug.LogWarning($"Cannot select ball {ballIndex} - not bought yet!");
         }
     }
 
@@ -192,7 +187,6 @@ public class BallManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogWarning($"Ball with name '{ballName}' not found!");
     }
 
     public bool IsBallBought(int ballIndex)
@@ -228,7 +222,6 @@ public class BallManager : MonoBehaviour
 
             if (IsBallBought(ballIndex))
             {
-                Debug.Log($"Ball {ball.ballName} is already bought!");
                 return;
             }
 
@@ -248,12 +241,7 @@ public class BallManager : MonoBehaviour
 
                 RefreshBallsBought();
 
-                Debug.Log($"Bought ball: {ball.ballName} for {ball.goldPrice} gold and {ball.diamondPrice} diamonds");
                 OnBallPurchased?.Invoke();
-            }
-            else
-            {
-                Debug.Log($"Not enough currency! Need {ball.goldPrice} gold and {ball.diamondPrice} diamonds");
             }
         }
     }
@@ -280,7 +268,6 @@ public class BallManager : MonoBehaviour
                 ballsBought.Add(i);
             }
         }
-        Debug.Log($"Balls bought: {ballsBought.Count} out of {Balls.Length}");
     }
 
     private int GetFirstUnlockedByDefaultIndex()

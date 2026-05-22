@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class FPSController : MonoBehaviour
@@ -72,7 +72,6 @@ public class FPSController : MonoBehaviour
             Application.targetFrameRate = targetFPS;
         }
 
-        Debug.Log($"FPS Controller: Target FPS set to {targetFPS} (VSync: {enableVSync})");
     }
 
     public void SetVSync(bool enable)

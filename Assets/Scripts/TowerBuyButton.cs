@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TowerBuyButton : MonoBehaviour
@@ -82,7 +82,6 @@ public class TowerBuyButton : MonoBehaviour
     {
         if (towerManager == null)
         {
-            Debug.LogError("TowerManager not found!");
             return;
         }
         
@@ -92,16 +91,13 @@ public class TowerBuyButton : MonoBehaviour
         if (!isBought)
         {
             towerManager.BuyTower(towerIndex);
-            Debug.Log($"Attempting to buy {towerName}");
         }
         else if (isBought && !isSelected)
         {
             towerManager.SetCurrentTower(towerIndex);
-            Debug.Log($"Selected {towerName}");
         }
         else if (isSelected)
         {
-            Debug.Log($"{towerName} is already selected!");
             return;
         }
         

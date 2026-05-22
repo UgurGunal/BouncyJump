@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ComboBarUI : MonoBehaviour
@@ -23,7 +23,6 @@ public class ComboBarUI : MonoBehaviour
         
         if (comboManager == null)
         {
-            Debug.LogError("ComboBarUI: ComboManager not found in scene!");
             return;
         }
 

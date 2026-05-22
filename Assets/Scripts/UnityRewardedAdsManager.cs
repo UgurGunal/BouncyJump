@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +19,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
     /// <summary>Fired when an ad unit finishes loading and is ready to show.</summary>
     public event Action<string> PlacementBecameReady;
 
-    [Header("Unity Ads — Game IDs (Unity dashboard)")]
+    [Header("Unity Ads â€” Game IDs (Unity dashboard)")]
     [SerializeField] string androidGameId = "";
     [SerializeField] string iOSGameId = "";
     [SerializeField] bool testMode = true;
@@ -54,7 +54,6 @@ public class UnityRewardedAdsManager : MonoBehaviour,
         _gameId = GetPlatformGameId();
         if (string.IsNullOrEmpty(_gameId))
         {
-            Debug.LogError("UnityRewardedAdsManager: Assign Android / iOS Game ID in the Inspector.");
             return;
         }
 
@@ -128,7 +127,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
 #endif
     }
 
-    /// <summary>Current platform’s shop rewarded placement id (from this component’s Inspector).</summary>
+    /// <summary>Current platformâ€™s shop rewarded placement id (from this componentâ€™s Inspector).</summary>
     public string GetShopRewardedAdUnitId()
     {
 #if UNITY_IOS
@@ -138,7 +137,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
 #endif
     }
 
-    /// <summary>Current platform’s revive rewarded placement id (from this component’s Inspector).</summary>
+    /// <summary>Current platformâ€™s revive rewarded placement id (from this componentâ€™s Inspector).</summary>
     public string GetReviveRewardedAdUnitId()
     {
 #if UNITY_IOS
@@ -157,7 +156,6 @@ public class UnityRewardedAdsManager : MonoBehaviour,
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
-        Debug.LogError($"UnityRewardedAdsManager: Init failed ({error}): {message}");
         _initialized = false;
     }
 
@@ -171,7 +169,6 @@ public class UnityRewardedAdsManager : MonoBehaviour,
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
     {
         _loadingUnits.Remove(adUnitId);
-        Debug.LogWarning($"UnityRewardedAdsManager: Load failed for '{adUnitId}' ({error}): {message}");
         StartCoroutine(ReloadAfterDelay(adUnitId, 2f));
     }
 
@@ -187,7 +184,6 @@ public class UnityRewardedAdsManager : MonoBehaviour,
         if (adUnitId != _activeShowUnitId)
             return;
 
-        Debug.LogWarning($"UnityRewardedAdsManager: Show failed ({error}): {message}");
         FinishShow(adUnitId, false);
         LoadPlacement(adUnitId);
     }

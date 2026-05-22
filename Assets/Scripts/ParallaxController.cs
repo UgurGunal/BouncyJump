@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -50,7 +50,6 @@ public class ParallaxController : MonoBehaviour
 
         if (cameraTransform == null)
         {
-            Debug.LogError("[ParallaxController] Camera not found! Make sure GamePersistentScene is loaded with Main Camera");
             yield break;
         }
 
@@ -60,7 +59,6 @@ public class ParallaxController : MonoBehaviour
         foreach (ParallaxObject obj in parallaxObjects)
             SetupParallaxObject(obj);
 
-        Debug.Log("[ParallaxController] Initialization complete, parallax system ready");
     }
 
     void LateUpdate()

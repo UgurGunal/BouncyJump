@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +9,7 @@ public class HomeScreenUI : MonoBehaviour
     public Button settingsButton;
     [Tooltip("Panel shown when Settings is pressed. Assign your settings root GameObject; keep it disabled in the scene if it should start hidden.")]
     public GameObject settingsPanel;
-    [Tooltip("Optional: close button on the settings panel. You can also leave this empty and use the Button’s On Click → HomeScreenUI.CloseSettingsPanel.")]
+    [Tooltip("Optional: close button on the settings panel. You can also leave this empty and use the Buttonâ€™s On Click â†’ HomeScreenUI.CloseSettingsPanel.")]
     public Button settingsCloseButton;
     public Button shopButton;
     public Button buyDiamondButton;
@@ -25,7 +25,7 @@ public class HomeScreenUI : MonoBehaviour
     [Header("Tower Integration")]
     public TowerManager towerManager;
 
-    [Header("Settings — volume (0–1, saved for all scenes)")]
+    [Header("Settings â€” volume (0â€“1, saved for all scenes)")]
     [Tooltip("Maps to MusicManager master volume. Works even when the manager is in another scene (saved in PlayerPrefs).")]
     public Slider musicVolumeSlider;
     [Tooltip("Maps to SoundEffectsManager master volume.")]
@@ -96,12 +96,10 @@ public class HomeScreenUI : MonoBehaviour
 
     void OnPlayButtonClick()
     {
-        Debug.Log("Play button clicked - Loading current tower scene");
         
         if (towerManager != null)
         {
             string sceneToLoad = towerManager.GetCurrentTowerSceneName();
-            Debug.Log($"Loading scene: {sceneToLoad}");
             
             try
             {
@@ -111,8 +109,6 @@ public class HomeScreenUI : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Failed to load scene '{sceneToLoad}': {e.Message}");
-                Debug.LogWarning("Please check your Build Settings and ensure the scene is added to the build");
                 
                 // Fallback: try to load default scene
                 try
@@ -121,13 +117,8 @@ public class HomeScreenUI : MonoBehaviour
                 }
                 catch (System.Exception e2)
                 {
-                    Debug.LogError($"Failed to load fallback GameScene: {e2.Message}");
                 }
             }
-        }
-        else
-        {
-            Debug.LogError("TowerManager not found!");
         }
     }
 
@@ -135,8 +126,6 @@ public class HomeScreenUI : MonoBehaviour
     {
         if (settingsPanel != null)
             settingsPanel.SetActive(true);
-        else
-            Debug.LogWarning("HomeScreenUI: Assign Settings Panel to show the settings menu.");
     }
 
     void OnSettingsCloseClick()
@@ -144,7 +133,7 @@ public class HomeScreenUI : MonoBehaviour
         CloseSettingsPanel();
     }
 
-    /// <summary>Hides the settings panel. Safe to call from the close button’s On Click () in the Inspector.</summary>
+    /// <summary>Hides the settings panel. Safe to call from the close buttonâ€™s On Click () in the Inspector.</summary>
     public void CloseSettingsPanel()
     {
         if (settingsPanel != null)
@@ -153,23 +142,15 @@ public class HomeScreenUI : MonoBehaviour
 
     void OnShopButtonClick()
     {
-        Debug.Log("Shop button clicked - Opening shop panel");
         
         if (shopManager != null)
-        {
             shopManager.OpenShop();
-        }
-        else
-        {
-            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
-        }
     }
 
     void OnBuyGoldShopClick()
     {
         if (shopManager == null)
         {
-            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
             return;
         }
         shopManager.OpenShop(buyGoldShopContentAnchoredY);
@@ -179,7 +160,6 @@ public class HomeScreenUI : MonoBehaviour
     {
         if (shopManager == null)
         {
-            Debug.LogError("Shop Manager not found! Please assign it in the inspector.");
             return;
         }
         shopManager.OpenShop(buyDiamondShopContentAnchoredY);

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -46,12 +46,7 @@ public class BuyGoldButton : MonoBehaviour
 
         if (shopManager.TryBuyGoldWithDiamonds(diamondCost, goldAmount))
         {
-            Debug.Log($"Bought {goldAmount} gold for {diamondCost} diamond(s).");
             RefreshCurrencyDisplay();
-        }
-        else
-        {
-            Debug.Log("Not enough diamonds to buy this gold pack.");
         }
     }
 

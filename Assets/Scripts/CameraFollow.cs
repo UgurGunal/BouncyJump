@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -40,7 +40,6 @@ public class CameraFollow : MonoBehaviour
             int currentLevel = LevelManager.Instance.GetCurrentLevel(0f);
             LevelManager.LevelData levelData = LevelManager.Instance.GetLevelData(currentLevel);
             constantSpeed = levelData.cameraSpeed;
-            // Debug.Log($"Initial camera speed set to: {constantSpeed}");
         }
     }
 
@@ -50,12 +49,6 @@ public class CameraFollow : MonoBehaviour
 
         // Check if player is out of bounds
         CheckCameraBounds();
-
-        // Debug: Show current positions and threshold check
-        if (!cameraActivated)
-        {
-            // Debug.Log($"Player Y: {player.position.y}, Threshold: {movementThreshold}, Should activate: {player.position.y > movementThreshold}");
-        }
 
         // Check if camera should be activated (one-time trigger for upward speed)
         if (!cameraActivated && player.position.y > movementThreshold)
@@ -70,11 +63,6 @@ public class CameraFollow : MonoBehaviour
                 int currentLevel = LevelManager.Instance.GetCurrentLevel(player.position.y);
                 LevelManager.LevelData levelData = LevelManager.Instance.GetLevelData(currentLevel);
                 constantSpeed = levelData.cameraSpeed;
-                // Debug.Log($"Camera upward speed ACTIVATED - Level {currentLevel}, Speed: {constantSpeed}");
-            }
-            else
-            {
-                // Debug.Log("Camera upward speed ACTIVATED - LevelManager not found, using default speed");
             }
         }
 
@@ -152,8 +140,6 @@ public class CameraFollow : MonoBehaviour
 
     void RestartGame()
     {
-        Debug.Log("Player died - RestartGame called");
-        
         // End session to capture final stats (currency will be saved by GameEndPanelUI)
         if (PointsManager.Instance != null)
         {
@@ -172,12 +158,10 @@ public class CameraFollow : MonoBehaviour
         // Then, show the revive panel
         if (RevivePanelUI.Instance != null && player != null)
         {
-            Debug.Log("Showing RevivePanelUI");
             RevivePanelUI.Instance.ShowRevivePanel();
         }
         else
         {
-            Debug.LogWarning("RevivePanelUI.Instance is null or player is null. RevivePanelUI.Instance: " + (RevivePanelUI.Instance != null) + ", Player: " + (player != null));
             // Fallback if RevivePanelUI is not in scene or player is null
             // Resume time before loading new scene in fallback
             Time.timeScale = 1f; 
@@ -195,6 +179,5 @@ public class CameraFollow : MonoBehaviour
     public void UpdateCameraSpeed(float newSpeed)
     {
         ConstantSpeed = newSpeed;
-        // Debug.Log($"Camera speed updated to: {newSpeed}");
     }
 }

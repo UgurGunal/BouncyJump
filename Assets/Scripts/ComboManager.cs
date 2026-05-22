@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -73,7 +73,6 @@ public class ComboManager : MonoBehaviour
         
         if (playerController == null && showDebugLogs)
         {
-            //Debug.LogWarning("ComboManager: PlayerBallController not found in scene!");
         }
         
         // Initialize combo to 0
@@ -81,7 +80,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"ComboManager initialized. Max Combo: {maxCombo}");
         }
     }
     
@@ -117,7 +115,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs && oldCombo > 0f && currentCombo == 0f)
         {
-            //Debug.Log("Combo decayed to zero");
         }
     }
     
@@ -140,7 +137,6 @@ public class ComboManager : MonoBehaviour
         
         //if (showDebugLogs && bonusSpeed > 0f)
         //{
-        //    Debug.Log($"Speed bonus: {bonusSpeed:F2} (Combo: {currentCombo:F1}/{maxCombo})");
         //}
         
         return bonusSpeed;
@@ -152,12 +148,11 @@ public class ComboManager : MonoBehaviour
         {
             if (showDebugLogs)
             {
-                //Debug.LogWarning($"Negative relative velocity for platform: {relativeVelocity}");
             }
             return;
         }
         
-        // Calculate bonus as relative velocity Y × platformVelocityMultiplier
+        // Calculate bonus as relative velocity Y Ã— platformVelocityMultiplier
         float comboToAdd = relativeVelocity * platformVelocityMultiplier;
         
         // Use the larger of calculated bonus or minimum bonus
@@ -177,7 +172,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Platform combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {relativeVelocity:F2})");
         }
     }
     
@@ -186,7 +180,6 @@ public class ComboManager : MonoBehaviour
         if (wall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning("WallComboIncrement called with null wall!");
             return;
         }
         
@@ -196,7 +189,6 @@ public class ComboManager : MonoBehaviour
         if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -204,11 +196,10 @@ public class ComboManager : MonoBehaviour
         if (IsWallOnCooldown(wall))
         {
             if (showDebugLogs)
-                //Debug.Log($"Wall {wall.name} is on cooldown, no combo added");
             return;
         }
         
-        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        // Calculate combo as absolute relative velocity Ã— wallVelocityMultiplier
         float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
@@ -229,7 +220,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2})");
         }
     }
 
@@ -239,7 +229,6 @@ public class ComboManager : MonoBehaviour
         if (wall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning("WallComboIncrementWithCooldown called with null wall!");
             return;
         }
         
@@ -249,7 +238,6 @@ public class ComboManager : MonoBehaviour
         if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -257,11 +245,10 @@ public class ComboManager : MonoBehaviour
         if (IsWallOnCooldown(wall))
         {
             if (showDebugLogs)
-                //Debug.Log($"Wall {wall.name} is on cooldown, no combo added");
             return;
         }
         
-        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        // Calculate combo as absolute relative velocity Ã— wallVelocityMultiplier
         float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
@@ -282,7 +269,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Wall combo with custom cooldown: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2})");
         }
     }
 
@@ -292,7 +278,6 @@ public class ComboManager : MonoBehaviour
         if (wall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning("WallComboIncrementAlternating called with null wall!");
             return;
         }
         
@@ -302,7 +287,6 @@ public class ComboManager : MonoBehaviour
         if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -311,7 +295,6 @@ public class ComboManager : MonoBehaviour
         if (sideWall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Wall {wall.name} doesn't have SideWall component!");
             return;
         }
         
@@ -319,11 +302,10 @@ public class ComboManager : MonoBehaviour
         if (!CanWallGiveCombo(sideWall.wallSide))
         {
             if (showDebugLogs)
-                //Debug.Log($"Wall {sideWall.wallSide} cannot give combo in current state: {currentWallComboState}");
             return;
         }
         
-        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        // Calculate combo as absolute relative velocity Ã— wallVelocityMultiplier
         float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
@@ -343,7 +325,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Alternating wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2}, New State: {currentWallComboState})");
         }
     }
 
@@ -353,7 +334,6 @@ public class ComboManager : MonoBehaviour
         if (wall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning("WallComboIncrementWithIndividualCooldown called with null wall!");
             return;
         }
         
@@ -363,7 +343,6 @@ public class ComboManager : MonoBehaviour
         if (absRelativeVelocity <= 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Zero or negative relative velocity for wall: {relativeVelocity}");
             return;
         }
         
@@ -372,7 +351,6 @@ public class ComboManager : MonoBehaviour
         if (sideWall == null)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Wall {wall.name} doesn't have SideWall component!");
             return;
         }
         
@@ -386,11 +364,10 @@ public class ComboManager : MonoBehaviour
             ResetOppositeWallCooldown(sideWall.wallSide);
             
             if (showDebugLogs)
-                //Debug.Log($"Wall {sideWall.wallSide} was on cooldown - cooldown reset to full duration, no combo added");
             return;
         }
         
-        // Calculate combo as absolute relative velocity × wallVelocityMultiplier
+        // Calculate combo as absolute relative velocity Ã— wallVelocityMultiplier
         float calculatedCombo = absRelativeVelocity * wallVelocityMultiplier;
         
         float oldCombo = currentCombo;
@@ -418,7 +395,6 @@ public class ComboManager : MonoBehaviour
         
         if (showDebugLogs)
         {
-            //Debug.Log($"Individual wall combo: {oldCombo:F1} → {currentCombo:F1} (Added: {calculatedCombo:F1}, Velocity: {absRelativeVelocity:F2}, Left CD: {leftWallCooldown:F1}, Right CD: {rightWallCooldown:F1})");
         }
     }
     
@@ -427,7 +403,6 @@ public class ComboManager : MonoBehaviour
         if (amount < 0f)
         {
             if (showDebugLogs)
-                //Debug.LogWarning($"Trying to add negative combo: {amount}");
             return;
         }
         
@@ -539,7 +514,6 @@ public class ComboManager : MonoBehaviour
     public void ResetCombo()
     {
         if (showDebugLogs){
-             //Debug.Log("Combo reset to 0");
         }
 
             
@@ -571,7 +545,6 @@ public class ComboManager : MonoBehaviour
         currentCombo = Mathf.Clamp(value, 0f, maxCombo);
         
         if (showDebugLogs){
-            //Debug.Log($"Combo set to: {currentCombo}");
         }
         
     }
@@ -581,7 +554,6 @@ public class ComboManager : MonoBehaviour
     private void TestComboIncrement()
     {
         AddCombo(100f);
-        //Debug.Log($"Test: Combo is now {currentCombo}");
     }
     
     // Helper methods for alternating wall combo system

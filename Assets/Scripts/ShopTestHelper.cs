@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopTestHelper : MonoBehaviour
@@ -39,7 +39,6 @@ public class ShopTestHelper : MonoBehaviour
         if (shopManager != null)
         {
             shopManager.AddGold(goldToAdd);
-            Debug.Log($"Added {goldToAdd} gold. Total: {shopManager.GetPlayerGold()}");
         }
     }
     
@@ -48,7 +47,6 @@ public class ShopTestHelper : MonoBehaviour
         if (shopManager != null)
         {
             shopManager.AddDiamonds(diamondsToAdd);
-            Debug.Log($"Added {diamondsToAdd} diamonds. Total: {shopManager.GetPlayerDiamonds()}");
         }
     }
     
@@ -86,7 +84,6 @@ public class ShopTestHelper : MonoBehaviour
         
         PlayerPrefs.Save();
         
-        Debug.Log("All data reset!");
         
         // Refresh UI
         if (shopManager != null)
@@ -113,7 +110,6 @@ public class ShopTestHelper : MonoBehaviour
             towerManager.RefreshTowersBought();
         }
         
-        Debug.Log("All towers unlocked!");
         
         // Refresh UI
         if (shopManager != null)

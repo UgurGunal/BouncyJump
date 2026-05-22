@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,14 +65,12 @@ public class RewardedDiamondAdButton : MonoBehaviour
         _mgr = UnityRewardedAdsManager.Instance;
         if (_mgr == null)
         {
-            Debug.LogError("RewardedDiamondAdButton: Add UnityRewardedAdsManager to the scene (Home and/or Game duplicate).");
             yield break;
         }
 
         _shopAdUnitId = _mgr.GetShopRewardedAdUnitId();
         if (string.IsNullOrEmpty(_shopAdUnitId))
         {
-            Debug.LogError("RewardedDiamondAdButton: UnityRewardedAdsManager shop rewarded ad unit IDs are empty.");
             yield break;
         }
 
@@ -87,7 +85,6 @@ public class RewardedDiamondAdButton : MonoBehaviour
 
         if (!_mgr.IsInitialized)
         {
-            Debug.LogError("RewardedDiamondAdButton: Unity Ads did not initialize.");
             yield break;
         }
 
@@ -109,7 +106,6 @@ public class RewardedDiamondAdButton : MonoBehaviour
         string id = ads != null ? ads.GetShopRewardedAdUnitId() : null;
         if (ads == null || string.IsNullOrEmpty(id) || !ads.IsPlacementReady(id))
         {
-            Debug.Log("RewardedDiamondAdButton: Ad not ready.");
             return;
         }
 

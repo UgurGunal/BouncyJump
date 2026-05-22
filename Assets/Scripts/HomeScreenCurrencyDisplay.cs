@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class HomeScreenCurrencyDisplay : MonoBehaviour
@@ -21,7 +21,6 @@ public class HomeScreenCurrencyDisplay : MonoBehaviour
         
         if (shopManager == null)
         {
-            Debug.LogWarning("ShopManager not found! Currency display may not work.");
         }
         
         // Initial update

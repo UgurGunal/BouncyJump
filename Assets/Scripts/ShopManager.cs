@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
@@ -10,14 +10,14 @@ public class ShopManager : MonoBehaviour
     public Button closeShopButton;
 
     [Header("Shop scroll")]
-    [Tooltip("The scrollable Content RectTransform — its Anchored Position Y is what actually changes when you scroll.")]
+    [Tooltip("The scrollable Content RectTransform â€” its Anchored Position Y is what actually changes when you scroll.")]
     public RectTransform shopScrollContent;
     [Tooltip("Usually the Viewport (Content's parent). If empty, Content's parent RectTransform is used for height.")]
     public RectTransform shopScrollViewport;
     [Tooltip("Optional: same ScrollRect as in the Inspector. Used only to sync the scrollbar after we set Content Y.")]
     public ScrollRect shopScrollRect;
 
-    [Header("Shop panel — scroll to section (while shop is open)")]
+    [Header("Shop panel â€” scroll to section (while shop is open)")]
     [Tooltip("Optional: Buy Gold button inside the shop; scrolls Content over time (no shop open).")]
     public Button shopPanelBuyGoldButton;
     [Tooltip("Optional: Buy Diamond button inside the shop.")]
@@ -101,7 +101,6 @@ public class ShopManager : MonoBehaviour
         TryAutoWireShopScroll();
         if (GetShopScrollContent() == null)
         {
-            Debug.LogWarning("ShopManager: No scroll Content found. Assign Shop Scroll Content / Shop Scroll Rect, or put a ScrollRect under Shop Panel.");
             OpenShop();
             return;
         }
@@ -114,8 +113,6 @@ public class ShopManager : MonoBehaviour
             homeUi.StartCoroutine(ScrollContentYAfterShopOpen(contentAnchoredY));
         else if (isActiveAndEnabled)
             StartCoroutine(ScrollContentYAfterShopOpen(contentAnchoredY));
-        else
-            Debug.LogError("ShopManager: Cannot finalize scroll — HomeScreenUI missing/inactive and ShopManager is disabled.");
     }
 
     /// <summary>Fills missing references from the first ScrollRect under the shop panel (include inactive).</summary>
@@ -232,7 +229,7 @@ public class ShopManager : MonoBehaviour
         if (viewport != null)
             scrollable = Mathf.Max(0f, content.rect.height - viewport.rect.height);
 
-        // ScrollRect owns scroll state; anchoredPosition.y is often wrong on the click frame — use normalized position (inverse of ApplyShopContentY).
+        // ScrollRect owns scroll state; anchoredPosition.y is often wrong on the click frame â€” use normalized position (inverse of ApplyShopContentY).
         float startY = (shopScrollRect != null && scrollable > 0.0001f)
             ? scrollable * (shopScrollRect.verticalNormalizedPosition - 1f)
             : content.anchoredPosition.y;
@@ -246,7 +243,7 @@ public class ShopManager : MonoBehaviour
         if (!isActiveAndEnabled)
             return;
 
-        // ScrollRect fights direct anchoredPosition changes — lock normalized pos from computed startY first.
+        // ScrollRect fights direct anchoredPosition changes â€” lock normalized pos from computed startY first.
         if (shopScrollRect != null && scrollable > 0.0001f)
         {
             shopScrollRect.StopMovement();
@@ -443,7 +440,6 @@ public class ShopManager : MonoBehaviour
     {
         if (!TrySpendDiamonds(diamondCost)) return false;
         AddGold(goldReward);
-        Debug.Log($"Bought {goldReward} gold for {diamondCost} diamonds.");
         return true;
     }
 
@@ -451,14 +447,12 @@ public class ShopManager : MonoBehaviour
     public void MockPurchaseDiamondsWithRealMoney(int amount)
     {
         AddDiamonds(amount);
-        Debug.Log($"[MOCK IAP] Purchased {amount} diamonds with real money.");
     }
 
     /// <summary>Mock: grant diamonds after watching an ad. Replace with real rewarded ad later.</summary>
     public void MockGrantDiamondsFromAd(int amount)
     {
         AddDiamonds(amount);
-        Debug.Log($"[MOCK AD] Granted {amount} diamonds from watching ad.");
     }
 
     void UpdateCurrencyDisplay()

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBallController : MonoBehaviour
 {
@@ -317,7 +317,6 @@ public class PlayerBallController : MonoBehaviour
         }
         
         gameStarted = true;
-        Debug.Log("Game started - Player can now move!");
     }
 
     private void ApplyScaleEffect(float collisionSpeed)
@@ -452,6 +451,5 @@ public class PlayerBallController : MonoBehaviour
         // Reset any other player state as needed
         isTouchingSideWall = false;
         
-        //Debug.Log($"Player revived at position: {revivePosition}");
     }
 }

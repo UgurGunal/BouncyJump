@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
@@ -74,11 +74,9 @@ public class SoundEffectsManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializeAudioSources();
             BuildSoundEffectDictionary();
-            Debug.Log("SoundEffectsManager: Instance created and marked as persistent");
         }
         else
         {
-            Debug.Log("SoundEffectsManager: Duplicate instance destroyed");
             Destroy(gameObject);
             return;
         }
@@ -144,7 +142,6 @@ public class SoundEffectsManager : MonoBehaviour
             {
                 if (soundEffectDictionary.ContainsKey(soundEffect.name))
                 {
-                    Debug.LogWarning($"SoundEffectsManager: Duplicate sound effect name '{soundEffect.name}'. The first one will be used.");
                 }
                 else
                 {
@@ -179,13 +176,11 @@ public class SoundEffectsManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(soundName))
         {
-            Debug.LogWarning("SoundEffectsManager: Attempted to play sound with empty name");
             return;
         }
 
         if (!soundEffectDictionary.ContainsKey(soundName))
         {
-            Debug.LogWarning($"SoundEffectsManager: Sound effect '{soundName}' not found in dictionary. Make sure it's added to the soundEffects list in the inspector.");
             return;
         }
 
@@ -193,7 +188,6 @@ public class SoundEffectsManager : MonoBehaviour
         
         if (soundEffect.clip == null)
         {
-            Debug.LogWarning($"SoundEffectsManager: Sound effect '{soundName}' has no AudioClip assigned.");
             return;
         }
 
@@ -201,7 +195,6 @@ public class SoundEffectsManager : MonoBehaviour
         AudioSource source = GetAvailableAudioSource();
         if (source == null)
         {
-            Debug.LogWarning("SoundEffectsManager: No available AudioSource in pool. Consider increasing audioSourcePoolSize.");
             return;
         }
 
@@ -247,14 +240,12 @@ public class SoundEffectsManager : MonoBehaviour
     {
         if (clip == null)
         {
-            Debug.LogWarning("SoundEffectsManager: Attempted to play null AudioClip");
             return;
         }
 
         AudioSource source = GetAvailableAudioSource();
         if (source == null)
         {
-            Debug.LogWarning("SoundEffectsManager: No available AudioSource in pool. Consider increasing audioSourcePoolSize.");
             return;
         }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SimpleTowerGenerator : MonoBehaviour
 {
@@ -108,8 +108,6 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         if (player == null || levelManager == null)
         {
-            Debug.LogError("SimpleTowerGenerator: Missing required references after auto-find");
-            Debug.LogError($"Player: {(player != null ? "Found" : "Missing")}, LevelManager: {(levelManager != null ? "Found" : "Missing")}");
             yield break;
         }
 
@@ -124,7 +122,6 @@ public class SimpleTowerGenerator : MonoBehaviour
 
         RefreshHeightLabelState();
         
-        Debug.Log("[SimpleTowerGenerator] Initialization complete, starting content generation");
         
         // Spawn initial content
         SpawnInitialContent();
@@ -137,29 +134,11 @@ public class SimpleTowerGenerator : MonoBehaviour
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
-            {
                 player = playerObject.transform;
-                Debug.Log("[SimpleTowerGenerator] Auto-found Player");
-            }
-            else
-            {
-                Debug.LogWarning("[SimpleTowerGenerator] Player not found! Make sure Player has 'Player' tag");
-            }
         }
-        
-        // Auto-find LevelManager from the active tower scene
+
         if (levelManager == null)
-        {
             levelManager = LevelManager.Instance;
-            if (levelManager != null)
-            {
-                Debug.Log("[SimpleTowerGenerator] Auto-found LevelManager from tower scene");
-            }
-            else
-            {
-                Debug.LogWarning("[SimpleTowerGenerator] LevelManager not found! Make sure tower scene has LevelManager with singleton pattern");
-            }
-        }
     }
 
     void Update()
@@ -514,7 +493,6 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void OnLevelChanged(int newLevel)
     {
-        Debug.Log($"SimpleTowerGenerator: Level changed to {newLevel}");
     }
 
     float GetRandomXPosition(float minX, float maxX)

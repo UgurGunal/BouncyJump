@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -41,7 +41,6 @@ public class CarouselController : MonoBehaviour
             content = GetComponent<RectTransform>();
             if (content == null)
             {
-                Debug.LogError("CarouselController: No content RectTransform assigned.");
                 return;
             }
         }
@@ -49,7 +48,6 @@ public class CarouselController : MonoBehaviour
         _pageCount = content.childCount;
         if (_pageCount == 0)
         {
-            Debug.LogError("CarouselController: Content has no children (pages).");
             return;
         }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
@@ -46,11 +46,9 @@ public class RevivePanelUI : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("RevivePanelUI Instance set");
         }
         else
         {
-            Debug.Log("Duplicate RevivePanelUI found, destroying");
             Destroy(gameObject);
             return;
         }
@@ -70,7 +68,6 @@ public class RevivePanelUI : MonoBehaviour
 
     public void ShowRevivePanel()
     {
-        Debug.Log("ShowRevivePanel called");
         panelObject.SetActive(true);
         contentContainer.transform.localScale = Vector3.zero;
         StartCoroutine(ScaleAnimation());
@@ -84,7 +81,7 @@ public class RevivePanelUI : MonoBehaviour
         StartCoroutine(EnsureWatchAdReadyWhilePanelOpenRoutine());
     }
 
-    /// <summary>Waits for singleton manager, init, and ad load — fixes inactive button when init or load finishes after the panel opens.</summary>
+    /// <summary>Waits for singleton manager, init, and ad load â€” fixes inactive button when init or load finishes after the panel opens.</summary>
     IEnumerator EnsureWatchAdReadyWhilePanelOpenRoutine()
     {
         float wait = 0f;
@@ -96,7 +93,6 @@ public class RevivePanelUI : MonoBehaviour
 
         if (Ads == null)
         {
-            Debug.LogWarning("RevivePanelUI: No UnityRewardedAdsManager found. Add it to Home (DDOL) or duplicate in this scene. Watch-ad stays disabled.");
             RefreshWatchAdButtonState();
             yield break;
         }
@@ -112,7 +108,6 @@ public class RevivePanelUI : MonoBehaviour
 
         if (!Ads.IsInitialized)
         {
-            Debug.LogWarning("RevivePanelUI: Unity Ads did not finish initializing. Check Game IDs on UnityRewardedAdsManager.");
             RefreshWatchAdButtonState();
             yield break;
         }
@@ -259,7 +254,6 @@ public class RevivePanelUI : MonoBehaviour
         string placement = RevivePlacementId();
         if (mgr == null || string.IsNullOrEmpty(placement) || !mgr.IsPlacementReady(placement))
         {
-            Debug.Log("RevivePanelUI: Rewarded ad not ready.");
             return;
         }
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -48,10 +48,10 @@ using UnityEngine.SceneManagement;
 /// 
 /// HOW IT WORKS:
 /// 
-/// - When HomeScene loads → PersistentLoader detects "MainMenu", no persistent scenes loaded
-/// - When TowerScene loads → PersistentLoader detects "GameScene", loads GamePersistentScene
-/// - When switching between tower scenes → GamePersistentScene stays loaded, only tower-specific content changes
-/// - When returning to HomeScene → PersistentLoader unloads GamePersistentScene
+/// - When HomeScene loads â†’ PersistentLoader detects "MainMenu", no persistent scenes loaded
+/// - When TowerScene loads â†’ PersistentLoader detects "GameScene", loads GamePersistentScene
+/// - When switching between tower scenes â†’ GamePersistentScene stays loaded, only tower-specific content changes
+/// - When returning to HomeScene â†’ PersistentLoader unloads GamePersistentScene
 /// - Game managers (currency, towers) and objects (player, camera) only exist during gameplay
 /// - HomeScene is completely independent with its own managers
 /// - ONE script handles everything automatically based on scene name detection
@@ -63,43 +63,6 @@ public class SceneManagerSetup : MonoBehaviour
     [Tooltip("Use this to test scene loading in the editor")]
     public bool testInEditor = false;
     
-    [Header("Debug")]
-    public bool showDebugLogs = true;
-
-    void Start()
-    {
-        if (showDebugLogs)
-        {
-            LogCurrentSceneSetup();
-        }
-    }
-
-    void LogCurrentSceneSetup()
-    {
-        Debug.Log($"=== SCENE SETUP DEBUG ===");
-        Debug.Log($"Current Scene: {SceneManager.GetActiveScene().name}");
-        Debug.Log($"Loaded Scenes: {SceneManager.sceneCount}");
-        
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            Scene scene = SceneManager.GetSceneAt(i);
-            Debug.Log($"  Scene {i}: {scene.name} (loaded: {scene.isLoaded})");
-        }
-        
-        // Check for managers
-        Debug.Log($"PointsManager.Instance: {(PointsManager.Instance != null ? "Found" : "Missing")}");
-        Debug.Log($"TowerManager.Instance: {(TowerManager.Instance != null ? "Found" : "Missing")}");
-        Debug.Log($"PersistentLoader.AreGameManagersLoaded(): {PersistentLoader.AreGameManagersLoaded()}");
-        Debug.Log($"=========================");
-    }
-
-    // Helper methods for testing
-    [ContextMenu("Log Scene Setup")]
-    public void LogSceneSetupMenu()
-    {
-        LogCurrentSceneSetup();
-    }
-
     [ContextMenu("Load Home Scene")]
     public void LoadHomeScene()
     {
