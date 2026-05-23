@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -944142815, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: -286981550, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.4142857, y: 0.4642857}
+  m_Size: {x: 2.357143, y: 0.41428572}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,8 +123,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.357143, y: 0.42857143}
-    newSize: {x: 2.4142857, y: 0.4642857}
+    oldSize: {x: 2.357143, y: 0.41428572}
+    newSize: {x: 2.357143, y: 0.41428572}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -168,10 +168,14 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 3.5
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 1
+  isAnvil: 0
+  anvilAudioCollider: {fileID: 0}
+  anvilSoundCooldown: 0.08

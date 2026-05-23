@@ -114,18 +114,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 27
-        width: 218
-        height: 1992
+        y: 23
+        width: 215
+        height: 1995
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cd75c5aa51288449ab214a64a4646c4
-      internalID: -2147285469
+      spriteID: 023eba5b28dcd3440815e3eb566f7103
+      internalID: -333722729
       vertices: []
       indices: 
       edges: []
@@ -134,19 +134,19 @@ TextureImporter:
       name: Tower5-AllSprites_1
       rect:
         serializedVersion: 2
-        x: 335
-        y: 15
-        width: 586
-        height: 2012
+        x: 343
+        y: 17
+        width: 593
+        height: 2015
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e0553417d2a7864486de20da19bb073
-      internalID: 2640898
+      spriteID: 14398708c3b563941a490f3ad035930b
+      internalID: -1647490207
       vertices: []
       indices: 
       edges: []
@@ -155,19 +155,19 @@ TextureImporter:
       name: Tower5-AllSprites_2
       rect:
         serializedVersion: 2
-        x: 956
-        y: 12
-        width: 149
-        height: 2021
+        x: 967
+        y: 15
+        width: 151
+        height: 2022
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c37cef46efc64e48b3d33ffd8601eee
-      internalID: -404553815
+      spriteID: 8d34d5e37b79289468034059f6499016
+      internalID: 106311598
       vertices: []
       indices: 
       edges: []
@@ -176,19 +176,19 @@ TextureImporter:
       name: Tower5-AllSprites_3
       rect:
         serializedVersion: 2
-        x: 1190
-        y: 1542
-        width: 285
-        height: 72
+        x: 1198
+        y: 1933
+        width: 286
+        height: 68
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f62c8390beff59a48aa0efd23cf77912
-      internalID: 924425283
+      spriteID: e0ddb7241af374f4ca28c1c796d5f7f1
+      internalID: -1950328398
       vertices: []
       indices: 
       edges: []
@@ -197,19 +197,19 @@ TextureImporter:
       name: Tower5-AllSprites_4
       rect:
         serializedVersion: 2
-        x: 1586
-        y: 1540
+        x: 1595
+        y: 1930
         width: 221
         height: 67
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 521b738f81d96c34b94036d263187c16
-      internalID: 1311799056
+      spriteID: cb293e852aaf77442a602a39b3ec28cd
+      internalID: -524029857
       vertices: []
       indices: 
       edges: []
@@ -218,19 +218,19 @@ TextureImporter:
       name: Tower5-AllSprites_5
       rect:
         serializedVersion: 2
-        x: 1195
-        y: 1434
-        width: 297
-        height: 63
+        x: 1194
+        y: 1821
+        width: 298
+        height: 61
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf7d4b1638bc7dc43a70bfc649ca20d7
-      internalID: -765162444
+      spriteID: f60d39cae111f3f4a8996f1c19f3f28d
+      internalID: -1848836890
       vertices: []
       indices: 
       edges: []
@@ -240,18 +240,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1593
-        y: 1432
+        y: 1817
         width: 243
         height: 59
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dda8a4b380decc14a9151d48fc243e15
-      internalID: -1098804492
+      spriteID: a9dc7cd38e817d742b70f8e732214628
+      internalID: 700551267
       vertices: []
       indices: 
       edges: []
@@ -260,19 +260,19 @@ TextureImporter:
       name: Tower5-AllSprites_7
       rect:
         serializedVersion: 2
-        x: 1185
-        y: 1314
+        x: 1199
+        y: 1694
         width: 302
-        height: 79
+        height: 84
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed905f5ceea10b446acd5c0454813998
-      internalID: -607500781
+      spriteID: 774abd6dd18abee4c9fa4a8d2e2ba126
+      internalID: 968706296
       vertices: []
       indices: 
       edges: []
@@ -281,19 +281,19 @@ TextureImporter:
       name: Tower5-AllSprites_8
       rect:
         serializedVersion: 2
-        x: 1590
-        y: 1302
-        width: 252
-        height: 84
+        x: 1605
+        y: 1687
+        width: 251
+        height: 75
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb33bd397a8472540bd4999b79138392
-      internalID: 1397676083
+      spriteID: b53293c3ad633db408cf61ccb3ba09f8
+      internalID: 1567836086
       vertices: []
       indices: 
       edges: []
@@ -302,19 +302,19 @@ TextureImporter:
       name: Tower5-AllSprites_9
       rect:
         serializedVersion: 2
-        x: 1178
-        y: 1217
+        x: 1203
+        y: 1595
         width: 304
         height: 60
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be658b158676fd74a9c5d2603553a9f1
-      internalID: 1335988894
+      spriteID: cb36da3bb2602f84da7e56a2c9f94ff3
+      internalID: 189208002
       vertices: []
       indices: 
       edges: []
@@ -323,19 +323,19 @@ TextureImporter:
       name: Tower5-AllSprites_10
       rect:
         serializedVersion: 2
-        x: 1590
-        y: 1212
+        x: 1615
+        y: 1590
         width: 250
-        height: 62
+        height: 61
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf5b1793fd180024fa77106fb8646169
-      internalID: -781202317
+      spriteID: ba84d7497be6c3b4fa6ed92002a29ffa
+      internalID: -1860193909
       vertices: []
       indices: 
       edges: []
@@ -344,19 +344,19 @@ TextureImporter:
       name: Tower5-AllSprites_11
       rect:
         serializedVersion: 2
-        x: 1167
-        y: 1100
-        width: 329
-        height: 82
+        x: 1194
+        y: 1477
+        width: 330
+        height: 78
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29828db6d0fda8445ae03f10a44caccd
-      internalID: 1475064012
+      spriteID: ede5e052d2953fb40a7b3b8b769dd1fa
+      internalID: -1435640604
       vertices: []
       indices: 
       edges: []
@@ -365,19 +365,19 @@ TextureImporter:
       name: Tower5-AllSprites_12
       rect:
         serializedVersion: 2
-        x: 1583
-        y: 1098
-        width: 247
-        height: 84
+        x: 1605
+        y: 1476
+        width: 255
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adefba96f91bea44d90b6e716253cf1c
-      internalID: -104663422
+      spriteID: 33362f97be535aa47bbbe0a1a0fafb08
+      internalID: -83962955
       vertices: []
       indices: 
       edges: []
@@ -386,19 +386,19 @@ TextureImporter:
       name: Tower5-AllSprites_13
       rect:
         serializedVersion: 2
-        x: 1168
-        y: 990
+        x: 1187
+        y: 1367
         width: 320
-        height: 72
+        height: 69
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ec685e00925aac42ac917dcb2d6899e
-      internalID: 1512078188
+      spriteID: b019f517705360e4fbb4194eaf0765d0
+      internalID: 918281617
       vertices: []
       indices: 
       edges: []
@@ -407,19 +407,19 @@ TextureImporter:
       name: Tower5-AllSprites_14
       rect:
         serializedVersion: 2
-        x: 1583
-        y: 990
-        width: 259
-        height: 73
+        x: 1602
+        y: 1367
+        width: 258
+        height: 72
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35af4a0c308217a4fa200117becade92
-      internalID: 1007774308
+      spriteID: 04488b7767097504fb824c8f6c297837
+      internalID: 161832267
       vertices: []
       indices: 
       edges: []
@@ -428,19 +428,19 @@ TextureImporter:
       name: Tower5-AllSprites_15
       rect:
         serializedVersion: 2
-        x: 1181
-        y: 864
+        x: 1195
+        y: 1266
         width: 330
-        height: 60
+        height: 58
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a68e7064c0c7fad4fa63a2f8442b0970
-      internalID: -944142815
+      spriteID: a0aca1ea050c07d49a3324f95f364423
+      internalID: -286981550
       vertices: []
       indices: 
       edges: []
@@ -449,19 +449,229 @@ TextureImporter:
       name: Tower5-AllSprites_16
       rect:
         serializedVersion: 2
-        x: 1179
-        y: 730
-        width: 618
-        height: 82
+        x: 1193
+        y: 1153
+        width: 611
+        height: 81
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1adaa96d81aaf7042a6e6d74166322b6
-      internalID: -638755562
+      spriteID: db8a97d6f6b08a04db5b2cdb14b70dac
+      internalID: 1006059430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_17
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 1018
+        width: 158
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d7f2000da08223488b90b7d7c8d5d2d
+      internalID: -1835430841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_18
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 907
+        width: 158
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103ceb22418f20940b6b2d890c5434ff
+      internalID: 2065059633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_19
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 802
+        width: 158
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a48e3bedda5e545a045ba4e3e4f217
+      internalID: -851230062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_20
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 690
+        width: 158
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5320d4b4168c01459f75622c4e5daa6
+      internalID: -1683269152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_21
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 582
+        width: 158
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8068baeadac4d604f8f236f709694902
+      internalID: 337044262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_22
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 469
+        width: 158
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435bbe0803478ed469cfdec79fde822c
+      internalID: -1225895917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_23
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 355
+        width: 158
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0115fc5cad6fa844396f38f4e34f7763
+      internalID: 940961379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_24
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 249
+        width: 158
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c773241c12e3c409741813c59176b1
+      internalID: 645579508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_25
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 143
+        width: 158
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368417bd9606ea74cba94c5f48187b95
+      internalID: -1783776730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower5-AllSprites_26
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 30
+        width: 183
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665886377bb78de4fb1484cba23b343f
+      internalID: -623300456
       vertices: []
       indices: 
       edges: []
@@ -477,23 +687,33 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tower5-AllSprites_0: -2147285469
-      Tower5-AllSprites_1: 2640898
-      Tower5-AllSprites_10: -781202317
-      Tower5-AllSprites_11: 1475064012
-      Tower5-AllSprites_12: -104663422
-      Tower5-AllSprites_13: 1512078188
-      Tower5-AllSprites_14: 1007774308
-      Tower5-AllSprites_15: -944142815
-      Tower5-AllSprites_16: -638755562
-      Tower5-AllSprites_2: -404553815
-      Tower5-AllSprites_3: 924425283
-      Tower5-AllSprites_4: 1311799056
-      Tower5-AllSprites_5: -765162444
-      Tower5-AllSprites_6: -1098804492
-      Tower5-AllSprites_7: -607500781
-      Tower5-AllSprites_8: 1397676083
-      Tower5-AllSprites_9: 1335988894
+      Tower5-AllSprites_0: -333722729
+      Tower5-AllSprites_1: -1647490207
+      Tower5-AllSprites_10: -1860193909
+      Tower5-AllSprites_11: -1435640604
+      Tower5-AllSprites_12: -83962955
+      Tower5-AllSprites_13: 918281617
+      Tower5-AllSprites_14: 161832267
+      Tower5-AllSprites_15: -286981550
+      Tower5-AllSprites_16: 1006059430
+      Tower5-AllSprites_17: -1835430841
+      Tower5-AllSprites_18: 2065059633
+      Tower5-AllSprites_19: -851230062
+      Tower5-AllSprites_2: 106311598
+      Tower5-AllSprites_20: -1683269152
+      Tower5-AllSprites_21: 337044262
+      Tower5-AllSprites_22: -1225895917
+      Tower5-AllSprites_23: 940961379
+      Tower5-AllSprites_24: 645579508
+      Tower5-AllSprites_25: -1783776730
+      Tower5-AllSprites_26: -623300456
+      Tower5-AllSprites_3: -1950328398
+      Tower5-AllSprites_4: -524029857
+      Tower5-AllSprites_5: -1848836890
+      Tower5-AllSprites_6: 700551267
+      Tower5-AllSprites_7: 968706296
+      Tower5-AllSprites_8: 1567836086
+      Tower5-AllSprites_9: 189208002
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

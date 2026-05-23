@@ -170,20 +170,27 @@ MonoBehaviour:
   parallaxObjects:
   - target: {fileID: 60219933}
     parallaxFactor: -0.035
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 1053119560}
     parallaxFactor: -0.035
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 863554778}
     parallaxFactor: 0.25
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 2125827023}
     parallaxFactor: 0.6
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
+  seamOverlapWorld: 0.02
+  seamOverlapPixels: 2
+  snapTilesToPixelGrid: 1
 --- !u!1 &60219931
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,12 +251,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2147285469, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: -333722729, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5571429, y: 14.228572}
+  m_Size: {x: 1.5357143, y: 14.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -306,8 +313,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5571429, y: 14.228572}
-    newSize: {x: 1.5571429, y: 14.228572}
+    oldSize: {x: 1.5357143, y: 14.25}
+    newSize: {x: 1.5357143, y: 14.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -453,12 +460,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -638755562, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: 1006059430, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.4142857, y: 0.5857143}
+  m_Size: {x: 4.364286, y: 0.57857144}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -496,12 +503,13 @@ MonoBehaviour:
   velocityThreshold: 4
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 0
   isAnvil: 0
   anvilAudioCollider: {fileID: 0}
@@ -564,12 +572,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: 2640898, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: -1647490207, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.1857142, y: 14.3714285}
+  m_Size: {x: 4.2357144, y: 14.392858}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -650,12 +658,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2147285469, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: -333722729, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5571429, y: 14.228572}
+  m_Size: {x: 1.5357143, y: 14.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -712,8 +720,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5571429, y: 14.228572}
-    newSize: {x: 1.5571429, y: 14.228572}
+    oldSize: {x: 1.5357143, y: 14.25}
+    newSize: {x: 1.5357143, y: 14.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -937,6 +945,65 @@ MonoBehaviour:
   coin3Prefab: {fileID: 6595305194927341745, guid: a774a5e1be604154793b1912d9a1a23f, type: 3}
   powerupPrefab: {fileID: 6595305194927341745, guid: ed60038291882f543be4060a041e8905, type: 3}
   diamondPrefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
+  enableHeightLabels: 1
+  towerHeight: 0
+  heightLabelInterval: 100
+  heightDisplayMultiplier: 5
+  heightLabelPrefabs:
+  - {fileID: 4490854985402721342, guid: d4edd53ec509ac743b9bfb21afa0a79c, type: 3}
+  - {fileID: 4490854985402721342, guid: 02ee8c2eb06027e41be652707cc0dbd8, type: 3}
+  - {fileID: 4490854985402721342, guid: b025527b34b5e8d40bf89bebffcc6679, type: 3}
+  - {fileID: 4490854985402721342, guid: 3a568347130b6744caadbbe47fa8e11d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1abb0454d144df54aa220eb0d514c4f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 38fdcecb7a547ec4abc3a7f6d150c253, type: 3}
+  - {fileID: 4490854985402721342, guid: 5392f1b702bc22441bbc44234fa35f6e, type: 3}
+  - {fileID: 4490854985402721342, guid: 513fa3790fb10ec46babb981b4a58ed8, type: 3}
+  - {fileID: 4490854985402721342, guid: 2929e4e0e5110f846b757f66dd42b0c5, type: 3}
+  - {fileID: 4490854985402721342, guid: 01f708a4a5566f643b640b62f2a7ef2c, type: 3}
+  - {fileID: 4490854985402721342, guid: d4edd53ec509ac743b9bfb21afa0a79c, type: 3}
+  - {fileID: 4490854985402721342, guid: 02ee8c2eb06027e41be652707cc0dbd8, type: 3}
+  - {fileID: 4490854985402721342, guid: b025527b34b5e8d40bf89bebffcc6679, type: 3}
+  - {fileID: 4490854985402721342, guid: 3a568347130b6744caadbbe47fa8e11d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1abb0454d144df54aa220eb0d514c4f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 38fdcecb7a547ec4abc3a7f6d150c253, type: 3}
+  - {fileID: 4490854985402721342, guid: 5392f1b702bc22441bbc44234fa35f6e, type: 3}
+  - {fileID: 4490854985402721342, guid: 513fa3790fb10ec46babb981b4a58ed8, type: 3}
+  - {fileID: 4490854985402721342, guid: 2929e4e0e5110f846b757f66dd42b0c5, type: 3}
+  - {fileID: 4490854985402721342, guid: 01f708a4a5566f643b640b62f2a7ef2c, type: 3}
+  - {fileID: 4490854985402721342, guid: d4edd53ec509ac743b9bfb21afa0a79c, type: 3}
+  - {fileID: 4490854985402721342, guid: 02ee8c2eb06027e41be652707cc0dbd8, type: 3}
+  - {fileID: 4490854985402721342, guid: b025527b34b5e8d40bf89bebffcc6679, type: 3}
+  - {fileID: 4490854985402721342, guid: 3a568347130b6744caadbbe47fa8e11d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1abb0454d144df54aa220eb0d514c4f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 38fdcecb7a547ec4abc3a7f6d150c253, type: 3}
+  - {fileID: 4490854985402721342, guid: 5392f1b702bc22441bbc44234fa35f6e, type: 3}
+  - {fileID: 4490854985402721342, guid: 513fa3790fb10ec46babb981b4a58ed8, type: 3}
+  - {fileID: 4490854985402721342, guid: 2929e4e0e5110f846b757f66dd42b0c5, type: 3}
+  - {fileID: 4490854985402721342, guid: 01f708a4a5566f643b640b62f2a7ef2c, type: 3}
+  - {fileID: 4490854985402721342, guid: d4edd53ec509ac743b9bfb21afa0a79c, type: 3}
+  - {fileID: 4490854985402721342, guid: 02ee8c2eb06027e41be652707cc0dbd8, type: 3}
+  - {fileID: 4490854985402721342, guid: b025527b34b5e8d40bf89bebffcc6679, type: 3}
+  - {fileID: 4490854985402721342, guid: 3a568347130b6744caadbbe47fa8e11d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1abb0454d144df54aa220eb0d514c4f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 38fdcecb7a547ec4abc3a7f6d150c253, type: 3}
+  - {fileID: 4490854985402721342, guid: 5392f1b702bc22441bbc44234fa35f6e, type: 3}
+  - {fileID: 4490854985402721342, guid: 513fa3790fb10ec46babb981b4a58ed8, type: 3}
+  - {fileID: 4490854985402721342, guid: 2929e4e0e5110f846b757f66dd42b0c5, type: 3}
+  - {fileID: 4490854985402721342, guid: 01f708a4a5566f643b640b62f2a7ef2c, type: 3}
+  - {fileID: 4490854985402721342, guid: d4edd53ec509ac743b9bfb21afa0a79c, type: 3}
+  - {fileID: 4490854985402721342, guid: 02ee8c2eb06027e41be652707cc0dbd8, type: 3}
+  - {fileID: 4490854985402721342, guid: b025527b34b5e8d40bf89bebffcc6679, type: 3}
+  - {fileID: 4490854985402721342, guid: 3a568347130b6744caadbbe47fa8e11d, type: 3}
+  - {fileID: 4490854985402721342, guid: 1abb0454d144df54aa220eb0d514c4f4, type: 3}
+  - {fileID: 4490854985402721342, guid: 38fdcecb7a547ec4abc3a7f6d150c253, type: 3}
+  - {fileID: 4490854985402721342, guid: 5392f1b702bc22441bbc44234fa35f6e, type: 3}
+  - {fileID: 4490854985402721342, guid: 513fa3790fb10ec46babb981b4a58ed8, type: 3}
+  - {fileID: 4490854985402721342, guid: 2929e4e0e5110f846b757f66dd42b0c5, type: 3}
+  - {fileID: 4490854985402721342, guid: 01f708a4a5566f643b640b62f2a7ef2c, type: 3}
+  heightLabelYOffset: 0
+  heightLabelYPadding: -0.2
+  heightLabelMaxX: 1.4
+  heightLabelMinX: -1.4
   levels:
   - cameraSpeed: 2
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 14c4bff14739f10428354b5a830bfa2c, type: 3}
@@ -953,6 +1020,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.003
     emptySpawnRate: 0.6
+    levelChangeTextColor: {r: 1, g: 0.8353811, b: 0.57924527, a: 1}
   - cameraSpeed: 3
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 4c10c2f381088e8498eaca9a0bd5d07c, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: c18f5dc8293541141bf0f62fd69d02d7, type: 3}
@@ -968,6 +1036,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.004
     emptySpawnRate: 0.5
+    levelChangeTextColor: {r: 0.9245283, g: 0.49628237, b: 0.3889996, a: 1}
   - cameraSpeed: 3.5
     longPlatformPrefab: {fileID: 6595305194927341745, guid: f47666ec19fb6de448c02063b024778b, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 1175d3149d2412c42ad119627b90b949, type: 3}
@@ -983,6 +1052,7 @@ MonoBehaviour:
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
     emptySpawnRate: 0.45
+    levelChangeTextColor: {r: 0.6995495, g: 0.9547169, b: 0.48096114, a: 1}
   - cameraSpeed: 4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 7bfd169c201fda24cbef47ecc8421c72, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: 4339f69cb2db9c445a46e9ae912a52d2, type: 3}
@@ -993,11 +1063,12 @@ MonoBehaviour:
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
     coin1SpawnRate: 0
-    coin2SpawnRate: 0.1
-    coin3SpawnRate: 0.3
+    coin2SpawnRate: 0
+    coin3SpawnRate: 0.38
     powerupSpawnRate: 0
     diamondSpawnRate: 0.006
     emptySpawnRate: 0.6
+    levelChangeTextColor: {r: 0.61698115, g: 0.74971503, b: 1, a: 1}
   - cameraSpeed: 4.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 16f48477c995adf4bb4570fdea6c4f8f, type: 3}
     shortPlatformPrefab: {fileID: 6595305194927341745, guid: ba412d9ce3cf2b5488f79017c76af213, type: 3}
@@ -1013,6 +1084,7 @@ MonoBehaviour:
     powerupSpawnRate: 0.003
     diamondSpawnRate: 0.01
     emptySpawnRate: 0.5
+    levelChangeTextColor: {r: 0.57169807, g: 1, b: 0.7826566, a: 1}
 --- !u!1 &2125827021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,12 +1143,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -200
-  m_Sprite: {fileID: -404553815, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: 106311598, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0642858, y: 14.435715}
+  m_Size: {x: 1.0785714, y: 14.442857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

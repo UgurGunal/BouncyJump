@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1311799056, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
+  m_Sprite: {fileID: -524029857, guid: cf3d719fa58344a4b8d3a38c81401b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,12 +169,17 @@ MonoBehaviour:
   velocityThreshold: 5
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 1.8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
+  isBouncyPlatform: 0
+  isAnvil: 0
+  anvilAudioCollider: {fileID: 0}
+  anvilSoundCooldown: 0.08
 --- !u!114 &1193769104262626235
 MonoBehaviour:
   m_ObjectHideFlags: 0
