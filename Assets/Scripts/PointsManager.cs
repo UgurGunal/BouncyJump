@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PointsManager : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class PointsManager : MonoBehaviour
     private float _sessionStartTime = 0f;
     private float _sessionDuration = 0f;
     private bool _sessionActive = false;
+    private bool _sessionPaused = false;
     private int _currentLevel = 0; // New: Track current level
     
 
@@ -61,8 +62,10 @@ public class PointsManager : MonoBehaviour
 
     void Update()
     {
-        if (_sessionActive)
+        if (_sessionActive && !_sessionPaused)
         {
+            _sessionDuration = Time.time - _sessionStartTime;
+
             // Update highest height reached
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
@@ -80,8 +83,6 @@ public class PointsManager : MonoBehaviour
                 }
             }
 
-            // Update session duration
-            _sessionDuration = Time.time - _sessionStartTime;
         }
     }
 
@@ -95,6 +96,7 @@ public class PointsManager : MonoBehaviour
         _sessionStartTime = Time.time;
         _sessionDuration = 0f;
         _sessionActive = true;
+        _sessionPaused = false;
         _currentLevel = 0; // New: Reset level on session start
         _currencySaved = false; // Reset currency saved flag for new session
     }
@@ -103,8 +105,22 @@ public class PointsManager : MonoBehaviour
     
     public void EndSession()
     {
+        if (_sessionActive && !_sessionPaused)
+            _sessionDuration = Time.time - _sessionStartTime;
+
         _sessionActive = false;
+        _sessionPaused = false;
         // Note: Currency accumulation/saving is handled by GameEndPanelUI when it shows
+    }
+
+    /// <summary>Freezes the run timer while the pause panel is open (resume continues from the same time).</summary>
+    public void PauseSession()
+    {
+        if (!_sessionActive || _sessionPaused)
+            return;
+
+        _sessionDuration = Time.time - _sessionStartTime;
+        _sessionPaused = true;
     }
     
     // Method to mark currency as already saved (called externally when currency is saved immediately)
@@ -153,9 +169,19 @@ public class PointsManager : MonoBehaviour
 
     public void ResumeSession()
     {
-        // Resume session without resetting collected items
-        _sessionStartTime = Time.time - _sessionDuration; // Adjust start time to maintain continuous duration
-        _sessionActive = true;
+        if (_sessionPaused)
+        {
+            _sessionStartTime = Time.time - _sessionDuration;
+            _sessionPaused = false;
+            return;
+        }
+
+        // After death/revive: continue tracking without resetting collected items
+        if (!_sessionActive)
+        {
+            _sessionStartTime = Time.time - _sessionDuration;
+            _sessionActive = true;
+        }
     }
 
     // --- Collectable Methods ---

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class SimpleTowerGenerator : MonoBehaviour
 {
@@ -59,6 +59,7 @@ public class SimpleTowerGenerator : MonoBehaviour
     private int heightLabelsSpawned;
     private int maxHeightLabels;
     private GameObject pendingHeightLabelPlatform;
+    private bool _poolsReady;
 
     void Awake()
     {
@@ -121,8 +122,9 @@ public class SimpleTowerGenerator : MonoBehaviour
         collectablePool = new PrefabObjectPool(poolInactiveRoot, ReleaseCollectableToPool);
 
         RefreshHeightLabelState();
-        
-        
+
+        _poolsReady = true;
+
         // Spawn initial content
         SpawnInitialContent();
     }
@@ -143,6 +145,9 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void Update()
     {
+        if (!_poolsReady || platformPool == null)
+            return;
+
         if (player == null) return;
         if (levelManager == null || levelManager != LevelManager.Instance)
         {
@@ -233,8 +238,13 @@ public class SimpleTowerGenerator : MonoBehaviour
         // platformY is now passed as parameter, no need to calculate again
         float platformScaleX = Random.Range(minPlatformScaleX, maxPlatformScaleX);
 
-        // Spawn platform
+        if (platformPrefab == null)
+            return;
+
         GameObject newPlatform = SpawnPlatform(platformX, platformY, platformPrefab, platformScaleX);
+        if (newPlatform == null)
+            return;
+
         TrySpawnHeightLabel(newPlatform);
 
         // Spawn collectable
@@ -287,7 +297,8 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     GameObject SpawnPlatform(float xPosition, float yPosition, GameObject platformPrefab, float scaleX = 1f)
     {
-        if (platformPrefab == null) return null;
+        if (platformPrefab == null || platformPool == null || generatedObjectsParent == null)
+            return null;
 
         Vector3 platformPosition = new Vector3(xPosition, yPosition, 0);
         GameObject newPlatform = platformPool.Get(platformPrefab, generatedObjectsParent);

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
@@ -10,14 +10,14 @@ public class ShopManager : MonoBehaviour
     public Button closeShopButton;
 
     [Header("Shop scroll")]
-    [Tooltip("The scrollable Content RectTransform â€” its Anchored Position Y is what actually changes when you scroll.")]
+    [Tooltip("The scrollable Content RectTransform - its Anchored Position Y is what actually changes when you scroll.")]
     public RectTransform shopScrollContent;
     [Tooltip("Usually the Viewport (Content's parent). If empty, Content's parent RectTransform is used for height.")]
     public RectTransform shopScrollViewport;
     [Tooltip("Optional: same ScrollRect as in the Inspector. Used only to sync the scrollbar after we set Content Y.")]
     public ScrollRect shopScrollRect;
 
-    [Header("Shop panel â€” scroll to section (while shop is open)")]
+    [Header("Shop panel - scroll to section (while shop is open)")]
     [Tooltip("Optional: Buy Gold button inside the shop; scrolls Content over time (no shop open).")]
     public Button shopPanelBuyGoldButton;
     [Tooltip("Optional: Buy Diamond button inside the shop.")]

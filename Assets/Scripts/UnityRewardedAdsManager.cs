@@ -19,7 +19,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
     /// <summary>Fired when an ad unit finishes loading and is ready to show.</summary>
     public event Action<string> PlacementBecameReady;
 
-    [Header("Unity Ads â€” Game IDs (Unity dashboard)")]
+    [Header("Unity Ads - Game IDs (Unity dashboard)")]
     [SerializeField] string androidGameId = "";
     [SerializeField] string iOSGameId = "";
     [SerializeField] bool testMode = true;

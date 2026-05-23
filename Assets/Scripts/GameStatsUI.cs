@@ -8,12 +8,26 @@ public class GameStatsUI : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI gemsText;
     public TextMeshProUGUI timeText;
+    [Tooltip("Optional: hide the whole timer row (icon + label). If empty, only timeText is shown/hidden.")]
+    public GameObject timeDisplayRoot;
     public TextMeshProUGUI levelText; // New: Reference for Level Text
+
+    [Header("Level Display")]
+    [Tooltip("HUD level label format. {0} = current level number (e.g. Level {0} -> Level 1).")]
+    public string levelTextFormat = "Level {0}";
 
     [Header("Update Settings")]
     public float updateInterval = 0.1f; // How often to update the UI (e.g., 10 times per second)
 
     private float _lastUpdateTime;
+    private bool _lastShowRunTimer;
+
+    void OnEnable()
+    {
+        // Force one apply so default-off matches hidden HUD on first run.
+        _lastShowRunTimer = !GameplayDisplaySettings.ShowRunTimer;
+        ApplyRunTimerVisibility();
+    }
 
     void Update()
     {
@@ -50,16 +64,33 @@ public class GameStatsUI : MonoBehaviour
             gemsText.text = $"{PointsManager.Instance.GemsCollected}";
         }
 
-        // Update Time Text
-        if (timeText != null)
-        {
-            timeText.text = $"{PointsManager.Instance.SessionDuration:F1}";
-        }
+        ApplyRunTimerVisibility();
 
-        // Update Level Text (New)
-        if (levelText != null)
-        {
-            levelText.text = $"{PointsManager.Instance.CurrentLevel}";
-        }
+        if (GameplayDisplaySettings.ShowRunTimer && timeText != null)
+            timeText.text = $"{PointsManager.Instance.SessionDuration:F1}";
+
+        if (levelText != null && !IsLevelChangePopupActive())
+            levelText.text = string.Format(levelTextFormat, PointsManager.Instance.CurrentLevel);
+    }
+
+    static bool IsLevelChangePopupActive()
+    {
+        return LevelChangeUI.Instance != null
+            && LevelChangeUI.Instance.IsShowing
+            && LevelChangeUI.Instance.levelText != null;
+    }
+
+    void ApplyRunTimerVisibility()
+    {
+        bool show = GameplayDisplaySettings.ShowRunTimer;
+        if (show == _lastShowRunTimer)
+            return;
+
+        _lastShowRunTimer = show;
+
+        if (timeDisplayRoot != null)
+            timeDisplayRoot.SetActive(show);
+        else if (timeText != null)
+            timeText.gameObject.SetActive(show);
     }
 }

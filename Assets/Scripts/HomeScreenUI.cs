@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class HomeScreenUI : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class HomeScreenUI : MonoBehaviour
     public Button settingsButton;
     [Tooltip("Panel shown when Settings is pressed. Assign your settings root GameObject; keep it disabled in the scene if it should start hidden.")]
     public GameObject settingsPanel;
-    [Tooltip("Optional: close button on the settings panel. You can also leave this empty and use the Buttonâ€™s On Click â†’ HomeScreenUI.CloseSettingsPanel.")]
+    [Tooltip("Optional: close button on the settings panel. You can also leave this empty and use the Button's On Click -> HomeScreenUI.CloseSettingsPanel.")]
     public Button settingsCloseButton;
     public Button shopButton;
     public Button buyDiamondButton;
@@ -25,11 +26,15 @@ public class HomeScreenUI : MonoBehaviour
     [Header("Tower Integration")]
     public TowerManager towerManager;
 
-    [Header("Settings â€” volume (0â€“1, saved for all scenes)")]
+    [Header("Settings - volume (0-1, saved for all scenes)")]
     [Tooltip("Maps to MusicManager master volume. Works even when the manager is in another scene (saved in PlayerPrefs).")]
     public Slider musicVolumeSlider;
     [Tooltip("Maps to SoundEffectsManager master volume.")]
     public Slider sfxVolumeSlider;
+
+    [Header("Settings - in-game HUD")]
+    [Tooltip("Your Settings panel Toggle only. Saves ON/OFF for the run timer on the gameplay HUD (PersistentScene). Nothing is shown on the home screen.")]
+    public Toggle inGameTimerHudToggle;
 
     void Start()
     {
@@ -92,6 +97,80 @@ public class HomeScreenUI : MonoBehaviour
             sfxVolumeSlider.SetValueWithoutNotify(AudioVolumeSettings.GetSfxVolume());
             sfxVolumeSlider.onValueChanged.AddListener(AudioVolumeSettings.SetSfxVolume);
         }
+
+        if (inGameTimerHudToggle == null)
+            inGameTimerHudToggle = FindInGameTimerHudToggleInSettings();
+
+        WireInGameTimerHudToggle();
+        EnsureButtonReceivesClicks(settingsCloseButton);
+    }
+
+    Toggle FindInGameTimerHudToggleInSettings()
+    {
+        if (settingsPanel == null)
+            return null;
+
+        Toggle[] toggles = settingsPanel.GetComponentsInChildren<Toggle>(true);
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            if (toggles[i].gameObject.name == "Toggle")
+                return toggles[i];
+        }
+
+        return toggles.Length > 0 ? toggles[0] : null;
+    }
+
+    void WireInGameTimerHudToggle()
+    {
+        if (inGameTimerHudToggle == null)
+            return;
+
+        inGameTimerHudToggle.SetIsOnWithoutNotify(GameplayDisplaySettings.ShowRunTimer);
+        inGameTimerHudToggle.onValueChanged.AddListener(OnInGameTimerHudToggleChanged);
+        inGameTimerHudToggle.interactable = true;
+
+        // Only the timer row (e.g. TimeDisplayOption), not the whole settings panel — avoids breaking QuitButton.
+        DisableLabelRaycastsInRow(inGameTimerHudToggle.transform.parent);
+
+        if (inGameTimerHudToggle.targetGraphic != null)
+            inGameTimerHudToggle.targetGraphic.raycastTarget = true;
+
+        inGameTimerHudToggle.transform.SetAsLastSibling();
+    }
+
+    /// <summary>Stops "Time Display" text from blocking the toggle. Does not touch other settings UI (quit, sliders).</summary>
+    static void DisableLabelRaycastsInRow(Transform row)
+    {
+        if (row == null)
+            return;
+
+        TextMeshProUGUI[] labels = row.GetComponentsInChildren<TextMeshProUGUI>(true);
+        for (int i = 0; i < labels.Length; i++)
+            labels[i].raycastTarget = false;
+    }
+
+    static void EnsureButtonReceivesClicks(Button button)
+    {
+        if (button == null)
+            return;
+
+        if (button.targetGraphic != null)
+        {
+            button.targetGraphic.raycastTarget = true;
+            return;
+        }
+
+        Image image = button.GetComponent<Image>();
+        if (image == null)
+            return;
+
+        image.raycastTarget = true;
+        button.targetGraphic = image;
+    }
+
+    void OnInGameTimerHudToggleChanged(bool show)
+    {
+        GameplayDisplaySettings.SetShowRunTimer(show);
     }
 
     void OnPlayButtonClick()
@@ -133,7 +212,7 @@ public class HomeScreenUI : MonoBehaviour
         CloseSettingsPanel();
     }
 
-    /// <summary>Hides the settings panel. Safe to call from the close buttonâ€™s On Click () in the Inspector.</summary>
+    /// <summary>Hides the settings panel. Safe to call from the close button's On Click () in the Inspector.</summary>
     public void CloseSettingsPanel()
     {
         if (settingsPanel != null)

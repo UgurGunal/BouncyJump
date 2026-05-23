@@ -10,12 +10,15 @@ public class LevelChangeUI : MonoBehaviour
     public TextMeshProUGUI levelText;
 
     [Header("Animation Settings")]
-    public float fadeInDuration = 0.5f;
-    public float displayDuration = 2f;
-    public float fadeOutDuration = 0.5f;
+    [Tooltip("Total time visible per level change (fade in + hold + fade out).")]
+    public float totalDisplayDuration = 2f;
+    public float fadeInDuration = 0.2f;
+    public float fadeOutDuration = 0.2f;
 
     [Header("Text Settings")]
     public string levelTextFormat = "LEVEL {0}";
+
+    public bool IsShowing { get; private set; }
 
     private void Awake()
     {
@@ -26,16 +29,17 @@ public class LevelChangeUI : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        if (levelText == null)
+            levelText = GetComponent<TextMeshProUGUI>();
     }
 
     void Start()
     {
-        // Ensure the text is hidden at start
         if (levelText != null)
-        {
-            levelText.alpha = 0f;
-        }
+            SetLevelTextAlpha(Color.white, 0f);
     }
 
     public void ShowLevelChange(int level)
@@ -51,46 +55,56 @@ public class LevelChangeUI : MonoBehaviour
 
     private IEnumerator AnimateLevelChange(int level, Color textColor)
     {
+        IsShowing = true;
+
+        float fadeIn = Mathf.Max(0f, fadeInDuration);
+        float fadeOut = Mathf.Max(0f, fadeOutDuration);
+        float total = Mathf.Max(0f, totalDisplayDuration);
+        float hold = Mathf.Max(0f, total - fadeIn - fadeOut);
+
         if (levelText != null)
         {
             levelText.text = string.Format(levelTextFormat, level);
             SetLevelTextAlpha(textColor, 0f);
         }
 
-        // Fade in
-        if (levelText != null)
+        if (levelText != null && fadeIn > 0f)
         {
             float elapsedTime = 0f;
-            while (elapsedTime < fadeInDuration)
+            while (elapsedTime < fadeIn)
             {
                 elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeInDuration);
+                float alpha = Mathf.Clamp01(elapsedTime / fadeIn);
                 SetLevelTextAlpha(textColor, alpha);
                 yield return null;
             }
-            SetLevelTextAlpha(textColor, 1f);
         }
 
-        yield return new WaitForSeconds(displayDuration);
+        SetLevelTextAlpha(textColor, 1f);
 
-        // Fade out
-        if (levelText != null)
+        if (hold > 0f)
+            yield return new WaitForSeconds(hold);
+
+        if (levelText != null && fadeOut > 0f)
         {
             float elapsedTime = 0f;
-            while (elapsedTime < fadeOutDuration)
+            while (elapsedTime < fadeOut)
             {
                 elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeOutDuration);
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeOut);
                 SetLevelTextAlpha(textColor, alpha);
                 yield return null;
             }
-            SetLevelTextAlpha(textColor, 0f);
         }
+
+        SetLevelTextAlpha(textColor, 0f);
+        IsShowing = false;
     }
 
     void SetLevelTextAlpha(Color rgb, float alpha)
     {
         if (levelText == null) return;
-        levelText.color = new Color(rgb.r, rgb.g, rgb.b, alpha);
+        Color c = new Color(rgb.r, rgb.g, rgb.b, alpha);
+        levelText.color = c;
     }
 }

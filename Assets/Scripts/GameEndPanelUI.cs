@@ -108,6 +108,10 @@ public class GameEndPanelUI : MonoBehaviour
         contentContainer.transform.localScale = Vector3.zero;
         StartCoroutine(ScaleAnimation());
         PopulateStats();
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.StopMusic();
+
         // Time.timeScale should already be 0f from RevivePanelUI
     }
 
@@ -463,7 +467,13 @@ public class GameEndPanelUI : MonoBehaviour
     {
         HideGameEndPanel();
         Time.timeScale = 1f; // Resume time before loading new scene
-        
+
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.StartSession();
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.RestartMusic();
+
         // Reset the persistent loader flag and reload scene
         PersistentLoader.ResetForRestart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

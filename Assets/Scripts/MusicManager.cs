@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
@@ -246,42 +246,6 @@ public class MusicManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Stop the currently playing music
-    /// </summary>
-    public void StopMusic()
-    {
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
-
-        if (musicSource.isPlaying)
-        {
-            StartCoroutine(FadeOutMusic());
-        }
-    }
-
-    /// <summary>
-    /// Fade out current music
-    /// </summary>
-    private IEnumerator FadeOutMusic()
-    {
-        float elapsedTime = 0f;
-        float startVolume = musicSource.volume;
-
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / fadeDuration;
-            musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
-            yield return null;
-        }
-
-        musicSource.Stop();
-        musicSource.volume = 0f;
-    }
-
-    /// <summary>
     /// Pause the currently playing music (instant pause, no fade)
     /// </summary>
     public void PauseMusic()
@@ -400,10 +364,41 @@ public class MusicManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Stop gameplay music immediately (e.g. after game over). Does not start a new track.
+    /// </summary>
+    public void StopMusic()
+    {
+        if (pauseFadeCoroutine != null)
+        {
+            StopCoroutine(pauseFadeCoroutine);
+            pauseFadeCoroutine = null;
+        }
+
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
+        }
+
+        if (musicSource != null)
+        {
+            musicSource.Stop();
+            musicSource.time = 0f;
+            musicSource.volume = 0f;
+        }
+    }
+
+    /// <summary>
     /// Restart the currently playing music from the beginning
     /// </summary>
     public void RestartMusic()
     {
+        if (pauseFadeCoroutine != null)
+        {
+            StopCoroutine(pauseFadeCoroutine);
+            pauseFadeCoroutine = null;
+        }
+
         // Stop any ongoing fade
         if (fadeCoroutine != null)
         {
@@ -416,6 +411,7 @@ public class MusicManager : MonoBehaviour
         {
             // Stop and restart from beginning
             musicSource.Stop();
+            musicSource.time = 0f;
             
             // Get the appropriate volume for current music
             float volume = defaultMusicVolume;

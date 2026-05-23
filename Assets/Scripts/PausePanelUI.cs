@@ -23,7 +23,6 @@ public class PausePanelUI : MonoBehaviour
     [Tooltip("Usually placed outside the pause panel so it stays visible after the panel is closed.")]
     public TextMeshProUGUI resumeCountdownText;
 
-    CameraFollow _cameraFollow;
     Coroutine _resumeCoroutine;
 
     void Awake()
@@ -54,8 +53,6 @@ public class PausePanelUI : MonoBehaviour
             homeButton.onClick.AddListener(OnHomeClicked);
         if (pauseOpenButton != null)
             pauseOpenButton.onClick.AddListener(ShowPausePanel);
-
-        _cameraFollow = FindObjectOfType<CameraFollow>();
     }
 
     /// <summary>Opens pause panel and freezes gameplay (Time.timeScale = 0).</summary>
@@ -69,6 +66,8 @@ public class PausePanelUI : MonoBehaviour
         Time.timeScale = 0f;
         if (MusicManager.Instance != null)
             MusicManager.Instance.PauseMusic();
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.PauseSession();
 
         panelObject.SetActive(true);
     }
@@ -105,11 +104,8 @@ public class PausePanelUI : MonoBehaviour
 
         if (MusicManager.Instance != null)
             MusicManager.Instance.ResumeMusic();
-
-        if (_cameraFollow == null)
-            _cameraFollow = FindObjectOfType<CameraFollow>();
-        if (_cameraFollow != null)
-            _cameraFollow.ResetRestartTrigger();
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.ResumeSession();
 
         _resumeCoroutine = null;
     }

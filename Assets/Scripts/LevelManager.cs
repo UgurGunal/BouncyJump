@@ -20,14 +20,14 @@ public class LevelManager : MonoBehaviour
     public GameObject powerupPrefab;
     public GameObject diamondPrefab;
 
-    [Header("Height Labels (Optional â€” per tower)")]
+    [Header("Height Labels (Optional - per tower)")]
     [Tooltip("When off, platforms spawn without height labels. Configure separately on each tower's LevelManager.")]
     public bool enableHeightLabels = false;
-    [Tooltip("Optional cap: max display height for labels (100, 200, â€¦). 0 = use every entry in Height Label Prefabs.")]
+    [Tooltip("Optional cap: max display height for labels (100, 200, ...). 0 = use every entry in Height Label Prefabs.")]
     public float towerHeight = 0f;
-    [Tooltip("Display-height interval for which platform gets a label (100, 200, 300, â€¦). Label position uses the platform's real X/Y, not these exact heights.")]
+    [Tooltip("Display-height interval for which platform gets a label (100, 200, 300, ...). Label position uses the platform's real X/Y, not these exact heights.")]
     public float heightLabelInterval = 100f;
-    [Tooltip("Used only to test when a platform has passed a milestone (display height = world Y Ã— this). Matches HUD (Ã—5).")]
+    [Tooltip("Used only to test when a platform has passed a milestone (display height = world Y x this). Matches HUD (x5).")]
     public float heightDisplayMultiplier = 5f;
     [Tooltip("Prefab for 100 label (index 0), 200 (index 1), etc.")]
     public GameObject[] heightLabelPrefabs;
@@ -35,9 +35,9 @@ public class LevelManager : MonoBehaviour
     public float heightLabelYOffset = 0f;
     [Tooltip("Fine-tune label Y after border alignment (negative = slightly lower).")]
     public float heightLabelYPadding = -0.2f;
-    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform 1.8 â†’ label 1.4).")]
+    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform 1.8 -> label 1.4).")]
     public float heightLabelMaxX = 1.4f;
-    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform -1.5 â†’ label -1.4).")]
+    [Tooltip("Labels on platforms past this X are shifted inward (e.g. platform -1.5 -> label -1.4).")]
     public float heightLabelMinX = -1.4f;
 
     [System.Serializable]
@@ -100,12 +100,21 @@ public class LevelManager : MonoBehaviour
         
         // Auto-find references from GamePersistentScene if not assigned
         FindPersistentReferences();
-        
+
+        if (player != null)
+        {
+            int startLevel = GetCurrentLevel(player.position.y);
+            if (startLevel != currentLevel)
+            {
+                currentLevel = startLevel;
+                UpdateLevelSettings(currentLevel);
+            }
+        }
+
         if (PointsManager.Instance != null)
         {
             PointsManager.Instance.StartSession();
         }
-        
     }
     
     void FindPersistentReferences()
