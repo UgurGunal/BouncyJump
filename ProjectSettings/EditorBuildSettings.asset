@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AmazonTower.unity
     guid: 787baf50bcaae0d4c9eabb60c533427b
+  - enabled: 1
+    path: Assets/Scenes/ElectricTower.unity
+    guid: 5ee3848987281a84db4d2d9e7942d21b
   m_configObjects: {}
