@@ -113,9 +113,9 @@ TextureImporter:
       name: Environment_0
       rect:
         serializedVersion: 2
-        x: 72
+        x: 81
         y: 692
-        width: 1100
+        width: 1091
         height: 199
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

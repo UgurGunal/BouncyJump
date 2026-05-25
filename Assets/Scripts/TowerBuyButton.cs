@@ -94,12 +94,12 @@ public class TowerBuyButton : MonoBehaviour
         }
 
         bool isBought = towerManager.IsTowerBought(towerIndex);
-        bool isSelected = towerManager.currentTowerIndex == towerIndex;
 
         if (!isBought)
             towerManager.BuyTower(towerIndex);
-        else if (!isSelected)
-            towerManager.SetCurrentTower(towerIndex);
+
+        // Always sync home viewport / carousel to this tower (preview if locked, save if bought).
+        towerManager.SelectHomeTowerVisual(towerIndex);
 
         UpdateButtonState();
 

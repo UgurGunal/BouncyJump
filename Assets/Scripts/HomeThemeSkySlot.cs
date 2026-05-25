@@ -23,8 +23,11 @@ public class HomeThemeSkySlot : MonoBehaviour
 
     public void SetSlideOffset(float x)
     {
-        if (SkyRect != null)
-            SkyRect.anchoredPosition = new Vector2(x, 0f);
+        RectTransform rect = transform as RectTransform;
+        if (rect != null)
+            rect.anchoredPosition = new Vector2(x, rect.anchoredPosition.y);
+        else if (SkyRect != null)
+            SkyRect.anchoredPosition = new Vector2(x, SkyRect.anchoredPosition.y);
     }
 
     void OnValidate()

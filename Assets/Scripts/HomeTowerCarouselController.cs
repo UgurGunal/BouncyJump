@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Sky and foreground are separate viewport children so clouds can sit between them in draw order.
-/// Hierarchy (top = behind): SkyA, SkyB, Clouds, FrontA, FrontB.
+/// Sky and foreground are separate viewport children so clouds sit between them in draw order.
+/// Hierarchy (back to front): SkyA, SkyB, Clouds, FrontA, FrontB. Sky + matching foreground slide together.
 /// </summary>
 public class HomeTowerCarouselController : MonoBehaviour
 {
+    const string SlideSetAName = "SlideSetA";
+    const string SlideSetBName = "SlideSetB";
+
     [Header("Viewport")]
     public RectTransform slideViewport;
 
@@ -19,7 +22,7 @@ public class HomeTowerCarouselController : MonoBehaviour
     public GameObject frontA;
     public GameObject frontB;
 
-    [Header("Clouds (fixed — direct child of viewport, between sky and front)")]
+    [Header("Clouds (fixed — direct child of viewport, between skies and foregrounds)")]
     public GameObject sharedClouds;
 
     [Header("Optional auto-wire")]
@@ -33,7 +36,7 @@ public class HomeTowerCarouselController : MonoBehaviour
     [Header("Animation")]
     public float slideDuration = 0.35f;
     public bool clipToViewport = true;
-    [Tooltip("Places Clouds between sky and foreground layers without moving them.")]
+    [Tooltip("Order: skies, Clouds, then foregrounds.")]
     public bool enforceDrawOrder = true;
 
     [Header("Optional")]
@@ -67,6 +70,7 @@ public class HomeTowerCarouselController : MonoBehaviour
         AutoWireReferences();
         EnsureSkyReferences();
         ResolveSlotComponents(allowAddComponents: true);
+        RestoreFlatViewportHierarchy();
     }
 
     void ResolveSlotComponents(bool allowAddComponents)
@@ -128,6 +132,7 @@ public class HomeTowerCarouselController : MonoBehaviour
         IsSlideControllerActive = true;
         AutoWireReferences();
         ResolveSlotComponents(allowAddComponents: true);
+        RestoreFlatViewportHierarchy();
         DisableLegacyThemeController();
 
         if (leftButton != null)
@@ -136,6 +141,7 @@ public class HomeTowerCarouselController : MonoBehaviour
             rightButton.onClick.AddListener(OnRightClicked);
 
         TowerManager.OnSelectionChanged += OnExternalTowerChanged;
+        TowerManager.OnTowerPurchased += OnExternalTowerChanged;
         EnsureViewportClipping();
         EnsureSkyReferences();
         EnsureSharedClouds();
@@ -145,6 +151,13 @@ public class HomeTowerCarouselController : MonoBehaviour
         RefreshSlideWidth();
         SnapToCurrentTower();
         UpdateNavigationButtons();
+        NotifyHomeTowerLockPresentation();
+    }
+
+    static void NotifyHomeTowerLockPresentation()
+    {
+        HomeTowerLockPresentation presentation = Object.FindObjectOfType<HomeTowerLockPresentation>();
+        presentation?.Refresh();
     }
 
     void OnDisable()
@@ -157,6 +170,7 @@ public class HomeTowerCarouselController : MonoBehaviour
             rightButton.onClick.RemoveListener(OnRightClicked);
 
         TowerManager.OnSelectionChanged -= OnExternalTowerChanged;
+        TowerManager.OnTowerPurchased -= OnExternalTowerChanged;
 
         if (slideRoutine != null)
         {
@@ -189,8 +203,50 @@ public class HomeTowerCarouselController : MonoBehaviour
             slideViewport = skyA.transform.parent as RectTransform;
         else if (frontA != null)
             slideViewport = frontA.transform.parent as RectTransform;
-        else if (slideLayerA != null)
-            slideViewport = slideLayerA.transform.parent as RectTransform;
+    }
+
+    /// <summary>
+    /// Undo legacy SlideSetA/B grouping so Clouds can sit between skies and foregrounds.
+    /// </summary>
+    void RestoreFlatViewportHierarchy()
+    {
+        if (slideViewport == null)
+            return;
+
+        ReparentToViewport(skyA);
+        ReparentToViewport(skyB);
+        ReparentToViewport(frontA);
+        ReparentToViewport(frontB);
+
+        DestroyEmptySlideSet(SlideSetAName);
+        DestroyEmptySlideSet(SlideSetBName);
+    }
+
+    void ReparentToViewport(GameObject child)
+    {
+        if (child == null || slideViewport == null)
+            return;
+
+        if (child.transform.parent != slideViewport)
+            child.transform.SetParent(slideViewport, false);
+    }
+
+    void DestroyEmptySlideSet(string slideSetName)
+    {
+        if (slideViewport == null)
+            return;
+
+        Transform slideSet = slideViewport.Find(slideSetName);
+        if (slideSet == null)
+            return;
+
+        while (slideSet.childCount > 0)
+            slideSet.GetChild(0).SetParent(slideViewport, false);
+
+        if (Application.isPlaying)
+            Destroy(slideSet.gameObject);
+        else
+            DestroyImmediate(slideSet.gameObject);
     }
 
     void EnsureSharedClouds()
@@ -203,7 +259,10 @@ public class HomeTowerCarouselController : MonoBehaviour
         }
 
         if (sharedClouds != null)
+        {
+            ReparentToViewport(sharedClouds);
             sharedClouds.SetActive(true);
+        }
     }
 
     void EnsureSkyReferences()
@@ -229,51 +288,29 @@ public class HomeTowerCarouselController : MonoBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Only moves Clouds — sky and foreground hierarchy order is left as set in the Editor.
-    /// Unity UI: lower sibling index = drawn behind.
-    /// </summary>
     void ApplyViewportDrawOrder()
     {
-        if (slideViewport == null || sharedClouds == null)
+        if (slideViewport == null)
             return;
 
-        if (sharedClouds.transform.parent != slideViewport)
-            return;
+        int index = 0;
+        SetSiblingIndex(skyA, ref index);
+        SetSiblingIndex(skyB, ref index);
 
-        int cloudsIndex = GetCloudsSiblingIndex();
-        sharedClouds.transform.SetSiblingIndex(cloudsIndex);
+        if (sharedClouds != null && sharedClouds.transform.parent == slideViewport)
+            sharedClouds.transform.SetSiblingIndex(index++);
+
+        SetSiblingIndex(frontA, ref index);
+        SetSiblingIndex(frontB, ref index);
     }
 
-    int GetCloudsSiblingIndex()
+    static void SetSiblingIndex(GameObject target, ref int index)
     {
-        int afterSky = -1;
-        ConsiderSiblingIndex(skyA, ref afterSky, takeMax: true);
-        ConsiderSiblingIndex(skyB, ref afterSky, takeMax: true);
-
-        int beforeFront = slideViewport.childCount;
-        ConsiderSiblingIndex(frontA, ref beforeFront, takeMax: false);
-        ConsiderSiblingIndex(frontB, ref beforeFront, takeMax: false);
-
-        if (afterSky < 0 && beforeFront >= slideViewport.childCount)
-            return sharedClouds.transform.GetSiblingIndex();
-
-        if (afterSky < 0)
-            return Mathf.Max(0, beforeFront - 1);
-
-        if (beforeFront >= slideViewport.childCount)
-            return Mathf.Min(afterSky + 1, slideViewport.childCount - 1);
-
-        return Mathf.Clamp(afterSky + 1, 0, beforeFront);
-    }
-
-    void ConsiderSiblingIndex(GameObject target, ref int value, bool takeMax)
-    {
-        if (target == null || target.transform.parent != slideViewport)
+        if (target == null)
             return;
 
-        int index = target.transform.GetSiblingIndex();
-        value = takeMax ? Mathf.Max(value, index) : Mathf.Min(value, index);
+        target.transform.SetSiblingIndex(index);
+        index++;
     }
 
     void ValidateSetup()
@@ -284,15 +321,17 @@ public class HomeTowerCarouselController : MonoBehaviour
         if (skyA != null && skyA.transform.parent != slideViewport)
         {
             Debug.LogWarning(
-                "HomeTowerCarousel: Sky A should be a direct child of HomeSlideViewport (not inside BackgroundPanel). " +
-                "Move the Sky object out of the panel so clouds can render between sky and tower.");
+                "HomeTowerCarousel: Sky A should be a direct child of the viewport (not inside a slide set or panel).");
         }
 
         if (frontA != null && frontA.transform.parent != slideViewport)
         {
             Debug.LogWarning(
-                "HomeTowerCarousel: Front A should be a direct child of HomeSlideViewport (e.g. rename BackgroundPanelA and remove Sky from inside it).");
+                "HomeTowerCarousel: Front A should be a direct child of the viewport.");
         }
+
+        if (!GetFrontSet().IsValid || !GetBackSet().IsValid)
+            Debug.LogWarning("HomeTowerCarousel: Assign Sky A/B and Front A/B on the carousel.");
     }
 
     void DisableLegacyThemeController()
@@ -309,6 +348,7 @@ public class HomeTowerCarouselController : MonoBehaviour
 
         SnapToCurrentTower();
         UpdateNavigationButtons();
+        NotifyHomeTowerLockPresentation();
     }
 
     void OnLeftClicked()
@@ -341,6 +381,7 @@ public class HomeTowerCarouselController : MonoBehaviour
     {
         isAnimating = true;
         SetNavigationInteractable(false);
+        RefreshSlideWidth();
 
         TowerManager tm = TowerManagerRef;
         Tower tower = tm != null && towerIndex >= 0 && towerIndex < tm.allTowers.Length
@@ -363,17 +404,15 @@ public class HomeTowerCarouselController : MonoBehaviour
         float incomingStartX = fromRight ? width : -width;
         float outgoingEndX = fromRight ? -width : width;
 
-        SetSetActive(back, true);
-        SetSetActive(front, true);
+        EnsureBothSetsActive();
+        Canvas.ForceUpdateCanvases();
 
         back.ApplyTower(tower);
         back.SetOffset(incomingStartX);
         front.SetOffset(0f);
 
-        tm?.SelectHomeTowerVisual(towerIndex);
-
         float elapsed = 0f;
-        float duration = Mathf.Max(0.01f, slideDuration);
+        float duration = Mathf.Max(0.05f, slideDuration);
 
         while (elapsed < duration)
         {
@@ -392,11 +431,14 @@ public class HomeTowerCarouselController : MonoBehaviour
         setAIsFront = !setAIsFront;
         ApplyFrontSetOnly();
 
+        tm?.SelectHomeTowerVisual(towerIndex);
+
         isAnimating = false;
         slideRoutine = null;
 
         SetNavigationInteractable(true);
         UpdateNavigationButtons();
+        NotifyHomeTowerLockPresentation();
     }
 
     void SnapToCurrentTower()
@@ -407,8 +449,6 @@ public class HomeTowerCarouselController : MonoBehaviour
         TowerSlideSet front = GetFrontSet();
         front.ApplyTower(tower);
         front.SetOffset(0f);
-
-        GetBackSet().SetOffset(slideWidth);
         ApplyFrontSetOnly();
     }
 
@@ -448,9 +488,19 @@ public class HomeTowerCarouselController : MonoBehaviour
 
     void ApplyFrontSetOnly()
     {
+        TowerSlideSet front = GetFrontSet();
+        TowerSlideSet back = GetBackSet();
+
+        SetSetActive(front, true);
+        SetSetActive(back, false);
+        front.SetOffset(0f);
+        back.SetOffset(0f);
+    }
+
+    void EnsureBothSetsActive()
+    {
         SetSetActive(GetFrontSet(), true);
-        SetSetActive(GetBackSet(), false);
-        GetFrontSet().SetOffset(0f);
+        SetSetActive(GetBackSet(), true);
     }
 
     static void SetSetActive(TowerSlideSet set, bool active)

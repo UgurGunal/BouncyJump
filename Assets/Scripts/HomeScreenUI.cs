@@ -175,7 +175,12 @@ public class HomeScreenUI : MonoBehaviour
 
     void OnPlayButtonClick()
     {
-        
+        if (towerManager == null)
+            towerManager = TowerManager.Instance;
+
+        if (towerManager != null && !towerManager.IsTowerBought(towerManager.currentTowerIndex))
+            return;
+
         if (towerManager != null)
         {
             string sceneToLoad = towerManager.GetCurrentTowerSceneName();

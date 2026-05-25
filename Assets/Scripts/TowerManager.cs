@@ -176,13 +176,7 @@ public class TowerManager : MonoBehaviour
     public void SetCurrentTower(int towerIndex)
     {
         if (towerIndex >= 0 && towerIndex < allTowers.Length && IsTowerBought(towerIndex))
-        {
-            currentTowerIndex = towerIndex;
-            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
-            PlayerPrefs.Save();
-
-            InvokeSelectionChanged();
-        }
+            SelectHomeTowerVisual(towerIndex);
     }
     
     public void SetCurrentTower(string towerName)
@@ -286,8 +280,9 @@ public class TowerManager : MonoBehaviour
                 
                 // Refresh bought towers list
                 RefreshTowersBought();
-                
+
                 InvokeTowerPurchased();
+                SelectHomeTowerVisual(towerIndex);
             }
         }
     }

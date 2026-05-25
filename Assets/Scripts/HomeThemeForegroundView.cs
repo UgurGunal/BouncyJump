@@ -17,7 +17,7 @@ public class HomeThemeForegroundView : MonoBehaviour
     public void SetSlideOffset(float x)
     {
         if (PanelRect != null)
-            PanelRect.anchoredPosition = new Vector2(x, 0f);
+            PanelRect.anchoredPosition = new Vector2(x, PanelRect.anchoredPosition.y);
     }
 
     public void ApplyTheme(TowerHomeTheme theme)
