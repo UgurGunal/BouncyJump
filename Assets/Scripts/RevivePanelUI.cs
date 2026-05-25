@@ -311,12 +311,6 @@ public class RevivePanelUI : MonoBehaviour
             {
                 PointsManager.Instance.ResumeSession();
             }
-            
-            // Resume the music from where it stopped when player revives
-            if (MusicManager.Instance != null)
-            {
-                MusicManager.Instance.ResumeMusic();
-            }
         }
         else
         {
@@ -357,9 +351,10 @@ public class RevivePanelUI : MonoBehaviour
         Time.timeScale = 1f;
 
         if (_cameraFollow != null)
-        {
             _cameraFollow.ResetRestartTrigger();
-        }
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.ResumeMusic();
 
         if (PausePanelUI.Instance != null)
             PausePanelUI.Instance.SetPauseOpenAllowed(true);

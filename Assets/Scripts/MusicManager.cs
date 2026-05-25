@@ -54,7 +54,8 @@ public class MusicManager : MonoBehaviour
     private string currentSceneName;
     private Coroutine fadeCoroutine;
     private float savedVolume; // Store volume before fade out for resume
-    private Coroutine pauseFadeCoroutine; // Coroutine for fade out and pause
+    private Coroutine pauseFadeCoroutine;
+    private bool resumeFadeInProgress;
 
     void Awake()
     {
@@ -132,22 +133,31 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Only handle additive scenes if needed, or handle main scene changes
-        // For now, we'll check the active scene
-        if (mode == LoadSceneMode.Single || mode == LoadSceneMode.Additive)
+        string activeSceneName = SceneManager.GetActiveScene().name;
+
+        // Ignore additive loads (e.g. persistent managers) — they are not the gameplay scene.
+        if (mode == LoadSceneMode.Additive && scene.name != activeSceneName)
+            return;
+
+        if (mode == LoadSceneMode.Single)
         {
-            string newSceneName = SceneManager.GetActiveScene().name;
-            if (newSceneName != currentSceneName)
+            if (activeSceneName != currentSceneName)
             {
-                // Different scene - play music for new scene
-                currentSceneName = newSceneName;
+                currentSceneName = activeSceneName;
                 PlayMusicForCurrentScene();
             }
             else
             {
-                // Same scene reloaded (restart) - restart music from beginning
                 RestartMusic();
             }
+
+            return;
+        }
+
+        if (activeSceneName != currentSceneName)
+        {
+            currentSceneName = activeSceneName;
+            PlayMusicForCurrentScene();
         }
     }
 
@@ -261,16 +271,14 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void FadeOutAndPauseMusic()
     {
-        if (!musicSource.isPlaying || musicSource.clip == null)
-        {
+        if (musicSource.clip == null)
             return;
-        }
 
-        // Stop any existing fade coroutine
-        if (pauseFadeCoroutine != null)
-        {
-            StopCoroutine(pauseFadeCoroutine);
-        }
+        StopPauseFadeCoroutine();
+        resumeFadeInProgress = false;
+
+        if (!musicSource.isPlaying)
+            return;
 
         pauseFadeCoroutine = StartCoroutine(FadeOutAndPauseCoroutine(1f));
     }
@@ -303,64 +311,82 @@ public class MusicManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Resume paused music with a fade in
+    /// Continues the current track from its paused position (no restart). Safe to call once.
     /// </summary>
     public void ResumeMusic()
     {
-        if (musicSource.clip == null)
-        {
+        if (musicSource == null || musicSource.clip == null)
             return;
-        }
 
-        // Stop any existing fade coroutine
-        if (pauseFadeCoroutine != null)
+        if (resumeFadeInProgress)
+            return;
+
+        float targetVolume = GetTargetVolumeForCurrentClip();
+        if (musicSource.isPlaying && musicSource.volume >= targetVolume * 0.95f)
+            return;
+
+        StopPauseFadeCoroutine();
+
+        if (fadeCoroutine != null)
         {
-            StopCoroutine(pauseFadeCoroutine);
-            pauseFadeCoroutine = null;
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
         }
 
-        // Resume playback
-        if (!musicSource.isPlaying)
+        resumeFadeInProgress = true;
+        pauseFadeCoroutine = StartCoroutine(FadeInResumeCoroutine(1f));
+    }
+
+    float GetTargetVolumeForCurrentClip()
+    {
+        float baseVolume = defaultMusicVolume;
+        if (!string.IsNullOrEmpty(currentSceneName) && sceneMusicDictionary != null &&
+            sceneMusicDictionary.ContainsKey(currentSceneName))
         {
-            musicSource.UnPause();
+            baseVolume = sceneMusicDictionary[currentSceneName].volume;
         }
 
-        // Fade in the volume over 1 second
-        StartCoroutine(FadeInResumeCoroutine(1f));
+        return baseVolume * masterVolume;
+    }
+
+    void StopPauseFadeCoroutine()
+    {
+        if (pauseFadeCoroutine == null)
+            return;
+
+        StopCoroutine(pauseFadeCoroutine);
+        pauseFadeCoroutine = null;
     }
 
     /// <summary>
-    /// Coroutine to fade in music volume after resume
+    /// Coroutine to fade in music volume after resume (does not restart the clip).
     /// </summary>
     private IEnumerator FadeInResumeCoroutine(float fadeDuration)
     {
-        // Get the target volume (use saved volume if available, otherwise calculate from scene settings)
-        float targetVolume = savedVolume;
-        if (targetVolume <= 0f)
-        {
-            // Calculate target volume from scene settings
-            float baseVolume = defaultMusicVolume;
-            if (sceneMusicDictionary.ContainsKey(currentSceneName))
-            {
-                baseVolume = sceneMusicDictionary[currentSceneName].volume;
-            }
-            targetVolume = baseVolume * masterVolume;
-        }
+        float targetVolume = savedVolume > 0f ? savedVolume : GetTargetVolumeForCurrentClip();
+
+        if (!musicSource.isPlaying)
+            musicSource.UnPause();
 
         float elapsedTime = 0f;
         float startVolume = musicSource.volume;
 
-        // Fade in the volume
-        while (elapsedTime < fadeDuration && musicSource.isPlaying)
+        while (elapsedTime < fadeDuration)
         {
+            if (!musicSource.isPlaying)
+                break;
+
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / fadeDuration;
             musicSource.volume = Mathf.Lerp(startVolume, targetVolume, t);
             yield return null;
         }
 
-        // Ensure volume is at target
-        musicSource.volume = targetVolume;
+        if (musicSource.isPlaying)
+            musicSource.volume = targetVolume;
+
+        resumeFadeInProgress = false;
+        pauseFadeCoroutine = null;
     }
 
     /// <summary>
@@ -368,11 +394,8 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void StopMusic()
     {
-        if (pauseFadeCoroutine != null)
-        {
-            StopCoroutine(pauseFadeCoroutine);
-            pauseFadeCoroutine = null;
-        }
+        StopPauseFadeCoroutine();
+        resumeFadeInProgress = false;
 
         if (fadeCoroutine != null)
         {
@@ -393,41 +416,17 @@ public class MusicManager : MonoBehaviour
     /// </summary>
     public void RestartMusic()
     {
-        if (pauseFadeCoroutine != null)
-        {
-            StopCoroutine(pauseFadeCoroutine);
-            pauseFadeCoroutine = null;
-        }
+        StopPauseFadeCoroutine();
+        resumeFadeInProgress = false;
 
-        // Stop any ongoing fade
         if (fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
             fadeCoroutine = null;
         }
 
-        // If we have a clip and it matches the current scene, restart it
-        if (musicSource.clip != null)
-        {
-            // Stop and restart from beginning
-            musicSource.Stop();
-            musicSource.time = 0f;
-            
-            // Get the appropriate volume for current music
-            float volume = defaultMusicVolume;
-            if (sceneMusicDictionary.ContainsKey(currentSceneName))
-            {
-                volume = sceneMusicDictionary[currentSceneName].volume;
-            }
-            
-            musicSource.volume = volume * masterVolume;
-            musicSource.Play();
-        }
-        else
-        {
-            // If no clip is set, play music for current scene
-            PlayMusicForCurrentScene();
-        }
+        currentSceneName = SceneManager.GetActiveScene().name;
+        PlayMusicForCurrentScene();
     }
 
     /// <summary>

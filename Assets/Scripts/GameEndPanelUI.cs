@@ -474,9 +474,7 @@ public class GameEndPanelUI : MonoBehaviour
         if (PointsManager.Instance != null)
             PointsManager.Instance.StartSession();
 
-        if (MusicManager.Instance != null)
-            MusicManager.Instance.RestartMusic();
-
+        // Music restarts once when the scene finishes loading (MusicManager.OnSceneLoaded).
         // Reset the persistent loader flag and reload scene
         PersistentLoader.ResetForRestart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
