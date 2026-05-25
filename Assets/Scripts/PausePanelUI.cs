@@ -24,6 +24,7 @@ public class PausePanelUI : MonoBehaviour
     public TextMeshProUGUI resumeCountdownText;
 
     Coroutine _resumeCoroutine;
+    bool _pauseOpenAllowed = true;
 
     void Awake()
     {
@@ -53,11 +54,28 @@ public class PausePanelUI : MonoBehaviour
             homeButton.onClick.AddListener(OnHomeClicked);
         if (pauseOpenButton != null)
             pauseOpenButton.onClick.AddListener(ShowPausePanel);
+
+        SetPauseOpenAllowed(true);
+    }
+
+    /// <summary>HUD pause button — off after death until revive finishes or level restarts.</summary>
+    public void SetPauseOpenAllowed(bool allowed)
+    {
+        _pauseOpenAllowed = allowed;
+
+        if (pauseOpenButton != null)
+            pauseOpenButton.interactable = allowed;
+
+        if (!allowed && panelObject != null && panelObject.activeSelf)
+            panelObject.SetActive(false);
     }
 
     /// <summary>Opens pause panel and freezes gameplay (Time.timeScale = 0).</summary>
     public void ShowPausePanel()
     {
+        if (!_pauseOpenAllowed)
+            return;
+
         if (panelObject == null)
             return;
         if (panelObject.activeSelf)

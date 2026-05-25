@@ -112,6 +112,9 @@ public class GameEndPanelUI : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.StopMusic();
 
+        if (PausePanelUI.Instance != null)
+            PausePanelUI.Instance.SetPauseOpenAllowed(false);
+
         // Time.timeScale should already be 0f from RevivePanelUI
     }
 

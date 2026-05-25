@@ -153,7 +153,10 @@ public class CameraFollow : MonoBehaviour
         }
         
         // Pause the game immediately
-        Time.timeScale = 0f; 
+        Time.timeScale = 0f;
+
+        if (PausePanelUI.Instance != null)
+            PausePanelUI.Instance.SetPauseOpenAllowed(false);
 
         // Then, show the revive panel
         if (RevivePanelUI.Instance != null && player != null)

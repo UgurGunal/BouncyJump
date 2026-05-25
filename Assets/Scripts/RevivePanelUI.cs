@@ -360,5 +360,8 @@ public class RevivePanelUI : MonoBehaviour
         {
             _cameraFollow.ResetRestartTrigger();
         }
+
+        if (PausePanelUI.Instance != null)
+            PausePanelUI.Instance.SetPauseOpenAllowed(true);
     }
 }
