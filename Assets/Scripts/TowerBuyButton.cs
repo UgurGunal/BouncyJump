@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TowerBuyButton : MonoBehaviour
@@ -44,8 +45,8 @@ public class TowerBuyButton : MonoBehaviour
     
     void Start()
     {
-        towerManager = TowerManager.Instance;
-        shopManager = FindObjectOfType<ShopManager>();
+        towerManager = ResolveTowerManager();
+        shopManager = FindShopManager();
         
         if (buyButton != null)
         {
@@ -68,6 +69,9 @@ public class TowerBuyButton : MonoBehaviour
     
     void OnEnable()
     {
+        if (towerManager == null)
+            towerManager = ResolveTowerManager();
+
         TowerManager.OnSelectionChanged += RefreshButton;
         TowerManager.OnTowerPurchased += RefreshButton;
     }
@@ -80,31 +84,65 @@ public class TowerBuyButton : MonoBehaviour
     
     void OnButtonClicked()
     {
+        towerManager = ResolveTowerManager();
+
         if (towerManager == null)
         {
+            Debug.LogWarning(
+                "TowerBuyButton: TowerManager not found. Play from HomeScene and ensure a TowersManager object exists with the TowerManager component.");
             return;
         }
-        
+
         bool isBought = towerManager.IsTowerBought(towerIndex);
-        bool isSelected = (towerManager.currentTowerIndex == towerIndex);
-        
+        bool isSelected = towerManager.currentTowerIndex == towerIndex;
+
         if (!isBought)
-        {
             towerManager.BuyTower(towerIndex);
-        }
-        else if (isBought && !isSelected)
-        {
+        else if (!isSelected)
             towerManager.SetCurrentTower(towerIndex);
-        }
-        else if (isSelected)
-        {
-            return;
-        }
-        
+
+        UpdateButtonState();
+
+        if (shopManager == null)
+            shopManager = FindShopManager();
+
         if (shopManager != null)
-        {
             shopManager.UpdateShopUI();
+    }
+
+    TowerManager ResolveTowerManager()
+    {
+        if (towerManager != null)
+            return towerManager;
+
+        towerManager = TowerManager.Instance;
+        if (towerManager != null)
+            return towerManager;
+
+        ShopManager shop = FindShopManager();
+        if (shop != null && shop.towerManager != null)
+            towerManager = shop.towerManager;
+
+        return towerManager;
+    }
+
+    static ShopManager FindShopManager()
+    {
+        ShopManager[] shops = Resources.FindObjectsOfTypeAll<ShopManager>();
+        for (int i = 0; i < shops.Length; i++)
+        {
+            ShopManager shop = shops[i];
+            if (shop == null || shop.hideFlags != HideFlags.None)
+                continue;
+
+            Scene scene = shop.gameObject.scene;
+            if (!scene.IsValid() || !scene.isLoaded)
+                continue;
+
+            return shop;
         }
+
+        return null;
     }
     
     void UpdateButtonState()

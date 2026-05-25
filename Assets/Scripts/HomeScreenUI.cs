@@ -186,15 +186,13 @@ public class HomeScreenUI : MonoBehaviour
                 PersistentLoader.ResetForRestart();
                 SceneManager.LoadScene(sceneToLoad);
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                
-                // Fallback: try to load default scene
                 try
                 {
                     SceneManager.LoadScene("GameScene");
                 }
-                catch (System.Exception e2)
+                catch (System.Exception)
                 {
                 }
             }

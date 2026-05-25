@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TowerManager : MonoBehaviour
@@ -18,20 +17,44 @@ public class TowerManager : MonoBehaviour
     [Tooltip("Used to detect when the shop config changed. When this value differs from the stored value, tower purchase keys are reset.")]
     public int towerShopSaveVersion = 1;
     
-    [Header("Home Screen UI")]
-    public Image homeScreenTowerImage;
-    
     private static TowerManager instance;
+
     public static TowerManager Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<TowerManager>();
-            }
+            if (instance != null)
+                return instance;
+
+            instance = FindInLoadedScenes();
             return instance;
         }
+    }
+
+    /// <summary>Finds TowerManager even if inactive; prefers an active object.</summary>
+    public static TowerManager FindInLoadedScenes()
+    {
+        TowerManager[] managers = Resources.FindObjectsOfTypeAll<TowerManager>();
+        TowerManager fallback = null;
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            TowerManager manager = managers[i];
+            if (manager == null || manager.hideFlags != HideFlags.None)
+                continue;
+
+            Scene scene = manager.gameObject.scene;
+            if (!scene.IsValid() || !scene.isLoaded)
+                continue;
+
+            if (manager.gameObject.activeInHierarchy)
+                return manager;
+
+            if (fallback == null)
+                fallback = manager;
+        }
+
+        return fallback;
     }
     
     /// <summary>Fired when the selected tower changes. Shop buttons use this to refresh state.</summary>
@@ -42,17 +65,20 @@ public class TowerManager : MonoBehaviour
     
     void Awake()
     {
-        // Singleton pattern scoped to the current scene (HomeScene).
-        // We intentionally do NOT use DontDestroyOnLoad so that TowerManager
-        // only exists while HomeScene is loaded.
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
+        // Singleton scoped to HomeScene (not DontDestroyOnLoad).
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+
+        instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
     }
     
     void Start()
@@ -92,12 +118,9 @@ public class TowerManager : MonoBehaviour
         
         // Initialize towers bought list
         RefreshTowersBought();
-        
-        // Ensure home screen visuals match current selection
-        UpdateHomeScreenTowerImage();
 
-        // Ensure all shop buttons refresh after PlayerPrefs initialization/reset.
-        OnSelectionChanged?.Invoke();
+        // Ensure all shop buttons and home theme refresh after PlayerPrefs initialization/reset.
+        InvokeSelectionChanged();
     }
     
     void OnEnable()
@@ -119,6 +142,37 @@ public class TowerManager : MonoBehaviour
         return null;
     }
     
+    public static int WrapTowerIndex(int index, int towerCount)
+    {
+        if (towerCount <= 0)
+            return 0;
+
+        index %= towerCount;
+        if (index < 0)
+            index += towerCount;
+
+        return index;
+    }
+
+    /// <summary>
+    /// Updates the visible home tower (cyclic navigation). Saves selection only if that tower is bought.
+    /// </summary>
+    public void SelectHomeTowerVisual(int towerIndex)
+    {
+        if (allTowers == null || allTowers.Length == 0)
+            return;
+
+        currentTowerIndex = WrapTowerIndex(towerIndex, allTowers.Length);
+
+        if (IsTowerBought(currentTowerIndex))
+        {
+            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
+            PlayerPrefs.Save();
+        }
+
+        InvokeSelectionChanged();
+    }
+
     public void SetCurrentTower(int towerIndex)
     {
         if (towerIndex >= 0 && towerIndex < allTowers.Length && IsTowerBought(towerIndex))
@@ -126,13 +180,8 @@ public class TowerManager : MonoBehaviour
             currentTowerIndex = towerIndex;
             PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
             PlayerPrefs.Save();
-            
-            
-            UpdateHomeScreenTowerImage();
-            OnSelectionChanged?.Invoke();
-        }
-        else if (!IsTowerBought(towerIndex))
-        {
+
+            InvokeSelectionChanged();
         }
     }
     
@@ -161,37 +210,24 @@ public class TowerManager : MonoBehaviour
     
     public Sprite GetCurrentHomeTowerImage()
     {
-        Tower currentTower = GetCurrentTower();
-        return currentTower?.homeTowerImage;
+        return GetCurrentTower()?.GetTowerForegroundSprite();
     }
-    
-    public void UpdateHomeScreenTowerImage()
-    {
-        // Only update if an explicit home screen image is assigned in the inspector.
-        // This prevents accidentally grabbing and overwriting images from the shop content.
-        if (homeScreenTowerImage == null)
-        {
-            return;
-        }
 
-        Sprite imageToUse = GetCurrentHomeTowerImage();
-        homeScreenTowerImage.sprite = imageToUse;
-        homeScreenTowerImage.enabled = imageToUse != null;
-        
-        // Preserve aspect so sprites do not stretch unexpectedly
-        if (!homeScreenTowerImage.preserveAspect)
-        {
-            homeScreenTowerImage.preserveAspect = true;
-        }
+    public TowerHomeTheme GetCurrentHomeTheme()
+    {
+        return GetCurrentTower()?.GetResolvedHomeTheme();
     }
-    
+
     public bool IsTowerBought(int towerIndex)
     {
-        if (towerIndex >= 0 && towerIndex < allTowers.Length)
-        {
-            return PlayerPrefs.GetInt($"TowerPurchased_{towerIndex}", allTowers[towerIndex].isUnlockedByDefault ? 1 : 0) == 1;
-        }
-        return false;
+        if (allTowers == null || towerIndex < 0 || towerIndex >= allTowers.Length)
+            return false;
+
+        Tower tower = allTowers[towerIndex];
+        if (tower == null)
+            return false;
+
+        return PlayerPrefs.GetInt($"TowerPurchased_{towerIndex}", tower.isUnlockedByDefault ? 1 : 0) == 1;
     }
     
     // Legacy method name for compatibility
@@ -251,7 +287,36 @@ public class TowerManager : MonoBehaviour
                 // Refresh bought towers list
                 RefreshTowersBought();
                 
-                OnTowerPurchased?.Invoke();
+                InvokeTowerPurchased();
+            }
+        }
+    }
+
+    public static void InvokeSelectionChanged()
+    {
+        InvokeAction(OnSelectionChanged);
+    }
+
+    public static void InvokeTowerPurchased()
+    {
+        InvokeAction(OnTowerPurchased);
+    }
+
+    static void InvokeAction(System.Action action)
+    {
+        if (action == null)
+            return;
+
+        System.Delegate[] handlers = action.GetInvocationList();
+        for (int i = 0; i < handlers.Length; i++)
+        {
+            try
+            {
+                ((System.Action)handlers[i])();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogException(e);
             }
         }
     }
@@ -320,8 +385,8 @@ public class TowerManager : MonoBehaviour
     
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Refresh the home screen image when scenes change (if it has been assigned).
-        UpdateHomeScreenTowerImage();
+        if (scene.name == gameObject.scene.name)
+            InvokeSelectionChanged();
     }
 }
 
@@ -330,8 +395,11 @@ public class Tower
 {
     [Header("Tower Information")]
     public string towerName = "Tower 1";
-    [Tooltip("Image used on the home screen when this tower is selected.")]
+    [Tooltip("Legacy single tower image. Prefer Home Theme > Tower Foreground.")]
     public Sprite homeTowerImage;
+
+    [Header("Home Screen Theme")]
+    public TowerHomeTheme homeTheme = new TowerHomeTheme();
     
     [Header("Pricing")]
     public int goldPrice = 0; // Cost in gold

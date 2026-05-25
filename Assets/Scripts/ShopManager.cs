@@ -49,9 +49,10 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         if (towerManager == null)
-        {
             towerManager = TowerManager.Instance;
-        }
+
+        if (towerManager == null)
+            towerManager = TowerManager.FindInLoadedScenes();
         
         // Setup close button
         if (closeShopButton != null)
