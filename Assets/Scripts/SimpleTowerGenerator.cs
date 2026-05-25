@@ -47,6 +47,8 @@ public class SimpleTowerGenerator : MonoBehaviour
     [Header("Initial Content Settings")]
     [Tooltip("Number of initial platforms to spawn")]
     public int initialPlatformCount = 10;
+    [Tooltip("Max platforms spawned per frame while catching up (prevents single-frame spikes).")]
+    public int maxSpawnsPerFrame = 3;
 
     private Transform generatedObjectsParent;
     private Transform poolInactiveRoot;
@@ -136,7 +138,10 @@ public class SimpleTowerGenerator : MonoBehaviour
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
+            {
                 player = playerObject.transform;
+                GameplayPlayerCache.SetPlayer(player);
+            }
         }
 
         if (levelManager == null)
@@ -164,10 +169,13 @@ public class SimpleTowerGenerator : MonoBehaviour
             OnLevelChanged(newLevel);
         }
 
-        // Spawn new content as player moves up
-        while (lastSpawnedPlatformY < player.position.y + spawnHeightOffset)
+        // Spawn new content as player moves up (capped per frame to avoid hitches)
+        int spawnsThisFrame = 0;
+        while (lastSpawnedPlatformY < player.position.y + spawnHeightOffset
+               && spawnsThisFrame < maxSpawnsPerFrame)
         {
             SpawnLevelContent();
+            spawnsThisFrame++;
         }
     }
 

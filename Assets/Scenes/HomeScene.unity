@@ -7949,8 +7949,8 @@ MonoBehaviour:
   playButton: {fileID: 2046909805}
   viewportTintRoot: {fileID: 2003491324}
   viewportTintOverlay: {fileID: 0}
-  viewportBlackTintAlpha: 0.55
-  lockedPlayButtonColor: {r: 0.82, g: 0.82, b: 0.82, a: 1}
+  viewportBlackTintAlpha: 0.75
+  lockedPlayButtonColor: {r: 0.7132075, g: 0.7132075, b: 0.7132075, a: 1}
 --- !u!1 &367818510
 GameObject:
   m_ObjectHideFlags: 0

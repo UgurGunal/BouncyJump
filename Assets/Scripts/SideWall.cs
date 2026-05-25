@@ -22,7 +22,13 @@ public class SideWall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        PlayerBallController player = PlayerBallController.Instance;
+        if (player == null)
+            player = collision.gameObject.GetComponent<PlayerBallController>();
+
         if (player != null)
         {
             // Use relative velocity from collision for more accurate speed calculation
@@ -129,109 +135,43 @@ public class SideWall : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        PlayerBallController player = PlayerBallController.Instance;
+        if (player == null)
+            player = collision.gameObject.GetComponent<PlayerBallController>();
+
         if (player != null)
-        {
             player.SetTouchingSideWall(false);
-        }
     }
 
     private bool AddWallComboWithCooldown(float playerSpeed)
     {
-        // Try to add combo safely without direct ComboManager reference
-        try
+        ComboManager combo = ComboManager.Instance;
+        if (combo == null)
+            return false;
+
+        if (combo.useWallCooldownSystem)
         {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
+            if (IsWallOnCooldown())
             {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        // Check which wall combo system is enabled
-                        var useWallCooldownProperty = comboManagerType.GetField("useWallCooldownSystem");
-                        var useAlternatingProperty = comboManagerType.GetField("useAlternatingWallCombo");
-                        
-                        bool useWallCooldown = false;
-                        bool useAlternating = false;
-                        
-                        if (useWallCooldownProperty != null)
-                            useWallCooldown = (bool)useWallCooldownProperty.GetValue(instance);
-                        if (useAlternatingProperty != null)
-                            useAlternating = (bool)useAlternatingProperty.GetValue(instance);
-                        
-                        if (useWallCooldown)
-                        {
-                            // Check if wall is on cooldown BEFORE calling the method
-                            bool wasOnCooldown = IsWallOnCooldown();
-                            
-                            if (wasOnCooldown)
-                            {
-                                // Wall is on cooldown - reset opposite wall's cooldown but don't reset this wall's cooldown
-                                var resetOppositeMethod = comboManagerType.GetMethod("ResetOppositeWallCooldown");
-                                
-                                if (resetOppositeMethod != null)
-                                {
-                                    // Reset opposite wall's cooldown
-                                    resetOppositeMethod.Invoke(instance, new object[] { wallSide });
-                                }
-                                
-                                return false; // No combo added, but opposite wall cooldown is reset
-                            }
-                            else
-                            {
-                                // Wall is not on cooldown - give combo
-                                var individualCooldownMethod = comboManagerType.GetMethod("WallComboIncrementWithIndividualCooldown");
-                                if (individualCooldownMethod != null)
-                                {
-                                    individualCooldownMethod.Invoke(instance, new object[] { gameObject, playerSpeed, wallCooldownDuration });
-                                    return true; // Combo was added
-                                }
-                            }
-                        }
-                        else if (useAlternating)
-                        {
-                            // Use the alternating wall combo method
-                            var alternatingMethod = comboManagerType.GetMethod("WallComboIncrementAlternating");
-                            if (alternatingMethod != null)
-                            {
-                                alternatingMethod.Invoke(instance, new object[] { gameObject, playerSpeed });
-                                return true; // Alternating system always gives combo when called
-                            }
-                        }
-                        else
-                        {
-                            // Use the original cooldown-based method
-                            var wallComboMethod = comboManagerType.GetMethod("WallComboIncrementWithCooldown");
-                            if (wallComboMethod != null)
-                            {
-                                wallComboMethod.Invoke(instance, new object[] { gameObject, playerSpeed, wallCooldownDuration });
-                                return true; // Original system always gives combo when called
-                            }
-                            else
-                            {
-                                // Fallback to original method if custom method doesn't exist
-                                var originalMethod = comboManagerType.GetMethod("WallComboIncrement");
-                                if (originalMethod != null)
-                                {
-                                    originalMethod.Invoke(instance, new object[] { gameObject, playerSpeed });
-                                    return true; // Fallback always gives combo when called
-                                }
-                            }
-                        }
-                    }
-                }
+                combo.ResetOppositeWallCooldown(wallSide);
+                return false;
             }
+
+            combo.WallComboIncrementWithIndividualCooldown(gameObject, playerSpeed, wallCooldownDuration);
+            return true;
         }
-        catch (System.Exception)
+
+        if (combo.useAlternatingWallCombo)
         {
-            // ComboManager not available
+            combo.WallComboIncrementAlternating(gameObject, playerSpeed);
+            return true;
         }
-        
-        return false; // Default to no combo if we can't determine the state
+
+        combo.WallComboIncrementWithCooldown(gameObject, playerSpeed, wallCooldownDuration);
+        return true;
     }
 
     // Public methods to control combo system manually
@@ -246,187 +186,25 @@ public class SideWall : MonoBehaviour
         wallCooldownDuration = Mathf.Max(0f, duration);
     }
     
-    // Check if this wall can give combo (for trail effect)
-    private bool CanWallGiveCombo()
-    {
-        try
-        {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        // Check which wall combo system is enabled
-                        var useWallCooldownProperty = comboManagerType.GetField("useWallCooldownSystem");
-                        var useAlternatingProperty = comboManagerType.GetField("useAlternatingWallCombo");
-                        
-                        bool useWallCooldown = false;
-                        bool useAlternating = false;
-                        
-                        if (useWallCooldownProperty != null)
-                            useWallCooldown = (bool)useWallCooldownProperty.GetValue(instance);
-                        if (useAlternatingProperty != null)
-                            useAlternating = (bool)useAlternatingProperty.GetValue(instance);
-                        
-                        if (useWallCooldown)
-                        {
-                            // Check if this wall is on cooldown
-                            if (wallSide == WallSide.Left)
-                            {
-                                var isLeftOnCooldownMethod = comboManagerType.GetMethod("IsLeftWallOnCooldown");
-                                if (isLeftOnCooldownMethod != null)
-                                {
-                                    return !(bool)isLeftOnCooldownMethod.Invoke(instance, null);
-                                }
-                            }
-                            else if (wallSide == WallSide.Right)
-                            {
-                                var isRightOnCooldownMethod = comboManagerType.GetMethod("IsRightWallOnCooldown");
-                                if (isRightOnCooldownMethod != null)
-                                {
-                                    return !(bool)isRightOnCooldownMethod.Invoke(instance, null);
-                                }
-                            }
-                        }
-                        else if (useAlternating)
-                        {
-                            // Get the current wall combo state
-                            var getStateMethod = comboManagerType.GetMethod("GetCurrentWallComboState");
-                            if (getStateMethod != null)
-                            {
-                                var currentState = getStateMethod.Invoke(instance, null);
-                                
-                                // Check if this wall can give combo based on current state
-                                if (currentState != null)
-                                {
-                                    string stateName = currentState.ToString();
-                                    
-                                    if (stateName == "BothActive")
-                                        return true; // Both walls can give combo
-                                    else if (stateName == "LeftOnly")
-                                        return wallSide == WallSide.Left; // Only left wall can give combo
-                                    else if (stateName == "RightOnly")
-                                        return wallSide == WallSide.Right; // Only right wall can give combo
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // If both systems are disabled, all walls can give combo
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-            // ComboManager not available, assume wall can give combo
-        }
-        
-        return false; // Default to no combo if we can't determine the state
-    }
-    
-    // Check if this wall is currently on cooldown
     private bool IsWallOnCooldown()
     {
-        try
-        {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        // Check if wall cooldown system is enabled
-                        var useWallCooldownProperty = comboManagerType.GetField("useWallCooldownSystem");
-                        bool useWallCooldown = false;
-                        
-                        if (useWallCooldownProperty != null)
-                            useWallCooldown = (bool)useWallCooldownProperty.GetValue(instance);
-                        
-                        if (useWallCooldown)
-                        {
-                            // Check if this wall is on cooldown
-                            if (wallSide == WallSide.Left)
-                            {
-                                var isLeftOnCooldownMethod = comboManagerType.GetMethod("IsLeftWallOnCooldown");
-                                if (isLeftOnCooldownMethod != null)
-                                {
-                                    return (bool)isLeftOnCooldownMethod.Invoke(instance, null);
-                                }
-                            }
-                            else if (wallSide == WallSide.Right)
-                            {
-                                var isRightOnCooldownMethod = comboManagerType.GetMethod("IsRightWallOnCooldown");
-                                if (isRightOnCooldownMethod != null)
-                                {
-                                    return (bool)isRightOnCooldownMethod.Invoke(instance, null);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-            // ComboManager not available
-        }
-        
-        return false; // Default to not on cooldown if we can't determine the state
+        ComboManager combo = ComboManager.Instance;
+        if (combo == null || !combo.useWallCooldownSystem)
+            return false;
+
+        return wallSide == WallSide.Left
+            ? combo.IsLeftWallOnCooldown()
+            : combo.IsRightWallOnCooldown();
     }
 
-    // Restart the wall cooldown timer (used for punish system)
     private void RestartWallCooldown()
     {
-        try
-        {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        // Check if wall cooldown system is enabled
-                        var useWallCooldownProperty = comboManagerType.GetField("useWallCooldownSystem");
-                        bool useWallCooldown = false;
-                        
-                        if (useWallCooldownProperty != null)
-                            useWallCooldown = (bool)useWallCooldownProperty.GetValue(instance);
-                        
-                        if (useWallCooldown)
-                        {
-                            // Restart cooldown using SetWallIndividualCooldownWithDuration
-                            var restartMethod = comboManagerType.GetMethod("SetWallIndividualCooldownWithDuration");
-                            if (restartMethod != null)
-                            {
-                                restartMethod.Invoke(instance, new object[] { wallSide, wallCooldownDuration });
-                                // Update cooldown start time to now
-                                cooldownStartTime = Time.time;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-            // ComboManager not available
-        }
+        ComboManager combo = ComboManager.Instance;
+        if (combo == null || !combo.useWallCooldownSystem)
+            return;
+
+        combo.SetWallIndividualCooldownWithDuration(wallSide, wallCooldownDuration);
+        cooldownStartTime = Time.time;
     }
 
     void Update()

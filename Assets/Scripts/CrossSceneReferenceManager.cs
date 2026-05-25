@@ -49,6 +49,7 @@ public class CrossSceneReferenceManager : MonoBehaviour
             if (playerObject != null)
             {
                 player = playerObject.transform;
+                GameplayPlayerCache.SetPlayer(player);
             }
         }
         

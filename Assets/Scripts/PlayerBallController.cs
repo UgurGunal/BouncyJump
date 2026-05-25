@@ -2,6 +2,8 @@
 
 public class PlayerBallController : MonoBehaviour
 {
+    public static PlayerBallController Instance { get; private set; }
+
     [Header("Movement")]
     public float acceleration = 45f;
     public float deceleration = 2f;
@@ -42,6 +44,28 @@ public class PlayerBallController : MonoBehaviour
     private bool isScaleEffectActive = false; // Track if scale effect is currently active
     private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
     private TrailRenderer trailRenderer; // Reference to trail renderer component
+
+    public Rigidbody2D Rigidbody
+    {
+        get
+        {
+            if (rb == null)
+                rb = GetComponent<Rigidbody2D>();
+            return rb;
+        }
+    }
+
+    void Awake()
+    {
+        Instance = this;
+        GameplayPlayerCache.SetPlayer(transform);
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
 
     void Start()
     {

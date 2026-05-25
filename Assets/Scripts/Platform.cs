@@ -44,7 +44,6 @@ public class Platform : MonoBehaviour
     [Tooltip("Minimum time between anvil sound plays to avoid duplicate triggers from multi-collider contact.")]
     public float anvilSoundCooldown = 0.08f;
 
-    private Transform playerTransform;
     private float lastAnvilSoundTime = -999f;
     private bool isFalling;
     private float fallElapsedTime;
@@ -52,9 +51,24 @@ public class Platform : MonoBehaviour
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalSpriteColors;
 
-    private void OnEnable()
+    void RegisterInActiveList()
     {
-        ActivePlatforms.Add(this);
+        ActivePlatforms.Remove(this);
+        float y = transform.position.y;
+        int insertIndex = ActivePlatforms.Count;
+        for (int i = 0; i < ActivePlatforms.Count; i++)
+        {
+            if (ActivePlatforms[i] == null)
+                continue;
+
+            if (ActivePlatforms[i].transform.position.y > y)
+            {
+                insertIndex = i;
+                break;
+            }
+        }
+
+        ActivePlatforms.Insert(insertIndex, this);
     }
 
     private void OnDisable()
@@ -64,19 +78,49 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
-        EnsurePlayerReference();
         destroyReferenceY = transform.position.y;
         CacheSpriteRenderers();
+        RegisterInActiveList();
     }
 
-    void EnsurePlayerReference()
+    public static void ProcessAllLifecycles(Transform player)
     {
-        if (playerTransform != null)
+        if (player == null)
             return;
 
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-            playerTransform = playerObject.transform;
+        float playerY = player.position.y;
+        for (int i = ActivePlatforms.Count - 1; i >= 0; i--)
+        {
+            Platform platform = ActivePlatforms[i];
+            if (platform == null)
+            {
+                ActivePlatforms.RemoveAt(i);
+                continue;
+            }
+
+            platform.TickLifecycle(playerY);
+        }
+    }
+
+    void TickLifecycle(float playerY)
+    {
+        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
+
+        if (enableDistanceDestroy && playerY > destroyReferenceY + destroyDistance)
+        {
+            Despawn();
+            return;
+        }
+
+        if (!isFalling)
+            return;
+
+        fallElapsedTime += Time.fixedDeltaTime;
+        float t = fallAccelerationTime > 0f
+            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
+            : 1f;
+        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
+        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
     }
 
     void CacheSpriteRenderers()
@@ -97,6 +141,7 @@ public class Platform : MonoBehaviour
         transform.rotation = Quaternion.identity;
         destroyReferenceY = worldPosition.y;
         RestoreSpriteColors();
+        RegisterInActiveList();
     }
 
     public void PrepareForPool()
@@ -159,58 +204,37 @@ public class Platform : MonoBehaviour
 
     public static void TriggerFallForPlatformsBelow(float collidedPlatformY)
     {
-        for (int i = ActivePlatforms.Count - 1; i >= 0; i--)
+        for (int i = 0; i < ActivePlatforms.Count; i++)
         {
             Platform platform = ActivePlatforms[i];
             if (platform == null)
-            {
-                ActivePlatforms.RemoveAt(i);
                 continue;
-            }
 
-            if (platform.transform.position.y < collidedPlatformY)
-                platform.StartFalling();
+            float platformY = platform.transform.position.y;
+            if (platformY >= collidedPlatformY)
+                break;
+
+            platform.StartFalling();
         }
-    }
-
-    private void FixedUpdate()
-    {
-        EnsurePlayerReference();
-        if (playerTransform == null)
-            return;
-
-        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
-
-        if (enableDistanceDestroy && ShouldDestroyByDistance())
-        {
-            Despawn();
-            return;
-        }
-
-        if (!isFalling)
-            return;
-
-        fallElapsedTime += Time.fixedDeltaTime;
-        float t = fallAccelerationTime > 0f
-            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
-            : 1f;
-        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
-        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
-    }
-
-    bool ShouldDestroyByDistance()
-    {
-        return playerTransform.position.y > destroyReferenceY + destroyDistance;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
-        if (player != null)
-        {
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-            HandleJump(player, rb, collision);
-        }
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        PlayerBallController player = PlayerBallController.Instance;
+        if (player == null)
+            player = collision.gameObject.GetComponent<PlayerBallController>();
+
+        if (player == null)
+            return;
+
+        Rigidbody2D rb = player.Rigidbody;
+        if (rb == null)
+            rb = collision.rigidbody;
+
+        HandleJump(player, rb, collision);
     }
 
     private void HandleJump(PlayerBallController player, Rigidbody2D rb, Collision2D collision)
@@ -296,57 +320,18 @@ public class Platform : MonoBehaviour
 
     private void IncrementPlatformCombo(float relativeVelocity)
     {
-        try
-        {
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        var platformComboMethod = comboManagerType.GetMethod("PlatformComboIncrement");
-                        if (platformComboMethod != null)
-                            platformComboMethod.Invoke(instance, new object[] { relativeVelocity });
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-        }
+        ComboManager combo = ComboManager.Instance;
+        if (combo != null)
+            combo.PlatformComboIncrement(relativeVelocity);
     }
 
     private float GetComboBonus()
     {
-        try
-        {
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        var getComboMethod = comboManagerType.GetMethod("getCombo");
-                        if (getComboMethod != null)
-                        {
-                            float currentCombo = (float)getComboMethod.Invoke(instance, null);
-                            return currentCombo * comboBonus;
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-        }
+        ComboManager combo = ComboManager.Instance;
+        if (combo == null)
+            return 0f;
 
-        return 0f;
+        return combo.getCombo() * comboBonus;
     }
 
     public void SetComboBonus(float bonus)

@@ -126,14 +126,28 @@ public class ChestPlatform : MonoBehaviour
     private bool isAnimating = false;
     private bool isFalling;
     private float fallElapsedTime;
-    private Transform playerTransform;
     private float destroyReferenceY;
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalSpriteColors;
 
-    void OnEnable()
+    void RegisterInActiveList()
     {
-        ActiveChestPlatforms.Add(this);
+        ActiveChestPlatforms.Remove(this);
+        float y = transform.position.y;
+        int insertIndex = ActiveChestPlatforms.Count;
+        for (int i = 0; i < ActiveChestPlatforms.Count; i++)
+        {
+            if (ActiveChestPlatforms[i] == null)
+                continue;
+
+            if (ActiveChestPlatforms[i].transform.position.y > y)
+            {
+                insertIndex = i;
+                break;
+            }
+        }
+
+        ActiveChestPlatforms.Insert(insertIndex, this);
     }
 
     void OnDisable()
@@ -143,10 +157,50 @@ public class ChestPlatform : MonoBehaviour
 
     void Start()
     {
-        EnsurePlayerReference();
         destroyReferenceY = transform.position.y;
         CacheSpriteRenderers();
         ResetChestVisualState();
+        RegisterInActiveList();
+    }
+
+    public static void ProcessAllLifecycles(Transform player)
+    {
+        if (player == null)
+            return;
+
+        float playerY = player.position.y;
+        for (int i = ActiveChestPlatforms.Count - 1; i >= 0; i--)
+        {
+            ChestPlatform chest = ActiveChestPlatforms[i];
+            if (chest == null)
+            {
+                ActiveChestPlatforms.RemoveAt(i);
+                continue;
+            }
+
+            chest.TickLifecycle(playerY);
+        }
+    }
+
+    void TickLifecycle(float playerY)
+    {
+        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
+
+        if (enableDistanceDestroy && playerY > destroyReferenceY + destroyDistance)
+        {
+            Despawn();
+            return;
+        }
+
+        if (!isFalling)
+            return;
+
+        fallElapsedTime += Time.fixedDeltaTime;
+        float t = fallAccelerationTime > 0f
+            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
+            : 1f;
+        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
+        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
     }
 
     public void ResetForSpawn(Vector3 worldPosition, Vector3 localScale)
@@ -160,6 +214,7 @@ public class ChestPlatform : MonoBehaviour
         ClearSpawnedCollectables();
         RestoreSpriteColors();
         ResetChestVisualState();
+        RegisterInActiveList();
     }
 
     public void PrepareForPool()
@@ -169,16 +224,6 @@ public class ChestPlatform : MonoBehaviour
         ClearSpawnedCollectables();
         RestoreSpriteColors();
         ResetChestVisualState();
-    }
-
-    void EnsurePlayerReference()
-    {
-        if (playerTransform != null)
-            return;
-
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-            playerTransform = playerObject.transform;
     }
 
     void CacheSpriteRenderers()
@@ -236,17 +281,17 @@ public class ChestPlatform : MonoBehaviour
 
     public static void TriggerFallForChestsBelow(float collidedPlatformY)
     {
-        for (int i = ActiveChestPlatforms.Count - 1; i >= 0; i--)
+        for (int i = 0; i < ActiveChestPlatforms.Count; i++)
         {
             ChestPlatform chest = ActiveChestPlatforms[i];
             if (chest == null)
-            {
-                ActiveChestPlatforms.RemoveAt(i);
                 continue;
-            }
 
-            if (chest.transform.position.y < collidedPlatformY)
-                chest.StartFalling();
+            float chestY = chest.transform.position.y;
+            if (chestY >= collidedPlatformY)
+                break;
+
+            chest.StartFalling();
         }
     }
 
@@ -285,41 +330,23 @@ public class ChestPlatform : MonoBehaviour
         }
     }
     
-    private void FixedUpdate()
-    {
-        EnsurePlayerReference();
-        if (playerTransform == null)
-            return;
-
-        destroyReferenceY = Mathf.Max(destroyReferenceY, transform.position.y);
-
-        if (enableDistanceDestroy && playerTransform.position.y > destroyReferenceY + destroyDistance)
-        {
-            Despawn();
-            return;
-        }
-
-        if (!isFalling)
-            return;
-
-        fallElapsedTime += Time.fixedDeltaTime;
-        float t = fallAccelerationTime > 0f
-            ? Mathf.Clamp01(fallElapsedTime / fallAccelerationTime)
-            : 1f;
-        float fallSpeed = Mathf.Lerp(fallMinSpeed, fallMaxSpeed, t);
-        transform.position += Vector3.down * fallSpeed * Time.fixedDeltaTime;
-    }
-    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerBallController player = collision.gameObject.GetComponent<PlayerBallController>();
-        if (player != null)
-        {
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-            
-            // Always handle jumping (platform functionality)
-            HandleJump(player, rb, collision);
-        }
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        PlayerBallController player = PlayerBallController.Instance;
+        if (player == null)
+            player = collision.gameObject.GetComponent<PlayerBallController>();
+
+        if (player == null)
+            return;
+
+        Rigidbody2D rb = player.Rigidbody;
+        if (rb == null)
+            rb = collision.rigidbody;
+
+        HandleJump(player, rb, collision);
     }
     
     private void HandleJump(PlayerBallController player, Rigidbody2D rb, Collision2D collision)
@@ -628,65 +655,18 @@ public class ChestPlatform : MonoBehaviour
     // Platform combo system methods
     private void IncrementPlatformCombo(float relativeVelocity)
     {
-        // Try to increment combo safely without direct ComboManager reference
-        try
-        {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        var platformComboMethod = comboManagerType.GetMethod("PlatformComboIncrement");
-                        if (platformComboMethod != null)
-                        {
-                            platformComboMethod.Invoke(instance, new object[] { relativeVelocity });
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-            // ComboManager not available
-        }
+        ComboManager combo = ComboManager.Instance;
+        if (combo != null)
+            combo.PlatformComboIncrement(relativeVelocity);
     }
 
     private float GetComboBonus()
     {
-        // Try to get combo bonus safely without direct ComboManager reference
-        try
-        {
-            // Use reflection to safely access ComboManager
-            System.Type comboManagerType = System.Type.GetType("ComboManager");
-            if (comboManagerType != null)
-            {
-                var instanceProperty = comboManagerType.GetProperty("Instance");
-                if (instanceProperty != null)
-                {
-                    var instance = instanceProperty.GetValue(null);
-                    if (instance != null)
-                    {
-                        var getComboMethod = comboManagerType.GetMethod("getCombo");
-                        if (getComboMethod != null)
-                        {
-                            float currentCombo = (float)getComboMethod.Invoke(instance, null);
-                            return currentCombo * comboBonus;
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception)
-        {
-            // ComboManager not available, return 0 bonus
-        }
+        ComboManager combo = ComboManager.Instance;
+        if (combo == null)
+            return 0f;
 
-        return 0f;
+        return combo.getCombo() * comboBonus;
     }
 
     // Public methods to control combo system manually

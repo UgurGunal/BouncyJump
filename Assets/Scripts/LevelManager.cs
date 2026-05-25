@@ -115,6 +115,12 @@ public class LevelManager : MonoBehaviour
         {
             PointsManager.Instance.StartSession();
         }
+
+        if (player != null)
+            GameplayPlayerCache.SetPlayer(player);
+
+        if (GetComponent<PlatformLifecycleUpdater>() == null)
+            gameObject.AddComponent<PlatformLifecycleUpdater>();
     }
     
     void FindPersistentReferences()
@@ -124,7 +130,10 @@ public class LevelManager : MonoBehaviour
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
+            {
                 player = playerObject.transform;
+                GameplayPlayerCache.SetPlayer(player);
+            }
         }
 
         if (cameraFollow == null)

@@ -53,11 +53,30 @@ public class PointsManager : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        CrossSceneReferenceManager.OnPlayerReady += HandlePlayerReady;
+    }
+
+    void OnDisable()
+    {
+        CrossSceneReferenceManager.OnPlayerReady -= HandlePlayerReady;
+    }
+
     void Start()
     {
         // Start session automatically if this manager is in the initial scene
         // Or call StartSession() explicitly from LevelManager/GameManager
         // StartSession(); // This might be called from LevelManager instead
+        Transform player = GameplayPlayerCache.Player;
+        if (player != null)
+            HandlePlayerReady(player);
+    }
+
+    static void HandlePlayerReady(Transform player)
+    {
+        if (player != null)
+            GameplayPlayerCache.SetPlayer(player);
     }
 
     void Update()
@@ -66,23 +85,16 @@ public class PointsManager : MonoBehaviour
         {
             _sessionDuration = Time.time - _sessionStartTime;
 
-            // Update highest height reached
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                float currentPlayerY = playerObject.transform.position.y;
-                if (currentPlayerY > _highestHeightReached)
-                {
-                    _highestHeightReached = currentPlayerY;
-                }
+            Transform player = GameplayPlayerCache.Player;
+            if (player == null)
+                return;
 
-                // Update current level based on player's height
-                if (LevelManager.Instance != null)
-                {
-                    _currentLevel = LevelManager.Instance.GetCurrentLevel(currentPlayerY);
-                }
-            }
+            float currentPlayerY = player.position.y;
+            if (currentPlayerY > _highestHeightReached)
+                _highestHeightReached = currentPlayerY;
 
+            if (LevelManager.Instance != null)
+                _currentLevel = LevelManager.Instance.GetCurrentLevel(currentPlayerY);
         }
     }
 
