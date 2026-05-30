@@ -361,6 +361,7 @@ public class HomeTowerCarouselController : MonoBehaviour
             return;
 
         int prev = TowerManager.WrapTowerIndex(tm.currentTowerIndex - 1, tm.allTowers.Length);
+        PlayTowerSwipeSound();
         slideRoutine = StartCoroutine(SlideToTower(prev, fromRight: false));
     }
 
@@ -374,7 +375,14 @@ public class HomeTowerCarouselController : MonoBehaviour
             return;
 
         int next = TowerManager.WrapTowerIndex(tm.currentTowerIndex + 1, tm.allTowers.Length);
+        PlayTowerSwipeSound();
         slideRoutine = StartCoroutine(SlideToTower(next, fromRight: true));
+    }
+
+    void PlayTowerSwipeSound()
+    {
+        if (SoundEffectsManager.Instance != null)
+            SoundEffectsManager.Instance.PlayHomeTowerSwipeSound();
     }
 
     IEnumerator SlideToTower(int towerIndex, bool fromRight)

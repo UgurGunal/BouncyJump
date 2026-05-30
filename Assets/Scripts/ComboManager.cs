@@ -40,6 +40,8 @@ public class ComboManager : MonoBehaviour
     public bool showDebugLogs = false;
 
     private PlayerBallController playerController;
+    private float powerupEffectEndTime;
+    private Coroutine powerupEffectLifecycleCoroutine;
     private Dictionary<GameObject, float> wallCooldowns = new Dictionary<GameObject, float>();
     private List<GameObject> expiredCooldowns = new List<GameObject>(); // Reuse list to avoid allocations
     
@@ -53,6 +55,7 @@ public class ComboManager : MonoBehaviour
     
     // Public property for safe access to currentCombo
     public float CurrentCombo => currentCombo;
+    public bool IsPowerupActive => Time.time < powerupEffectEndTime;
     
     void Awake()
     {
@@ -416,7 +419,38 @@ public class ComboManager : MonoBehaviour
             return;
         }
 
+        bool wasAlreadyActive = IsPowerupActive;
+
+        powerupEffectEndTime = Mathf.Max(powerupEffectEndTime, Time.time + duration);
+        EnsurePowerupEffectLifecycleRunning();
+
+        if (!wasAlreadyActive && SoundEffectsManager.Instance != null)
+            SoundEffectsManager.Instance.PlayPowerupSound(-1f);
+
         StartCoroutine(ComboPowerupRoutine(duration, comboPerSecond));
+    }
+
+    void EnsurePowerupEffectLifecycleRunning()
+    {
+        if (powerupEffectLifecycleCoroutine != null)
+            return;
+
+        powerupEffectLifecycleCoroutine = StartCoroutine(PowerupEffectLifecycleRoutine());
+    }
+
+    IEnumerator PowerupEffectLifecycleRoutine()
+    {
+        PlayerParticleController particleController = playerController != null
+            ? playerController.particleController
+            : null;
+
+        particleController?.StartPowerupEffect();
+
+        while (Time.time < powerupEffectEndTime)
+            yield return null;
+
+        particleController?.StopPowerupEffect();
+        powerupEffectLifecycleCoroutine = null;
     }
 
     private IEnumerator ComboPowerupRoutine(float duration, float comboPerSecond)

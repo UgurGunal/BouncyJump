@@ -3,7 +3,7 @@ using UnityEngine;
 public class PowerupCollectable : MonoBehaviour
 {
     public float yDestroyOffset = 10f;
-    public float powerupDuration = 5f;
+    public float powerupDuration = 7.5f;
     public float powerupPerSecond = 100f;
 
     CollectableDistanceDespawn distanceDespawn;

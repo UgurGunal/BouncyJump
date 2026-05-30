@@ -31,6 +31,10 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip chestClip;
     [Tooltip("Diamond/gem pickup (name is always 'diamond').")]
     public AudioClip diamondClip;
+    [Tooltip("Powerup pickup (name is always 'powerup').")]
+    public AudioClip powerupClip;
+    [Tooltip("Home menu tower carousel left/right swipe (name is always 'homeTowerSwipe').")]
+    public AudioClip homeTowerSwipeClip;
     [Tooltip("Endgame panel count tick (name: endgameCountdown). Played N times per count animation; pitch always 1.")]
     public AudioClip endgameCountdownClip;
 
@@ -46,6 +50,12 @@ public class SoundEffectsManager : MonoBehaviour
     public float diamondPitchBase = 1f;
     [Tooltip("Random upward pitch shift for diamond pickup.")]
     public float diamondPitchRandomVariance = 0.01f;
+
+    [Header("Powerup Sound Settings")]
+    [Tooltip("Base pitch for powerup pickup (before random variance).")]
+    public float powerupPitchBase = 1f;
+    [Tooltip("Random upward pitch shift for powerup pickup.")]
+    public float powerupPitchRandomVariance = 0.01f;
 
     [Header("Additional Sound Effects (optional)")]
     [Tooltip("Optional extra sound effects. You can leave this empty if you only use wall/coin/bouncyPlatform.")]
@@ -133,6 +143,8 @@ public class SoundEffectsManager : MonoBehaviour
         AddCoreSound("anvil", anvilClip);
         AddCoreSound("chest", chestClip);
         AddCoreSound("diamond", diamondClip);
+        AddCoreSound("powerup", powerupClip);
+        AddCoreSound("homeTowerSwipe", homeTowerSwipeClip);
         AddCoreSound("endgameCountdown", endgameCountdownClip);
 
         // Register any additional sounds from the list.
@@ -231,6 +243,22 @@ public class SoundEffectsManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Plays the powerup pickup sound (same pattern as coins: slight upward pitch variance).
+    /// </summary>
+    public void PlayPowerupSound(float volumeOverride = -1f)
+    {
+        float upwardShift = Mathf.Max(0f, powerupPitchRandomVariance);
+        float pitch = powerupPitchBase + Random.Range(0f, upwardShift);
+        pitch = Mathf.Clamp(pitch, 0.5f, 3f);
+        PlaySound("powerup", volumeOverride, pitch);
+    }
+
+    public void PlayHomeTowerSwipeSound(float volumeOverride = -1f)
+    {
+        PlaySound("homeTowerSwipe", volumeOverride, 1f);
+    }
+
+    /// <summary>
     /// Play a sound effect using an AudioClip directly (for dynamically loaded clips)
     /// </summary>
     /// <param name="clip">The AudioClip to play</param>
@@ -312,8 +340,6 @@ public class SoundEffectsManager : MonoBehaviour
     private void ApplyMasterVolume()
     {
         // Volume will be applied when sounds are played
-        // For currently playing sounds, we'd need to update them here
-        // For simplicity, new sounds will use the new volume
     }
 
     /// <summary>

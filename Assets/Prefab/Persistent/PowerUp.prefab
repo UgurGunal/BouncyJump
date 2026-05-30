@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yDestroyOffset: 10
-  powerupDuration: 5
+  powerupDuration: 7.5
   powerupPerSecond: 300

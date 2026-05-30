@@ -45,6 +45,8 @@ public class PlayerBallController : MonoBehaviour
     private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
     private TrailRenderer trailRenderer; // Reference to trail renderer component
 
+    static readonly Color PowerupTrailColor = new Color(0f, 0xBB / 255f, 1f);
+
     public Rigidbody2D Rigidbody
     {
         get
@@ -151,8 +153,13 @@ public class PlayerBallController : MonoBehaviour
         }
         // If combo < 200, alpha remains 0
 
-        Color startColor = new Color(1f, 1f, 1f, alpha); // White with calculated alpha
-        Color endColor = new Color(1f, 1f, 1f, 0f); // White with 0 alpha
+        bool powerupActive = comboManager.IsPowerupActive;
+        Color trailRgb = powerupActive ? PowerupTrailColor : Color.white;
+        if (powerupActive)
+            alpha = 1f;
+
+        Color startColor = new Color(trailRgb.r, trailRgb.g, trailRgb.b, alpha);
+        Color endColor = new Color(trailRgb.r, trailRgb.g, trailRgb.b, 0f);
         
         trailRenderer.startColor = startColor;
         trailRenderer.endColor = endColor;

@@ -12,9 +12,14 @@ public class PlayerParticleController : MonoBehaviour
     [Tooltip("Secondary wall bounce particle system prefab (behaves exactly like the first, optional).")]
     public ParticleSystem wallDustParticleSystemPrefab2;
 
+    [Header("Powerup Particles")]
+    [Tooltip("Prefab with child ParticleSystem components. Spawned on the player while a combo powerup is active.")]
+    public GameObject powerupEffectPrefab;
+
     private Vector3 originalWallDustShapePosition;
     private Vector3 originalWallDustShapePosition2;
     private Transform _playerTransform;
+    private GameObject _powerupEffectInstance;
 
     void Awake()
     {
@@ -66,7 +71,7 @@ public class PlayerParticleController : MonoBehaviour
         }
         else
         {
-            position.x = -0.35f;
+            position.x = -0.38f;
 
             // Reset rotation for left wall (no X flip)
             Vector3 rotation = shape.rotation;
@@ -114,6 +119,42 @@ public class PlayerParticleController : MonoBehaviour
             maxLifetime = 2f;
 
         Destroy(particleInstance.gameObject, maxLifetime + 0.5f);
+    }
+
+    public void StartPowerupEffect()
+    {
+        if (powerupEffectPrefab == null || _powerupEffectInstance != null)
+            return;
+
+        _powerupEffectInstance = Instantiate(powerupEffectPrefab, _playerTransform.position, Quaternion.identity);
+
+        foreach (var particleSystem in _powerupEffectInstance.GetComponentsInChildren<ParticleSystem>(true))
+            particleSystem.Play(true);
+    }
+
+    void LateUpdate()
+    {
+        if (_powerupEffectInstance == null)
+            return;
+
+        _powerupEffectInstance.transform.SetPositionAndRotation(_playerTransform.position, Quaternion.identity);
+    }
+
+    public void StopPowerupEffect()
+    {
+        if (_powerupEffectInstance == null)
+            return;
+
+        foreach (var particleSystem in _powerupEffectInstance.GetComponentsInChildren<ParticleSystem>(true))
+            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+        Destroy(_powerupEffectInstance);
+        _powerupEffectInstance = null;
+    }
+
+    void OnDisable()
+    {
+        StopPowerupEffect();
     }
 
 }
