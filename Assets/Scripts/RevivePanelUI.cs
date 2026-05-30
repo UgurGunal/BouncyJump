@@ -74,7 +74,6 @@ public class RevivePanelUI : MonoBehaviour
         
         _currentCountdownTime = reviveCountdownDuration;
         _countdownPausedForAd = false;
-        UpdateDiamondButtonState();
         PrepareReviveRewardedAd();
         RefreshWatchAdButtonState();
         StartCoroutine(CountdownCoroutine());
@@ -212,13 +211,16 @@ public class RevivePanelUI : MonoBehaviour
         StopAllCoroutines();
     }
 
-    void UpdateDiamondButtonState()
+    void OnPay3DiamondClick()
     {
-        if (pay3DiamondButton != null)
+        if (ShopManager.TrySpendSavedDiamonds(diamondsToRevive))
         {
-            bool canAfford = PointsManager.Instance.GemsCollected >= diamondsToRevive;
-            pay3DiamondButton.interactable = canAfford;
+            HideRevivePanel();
+            StartCoroutine(ReviveCountdown());
+            return;
         }
+
+        ShopManager.OpenInGameDiamondPurchase();
     }
 
     IEnumerator CountdownCoroutine()
@@ -236,16 +238,6 @@ public class RevivePanelUI : MonoBehaviour
             yield return null;
         }
         OnCountdownFinished();
-    }
-
-    void OnPay3DiamondClick()
-    {
-        if (PointsManager.Instance != null && PointsManager.Instance.GemsCollected >= diamondsToRevive)
-        {
-            PointsManager.Instance.AddGem(-diamondsToRevive);
-            HideRevivePanel();
-            StartCoroutine(ReviveCountdown());
-        }
     }
 
     void OnWatchAdClick()
@@ -266,7 +258,6 @@ public class RevivePanelUI : MonoBehaviour
     void OnReviveRewardedAdFinished(bool userEarnedReward)
     {
         _countdownPausedForAd = false;
-        UpdateDiamondButtonState();
         RefreshWatchAdButtonState();
 
         if (userEarnedReward)

@@ -1689,8 +1689,8 @@ MonoBehaviour:
   currentCombo: 0
   minDecrease: 90
   maxDecrease: 300
-  speedLimitBonus: 2.6
-  rotationSpeedMultiplier: 2
+  speedLimitBonus: 2.5
+  rotationSpeedMultiplier: 1.2
   platformVelocityMultiplier: 2.5
   platformMinimumBonus: 40
   platformComboMultiplier: 1
@@ -4075,9 +4075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd61ed0d09d6c34ab60e780ee7a6f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
+  acceleration: 40
   deceleration: 2
-  turnFactor: 100
+  turnFactor: 80
   maxSpeed: 6.5
   restartMargin: 0
   enableComboSpeedSystem: 1

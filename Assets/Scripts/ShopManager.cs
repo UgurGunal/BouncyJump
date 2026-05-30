@@ -399,6 +399,11 @@ public class ShopManager : MonoBehaviour
     
     public int GetPlayerDiamonds()
     {
+        return GetSavedDiamondBalance();
+    }
+
+    public static int GetSavedDiamondBalance()
+    {
         return PlayerPrefs.GetInt("PlayerDiamonds", 0);
     }
     
@@ -421,12 +426,32 @@ public class ShopManager : MonoBehaviour
     /// <summary>Spend diamonds to get gold. Returns true if player had enough diamonds.</summary>
     public bool TrySpendDiamonds(int amount)
     {
-        int current = GetPlayerDiamonds();
-        if (current < amount) return false;
+        return TrySpendSavedDiamonds(amount);
+    }
+
+    public static bool TrySpendSavedDiamonds(int amount)
+    {
+        int current = GetSavedDiamondBalance();
+        if (current < amount)
+            return false;
+
         PlayerPrefs.SetInt("PlayerDiamonds", current - amount);
         PlayerPrefs.Save();
-        UpdateCurrencyDisplay();
+
+        ShopManager shop = Object.FindObjectOfType<ShopManager>(true);
+        if (shop != null)
+            shop.UpdateCurrencyDisplay();
+
+        HomeScreenCurrencyDisplay display = Object.FindObjectOfType<HomeScreenCurrencyDisplay>(true);
+        if (display != null)
+            display.RefreshCurrencyDisplay();
+
         return true;
+    }
+
+    /// <summary>Google Play in-app diamond purchase. Wire billing here when ready.</summary>
+    public static void OpenInGameDiamondPurchase()
+    {
     }
 
     /// <summary>Buy gold by spending diamonds. Exchange rate is configurable.</summary>
