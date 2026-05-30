@@ -281,6 +281,9 @@ public class TowerManager : MonoBehaviour
                 // Refresh bought towers list
                 RefreshTowersBought();
 
+                if (SoundEffectsManager.Instance != null)
+                    SoundEffectsManager.Instance.PlayShopPurchaseSound();
+
                 InvokeTowerPurchased();
                 SelectHomeTowerVisual(towerIndex);
             }

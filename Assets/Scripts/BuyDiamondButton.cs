@@ -2,18 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Add this to any "Buy Gold" button. Set diamondCost and goldAmount in the Inspector
-/// (or use multiple instances for different packs). Purchase logic is in ShopManager.
-/// Awake order is after ShopManager so scroll listeners on the same button run first.
+/// Add this to any "Buy Diamond" pack button. Set diamondAmount in the Inspector.
+/// Purchase logic and sound are handled by ShopManager.
 /// </summary>
 [DefaultExecutionOrder(50)]
-public class BuyGoldButton : MonoBehaviour
+public class BuyDiamondButton : MonoBehaviour
 {
     [Header("Pack")]
-    [Tooltip("Diamonds required to buy this gold pack")]
-    public int diamondCost = 1;
-    [Tooltip("Gold granted when purchase succeeds")]
-    public int goldAmount = 100;
+    [Tooltip("Diamonds granted when this pack is purchased")]
+    public int diamondAmount = 50;
 
     ShopManager shopManager;
 
@@ -44,8 +41,8 @@ public class BuyGoldButton : MonoBehaviour
             shopManager = FindObjectOfType<ShopManager>(true);
         if (shopManager == null) return;
 
-        if (shopManager.TryBuyGoldWithDiamonds(diamondCost, goldAmount))
-            RefreshCurrencyDisplay();
+        shopManager.MockPurchaseDiamondsWithRealMoney(diamondAmount);
+        RefreshCurrencyDisplay();
     }
 
     void RefreshCurrencyDisplay()

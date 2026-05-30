@@ -35,6 +35,8 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip powerupClip;
     [Tooltip("Home menu tower carousel left/right swipe (name is always 'homeTowerSwipe').")]
     public AudioClip homeTowerSwipeClip;
+    [Tooltip("Shop purchase for buy gold and buy diamond packs (name is always 'shopPurchase').")]
+    public AudioClip shopPurchaseClip;
     [Tooltip("Endgame panel count tick (name: endgameCountdown). Played N times per count animation; pitch always 1.")]
     public AudioClip endgameCountdownClip;
 
@@ -145,6 +147,7 @@ public class SoundEffectsManager : MonoBehaviour
         AddCoreSound("diamond", diamondClip);
         AddCoreSound("powerup", powerupClip);
         AddCoreSound("homeTowerSwipe", homeTowerSwipeClip);
+        AddCoreSound("shopPurchase", shopPurchaseClip);
         AddCoreSound("endgameCountdown", endgameCountdownClip);
 
         // Register any additional sounds from the list.
@@ -256,6 +259,11 @@ public class SoundEffectsManager : MonoBehaviour
     public void PlayHomeTowerSwipeSound(float volumeOverride = -1f)
     {
         PlaySound("homeTowerSwipe", volumeOverride, 1f);
+    }
+
+    public void PlayShopPurchaseSound(float volumeOverride = -1f)
+    {
+        PlaySound("shopPurchase", volumeOverride, 1f);
     }
 
     /// <summary>

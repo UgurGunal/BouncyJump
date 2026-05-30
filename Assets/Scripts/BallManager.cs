@@ -241,6 +241,9 @@ public class BallManager : MonoBehaviour
 
                 RefreshBallsBought();
 
+                if (SoundEffectsManager.Instance != null)
+                    SoundEffectsManager.Instance.PlayShopPurchaseSound();
+
                 OnBallPurchased?.Invoke();
             }
         }

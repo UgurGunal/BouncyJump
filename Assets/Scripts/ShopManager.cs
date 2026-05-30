@@ -378,13 +378,6 @@ public class ShopManager : MonoBehaviour
         {
             button.RefreshButton();
         }
-
-        // Refresh buy-gold buttons (enable/disable based on diamond count)
-        BuyGoldButton[] goldButtons = FindObjectsOfType<BuyGoldButton>();
-        foreach (var button in goldButtons)
-        {
-            button.RefreshButton();
-        }
     }
     
     public int GetPlayerCurrency()
@@ -441,6 +434,7 @@ public class ShopManager : MonoBehaviour
     {
         if (!TrySpendDiamonds(diamondCost)) return false;
         AddGold(goldReward);
+        PlayShopPurchaseSound();
         return true;
     }
 
@@ -448,12 +442,19 @@ public class ShopManager : MonoBehaviour
     public void MockPurchaseDiamondsWithRealMoney(int amount)
     {
         AddDiamonds(amount);
+        PlayShopPurchaseSound();
     }
 
     /// <summary>Mock: grant diamonds after watching an ad. Replace with real rewarded ad later.</summary>
     public void MockGrantDiamondsFromAd(int amount)
     {
         AddDiamonds(amount);
+    }
+
+    static void PlayShopPurchaseSound()
+    {
+        if (SoundEffectsManager.Instance != null)
+            SoundEffectsManager.Instance.PlayShopPurchaseSound();
     }
 
     void UpdateCurrencyDisplay()

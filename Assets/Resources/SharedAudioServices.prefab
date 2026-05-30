@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1004842133091399540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4282302327243657731}
+  - component: {fileID: 3353026905656668934}
+  - component: {fileID: 8366812403130800327}
+  m_Layer: 0
+  m_Name: SharedAudioServices
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4282302327243657731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004842133091399540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.468588, y: 14.521238, z: 0.01845258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3353026905656668934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004842133091399540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc477e32a6c435f9722adeb2c910cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePoolSize: 10
+  masterVolume: 1
+  wallClip: {fileID: 8300000, guid: 602a298f66c54014a9497fdd67d11d8d, type: 3}
+  coinClip: {fileID: 8300000, guid: e3630469ad65a3142b5227dd5780a6f2, type: 3}
+  bouncyPlatformClip: {fileID: 8300000, guid: 2000eb60c86d3aa42a757ba5459da9ee, type: 3}
+  anvilClip: {fileID: 8300000, guid: da861feca949f9a43b4c1a6464a21f17, type: 3}
+  chestClip: {fileID: 8300000, guid: 05bd3052a04c1834c896925724e61290, type: 3}
+  diamondClip: {fileID: 8300000, guid: 8c3a55ecee8ca7e4983bcffb842044e5, type: 3}
+  powerupClip: {fileID: 8300000, guid: fcf5a88c381f3be4193cb2957ac1b297, type: 3}
+  homeTowerSwipeClip: {fileID: 8300000, guid: 99b2245ee2f667a4799a1b1e367b60f5, type: 3}
+  shopPurchaseClip: {fileID: 8300000, guid: 9bf04046e61f7d24dbdebb99c2693069, type: 3}
+  endgameCountdownClip: {fileID: 8300000, guid: fc6986a39dd2d124b89b22272a1162f7, type: 3}
+  coinPitchBase: 1
+  coinPitchRandomVariance: 0.006
+  diamondPitchBase: 1
+  diamondPitchRandomVariance: 0.01
+  powerupPitchBase: 1
+  powerupPitchRandomVariance: 0.01
+  soundEffects: []
+--- !u!114 &8366812403130800327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004842133091399540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d688ed6e84d42c3b1723add0c26dc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1
+  masterVolume: 1
+  loopMusic: 1
+  sceneMusicList:
+  - sceneName: BasicTower
+    musicClip: {fileID: 8300000, guid: 4991c02c7b7b989478e7cf47da96e476, type: 3}
+    volume: 0.8
+  - sceneName: OldTower
+    musicClip: {fileID: 8300000, guid: 55276765e417c2f4083424bb5ddfd42e, type: 3}
+    volume: 0.8
+  - sceneName: IronTower
+    musicClip: {fileID: 8300000, guid: 6815c6e0cccc6374f97baebae8f6fade, type: 3}
+    volume: 0.8
+  - sceneName: RoyalTower
+    musicClip: {fileID: 8300000, guid: bf6cb824fd7666f4d99fb7df927bd86b, type: 3}
+    volume: 0.8
+  - sceneName: AmazonTower
+    musicClip: {fileID: 8300000, guid: f2c1ccfd037ea51478019fc49e67d21f, type: 3}
+    volume: 0.8
+  - sceneName: ElectricTower
+    musicClip: {fileID: 8300000, guid: bb7f959bfeaf27e40bfda92cbe5b43cb, type: 3}
+    volume: 0.8
+  defaultMusic: {fileID: 0}
+  defaultMusicVolume: 1
