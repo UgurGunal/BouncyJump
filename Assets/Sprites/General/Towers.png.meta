@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 105
+  spritePixelsToUnits: 110
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,10 +113,10 @@ TextureImporter:
       name: Towers_0
       rect:
         serializedVersion: 2
-        x: 75
+        x: 54
         y: 2012
-        width: 720
-        height: 1664
+        width: 738
+        height: 1671
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e83398965b697e47ba94f30608730ba
-      internalID: -253952594
+      spriteID: dde9f2f270b7ada4d9edb7d8d7e04120
+      internalID: 676085762
       vertices: []
       indices: 
       edges: []
@@ -134,10 +134,10 @@ TextureImporter:
       name: Towers_1
       rect:
         serializedVersion: 2
-        x: 879
-        y: 2008
-        width: 792
-        height: 1684
+        x: 877
+        y: 2005
+        width: 791
+        height: 1686
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a70e25da151774845831601618440383
-      internalID: 1171264923
+      spriteID: fd7b9f2f52be0dd4290b87102b21c78f
+      internalID: -1150038194
       vertices: []
       indices: 
       edges: []
@@ -155,10 +155,10 @@ TextureImporter:
       name: Towers_2
       rect:
         serializedVersion: 2
-        x: 1734
-        y: 1992
-        width: 1174
-        height: 1765
+        x: 1710
+        y: 1990
+        width: 1226
+        height: 1767
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb8a98b3bebe0be41ac5e4e3b8deb86c
-      internalID: -674502749
+      spriteID: 9032a6d2ddb37914bb7e5bbf4ddcf37f
+      internalID: -480432573
       vertices: []
       indices: 
       edges: []
@@ -176,10 +176,10 @@ TextureImporter:
       name: Towers_3
       rect:
         serializedVersion: 2
-        x: 121
-        y: 54
-        width: 739
-        height: 1906
+        x: 117
+        y: 53
+        width: 747
+        height: 1907
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03cb0c1d355e4ff4392b4bc250771e88
-      internalID: -43791167
+      spriteID: 585a53210d3dd7941ab3cc6633efc30b
+      internalID: 972920191
       vertices: []
       indices: 
       edges: []
@@ -197,10 +197,10 @@ TextureImporter:
       name: Towers_4
       rect:
         serializedVersion: 2
-        x: 995
-        y: 88
-        width: 796
-        height: 1793
+        x: 985
+        y: 87
+        width: 808
+        height: 1792
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 999fbd559fe13f74f90ac53baf9aa6cc
-      internalID: 231119245
+      spriteID: d47dd55c92dd95343916ea6464bf2410
+      internalID: 1868179825
       vertices: []
       indices: 
       edges: []
@@ -218,10 +218,10 @@ TextureImporter:
       name: Towers_5
       rect:
         serializedVersion: 2
-        x: 1948
-        y: 66
-        width: 859
-        height: 1784
+        x: 1946
+        y: 69
+        width: 857
+        height: 1789
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b36af661e3b6bcb418640a343a6c5f0c
-      internalID: -1853838465
+      spriteID: 71d336e8106117d46a5c53e9a0757e11
+      internalID: -1268001474
       vertices: []
       indices: 
       edges: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Towers_0: -253952594
-      Towers_1: 1171264923
-      Towers_2: -674502749
-      Towers_3: -43791167
-      Towers_4: 231119245
-      Towers_5: -1853838465
+      Towers_0: 676085762
+      Towers_1: -1150038194
+      Towers_2: -480432573
+      Towers_3: 972920191
+      Towers_4: 1868179825
+      Towers_5: -1268001474
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
