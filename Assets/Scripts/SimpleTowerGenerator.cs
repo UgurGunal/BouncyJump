@@ -169,9 +169,12 @@ public class SimpleTowerGenerator : MonoBehaviour
             OnLevelChanged(newLevel);
         }
 
+        float maxSpawnY = levelManager.GetMaxTowerWorldY();
+
         // Spawn new content as player moves up (capped per frame to avoid hitches)
         int spawnsThisFrame = 0;
         while (lastSpawnedPlatformY < player.position.y + spawnHeightOffset
+               && lastSpawnedPlatformY < maxSpawnY
                && spawnsThisFrame < maxSpawnsPerFrame)
         {
             SpawnLevelContent();
@@ -190,9 +193,13 @@ public class SimpleTowerGenerator : MonoBehaviour
 
     void SpawnLevelContent()
     {
+        float maxSpawnY = levelManager.GetMaxTowerWorldY();
+
         // Calculate the Y position for the next platform first
         float nextPlatformY = lastSpawnedPlatformY + GetRandomYInterval(minPlatformYInterval, maxPlatformYInterval);
-        
+        if (nextPlatformY >= maxSpawnY)
+            return;
+
         // Get level data based on the platform's Y position (not player position)
         int platformLevel = levelManager.GetCurrentLevel(nextPlatformY);
         LevelManager.LevelData levelData = levelManager.GetLevelData(platformLevel);

@@ -198,6 +198,11 @@ public class GameEndPanelUI : MonoBehaviour
         
         // Display max reached height this session (multiplied by 5 as per your UI format)
         int displayHeight = Mathf.RoundToInt(PointsManager.Instance.HighestHeightReached * 5);
+        if (LevelManager.Instance != null)
+        {
+            int maxDisplayHeight = Mathf.RoundToInt(LevelManager.Instance.GetMaxTowerWorldY() * 5);
+            displayHeight = Mathf.Min(displayHeight, maxDisplayHeight);
+        }
 
         // Per-tower best height (persisted): read old best, then save if this run beat the record
         int towerIndex = TowerHeightHighScore.GetCurrentTowerIndexFromSave();
@@ -205,11 +210,12 @@ public class GameEndPanelUI : MonoBehaviour
         bool isNewTowerBest = TowerHeightHighScore.TryRecordHeight(towerIndex, PointsManager.Instance.HighestHeightReached);
         int bestTowerDisplayHeight = TowerHeightHighScore.GetBestDisplayHeight(towerIndex);
 
-        // Display max reached level (1-based)
+        // Display max reached level (1-based), capped to this tower's configured level count
         int maxReachedLevel = 1;
         if (LevelManager.Instance != null)
         {
             maxReachedLevel = LevelManager.Instance.GetCurrentLevel(PointsManager.Instance.HighestHeightReached);
+            maxReachedLevel = LevelManager.Instance.ClampLevel(maxReachedLevel);
         }
 
         // Display total earned coins (max level * coins collected)

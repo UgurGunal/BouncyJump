@@ -4,7 +4,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; } // New: Singleton Instance
 
+    [Tooltip("Number of levels for this tower. Max world Y = levelCount × levelHeight (e.g. 6 × 1000 = 6000).")]
     public int levelCount = 4;
+    [Tooltip("World Y span per level. Reaching levelCount × levelHeight ends the run (game end panel, no revive).")]
     public float levelHeight = 20f;
 
     [Header("Player and Camera References")]
@@ -69,6 +71,9 @@ public class LevelManager : MonoBehaviour
     private int currentLevel = -1;
     private float lastCheckTime = 0f;
     private float checkInterval = 1f; // Check every 1 second
+    private bool _towerCompleteTriggered;
+
+    public bool IsTowerComplete => _towerCompleteTriggered;
 
     // New: Awake method for Singleton
     void Awake()
@@ -142,7 +147,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || _towerCompleteTriggered) return;
 
         // Check for level change based on player's Y position every second
         if (Time.time - lastCheckTime >= checkInterval)
@@ -157,15 +162,50 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        if (player == null || _towerCompleteTriggered) return;
+
+        if (player.position.y >= GetMaxTowerWorldY())
+            TriggerTowerComplete();
+    }
+
+    public int GetEffectiveLevelCount()
+    {
+        int count = Mathf.Max(1, levelCount);
+        if (levels != null && levels.Length > 0)
+            count = Mathf.Min(count, levels.Length);
+        return count;
+    }
+
+    public int GetMaxLevel() => GetEffectiveLevelCount();
+
+    /// <summary>World Y at which the run ends (e.g. 5 levels × 1000 = 5000).</summary>
+    public float GetMaxTowerWorldY()
+    {
+        if (levelHeight <= 0f)
+            return float.PositiveInfinity;
+        return GetMaxLevel() * levelHeight;
+    }
+
+    public int ClampLevel(int level) => Mathf.Clamp(level, 1, GetMaxLevel());
+
     public int GetCurrentLevel(float playerY)
     {
-        return Mathf.Max(1, Mathf.FloorToInt(playerY / levelHeight) + 1);
+        if (levelHeight <= 0f)
+            return 1;
+
+        int raw = Mathf.Max(1, Mathf.FloorToInt(playerY / levelHeight) + 1);
+        return ClampLevel(raw);
     }
 
     public LevelData GetLevelData(int level)
     {
-        // Convert level 1-based to 0-based array index
-        int arrayIndex = Mathf.Clamp(level - 1, 0, levels.Length - 1);
+        int clamped = ClampLevel(level);
+        int arrayIndex = clamped - 1;
+        if (levels == null || levels.Length == 0)
+            return null;
+        arrayIndex = Mathf.Clamp(arrayIndex, 0, levels.Length - 1);
         return levels[arrayIndex];
     }
 
@@ -215,19 +255,43 @@ public class LevelManager : MonoBehaviour
 
     void UpdateLevelSettings(int level)
     {
+        level = ClampLevel(level);
         LevelData levelData = GetLevelData(level);
-        
+        if (levelData == null)
+            return;
+
         // Update camera speed using the new method
         if (cameraFollow != null)
-        {
             cameraFollow.UpdateCameraSpeed(levelData.cameraSpeed);
-        }
-        
+
         // Show level change UI
         if (LevelChangeUI.Instance != null)
-        {
             LevelChangeUI.Instance.ShowLevelChange(level, levelData.levelChangeTextColor);
-        }
-        
+    }
+
+    public void TriggerTowerComplete()
+    {
+        if (_towerCompleteTriggered)
+            return;
+
+        _towerCompleteTriggered = true;
+        currentLevel = GetMaxLevel();
+
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.CapSessionStatsForTowerComplete(GetMaxTowerWorldY(), GetMaxLevel());
+
+        if (PointsManager.Instance != null)
+            PointsManager.Instance.EndSession();
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.FadeOutAndPauseMusic();
+
+        Time.timeScale = 0f;
+
+        if (PausePanelUI.Instance != null)
+            PausePanelUI.Instance.SetPauseOpenAllowed(false);
+
+        if (GameEndPanelUI.Instance != null)
+            GameEndPanelUI.Instance.ShowGameEndPanel();
     }
 }

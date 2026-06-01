@@ -4075,9 +4075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd61ed0d09d6c34ab60e780ee7a6f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 40
+  acceleration: 100
   deceleration: 2
-  turnFactor: 80
+  turnFactor: 100
   maxSpeed: 6.5
   restartMargin: 0
   enableComboSpeedSystem: 1

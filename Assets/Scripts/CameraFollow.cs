@@ -140,6 +140,9 @@ public class CameraFollow : MonoBehaviour
 
     void RestartGame()
     {
+        if (LevelManager.Instance != null && LevelManager.Instance.IsTowerComplete)
+            return;
+
         // End session to capture final stats (currency will be saved by GameEndPanelUI)
         if (PointsManager.Instance != null)
         {

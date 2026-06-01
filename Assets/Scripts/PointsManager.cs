@@ -32,8 +32,8 @@ public class PointsManager : MonoBehaviour
         {
             if (LevelManager.Instance != null)
             {
-                int maxReachedLevel = Mathf.CeilToInt(_highestHeightReached / LevelManager.Instance.levelHeight);
-                return Mathf.Max(1, maxReachedLevel) * _coinsCollected;
+                int maxReachedLevel = LevelManager.Instance.GetCurrentLevel(_highestHeightReached);
+                return maxReachedLevel * _coinsCollected;
             }
             return _coinsCollected; // Fallback if LevelManager is not available
         }
@@ -123,6 +123,14 @@ public class PointsManager : MonoBehaviour
         _sessionActive = false;
         _sessionPaused = false;
         // Note: Currency accumulation/saving is handled by GameEndPanelUI when it shows
+    }
+
+    /// <summary>Caps height/level when the player clears the tower (no level 7+ in endgame UI).</summary>
+    public void CapSessionStatsForTowerComplete(float maxWorldY, int maxLevel)
+    {
+        if (_highestHeightReached > maxWorldY)
+            _highestHeightReached = maxWorldY;
+        _currentLevel = maxLevel;
     }
 
     /// <summary>Freezes the run timer while the pause panel is open (resume continues from the same time).</summary>
