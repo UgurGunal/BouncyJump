@@ -382,19 +382,18 @@ public class ShopManager : MonoBehaviour
     
     public int GetPlayerCurrency()
     {
-        return PlayerPrefs.GetInt("PlayerCurrency", 0);
+        GameSaveService.EnsureLoaded();
+        return GameSaveService.GetGold();
     }
     
     public void AddCurrency(int amount)
     {
-        int currentCurrency = GetPlayerCurrency();
-        PlayerPrefs.SetInt("PlayerCurrency", currentCurrency + amount);
-        PlayerPrefs.Save();
+        AddGold(amount);
     }
     
     public int GetPlayerGold()
     {
-        return PlayerPrefs.GetInt("PlayerGold", 0);
+        return GameSaveService.GetGold();
     }
     
     public int GetPlayerDiamonds()
@@ -404,22 +403,18 @@ public class ShopManager : MonoBehaviour
 
     public static int GetSavedDiamondBalance()
     {
-        return PlayerPrefs.GetInt("PlayerDiamonds", 0);
+        return GameSaveService.GetDiamonds();
     }
     
     public void AddGold(int amount)
     {
-        int currentGold = GetPlayerGold();
-        PlayerPrefs.SetInt("PlayerGold", currentGold + amount);
-        PlayerPrefs.Save();
+        GameSaveService.AddGold(amount);
         UpdateCurrencyDisplay();
     }
     
     public void AddDiamonds(int amount)
     {
-        int currentDiamonds = GetPlayerDiamonds();
-        PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + amount);
-        PlayerPrefs.Save();
+        GameSaveService.AddDiamonds(amount);
         UpdateCurrencyDisplay();
     }
 
@@ -431,12 +426,8 @@ public class ShopManager : MonoBehaviour
 
     public static bool TrySpendSavedDiamonds(int amount)
     {
-        int current = GetSavedDiamondBalance();
-        if (current < amount)
+        if (!GameSaveService.TrySpendDiamonds(amount))
             return false;
-
-        PlayerPrefs.SetInt("PlayerDiamonds", current - amount);
-        PlayerPrefs.Save();
 
         ShopManager shop = Object.FindObjectOfType<ShopManager>(true);
         if (shop != null)

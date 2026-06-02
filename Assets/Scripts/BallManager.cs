@@ -38,7 +38,7 @@ public class BallManager : MonoBehaviour
     [Header("Current Selection")]
     public int currentBallIndex = 0;
 
-    [Header("Save Data (PlayerPrefs)")]
+    [Header("Save Data")]
     [Tooltip("If you change the ball list/order, bump this value to reset purchase keys so only defaults are unlocked.")]
     public int ballShopSaveVersion = 1;
 
@@ -84,28 +84,23 @@ public class BallManager : MonoBehaviour
         int defaultUnlockedIndex = GetFirstUnlockedByDefaultIndex();
 
         // Reset old purchase keys when ball config changes, so only defaults are unlocked.
-        int savedVersion = PlayerPrefs.GetInt("BallShopSaveVersion", 0);
+        GameSaveService.EnsureLoaded();
+
+        int savedVersion = GameSaveService.GetBallShopSaveVersion();
         if (savedVersion != ballShopSaveVersion)
         {
             ResetBallPurchaseKeys();
-            PlayerPrefs.SetInt("BallShopSaveVersion", ballShopSaveVersion);
+            GameSaveService.SetBallShopSaveVersion(ballShopSaveVersion);
         }
 
-        currentBallIndex = PlayerPrefs.GetInt("CurrentBallIndex", defaultUnlockedIndex);
+        currentBallIndex = GameSaveService.GetCurrentBallIndex();
         if (currentBallIndex < 0 || currentBallIndex >= BallCount)
-        {
             currentBallIndex = defaultUnlockedIndex;
-            PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
-        }
 
-        // If saved selection is locked, force default unlocked.
         if (!IsBallBought(currentBallIndex))
-        {
             currentBallIndex = defaultUnlockedIndex;
-            PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
-        }
 
-        PlayerPrefs.Save();
+        GameSaveService.SetCurrentBallIndex(currentBallIndex);
 
         RefreshBallsBought();
     }
@@ -167,9 +162,7 @@ public class BallManager : MonoBehaviour
         if (ballIndex >= 0 && ballIndex < Balls.Length && IsBallBought(ballIndex))
         {
             currentBallIndex = ballIndex;
-            PlayerPrefs.SetInt("CurrentBallIndex", currentBallIndex);
-            PlayerPrefs.Save();
-
+            GameSaveService.SetCurrentBallIndex(currentBallIndex);
             OnSelectionChanged?.Invoke();
         }
         else if (!IsBallBought(ballIndex))
@@ -197,7 +190,7 @@ public class BallManager : MonoBehaviour
             if (Balls[ballIndex] != null && Balls[ballIndex].isUnlockedByDefault)
                 return true;
 
-            return PlayerPrefs.GetInt($"BallPurchased_{ballIndex}", 0) == 1;
+            return GameSaveService.IsBallPurchased(ballIndex);
         }
         return false;
     }
@@ -225,19 +218,14 @@ public class BallManager : MonoBehaviour
                 return;
             }
 
-            int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
-            int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
+            int currentGold = GameSaveService.GetGold();
+            int currentDiamonds = GameSaveService.GetDiamonds();
 
             if (currentGold >= ball.goldPrice && currentDiamonds >= ball.diamondPrice)
             {
-                currentGold -= ball.goldPrice;
-                currentDiamonds -= ball.diamondPrice;
-
-                PlayerPrefs.SetInt("PlayerGold", currentGold);
-                PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds);
-
-                PlayerPrefs.SetInt($"BallPurchased_{ballIndex}", 1);
-                PlayerPrefs.Save();
+                GameSaveService.SetGold(currentGold - ball.goldPrice);
+                GameSaveService.SetDiamonds(currentDiamonds - ball.diamondPrice);
+                GameSaveService.SetBallPurchased(ballIndex, true);
 
                 RefreshBallsBought();
 
@@ -285,10 +273,7 @@ public class BallManager : MonoBehaviour
 
     private void ResetBallPurchaseKeys()
     {
-        for (int i = 0; i < BallCount; i++)
-        {
-            PlayerPrefs.DeleteKey($"BallPurchased_{i}");
-        }
+        GameSaveService.ClearBallPurchases();
     }
 }
 

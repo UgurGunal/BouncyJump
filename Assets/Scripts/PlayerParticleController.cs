@@ -78,7 +78,7 @@ public class PlayerParticleController : MonoBehaviour
             rotation.z = Mathf.Abs(rotation.z);
             rotation.x = Mathf.Abs(rotation.x % 360f);
             shape.rotation = rotation;
-        }
+        } C:\Gradle\gradle-8.11\bin
 
         shape.position = position;
 

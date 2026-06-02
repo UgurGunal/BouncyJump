@@ -225,7 +225,7 @@ public class GameEndPanelUI : MonoBehaviour
             totalEarnedCoins = maxReachedLevel * PointsManager.Instance.CoinsCollected;
         }
         
-        // Accumulate this session's currency (but don't save to PlayerPrefs yet)
+        // Accumulate this session's currency into secure save
         if (PointsManager.Instance != null)
         {
             PointsManager.Instance.AccumulateSessionCurrency();

@@ -1,19 +1,17 @@
 using UnityEngine;
 
 /// <summary>
-/// Persists the best (highest) height reached per tower index.
+/// Persists the best (highest) height reached per tower index via <see cref="GameSaveService"/>.
 /// Uses the same world-space Y value as <see cref="PointsManager.HighestHeightReached"/>.
 /// Display values use the same *5 multiplier as <see cref="GameEndPanelUI"/> / <see cref="GameStatsUI"/>.
 /// </summary>
 public static class TowerHeightHighScore
 {
-    private const string KeyPrefix = "TowerBestHeight_";
-
     /// <summary>Returns stored best raw height (world Y) for this tower, or 0 if none.</summary>
     public static float GetBestRawHeight(int towerIndex)
     {
         if (towerIndex < 0) return 0f;
-        return PlayerPrefs.GetFloat($"{KeyPrefix}{towerIndex}", 0f);
+        return GameSaveService.GetTowerBestRawHeight(towerIndex);
     }
 
     /// <summary>Same display number as session height in UI: Mathf.RoundToInt(rawHeight * 5).</summary>
@@ -26,17 +24,12 @@ public static class TowerHeightHighScore
     public static bool TryRecordHeight(int towerIndex, float sessionRawHeight)
     {
         if (towerIndex < 0) return false;
-        float best = GetBestRawHeight(towerIndex);
-        if (sessionRawHeight <= best) return false;
-
-        PlayerPrefs.SetFloat($"{KeyPrefix}{towerIndex}", sessionRawHeight);
-        PlayerPrefs.Save();
-        return true;
+        return GameSaveService.TryRecordTowerBestHeight(towerIndex, sessionRawHeight);
     }
 
-    /// <summary>Reads <c>CurrentTowerIndex</c> from PlayerPrefs (same key as TowerManager).</summary>
+    /// <summary>Reads current tower selection from secure save.</summary>
     public static int GetCurrentTowerIndexFromSave()
     {
-        return PlayerPrefs.GetInt("CurrentTowerIndex", 0);
+        return GameSaveService.GetCurrentTowerIndex();
     }
 }

@@ -149,7 +149,7 @@ public class PointsManager : MonoBehaviour
         _currencySaved = true;
     }
     
-    // Method to accumulate current session's currency and save to PlayerPrefs immediately for safety
+    // Method to accumulate current session's currency and save via GameSaveService immediately for safety
     public void AccumulateSessionCurrency()
     {
         if (!_currencySaved)
@@ -157,17 +157,10 @@ public class PointsManager : MonoBehaviour
             int earnedGold = TotalEarnedCoins;
             int earnedDiamonds = _gemsCollected;
             
-            // Save immediately to PlayerPrefs for crash protection
-            if (earnedGold > 0 || earnedDiamonds > 0)
-            {
-                int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
-                int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
-                
-                PlayerPrefs.SetInt("PlayerGold", currentGold + earnedGold);
-                PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds + earnedDiamonds);
-                PlayerPrefs.Save();
-                
-            }
+            if (earnedGold > 0)
+                GameSaveService.AddGold(earnedGold);
+            if (earnedDiamonds > 0)
+                GameSaveService.AddDiamonds(earnedDiamonds);
             
             _currencySaved = true; // Mark this session as processed
         }

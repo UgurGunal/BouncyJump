@@ -170,20 +170,27 @@ MonoBehaviour:
   parallaxObjects:
   - target: {fileID: 60219933}
     parallaxFactor: -0.035
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 1053119560}
     parallaxFactor: -0.035
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 863554778}
     parallaxFactor: 0.25
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
   - target: {fileID: 2125827023}
     parallaxFactor: 0.6
-    spriteHeight: 0
+    manualTileHeight: 0
+    tileHeight: 0
     duplicate: {fileID: 0}
+  seamOverlapWorld: 0.02
+  seamOverlapPixels: 2
+  snapTilesToPixelGrid: 1
 --- !u!1 &60219931
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,12 +503,13 @@ MonoBehaviour:
   velocityThreshold: 4
   contactNormalThreshold: 0
   enableComboSystem: 1
-  enableTimerDestroy: 0
-  destroyTime: 8
-  shakeMagnitude: 0.1
   enableDistanceDestroy: 1
   destroyDistance: 8
-  timerDestroyDistance: 4.4
+  enableFalling: 0
+  fallMinSpeed: 1
+  fallMaxSpeed: 6
+  fallAccelerationTime: 1.5
+  fallTintStrength: 0.15
   isBouncyPlatform: 0
   isAnvil: 0
   anvilAudioCollider: {fileID: 0}
@@ -1012,12 +1020,12 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.27
-    coin2SpawnRate: 0.08
+    coin1SpawnRate: 0.25
+    coin2SpawnRate: 0.05
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.005
-    emptySpawnRate: 0.65
+    emptySpawnRate: 0.7
     levelChangeTextColor: {r: 0.49236736, g: 0.97735846, b: 0.94292116, a: 1}
   - cameraSpeed: 3.4
     longPlatformPrefab: {fileID: 6595305194927341745, guid: 92d7d0fae1eb4f0409c923e5e7842c33, type: 3}
@@ -1028,12 +1036,12 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.22
-    coin2SpawnRate: 0.16
+    coin1SpawnRate: 0.2
+    coin2SpawnRate: 0.15
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.006
-    emptySpawnRate: 0.62
+    emptySpawnRate: 0.65
     levelChangeTextColor: {r: 1, g: 0.8969003, b: 0.51886785, a: 1}
   - cameraSpeed: 3.8
     longPlatformPrefab: {fileID: 6595305194927341745, guid: b7111518dc659ac4697f060aac3f8ac9, type: 3}
@@ -1044,12 +1052,12 @@ MonoBehaviour:
     shortPlatformSpawnRate: 0.48
     specialPlatformSpawnRate: 0.04
     specialPlatform2SpawnRate: 0
-    coin1SpawnRate: 0.2
-    coin2SpawnRate: 0.24
+    coin1SpawnRate: 0.15
+    coin2SpawnRate: 0.25
     coin3SpawnRate: 0
     powerupSpawnRate: 0
     diamondSpawnRate: 0.007
-    emptySpawnRate: 0.56
+    emptySpawnRate: 0.6
     levelChangeTextColor: {r: 0.610388, g: 0.97735846, b: 0.7370802, a: 1}
 --- !u!1 &2125827021
 GameObject:

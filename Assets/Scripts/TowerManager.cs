@@ -13,7 +13,7 @@ public class TowerManager : MonoBehaviour
     [Header("Current Selection")]
     public int currentTowerIndex = 0;
 
-    [Header("Save Data (PlayerPrefs)")]
+    [Header("Save Data")]
     [Tooltip("Used to detect when the shop config changed. When this value differs from the stored value, tower purchase keys are reset.")]
     public int towerShopSaveVersion = 1;
     
@@ -92,29 +92,23 @@ public class TowerManager : MonoBehaviour
 
         // If the save version changed (or the player never had this key), wipe purchase keys
         // so only towers marked `isUnlockedByDefault=true` appear bought on startup.
-        int savedVersion = PlayerPrefs.GetInt("TowerShopSaveVersion", 0);
+        GameSaveService.EnsureLoaded();
+
+        int savedVersion = GameSaveService.GetTowerShopSaveVersion();
         if (savedVersion != towerShopSaveVersion)
         {
             ResetTowerPurchaseKeys();
-            PlayerPrefs.SetInt("TowerShopSaveVersion", towerShopSaveVersion);
+            GameSaveService.SetTowerShopSaveVersion(towerShopSaveVersion);
         }
 
-        // Load saved tower selection, but always fall back to a valid default-unlocked tower.
-        currentTowerIndex = PlayerPrefs.GetInt("CurrentTowerIndex", defaultUnlockedIndex);
+        currentTowerIndex = GameSaveService.GetCurrentTowerIndex();
         if (!IsTowerBought(currentTowerIndex))
-        {
             currentTowerIndex = defaultUnlockedIndex;
-            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
-        }
 
-        PlayerPrefs.Save();
-        
-        // Ensure index is valid
         if (currentTowerIndex >= allTowers.Length)
-        {
             currentTowerIndex = defaultUnlockedIndex;
-            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
-        }
+
+        GameSaveService.SetCurrentTowerIndex(currentTowerIndex);
         
         // Initialize towers bought list
         RefreshTowersBought();
@@ -165,10 +159,7 @@ public class TowerManager : MonoBehaviour
         currentTowerIndex = WrapTowerIndex(towerIndex, allTowers.Length);
 
         if (IsTowerBought(currentTowerIndex))
-        {
-            PlayerPrefs.SetInt("CurrentTowerIndex", currentTowerIndex);
-            PlayerPrefs.Save();
-        }
+            GameSaveService.SetCurrentTowerIndex(currentTowerIndex);
 
         InvokeSelectionChanged();
     }
@@ -221,7 +212,10 @@ public class TowerManager : MonoBehaviour
         if (tower == null)
             return false;
 
-        return PlayerPrefs.GetInt($"TowerPurchased_{towerIndex}", tower.isUnlockedByDefault ? 1 : 0) == 1;
+        if (tower.isUnlockedByDefault)
+            return true;
+
+        return GameSaveService.IsTowerPurchased(towerIndex);
     }
     
     // Legacy method name for compatibility
@@ -261,22 +255,14 @@ public class TowerManager : MonoBehaviour
             }
             
             // Check if player has enough currency
-            int currentGold = PlayerPrefs.GetInt("PlayerGold", 0);
-            int currentDiamonds = PlayerPrefs.GetInt("PlayerDiamonds", 0);
+            int currentGold = GameSaveService.GetGold();
+            int currentDiamonds = GameSaveService.GetDiamonds();
             
             if (currentGold >= tower.goldPrice && currentDiamonds >= tower.diamondPrice)
             {
-                // Deduct costs
-                currentGold -= tower.goldPrice;
-                currentDiamonds -= tower.diamondPrice;
-                
-                // Save new currency amounts
-                PlayerPrefs.SetInt("PlayerGold", currentGold);
-                PlayerPrefs.SetInt("PlayerDiamonds", currentDiamonds);
-                
-                // Mark tower as purchased
-                PlayerPrefs.SetInt($"TowerPurchased_{towerIndex}", 1);
-                PlayerPrefs.Save();
+                GameSaveService.SetGold(currentGold - tower.goldPrice);
+                GameSaveService.SetDiamonds(currentDiamonds - tower.diamondPrice);
+                GameSaveService.SetTowerPurchased(towerIndex, true);
                 
                 // Refresh bought towers list
                 RefreshTowersBought();
@@ -369,10 +355,7 @@ public class TowerManager : MonoBehaviour
 
     private void ResetTowerPurchaseKeys()
     {
-        for (int i = 0; i < allTowers.Length; i++)
-        {
-            PlayerPrefs.DeleteKey($"TowerPurchased_{i}");
-        }
+        GameSaveService.ClearTowerPurchases();
     }
     
     public List<int> GetTowersBought()

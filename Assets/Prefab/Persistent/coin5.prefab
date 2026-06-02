@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f879fdc19d5e33409cafa79d454c341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 3
+  coinValue: 10
   yDestroyOffset: 10
