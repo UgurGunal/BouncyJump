@@ -86,6 +86,9 @@ public class ShopManager : MonoBehaviour
         ScrollShopContentToAnchoredYAnimated(shopPanelBuyDiamondScrollY, shopPanelScrollSpeed);
     }
     
+    /// <summary>True when the shop panel GameObject is active in the hierarchy.</summary>
+    public bool IsShopOpen => shopPanel != null && shopPanel.activeInHierarchy;
+
     /// <summary>Open the shop without changing scroll.</summary>
     public void OpenShop()
     {
@@ -475,14 +478,24 @@ public class ShopManager : MonoBehaviour
 
     void UpdateCurrencyDisplay()
     {
+        CurrencyFlyFeedback fly = CurrencyFlyFeedback.Instance;
+
         if (goldText != null)
         {
-            goldText.text = FormatCurrency(GetPlayerGold());
+            int gold;
+            if (fly != null && fly.TryGetDisplayedGold(out gold))
+                goldText.text = FormatCurrency(gold);
+            else
+                goldText.text = FormatCurrency(GetPlayerGold());
         }
-        
+
         if (diamondText != null)
         {
-            diamondText.text = FormatCurrency(GetPlayerDiamonds());
+            int diamonds;
+            if (fly != null && fly.TryGetDisplayedDiamonds(out diamonds))
+                diamondText.text = FormatCurrency(diamonds);
+            else
+                diamondText.text = FormatCurrency(GetPlayerDiamonds());
         }
     }
     

@@ -48,19 +48,27 @@ public class HomeScreenCurrencyDisplay : MonoBehaviour
     void UpdateCurrencyDisplay()
     {
         if (shopManager == null) return;
-        
-        // Update gold display with comma formatting
+
+        CurrencyFlyFeedback fly = CurrencyFlyFeedback.Instance;
+
+        // Update gold display with comma formatting (fly FX owns the value while icons are in transit)
         if (goldText != null)
         {
-            int gold = shopManager.GetPlayerGold();
-            goldText.text = FormatCurrency(gold);
+            int gold;
+            if (fly != null && fly.TryGetDisplayedGold(out gold))
+                goldText.text = FormatCurrency(gold);
+            else
+                goldText.text = FormatCurrency(shopManager.GetPlayerGold());
         }
-        
+
         // Update diamond display with comma formatting
         if (diamondText != null)
         {
-            int diamonds = shopManager.GetPlayerDiamonds();
-            diamondText.text = FormatCurrency(diamonds);
+            int diamonds;
+            if (fly != null && fly.TryGetDisplayedDiamonds(out diamonds))
+                diamondText.text = FormatCurrency(diamonds);
+            else
+                diamondText.text = FormatCurrency(shopManager.GetPlayerDiamonds());
         }
     }
     

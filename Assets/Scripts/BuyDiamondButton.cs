@@ -42,7 +42,11 @@ public class BuyDiamondButton : MonoBehaviour
         if (shopManager == null) return;
 
         shopManager.MockPurchaseDiamondsWithRealMoney(diamondAmount);
-        RefreshCurrencyDisplay();
+
+        if (CurrencyFlyFeedback.Instance != null)
+            CurrencyFlyFeedback.Instance.PlayDiamonds(diamondAmount);
+        else
+            RefreshCurrencyDisplay();
     }
 
     void RefreshCurrencyDisplay()

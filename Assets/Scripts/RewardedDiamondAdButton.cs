@@ -119,9 +119,17 @@ public class RewardedDiamondAdButton : MonoBehaviour
         {
             shopManager.AddDiamonds(diamondReward);
             shopManager.UpdateShopUI();
-            var homeCurrency = FindObjectOfType<HomeScreenCurrencyDisplay>();
-            if (homeCurrency != null)
-                homeCurrency.RefreshCurrencyDisplay();
+
+            if (CurrencyFlyFeedback.Instance != null)
+            {
+                CurrencyFlyFeedback.Instance.PlayDiamonds(diamondReward);
+            }
+            else
+            {
+                var homeCurrency = FindObjectOfType<HomeScreenCurrencyDisplay>();
+                if (homeCurrency != null)
+                    homeCurrency.RefreshCurrencyDisplay();
+            }
         }
 
         var ads = UnityRewardedAdsManager.Instance;

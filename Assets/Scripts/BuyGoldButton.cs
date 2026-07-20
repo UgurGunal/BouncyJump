@@ -44,7 +44,12 @@ public class BuyGoldButton : MonoBehaviour
             shopManager = FindObjectOfType<ShopManager>(true);
         if (shopManager == null) return;
 
-        if (shopManager.TryBuyGoldWithDiamonds(diamondCost, goldAmount))
+        if (!shopManager.TryBuyGoldWithDiamonds(diamondCost, goldAmount))
+            return;
+
+        if (CurrencyFlyFeedback.Instance != null)
+            CurrencyFlyFeedback.Instance.PlayGold(goldAmount);
+        else
             RefreshCurrencyDisplay();
     }
 
