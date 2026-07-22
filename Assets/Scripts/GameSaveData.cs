@@ -31,6 +31,9 @@ public class GameSaveData
     public float sfxVolume = 0.5f;
     public int showRunTimer;
 
+    /// <summary>1 = first-run tutorial finished. Missing on older saves = not completed.</summary>
+    public int tutorialCompleted;
+
     public static GameSaveData CreateNew()
     {
         return new GameSaveData

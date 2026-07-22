@@ -101,6 +101,22 @@ public class MovingPlatform : MonoBehaviour
     }
 
     /// <summary>
+    /// Re-rolls moving vs static on each spawn so pool reuse matches fresh instantiation.
+    /// </summary>
+    public void ResetForSpawn()
+    {
+        hasDecided = false;
+        DecidePlatformType();
+    }
+
+    public void PrepareForPool()
+    {
+        isMovingPlatform = false;
+        currentDirection = 0f;
+        hasDecided = false;
+    }
+
+    /// <summary>
     /// Allows external callers (e.g., spawners) to force this platform to become moving.
     /// </summary>
     public void ForceSetMovingState(bool shouldMove, int direction = 0)

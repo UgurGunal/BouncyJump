@@ -32,7 +32,8 @@ public class RevivePanelUI : MonoBehaviour
 
     void Awake()
     {
-        panelObject.SetActive(false);
+        if (panelObject != null)
+            panelObject.SetActive(false);
     }
 
     static string RevivePlacementId()
@@ -68,8 +69,12 @@ public class RevivePanelUI : MonoBehaviour
 
     public void ShowRevivePanel()
     {
+        if (panelObject == null)
+            return;
+
         panelObject.SetActive(true);
-        contentContainer.transform.localScale = Vector3.zero;
+        if (contentContainer != null)
+            contentContainer.transform.localScale = Vector3.zero;
         StartCoroutine(ScaleAnimation());
         
         _currentCountdownTime = reviveCountdownDuration;
@@ -184,6 +189,9 @@ public class RevivePanelUI : MonoBehaviour
 
     private IEnumerator ScaleAnimation()
     {
+        if (contentContainer == null)
+            yield break;
+
         float duration = 0.5f;
         float elapsed = 0f;
         Vector3 startScale = Vector3.zero;
@@ -207,7 +215,8 @@ public class RevivePanelUI : MonoBehaviour
     void HideRevivePanel()
     {
         _countdownPausedForAd = false;
-        panelObject.SetActive(false);
+        if (panelObject != null)
+            panelObject.SetActive(false);
         StopAllCoroutines();
     }
 

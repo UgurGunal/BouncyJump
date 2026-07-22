@@ -7,8 +7,9 @@ public class ComboBarUI : MonoBehaviour
     public Slider comboSlider;
 
     [Header("Smooth Transition Settings")]
-    public float smoothSpeed = 5f; // How fast the slider catches up to actual combo
-    public bool useSmoothTransitions = true; // Toggle for smooth vs instant updates
+    [Tooltip("Higher = snappier bar. ~10 slow, ~24 default, ~40 near-instant.")]
+    public float smoothSpeed = 24f;
+    public bool useSmoothTransitions = true;
 
     private ComboManager comboManager;
     private float targetComboValue = 0f;
@@ -55,8 +56,8 @@ public class ComboBarUI : MonoBehaviour
 
         if (useSmoothTransitions)
         {
-            // Smooth transition using Lerp with fixed time step
-            currentSliderValue = Mathf.Lerp(currentSliderValue, targetComboValue, smoothSpeed * UPDATE_INTERVAL);
+            float t = 1f - Mathf.Exp(-smoothSpeed * UPDATE_INTERVAL);
+            currentSliderValue = Mathf.Lerp(currentSliderValue, targetComboValue, t);
             
             // Update slider with smooth value
             if (comboSlider != null)

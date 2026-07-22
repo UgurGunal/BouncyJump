@@ -183,7 +183,9 @@ public class HomeScreenUI : MonoBehaviour
 
         if (towerManager != null)
         {
-            string sceneToLoad = towerManager.GetCurrentTowerSceneName();
+            string sceneToLoad = GameSaveService.GetTutorialCompleted()
+                ? towerManager.GetCurrentTowerSceneName()
+                : "Tutorial";
             
             try
             {

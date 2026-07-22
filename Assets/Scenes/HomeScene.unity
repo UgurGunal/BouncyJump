@@ -31290,7 +31290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diamondCost: 2000
   goldAmount: 400000
-  flySpawnFrom: {fileID: 0}
 --- !u!1 &1733379642
 GameObject:
   m_ObjectHideFlags: 0
@@ -32261,10 +32260,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1252753625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777377898
 MonoBehaviour:
@@ -32289,9 +32288,12 @@ MonoBehaviour:
   goldIconPrefab: {fileID: 2591715511824495072, guid: 4dcd1cc806479d249a304520eb3ab63c, type: 3}
   diamondIconPrefab: {fileID: 1858667889264899907, guid: 2b7ddad300a8f544d87018f983f25015, type: 3}
   iconLayer: {fileID: 1777377897}
-  maxIconsPerPlay: 12
-  spawnSpread: 48
+  spawnRadiusMin: 60
+  spawnRadiusMax: 160
+  spawnAngleJitter: 18
+  spawnHoldDuration: 0.35
   spawnStagger: 0.05
+  spawnPopFromScale: 0.25
   flyDuration: 0.55
   arcHeight: 80
   targetPunchScale: 1.18
@@ -34190,7 +34192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diamondCost: 50
   goldAmount: 6000
-  flySpawnFrom: {fileID: 0}
 --- !u!1 &1878610289
 GameObject:
   m_ObjectHideFlags: 0
@@ -36997,7 +36998,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diamondCost: 10
   goldAmount: 1000
-  flySpawnFrom: {fileID: 0}
 --- !u!1 &2003109466
 GameObject:
   m_ObjectHideFlags: 0
@@ -40202,7 +40202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diamondCost: 300
   goldAmount: 45000
-  flySpawnFrom: {fileID: 0}
 --- !u!1 &2132570964
 GameObject:
   m_ObjectHideFlags: 0

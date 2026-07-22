@@ -3,6 +3,9 @@ using UnityEngine;
 public class SideWall : MonoBehaviour
 {
     public enum WallSide { Left, Right }
+
+    /// <summary>Fired on every player collision with a side wall, regardless of combo cooldown.</summary>
+    public static event System.Action<WallSide> OnPlayerHit;
     
     [Header("Wall Settings")]
     public WallSide wallSide;
@@ -31,6 +34,8 @@ public class SideWall : MonoBehaviour
 
         if (player != null)
         {
+            OnPlayerHit?.Invoke(wallSide);
+
             // Use relative velocity from collision for more accurate speed calculation
             float playerSpeed = Mathf.Abs(collision.relativeVelocity.x);
             float collisionSpeed = collision.relativeVelocity.magnitude;

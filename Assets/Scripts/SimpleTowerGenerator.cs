@@ -336,6 +336,10 @@ public class SimpleTowerGenerator : MonoBehaviour
             }
         }
 
+        MovingPlatform movingPlatform = newPlatform.GetComponent<MovingPlatform>();
+        if (movingPlatform != null)
+            movingPlatform.ResetForSpawn();
+
         return newPlatform;
     }
 
@@ -355,6 +359,10 @@ public class SimpleTowerGenerator : MonoBehaviour
             if (platform != null)
                 platform.PrepareForPool();
         }
+
+        MovingPlatform movingPlatform = instance.GetComponent<MovingPlatform>();
+        if (movingPlatform != null)
+            movingPlatform.PrepareForPool();
 
         platformPool.Return(prefab, instance);
     }

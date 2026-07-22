@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ElectricTower.unity
     guid: 5ee3848987281a84db4d2d9e7942d21b
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 5a91bbf792c16ff479b40dcd3afc3783
   m_configObjects: {}

@@ -49,12 +49,14 @@ public static class GameSaveService
         if (TryLoadFromDisk(out GameSaveData diskData))
         {
             _data = diskData;
+            MigrateTutorialFlagIfNeeded();
             return;
         }
 
         if (HasLegacyPlayerPrefs())
         {
             _data = MigrateFromPlayerPrefs();
+            MigrateTutorialFlagIfNeeded();
             WriteToDisk();
             ClearLegacyPlayerPrefs();
             return;
@@ -230,6 +232,7 @@ public static class GameSaveService
     public static float GetMusicVolume() { EnsureLoaded(); return Mathf.Clamp01(_data.musicVolume); }
     public static float GetSfxVolume() { EnsureLoaded(); return Mathf.Clamp01(_data.sfxVolume); }
     public static bool GetShowRunTimer() { EnsureLoaded(); return _data.showRunTimer == 1; }
+    public static bool GetTutorialCompleted() { EnsureLoaded(); return _data.tutorialCompleted == 1; }
 
     public static void SetMusicVolume(float volume)
     {
@@ -249,6 +252,13 @@ public static class GameSaveService
     {
         EnsureLoaded();
         _data.showRunTimer = show ? 1 : 0;
+        Save();
+    }
+
+    public static void SetTutorialCompleted(bool completed)
+    {
+        EnsureLoaded();
+        _data.tutorialCompleted = completed ? 1 : 0;
         Save();
     }
 
@@ -410,6 +420,34 @@ public static class GameSaveService
     }
 
     static bool IsValidIndex(int index, int max) => index >= 0 && index < max;
+
+    /// <summary>
+    /// Players who already have progress should not be forced through the newly added tutorial.
+    /// </summary>
+    static void MigrateTutorialFlagIfNeeded()
+    {
+        if (_data == null || _data.tutorialCompleted == 1)
+            return;
+
+        bool hasProgress = _data.gold > 0 || _data.diamonds > 0;
+        if (!hasProgress && _data.towerBestHeights != null)
+        {
+            for (int i = 0; i < _data.towerBestHeights.Length; i++)
+            {
+                if (_data.towerBestHeights[i] > 0f)
+                {
+                    hasProgress = true;
+                    break;
+                }
+            }
+        }
+
+        if (!hasProgress)
+            return;
+
+        _data.tutorialCompleted = 1;
+        WriteToDisk();
+    }
 
     [Serializable]
     class SaveFileEnvelope

@@ -88,24 +88,34 @@ public class GameEndPanelUI : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
-        panelObject.SetActive(false); // Start inactive
+
+        if (panelObject != null)
+            panelObject.SetActive(false);
     }
 
     void Start()
     {
-        mainMenuButton.onClick.AddListener(OnMainMenuClick);
-        restartButton.onClick.AddListener(OnRestartClick);
-        quitButton.onClick.AddListener(OnRestartClick); // Both restart and quit reload the scene
+        if (mainMenuButton != null)
+            mainMenuButton.onClick.AddListener(OnMainMenuClick);
+        if (restartButton != null)
+            restartButton.onClick.AddListener(OnRestartClick);
+        if (quitButton != null)
+            quitButton.onClick.AddListener(OnRestartClick); // Both restart and quit reload the scene
     }
 
     public void ShowGameEndPanel()
     {
+        if (panelObject == null)
+            return;
+
         // Prevent overlapping coroutines if the panel is opened multiple times.
         StopAllCoroutines();
 
         panelObject.SetActive(true);
-        contentContainer.transform.localScale = Vector3.zero;
+        if (contentContainer != null)
+            contentContainer.transform.localScale = Vector3.zero;
         StartCoroutine(ScaleAnimation());
         PopulateStats();
 
@@ -120,6 +130,9 @@ public class GameEndPanelUI : MonoBehaviour
 
     private IEnumerator ScaleAnimation()
     {
+        if (contentContainer == null)
+            yield break;
+
         float duration = 0.5f;
         float elapsed = 0f;
         Vector3 startScale = Vector3.zero;
@@ -143,7 +156,8 @@ public class GameEndPanelUI : MonoBehaviour
     void HideGameEndPanel()
     {
         StopAllCoroutines();
-        panelObject.SetActive(false);
+        if (panelObject != null)
+            panelObject.SetActive(false);
     }
 
     private IEnumerator AnimateMaxLevelGlow()

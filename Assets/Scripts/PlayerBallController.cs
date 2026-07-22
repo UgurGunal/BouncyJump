@@ -4,6 +4,9 @@ public class PlayerBallController : MonoBehaviour
 {
     public static PlayerBallController Instance { get; private set; }
 
+    /// <summary>Fired while the player is steering left (-1) or right (+1).</summary>
+    public static event System.Action<float> OnDirectionalInput;
+
     [Header("Movement")]
     public float acceleration = 45f;
     public float deceleration = 2f;
@@ -167,10 +170,10 @@ public class PlayerBallController : MonoBehaviour
     
     private void HandleInput()
     {
-        
         moveInput = 0f;
-        
+
         #if UNITY_EDITOR || UNITY_STANDALONE
+        // Keyboard/arrows: left = -1, right = +1 (same roles as mobile screen halves).
         moveInput = Input.GetAxisRaw("Horizontal");
         #endif
 
@@ -178,13 +181,16 @@ public class PlayerBallController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
             {
-                float screenMid = Screen.width * 0.5f; // Cached multiplication
+                float screenMid = Screen.width * 0.5f;
                 moveInput = touch.position.x < screenMid ? -1f : 1f;
             }
         }
         #endif
+
+        if (!Mathf.Approximately(moveInput, 0f))
+            OnDirectionalInput?.Invoke(moveInput);
     }
 
     void FixedUpdate()
