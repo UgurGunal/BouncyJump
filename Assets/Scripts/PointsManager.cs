@@ -155,20 +155,19 @@ public class PointsManager : MonoBehaviour
         if (!_currencySaved)
         {
             int earnedGold = TotalEarnedCoins;
-            int earnedDiamonds = _gemsCollected;
-            
+
+            // Gold is level-scaled and only known at end-of-run.
+            // Diamonds are already persisted on each collect (see AddGem) so revive/shop can spend them mid-run.
             if (earnedGold > 0)
                 GameSaveService.AddGold(earnedGold);
-            if (earnedDiamonds > 0)
-                GameSaveService.AddDiamonds(earnedDiamonds);
-            
+
             _currencySaved = true; // Mark this session as processed
         }
     }
 
     /// <summary>
-    /// Same gold/diamond persistence and tower best-height update as the game-over flow (<see cref="GameEndPanelUI"/>),
-    /// for leaving mid-run (e.g. pause â†’ home). Safe if <see cref="EndSession"/> was already called (e.g. after death).
+    /// Same gold persistence and tower best-height update as the game-over flow (<see cref="GameEndPanelUI"/>),
+    /// for leaving mid-run (e.g. pause → home). Diamonds are already saved on collect. Safe if <see cref="EndSession"/> was already called (e.g. after death).
     /// </summary>
     public void FinalizeRunRewardsForMenuExit()
     {
@@ -211,7 +210,11 @@ public class PointsManager : MonoBehaviour
 
     public void AddGem(int value)
     {
+        if (value == 0)
+            return;
+
         _gemsCollected += value;
-        // Note: Currency is saved at end of session
+        // Persist immediately so mid-run spends (e.g. revive) can use session-earned diamonds.
+        GameSaveService.AddDiamonds(value);
     }
 }

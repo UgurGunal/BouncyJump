@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     public int levelCount = 4;
     [Tooltip("World Y span per level. Reaching levelCount × levelHeight ends the run (game end panel, no revive).")]
     public float levelHeight = 20f;
+    [Tooltip("Delay after reaching max tower height before the game end panel appears (unscaled seconds).")]
+    public float towerCompleteEndDelay = 1f;
 
     [Header("Player and Camera References")]
     [Tooltip("These will be auto-found from GamePersistentScene if not assigned")]
@@ -120,6 +122,9 @@ public class LevelManager : MonoBehaviour
         {
             PointsManager.Instance.StartSession();
         }
+
+        if (RevivePanelUI.Instance != null)
+            RevivePanelUI.Instance.ResetSessionReviveCount();
 
         if (player != null)
             GameplayPlayerCache.SetPlayer(player);
@@ -286,10 +291,19 @@ public class LevelManager : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.FadeOutAndPauseMusic();
 
-        Time.timeScale = 0f;
-
         if (PausePanelUI.Instance != null)
             PausePanelUI.Instance.SetPauseOpenAllowed(false);
+
+        StartCoroutine(ShowGameEndAfterTowerCompleteDelay());
+    }
+
+    System.Collections.IEnumerator ShowGameEndAfterTowerCompleteDelay()
+    {
+        float delay = Mathf.Max(0f, towerCompleteEndDelay);
+        if (delay > 0f)
+            yield return new WaitForSecondsRealtime(delay);
+
+        Time.timeScale = 0f;
 
         if (GameEndPanelUI.Instance != null)
             GameEndPanelUI.Instance.ShowGameEndPanel();

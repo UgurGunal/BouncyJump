@@ -5742,6 +5742,7 @@ MonoBehaviour:
   diamondsToRevive: 3
   reviveCountdownDuration: 10
   reviveYOffset: -0.6
+  maxRevivesPerSession: 2
 --- !u!114 &1675455548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6903,13 +6904,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b3ea57380171b47b80dbdb5dc040d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidGameId: 6087433
-  iOSGameId: 6087432
-  testMode: 1
-  androidShopRewardedAdUnitId: Rewarded_Android
-  iOSShopRewardedAdUnitId: Rewarded_iOS
-  androidReviveRewardedAdUnitId: Revive_Android
-  iOSReviveRewardedAdUnitId: Revive_iOS
+  androidGameId: 6162757
+  iOSGameId: 6162756
+  testMode: 0
+  androidShopRewardedAdUnitId: Rewarded_Shop_Android
+  iOSShopRewardedAdUnitId: Rewarded_Shop_IOS
+  androidReviveRewardedAdUnitId: Rewarded_Revive_Android
+  iOSReviveRewardedAdUnitId: Rewarded_Revive_IOS
+  reviveWarmRetrySeconds: 3
 --- !u!4 &2110875664
 Transform:
   m_ObjectHideFlags: 0

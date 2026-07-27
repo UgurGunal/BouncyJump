@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Editor-only cheat controls for shop testing. Hidden and inert in player builds.
+/// </summary>
 public class ShopTestHelper : MonoBehaviour
 {
     [Header("Test Controls")]
@@ -14,9 +17,20 @@ public class ShopTestHelper : MonoBehaviour
     public int diamondsToAdd = 100;
     
     private ShopManager shopManager;
+
+    void Awake()
+    {
+#if !UNITY_EDITOR
+        HideTestControls();
+        enabled = false;
+#endif
+    }
     
     void Start()
     {
+#if !UNITY_EDITOR
+        return;
+#else
         shopManager = FindObjectOfType<ShopManager>();
         
         if (addGoldButton != null)
@@ -30,22 +44,42 @@ public class ShopTestHelper : MonoBehaviour
             
         if (unlockAllTowersButton != null)
             unlockAllTowersButton.onClick.AddListener(UnlockAllTowers);
+#endif
+    }
+
+    void HideTestControls()
+    {
+        SetButtonActive(addGoldButton, false);
+        SetButtonActive(addDiamondsButton, false);
+        SetButtonActive(resetAllButton, false);
+        SetButtonActive(unlockAllTowersButton, false);
+    }
+
+    static void SetButtonActive(Button button, bool active)
+    {
+        if (button != null)
+            button.gameObject.SetActive(active);
     }
     
     public void AddTestGold()
     {
+#if UNITY_EDITOR
         if (shopManager != null)
             shopManager.AddGold(goldToAdd);
+#endif
     }
     
     public void AddTestDiamonds()
     {
+#if UNITY_EDITOR
         if (shopManager != null)
             shopManager.AddDiamonds(diamondsToAdd);
+#endif
     }
     
     public void ResetAllData()
     {
+#if UNITY_EDITOR
         GameSaveService.ResetToDefaults();
 
         TowerManager towerManager = TowerManager.Instance;
@@ -58,10 +92,12 @@ public class ShopTestHelper : MonoBehaviour
 
         if (shopManager != null)
             shopManager.UpdateShopUI();
+#endif
     }
     
     public void UnlockAllTowers()
     {
+#if UNITY_EDITOR
         TowerManager towerManager = TowerManager.Instance;
         if (towerManager != null && towerManager.allTowers != null)
         {
@@ -73,5 +109,6 @@ public class ShopTestHelper : MonoBehaviour
 
         if (shopManager != null)
             shopManager.UpdateShopUI();
+#endif
     }
 }

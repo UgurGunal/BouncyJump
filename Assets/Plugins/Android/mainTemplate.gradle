@@ -6,7 +6,16 @@ dependencies {
 // Android Resolver Dependencies Start
     implementation 'com.unity3d.ads:unity-ads:[4.17.0,4.18[' // Packages/com.unity.ads/Editor/Source/Dependencies.xml:7
 // Android Resolver Dependencies End
-**DEPS**}
+**DEPS**
+}
+
+// Keep androidx.core below 1.15 so compileSdk 34 builds succeed (Unity 2022.3 / AGP 7.4.2).
+configurations.configureEach {
+    resolutionStrategy {
+        force 'androidx.core:core:1.13.1'
+        force 'androidx.core:core-ktx:1.13.1'
+    }
+}
 
 // Android Resolver Exclusions Start
 android {
@@ -32,7 +41,8 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion **MINSDKVERSION**
+        // Billing Client 9.x requires API 23+ (do not lower below 23).
+        minSdkVersion 23
         targetSdkVersion **TARGETSDKVERSION**
         ndk {
             abiFilters **ABIFILTERS**

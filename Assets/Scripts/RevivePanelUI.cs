@@ -20,12 +20,21 @@ public class RevivePanelUI : MonoBehaviour
     public int diamondsToRevive = 3;
     public float reviveCountdownDuration = 10f;
     public float reviveYOffset = -0.6f;
+    [Min(0)]
+    [Tooltip("Maximum successful revives allowed before the next run restart.")]
+    public int maxRevivesPerSession = 2;
 
     private PlayerBallController _playerController;
     private CameraFollow _cameraFollow;
     private float _currentCountdownTime;
     private bool _countdownPausedForAd;
     private UnityRewardedAdsManager _adsEventsSource;
+    private int _revivesUsedThisSession;
+    /// <summary>Bumped to cancel an in-flight watch-ad wait when the panel closes.</summary>
+    private int _watchAdRequestId;
+
+    public int RevivesUsedThisSession => _revivesUsedThisSession;
+    public int RevivesRemaining => Mathf.Max(0, maxRevivesPerSession - _revivesUsedThisSession);
 
     /// <summary>No Inspector reference needed: <see cref="UnityRewardedAdsManager"/> registers itself as <c>Instance</c> in Awake (singleton).</summary>
     static UnityRewardedAdsManager Ads => UnityRewardedAdsManager.Instance;
@@ -69,6 +78,12 @@ public class RevivePanelUI : MonoBehaviour
 
     public void ShowRevivePanel()
     {
+        if (!CanReviveThisSession())
+        {
+            ShowGameEndPanel();
+            return;
+        }
+
         if (panelObject == null)
             return;
 
@@ -85,11 +100,11 @@ public class RevivePanelUI : MonoBehaviour
         StartCoroutine(EnsureWatchAdReadyWhilePanelOpenRoutine());
     }
 
-    /// <summary>Waits for singleton manager, init, and ad load â€” fixes inactive button when init or load finishes after the panel opens.</summary>
+    /// <summary>Keeps requesting a revive ad the whole time the panel is open.</summary>
     IEnumerator EnsureWatchAdReadyWhilePanelOpenRoutine()
     {
         float wait = 0f;
-        while (Ads == null && wait < 20f)
+        while (Ads == null && wait < 20f && panelObject != null && panelObject.activeInHierarchy)
         {
             wait += Time.unscaledDeltaTime;
             yield return null;
@@ -110,12 +125,6 @@ public class RevivePanelUI : MonoBehaviour
             yield return null;
         }
 
-        if (!Ads.IsInitialized)
-        {
-            RefreshWatchAdButtonState();
-            yield break;
-        }
-
         string placement = RevivePlacementId();
         if (string.IsNullOrEmpty(placement))
         {
@@ -123,17 +132,15 @@ public class RevivePanelUI : MonoBehaviour
             yield break;
         }
 
-        Ads.LoadPlacement(placement);
-
-        wait = 0f;
-        while (!Ads.IsPlacementReady(placement) && wait < 30f && panelObject.activeInHierarchy)
+        // Keep warming until the panel closes — do not give up after a fixed timeout.
+        while (panelObject != null && panelObject.activeInHierarchy)
         {
-            wait += Time.unscaledDeltaTime;
-            RefreshWatchAdButtonState();
-            yield return null;
-        }
+            if (Ads != null && Ads.IsInitialized && !Ads.IsPlacementReady(placement))
+                Ads.LoadPlacement(placement);
 
-        RefreshWatchAdButtonState();
+            RefreshWatchAdButtonState();
+            yield return new WaitForSecondsRealtime(1f);
+        }
     }
 
     void EnsureRewardedAdsEventsSubscribed()
@@ -181,10 +188,9 @@ public class RevivePanelUI : MonoBehaviour
     {
         if (watchAdButton == null)
             return;
-        var mgr = Ads;
-        string placement = RevivePlacementId();
-        bool ready = mgr != null && !string.IsNullOrEmpty(placement) && mgr.IsPlacementReady(placement);
-        watchAdButton.interactable = ready && !_countdownPausedForAd;
+        // Always keep the watch-ad option clickable while the panel is open.
+        // Only lock it while an ad is loading/showing for this click.
+        watchAdButton.interactable = !_countdownPausedForAd;
     }
 
     private IEnumerator ScaleAnimation()
@@ -214,18 +220,26 @@ public class RevivePanelUI : MonoBehaviour
 
     void HideRevivePanel()
     {
+        _watchAdRequestId++;
         _countdownPausedForAd = false;
         if (panelObject != null)
             panelObject.SetActive(false);
         StopAllCoroutines();
+        // Warm the next revive ad as soon as this panel closes (after a successful revive or quit).
+        PrepareReviveRewardedAd();
     }
 
     void OnPay3DiamondClick()
     {
+        if (!CanReviveThisSession())
+        {
+            ShowGameEndPanel();
+            return;
+        }
+
         if (ShopManager.TrySpendSavedDiamonds(diamondsToRevive))
         {
-            HideRevivePanel();
-            StartCoroutine(ReviveCountdown());
+            BeginRevive();
             return;
         }
 
@@ -251,32 +265,95 @@ public class RevivePanelUI : MonoBehaviour
 
     void OnWatchAdClick()
     {
+        if (_countdownPausedForAd)
+            return;
+
         var mgr = Ads;
-        string placement = RevivePlacementId();
-        if (mgr == null || string.IsNullOrEmpty(placement) || !mgr.IsPlacementReady(placement))
+        string revivePlacement = RevivePlacementId();
+        if (mgr == null || string.IsNullOrEmpty(revivePlacement) || !mgr.IsInitialized)
         {
+            Debug.LogWarning("Revive ad cannot start because Unity Ads is not initialized.");
             return;
         }
 
+        int requestId = ++_watchAdRequestId;
         _countdownPausedForAd = true;
         RefreshWatchAdButtonState();
 
-        mgr.ShowRewarded(placement, OnReviveRewardedAdFinished);
+        if (mgr.IsPlacementReady(revivePlacement))
+        {
+            mgr.ShowRewarded(revivePlacement, OnReviveRewardedAdFinished);
+            return;
+        }
+
+        // A new or temporarily unfilled revive placement must not block reviving.
+        // Prefer the dedicated placement, but use the already-cached shop ad as a fallback.
+        string shopFallbackPlacement = mgr.GetShopRewardedAdUnitId();
+        if (!string.IsNullOrEmpty(shopFallbackPlacement) &&
+            mgr.IsPlacementReady(shopFallbackPlacement))
+        {
+            Debug.LogWarning(
+                $"Revive ad '{revivePlacement}' is not ready; using fallback '{shopFallbackPlacement}'.");
+            mgr.ShowRewarded(shopFallbackPlacement, OnReviveRewardedAdFinished);
+            return;
+        }
+
+        mgr.ShowRewardedWhenReady(
+            revivePlacement,
+            OnReviveRewardedAdFinished,
+            8f,
+            () => requestId != _watchAdRequestId);
     }
 
     void OnReviveRewardedAdFinished(bool userEarnedReward)
     {
         _countdownPausedForAd = false;
+
+        if (panelObject == null || !panelObject.activeInHierarchy)
+        {
+            PrepareReviveRewardedAd();
+            return;
+        }
+
         RefreshWatchAdButtonState();
 
         if (userEarnedReward)
         {
-            HideRevivePanel();
-            StartCoroutine(ReviveCountdown());
+            if (CanReviveThisSession())
+                BeginRevive();
+            else
+                ShowGameEndPanel();
+            return;
         }
+
+        // Ad failed / no fill — keep option open and immediately request another.
+        PrepareReviveRewardedAd();
     }
 
     void OnQuitClick()
+    {
+        ShowGameEndPanel();
+    }
+
+    bool CanReviveThisSession()
+    {
+        return _revivesUsedThisSession < Mathf.Max(0, maxRevivesPerSession);
+    }
+
+    void BeginRevive()
+    {
+        if (!CanReviveThisSession())
+        {
+            ShowGameEndPanel();
+            return;
+        }
+
+        _revivesUsedThisSession++;
+        HideRevivePanel();
+        StartCoroutine(ReviveCountdown());
+    }
+
+    void ShowGameEndPanel()
     {
         HideRevivePanel();
         if (GameEndPanelUI.Instance != null)
@@ -291,6 +368,11 @@ public class RevivePanelUI : MonoBehaviour
             Time.timeScale = 1f;
             UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
         }
+    }
+
+    public void ResetSessionReviveCount()
+    {
+        _revivesUsedThisSession = 0;
     }
 
     void OnCountdownFinished()

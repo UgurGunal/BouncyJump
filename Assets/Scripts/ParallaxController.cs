@@ -11,11 +11,12 @@ public class ParallaxObject
     public float manualTileHeight;
     [HideInInspector] public float tileHeight;
     [HideInInspector] public Transform duplicate;
+    [HideInInspector] public float baseZ;
 }
 
 /// <summary>
 /// Infinite vertical parallax backgrounds using two stacked tiles.
-/// Seam overlap + pixel snapping reduce white lines between tiles.
+/// Seam overlap, edge inset and a fixed tile depth order keep the joint invisible.
 /// </summary>
 [DefaultExecutionOrder(100)]
 public class ParallaxController : MonoBehaviour
@@ -32,11 +33,14 @@ public class ParallaxController : MonoBehaviour
     public float seamOverlapWorld = 0.02f;
     [Tooltip("Extra overlap in screen pixels (good for pixel-art sprites).")]
     public int seamOverlapPixels = 2;
-    [Tooltip("Snap tile Y positions to the camera pixel grid.")]
-    public bool snapTilesToPixelGrid = true;
+    [Tooltip("Texture pixels trimmed off the top and bottom of each tile sprite. The atlas margin is opaque white, so filtering and block compression brighten the outermost rows.")]
+    [Range(0, 16)] public int spriteEdgeInsetPixels = 4;
+    [Tooltip("Depth gap between the two tiles so their overlap never has a sorting tie.")]
+    public float tileDepthSeparation = 0.01f;
 
     Vector3 lastCameraPosition;
     float worldPixelSize = -1f;
+    readonly List<Sprite> generatedSprites = new List<Sprite>();
 
     void Start()
     {
@@ -76,30 +80,38 @@ public class ParallaxController : MonoBehaviour
         lastCameraPosition = cameraTransform.position;
     }
 
+    void OnDestroy()
+    {
+        foreach (Sprite sprite in generatedSprites)
+        {
+            if (sprite != null)
+                Destroy(sprite);
+        }
+
+        generatedSprites.Clear();
+    }
+
     void SetupParallaxObject(ParallaxObject obj)
     {
         if (obj.target == null)
             return;
 
+        if (obj.duplicate != null)
+            Destroy(obj.duplicate.gameObject);
+
+        ApplyEdgeInset(obj.target);
+
         obj.tileHeight = obj.manualTileHeight > 0f ? obj.manualTileHeight : MeasureTileHeight(obj.target);
         if (obj.tileHeight <= 0f)
             return;
 
-        if (obj.duplicate != null)
-            Destroy(obj.duplicate.gameObject);
+        obj.baseZ = obj.target.position.z;
 
         obj.duplicate = Instantiate(obj.target, obj.target.parent);
         obj.duplicate.name = obj.target.name + "_ParallaxDuplicate";
 
         float step = GetTileStep(obj.tileHeight);
-
-        Vector3 basePos = obj.target.position;
-        basePos.y = SnapY(basePos.y);
-        obj.target.position = basePos;
-
-        Vector3 duplicatePos = basePos + Vector3.up * step;
-        duplicatePos.y = SnapY(duplicatePos.y);
-        obj.duplicate.position = duplicatePos;
+        obj.duplicate.position = obj.target.position + Vector3.up * step;
 
         CopySpriteSettings(obj.target, obj.duplicate);
     }
@@ -110,31 +122,71 @@ public class ParallaxController : MonoBehaviour
             return;
 
         float step = GetTileStep(obj.tileHeight);
-        Vector3 parallaxDelta = new Vector3(0f, deltaMovement.y * obj.parallaxFactor, 0f);
+        float targetY = obj.target.position.y;
+        float duplicateY = obj.duplicate.position.y;
 
-        obj.target.position += parallaxDelta;
-        obj.duplicate.position += parallaxDelta;
+        Transform below = targetY <= duplicateY ? obj.target : obj.duplicate;
+        Transform above = below == obj.target ? obj.duplicate : obj.target;
 
+        float belowY = Mathf.Min(targetY, duplicateY) + deltaMovement.y * obj.parallaxFactor;
         float cameraY = cameraTransform.position.y;
-        Transform lower = obj.target.position.y <= obj.duplicate.position.y ? obj.target : obj.duplicate;
-        Transform upper = lower == obj.target ? obj.duplicate : obj.target;
 
-        if (deltaMovement.y > 0f)
+        if (deltaMovement.y > 0f && cameraY - belowY > step)
         {
-            if (cameraY - lower.position.y > step)
-            {
-                float newY = SnapY(upper.position.y + step);
-                lower.position = new Vector3(lower.position.x, newY, lower.position.z);
-            }
+            belowY += step;
+            Transform wrapped = below;
+            below = above;
+            above = wrapped;
         }
-        else if (deltaMovement.y < 0f)
+        else if (deltaMovement.y < 0f && belowY > cameraY)
         {
-            if (upper.position.y - cameraY > step)
-            {
-                float newY = SnapY(lower.position.y - step);
-                upper.position = new Vector3(upper.position.x, newY, upper.position.z);
-            }
+            belowY -= step;
+            Transform wrapped = above;
+            above = below;
+            below = wrapped;
         }
+
+        // Deriving the upper tile from the lower one keeps the pair exactly one step apart;
+        // letting both accumulate independently drifts them into a sub-pixel gap. The upper
+        // tile also stays in front, so the overlap band always shows its inset bottom edge
+        // rather than an arbitrary winner of a depth tie.
+        above.position = new Vector3(above.position.x, belowY + step, obj.baseZ);
+        below.position = new Vector3(below.position.x, belowY, obj.baseZ + tileDepthSeparation);
+    }
+
+    /// <summary>
+    /// Rebuilds the tile sprite from a slightly smaller rect so the outermost texture rows,
+    /// which pick up the white atlas margin through filtering and block compression, are
+    /// never sampled.
+    /// </summary>
+    void ApplyEdgeInset(Transform tile)
+    {
+        if (spriteEdgeInsetPixels <= 0)
+            return;
+
+        SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
+        if (renderer == null || renderer.sprite == null)
+            return;
+
+        Sprite source = renderer.sprite;
+        if (source.texture == null || generatedSprites.Contains(source))
+            return;
+
+        Rect rect = source.rect;
+        float inset = Mathf.Min(spriteEdgeInsetPixels, (rect.height - 1f) * 0.5f);
+        if (inset <= 0f)
+            return;
+
+        Rect inner = new Rect(rect.x, rect.y + inset, rect.width, rect.height - inset * 2f);
+        Vector2 pivot = new Vector2(
+            Mathf.Clamp01(source.pivot.x / rect.width),
+            Mathf.Clamp01((source.pivot.y - inset) / inner.height));
+
+        Sprite trimmed = Sprite.Create(source.texture, inner, pivot, source.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+        trimmed.name = source.name + "_EdgeInset";
+
+        renderer.sprite = trimmed;
+        generatedSprites.Add(trimmed);
     }
 
     float GetTileStep(float tileHeight)
@@ -142,14 +194,6 @@ public class ParallaxController : MonoBehaviour
         float pixelOverlap = seamOverlapPixels * Mathf.Max(worldPixelSize, 0f);
         float overlap = seamOverlapWorld + pixelOverlap;
         return Mathf.Max(0.01f, tileHeight - overlap);
-    }
-
-    float SnapY(float y)
-    {
-        if (!snapTilesToPixelGrid || worldPixelSize <= 0f)
-            return y;
-
-        return Mathf.Round(y / worldPixelSize) * worldPixelSize;
     }
 
     void RefreshWorldPixelSize()

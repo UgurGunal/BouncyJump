@@ -26,19 +26,25 @@ public class UnityRewardedAdsManager : MonoBehaviour,
 
     [Header("Rewarded ad unit IDs (dashboard placements)")]
     [Tooltip("Shop / diamonds button uses this placement.")]
-    [SerializeField] string androidShopRewardedAdUnitId = "Rewarded_Android";
-    [SerializeField] string iOSShopRewardedAdUnitId = "Rewarded_iOS";
-    [Tooltip("Revive panel uses this placement. Use the same IDs as shop if you only have one rewarded unit per platform (e.g. Rewarded_Android).")]
-    [SerializeField] string androidReviveRewardedAdUnitId = "Rewarded_Android";
-    [SerializeField] string iOSReviveRewardedAdUnitId = "Rewarded_iOS";
+    [SerializeField] string androidShopRewardedAdUnitId = "Rewarded_Shop_Android";
+    [SerializeField] string iOSShopRewardedAdUnitId = "Rewarded_Shop_IOS";
+    [Tooltip("Revive panel placement — keep separate from shop so they do not share one loaded ad.")]
+    [SerializeField] string androidReviveRewardedAdUnitId = "Rewarded_Revive_Android";
+    [SerializeField] string iOSReviveRewardedAdUnitId = "Rewarded_Revive_IOS";
+
+    [Header("Revive preload")]
+    [Tooltip("How often to re-request a revive ad when none is ready.")]
+    [SerializeField] float reviveWarmRetrySeconds = 3f;
 
     string _gameId;
     bool _initialized;
     readonly HashSet<string> _loadedUnits = new HashSet<string>();
     readonly HashSet<string> _loadingUnits = new HashSet<string>();
+    readonly HashSet<string> _reportedLoadFailures = new HashSet<string>();
 
     string _activeShowUnitId;
     Action<bool> _onShowFinished;
+    bool _showWhenReadyRunning;
 
     void Awake()
     {
@@ -116,6 +122,77 @@ public class UnityRewardedAdsManager : MonoBehaviour,
         Advertisement.Show(adUnitId, this);
     }
 
+    /// <summary>
+    /// Loads if needed, waits up to <paramref name="timeoutSeconds"/>, then shows.
+    /// Use for revive so the button can stay clickable before the ad is cached.
+    /// </summary>
+    public void ShowRewardedWhenReady(
+        string adUnitId,
+        Action<bool> onUserEarnedReward,
+        float timeoutSeconds = 20f,
+        Func<bool> isCancelled = null)
+    {
+        if (_showWhenReadyRunning || _activeShowUnitId != null)
+        {
+            onUserEarnedReward?.Invoke(false);
+            return;
+        }
+
+        StartCoroutine(ShowRewardedWhenReadyRoutine(adUnitId, onUserEarnedReward, timeoutSeconds, isCancelled));
+    }
+
+    IEnumerator ShowRewardedWhenReadyRoutine(
+        string adUnitId,
+        Action<bool> onUserEarnedReward,
+        float timeoutSeconds,
+        Func<bool> isCancelled)
+    {
+        _showWhenReadyRunning = true;
+        try
+        {
+            if (string.IsNullOrEmpty(adUnitId) || !IsInitialized)
+            {
+                onUserEarnedReward?.Invoke(false);
+                yield break;
+            }
+
+            float wait = 0f;
+            LoadPlacement(adUnitId);
+            while (!IsPlacementReady(adUnitId) && wait < timeoutSeconds)
+            {
+                if (isCancelled != null && isCancelled())
+                {
+                    onUserEarnedReward?.Invoke(false);
+                    yield break;
+                }
+
+                if (!_loadingUnits.Contains(adUnitId) && !_loadedUnits.Contains(adUnitId))
+                    LoadPlacement(adUnitId);
+
+                wait += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (isCancelled != null && isCancelled())
+            {
+                onUserEarnedReward?.Invoke(false);
+                yield break;
+            }
+
+            if (!IsPlacementReady(adUnitId))
+            {
+                onUserEarnedReward?.Invoke(false);
+                yield break;
+            }
+
+            ShowRewarded(adUnitId, onUserEarnedReward);
+        }
+        finally
+        {
+            _showWhenReadyRunning = false;
+        }
+    }
+
     string GetPlatformGameId()
     {
 #if UNITY_IOS
@@ -150,25 +227,54 @@ public class UnityRewardedAdsManager : MonoBehaviour,
     public void OnInitializationComplete()
     {
         _initialized = true;
+        Debug.Log($"Unity Ads initialized. Game ID: {_gameId}");
         LoadPlacement(GetShopRewardedAdUnitId());
         LoadPlacement(GetReviveRewardedAdUnitId());
+        StartCoroutine(KeepRevivePlacementWarmRoutine());
+    }
+
+    /// <summary>Keeps a revive ad cached whenever possible so death UI can show one quickly.</summary>
+    IEnumerator KeepRevivePlacementWarmRoutine()
+    {
+        float interval = Mathf.Max(1f, reviveWarmRetrySeconds);
+        while (Instance == this)
+        {
+            yield return new WaitForSecondsRealtime(interval);
+            if (!IsInitialized)
+                continue;
+
+            string reviveId = GetReviveRewardedAdUnitId();
+            if (string.IsNullOrEmpty(reviveId))
+                continue;
+            if (_activeShowUnitId == reviveId)
+                continue;
+            if (IsPlacementReady(reviveId) || _loadingUnits.Contains(reviveId))
+                continue;
+
+            LoadPlacement(reviveId);
+        }
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
         _initialized = false;
+        Debug.LogError($"Unity Ads initialization failed: {error} - {message}");
     }
 
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
         _loadingUnits.Remove(adUnitId);
+        _reportedLoadFailures.Remove(adUnitId);
         _loadedUnits.Add(adUnitId);
+        Debug.Log($"Unity Ads loaded ad unit: {adUnitId}");
         PlacementBecameReady?.Invoke(adUnitId);
     }
 
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
     {
         _loadingUnits.Remove(adUnitId);
+        if (_reportedLoadFailures.Add(adUnitId))
+            Debug.LogWarning($"Unity Ads failed to load '{adUnitId}': {error} - {message}");
         StartCoroutine(ReloadAfterDelay(adUnitId, 2f));
     }
 
@@ -184,6 +290,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
         if (adUnitId != _activeShowUnitId)
             return;
 
+        Debug.LogWarning($"Unity Ads failed to show '{adUnitId}': {error} - {message}");
         FinishShow(adUnitId, false);
         LoadPlacement(adUnitId);
     }

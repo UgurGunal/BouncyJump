@@ -192,12 +192,13 @@ public static class GameSaveService
         return _data.ballPurchased[ballIndex] == 1;
     }
 
-    public static void SetBallPurchased(int ballIndex, bool purchased)
+    public static bool SetBallPurchased(int ballIndex, bool purchased)
     {
-        if (!IsValidIndex(ballIndex, GameSaveData.MaxBalls)) return;
+        if (!IsValidIndex(ballIndex, GameSaveData.MaxBalls)) return false;
         EnsureLoaded();
         _data.ballPurchased[ballIndex] = purchased ? 1 : 0;
         Save();
+        return true;
     }
 
     public static void ClearBallPurchases()
@@ -411,12 +412,31 @@ public static class GameSaveService
 
     static void EnsureArraySizes(GameSaveData data)
     {
-        if (data.towerPurchased == null || data.towerPurchased.Length != GameSaveData.MaxTowers)
-            data.towerPurchased = new int[GameSaveData.MaxTowers];
-        if (data.ballPurchased == null || data.ballPurchased.Length != GameSaveData.MaxBalls)
-            data.ballPurchased = new int[GameSaveData.MaxBalls];
-        if (data.towerBestHeights == null || data.towerBestHeights.Length != GameSaveData.MaxTowers)
-            data.towerBestHeights = new float[GameSaveData.MaxTowers];
+        data.towerPurchased = ResizePreserve(data.towerPurchased, GameSaveData.MaxTowers);
+        data.ballPurchased = ResizePreserve(data.ballPurchased, GameSaveData.MaxBalls);
+        data.towerBestHeights = ResizePreserve(data.towerBestHeights, GameSaveData.MaxTowers);
+    }
+
+    static int[] ResizePreserve(int[] source, int size)
+    {
+        if (source != null && source.Length == size)
+            return source;
+
+        var resized = new int[size];
+        if (source != null)
+            Array.Copy(source, resized, Math.Min(source.Length, size));
+        return resized;
+    }
+
+    static float[] ResizePreserve(float[] source, int size)
+    {
+        if (source != null && source.Length == size)
+            return source;
+
+        var resized = new float[size];
+        if (source != null)
+            Array.Copy(source, resized, Math.Min(source.Length, size));
+        return resized;
     }
 
     static bool IsValidIndex(int index, int max) => index >= 0 && index < max;

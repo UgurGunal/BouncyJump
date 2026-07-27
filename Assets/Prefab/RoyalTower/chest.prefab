@@ -193,7 +193,7 @@ MonoBehaviour:
   openedSprite: {fileID: 151792654, guid: bd69394ebc09775468598277dd545979, type: 3}
   coin1Prefab: {fileID: 6595305194927341745, guid: 2fc9cb9f09d913c428525279aaab1131, type: 3}
   coin2Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
-  coin3Prefab: {fileID: 6595305194927341745, guid: 233e04f1f31b8bc47abe294294dfb31d, type: 3}
+  coin3Prefab: {fileID: 6595305194927341745, guid: a774a5e1be604154793b1912d9a1a23f, type: 3}
   diamond1Prefab: {fileID: 6595305194927341745, guid: c38fc30edfc33034997371bda981b3ef, type: 3}
   diamond2Prefab: {fileID: 6595305194927341745, guid: ed60038291882f543be4060a041e8905, type: 3}
   useSpawnChoiceSystem: 1

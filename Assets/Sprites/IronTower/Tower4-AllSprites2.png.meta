@@ -135,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 274
-        y: 28
+        y: 27
         width: 588
-        height: 1980
+        height: 1981
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -336,27 +336,6 @@ TextureImporter:
       bones: []
       spriteID: f2bad0991fac861449fdeba3d95c4248
       internalID: 675739643
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tower4-AllSprites2_11
-      rect:
-        serializedVersion: 2
-        x: 1602
-        y: 1556
-        width: 4
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 736e22f9bb8b61248a4e9d493728733d
-      internalID: 2098173131
       vertices: []
       indices: 
       edges: []

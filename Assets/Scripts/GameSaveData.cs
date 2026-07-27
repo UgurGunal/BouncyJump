@@ -8,7 +8,8 @@ public class GameSaveData
 {
     public const int FormatVersion = 1;
     public const int MaxTowers = 64;
-    public const int MaxBalls = 64;
+    // Must be >= BallManager/BallDatabase length (42 normal + 30 premium = 72).
+    public const int MaxBalls = 128;
 
     public int formatVersion = FormatVersion;
     public int gold;

@@ -223,9 +223,12 @@ public class BallManager : MonoBehaviour
 
             if (currentGold >= ball.goldPrice && currentDiamonds >= ball.diamondPrice)
             {
+                // Persist ownership first so we never charge if the index can't be saved.
+                if (!GameSaveService.SetBallPurchased(ballIndex, true))
+                    return;
+
                 GameSaveService.SetGold(currentGold - ball.goldPrice);
                 GameSaveService.SetDiamonds(currentDiamonds - ball.diamondPrice);
-                GameSaveService.SetBallPurchased(ballIndex, true);
 
                 RefreshBallsBought();
 
