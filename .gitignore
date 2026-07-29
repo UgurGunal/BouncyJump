@@ -62,6 +62,16 @@ sysinfo.txt
 *.unitypackage.meta
 *.app
 
+# Local Android signing secrets (never commit)
+/AndroidKeystore.local
+/keystore.pass
+/.android-signing
+/BuildAndroid.status
+/BuildAndroid.now
+/BuildAndroidAab.now
+/Assets/Editor/BuildAndroidAab.now
+/Assets/Editor/BuildAndroidAab.now.meta
+
 # Crashlytics generated file
 crashlytics-build.properties
 

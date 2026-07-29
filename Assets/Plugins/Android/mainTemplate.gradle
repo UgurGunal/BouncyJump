@@ -9,7 +9,7 @@ dependencies {
 **DEPS**
 }
 
-// Keep androidx.core below 1.15 so compileSdk 34 builds succeed (Unity 2022.3 / AGP 7.4.2).
+// Keep androidx.core pinned so Ads/IAP do not pull 1.15+ unexpectedly on AGP 7.4.2.
 configurations.configureEach {
     resolutionStrategy {
         force 'androidx.core:core:1.13.1'

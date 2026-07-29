@@ -255,9 +255,8 @@ public class HomeScreenUI : MonoBehaviour
     /// <summary>Call this from an IAP success handler or a separate "Buy with real money" button.</summary>
     public void OnBuyDiamondsWithRealMoney()
     {
-        if (shopManager == null) return;
-        shopManager.MockPurchaseDiamondsWithRealMoney(MockDiamondsFromIAP);
-        var currencyDisplay = FindObjectOfType<HomeScreenCurrencyDisplay>();
-        if (currencyDisplay != null) currencyDisplay.RefreshCurrencyDisplay();
+        IAPManager iap = IAPManager.EnsureExists();
+        if (iap != null)
+            iap.Buy(IAPManager.ProductGems50);
     }
 }

@@ -2,57 +2,64 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Add this to any "Buy Diamond" pack button. Set diamondAmount in the Inspector.
-/// Purchase logic and sound are handled by ShopManager.
+/// Buy-diamond pack button. Set <see cref="productId"/> to a store product
+/// (e.g. com.rugustudios.gems50). Purchase is handled by <see cref="IAPManager"/>.
 /// </summary>
 [DefaultExecutionOrder(50)]
 public class BuyDiamondButton : MonoBehaviour
 {
-    [Header("Pack")]
-    [Tooltip("Diamonds granted when this pack is purchased")]
+    [Header("IAP")]
+    [Tooltip("Store product id, e.g. com.rugustudios.gems50")]
+    public string productId = IAPManager.ProductGems50;
+
+    [Tooltip("Fallback diamond amount if IAP catalog mapping is missing (should match the product).")]
     public int diamondAmount = 50;
 
-    ShopManager shopManager;
+    Button _button;
 
     void Awake()
     {
-        Button button = GetComponent<Button>();
-        if (button != null)
-            button.onClick.AddListener(OnClick);
+        _button = GetComponent<Button>();
+        if (_button != null)
+            _button.onClick.AddListener(OnClick);
     }
 
     void Start()
     {
-        if (shopManager == null)
-        {
-            shopManager = FindObjectOfType<ShopManager>();
-            if (shopManager == null)
-            {
-                ShopManager[] found = FindObjectsOfType<ShopManager>(true);
-                if (found != null && found.Length > 0)
-                    shopManager = found[0];
-            }
-        }
+        IAPManager.EnsureExists();
+        if (string.IsNullOrEmpty(productId) && diamondAmount > 0)
+            productId = GuessProductId(diamondAmount);
     }
 
     void OnClick()
     {
-        if (shopManager == null)
-            shopManager = FindObjectOfType<ShopManager>(true);
-        if (shopManager == null) return;
+        IAPManager iap = IAPManager.EnsureExists();
+        if (iap == null)
+            return;
 
-        shopManager.MockPurchaseDiamondsWithRealMoney(diamondAmount);
+        if (string.IsNullOrEmpty(productId))
+        {
+            Debug.LogError("[BuyDiamondButton] productId is empty.");
+            return;
+        }
 
-        if (CurrencyFlyFeedback.Instance != null)
-            CurrencyFlyFeedback.Instance.PlayDiamonds(diamondAmount);
-        else
-            RefreshCurrencyDisplay();
+        if (!iap.IsReady)
+        {
+            Debug.LogWarning("[BuyDiamondButton] IAP not ready yet. Try again in a moment.");
+            return;
+        }
+
+        iap.Buy(productId);
     }
 
-    void RefreshCurrencyDisplay()
+    static string GuessProductId(int amount)
     {
-        var display = FindObjectOfType<HomeScreenCurrencyDisplay>();
-        if (display != null)
-            display.RefreshCurrencyDisplay();
+        switch (amount)
+        {
+            case 50: return IAPManager.ProductGems50;
+            case 300: return IAPManager.ProductGems300;
+            case 2000: return IAPManager.ProductGems2000;
+            default: return null;
+        }
     }
 }

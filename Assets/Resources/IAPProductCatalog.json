@@ -1,1 +1,86 @@
-{"appleSKU":"","appleTeamID":"","enableCodelessAutoInitialization":true,"enableUnityGamingServicesAutoInitialization":false,"products":[{"id":"diamond_50","type":0,"storeIDs":[],"defaultDescription":{"googleLocale":21,"title":"50 Diamond","description":""},"screenshotPath":"","applePriceTier":0,"googlePrice":{"data":[0,0,0,0],"num":0.0},"pricingTemplateID":"","descriptions":[],"payouts":[{"t":"Currency","st":"Diamond","q":50.0,"d":""}]}]}
+{
+    "appleSKU": "bouncyjump001",
+    "appleTeamID": "",
+    "enableCodelessAutoInitialization": false,
+    "enableUnityGamingServicesAutoInitialization": false,
+    "products": [
+        {
+            "id": "com.rugustudios.gems50",
+            "type": 0,
+            "storeIDs": [],
+            "defaultDescription": {
+                "googleLocale": 21,
+                "title": "50 Gems",
+                "description": "50 diamonds"
+            },
+            "screenshotPath": "",
+            "applePriceTier": 0,
+            "googlePrice": {
+                "data": [0, 0, 0, 0],
+                "num": 0.0
+            },
+            "pricingTemplateID": "",
+            "descriptions": [],
+            "payouts": [
+                {
+                    "t": "Currency",
+                    "st": "Diamond",
+                    "q": 50.0,
+                    "d": ""
+                }
+            ]
+        },
+        {
+            "id": "com.rugustudios.gems300",
+            "type": 0,
+            "storeIDs": [],
+            "defaultDescription": {
+                "googleLocale": 21,
+                "title": "300 Gems",
+                "description": "300 diamonds"
+            },
+            "screenshotPath": "",
+            "applePriceTier": 0,
+            "googlePrice": {
+                "data": [0, 0, 0, 0],
+                "num": 0.0
+            },
+            "pricingTemplateID": "",
+            "descriptions": [],
+            "payouts": [
+                {
+                    "t": "Currency",
+                    "st": "Diamond",
+                    "q": 300.0,
+                    "d": ""
+                }
+            ]
+        },
+        {
+            "id": "com.rugustudios.gems2000",
+            "type": 0,
+            "storeIDs": [],
+            "defaultDescription": {
+                "googleLocale": 21,
+                "title": "2000 Gems",
+                "description": "2000 diamonds"
+            },
+            "screenshotPath": "",
+            "applePriceTier": 0,
+            "googlePrice": {
+                "data": [0, 0, 0, 0],
+                "num": 0.0
+            },
+            "pricingTemplateID": "",
+            "descriptions": [],
+            "payouts": [
+                {
+                    "t": "Currency",
+                    "st": "Diamond",
+                    "q": 2000.0,
+                    "d": ""
+                }
+            ]
+        }
+    ]
+}

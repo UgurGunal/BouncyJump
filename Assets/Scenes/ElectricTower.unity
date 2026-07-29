@@ -188,9 +188,10 @@ MonoBehaviour:
     manualTileHeight: 0
     tileHeight: 0
     duplicate: {fileID: 0}
-  seamOverlapWorld: 0.02
+  seamOverlapWorld: 0.03
   seamOverlapPixels: 2
-  snapTilesToPixelGrid: 1
+  spriteEdgeInsetPixels: 4
+  tileDepthSeparation: 0.01
 --- !u!1 &212887702
 GameObject:
   m_ObjectHideFlags: 0

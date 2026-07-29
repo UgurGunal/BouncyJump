@@ -8,8 +8,8 @@ plugins {
     **BUILD_SCRIPT_DEPS**
 }
 
-// Unity 2022.3 compiles against API 34; androidx.core 1.15+ requires API 35.
-// IAP/Ads can pull 1.15 transitively — pin a compatible version so release builds succeed.
+// Unity 2022.3 / AGP 7.4.2: pin androidx.core so Ads/IAP do not pull 1.15+ unexpectedly.
+// Target/compile SDK is 35+; keep this pin unless a dependency requires a newer androidx.core.
 subprojects { subproject ->
     subproject.configurations.configureEach {
         resolutionStrategy {

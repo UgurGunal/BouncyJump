@@ -443,9 +443,12 @@ public class ShopManager : MonoBehaviour
         return true;
     }
 
-    /// <summary>Google Play in-app diamond purchase. Wire billing here when ready.</summary>
+    /// <summary>Google Play / App Store diamond purchase via IAPManager.</summary>
     public static void OpenInGameDiamondPurchase()
     {
+        IAPManager iap = IAPManager.EnsureExists();
+        if (iap != null)
+            iap.Buy(IAPManager.ProductGems50);
     }
 
     /// <summary>Buy gold by spending diamonds. Exchange rate is configurable.</summary>
@@ -457,11 +460,33 @@ public class ShopManager : MonoBehaviour
         return true;
     }
 
-    /// <summary>Mock: purchase diamonds with real money (IAP). Replace with real IAP later.</summary>
-    public void MockPurchaseDiamondsWithRealMoney(int amount)
+    /// <summary>Called by IAPManager after a successful real-money purchase is pending confirmation.</summary>
+    public void GrantDiamondsFromIAP(int amount)
     {
         AddDiamonds(amount);
         PlayShopPurchaseSound();
+        if (CurrencyFlyFeedback.Instance != null)
+            CurrencyFlyFeedback.Instance.PlayDiamonds(amount);
+        else
+            UpdateCurrencyDisplay();
+    }
+
+    /// <summary>Deprecated mock path — routes to real IAP for the matching pack size.</summary>
+    public void MockPurchaseDiamondsWithRealMoney(int amount)
+    {
+        IAPManager iap = IAPManager.EnsureExists();
+        if (iap == null)
+            return;
+
+        string productId = null;
+        if (amount == 50) productId = IAPManager.ProductGems50;
+        else if (amount == 300) productId = IAPManager.ProductGems300;
+        else if (amount == 2000) productId = IAPManager.ProductGems2000;
+
+        if (productId != null)
+            iap.Buy(productId);
+        else
+            Debug.LogWarning($"[ShopManager] No IAP product mapped for {amount} diamonds.");
     }
 
     /// <summary>Mock: grant diamonds after watching an ad. Replace with real rewarded ad later.</summary>

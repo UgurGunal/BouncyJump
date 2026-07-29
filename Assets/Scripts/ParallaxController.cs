@@ -12,11 +12,13 @@ public class ParallaxObject
     [HideInInspector] public float tileHeight;
     [HideInInspector] public Transform duplicate;
     [HideInInspector] public float baseZ;
+    [HideInInspector] public int baseSortingOrder;
 }
 
 /// <summary>
 /// Infinite vertical parallax backgrounds using two stacked tiles.
-/// Seam overlap, edge inset and a fixed tile depth order keep the joint invisible.
+/// Tiles are overlapped and inset, and the upper tile always wins the 2D sort
+/// so the joint never flashes a bright atlas edge or a gap behind the art.
 /// </summary>
 [DefaultExecutionOrder(100)]
 public class ParallaxController : MonoBehaviour
@@ -29,13 +31,13 @@ public class ParallaxController : MonoBehaviour
     public List<ParallaxObject> parallaxObjects = new List<ParallaxObject>();
 
     [Header("Seam Fix")]
-    [Tooltip("Extra overlap between stacked background pieces (world units).")]
-    public float seamOverlapWorld = 0.02f;
-    [Tooltip("Extra overlap in screen pixels (good for pixel-art sprites).")]
+    [Tooltip("How far the two tiles slide into each other (world units). Larger = harder to see the joint.")]
+    public float seamOverlapWorld = 0.03f;
+    [Tooltip("Extra overlap in screen pixels (scales with resolution / ortho size).")]
     public int seamOverlapPixels = 2;
-    [Tooltip("Texture pixels trimmed off the top and bottom of each tile sprite. The atlas margin is opaque white, so filtering and block compression brighten the outermost rows.")]
+    [Tooltip("Texture pixels trimmed off the top and bottom of each tile sprite. Atlas margins are opaque white and bleed through filtering / compression.")]
     [Range(0, 16)] public int spriteEdgeInsetPixels = 4;
-    [Tooltip("Depth gap between the two tiles so their overlap never has a sorting tie.")]
+    [Tooltip("Depth gap between tiles (only used if transparency sort mode is Custom Axis / Z). Prefer sortingOrder for Default mode.")]
     public float tileDepthSeparation = 0.01f;
 
     Vector3 lastCameraPosition;
@@ -53,16 +55,13 @@ public class ParallaxController : MonoBehaviour
         FindCameraReference();
 
         if (cameraTransform == null)
-        {
             yield break;
-        }
 
         lastCameraPosition = cameraTransform.position;
         RefreshWorldPixelSize();
 
         foreach (ParallaxObject obj in parallaxObjects)
             SetupParallaxObject(obj);
-
     }
 
     void LateUpdate()
@@ -107,6 +106,9 @@ public class ParallaxController : MonoBehaviour
 
         obj.baseZ = obj.target.position.z;
 
+        SpriteRenderer sourceRenderer = obj.target.GetComponent<SpriteRenderer>();
+        obj.baseSortingOrder = sourceRenderer != null ? sourceRenderer.sortingOrder : 0;
+
         obj.duplicate = Instantiate(obj.target, obj.target.parent);
         obj.duplicate.name = obj.target.name + "_ParallaxDuplicate";
 
@@ -114,6 +116,7 @@ public class ParallaxController : MonoBehaviour
         obj.duplicate.position = obj.target.position + Vector3.up * step;
 
         CopySpriteSettings(obj.target, obj.duplicate);
+        ApplySeamSort(obj.target, obj.duplicate, obj);
     }
 
     void UpdateParallaxObject(ParallaxObject obj, Vector3 deltaMovement)
@@ -146,12 +149,26 @@ public class ParallaxController : MonoBehaviour
             below = wrapped;
         }
 
-        // Deriving the upper tile from the lower one keeps the pair exactly one step apart;
-        // letting both accumulate independently drifts them into a sub-pixel gap. The upper
-        // tile also stays in front, so the overlap band always shows its inset bottom edge
-        // rather than an arbitrary winner of a depth tie.
+        // Keep the pair exactly one step apart so a sub-pixel gap never opens.
+        // Upper tile stays in front via sortingOrder (Default 2D sort ignores Z).
         above.position = new Vector3(above.position.x, belowY + step, obj.baseZ);
         below.position = new Vector3(below.position.x, belowY, obj.baseZ + tileDepthSeparation);
+        ApplySeamSort(above, below, obj);
+    }
+
+    /// <summary>
+    /// Default transparency sort ignores Z, so both tiles must differ in sortingOrder.
+    /// Lower tile is pushed one order behind the original so nothing jumps in front of gameplay.
+    /// </summary>
+    static void ApplySeamSort(Transform above, Transform below, ParallaxObject obj)
+    {
+        SpriteRenderer aboveRenderer = above.GetComponent<SpriteRenderer>();
+        SpriteRenderer belowRenderer = below.GetComponent<SpriteRenderer>();
+
+        if (aboveRenderer != null)
+            aboveRenderer.sortingOrder = obj.baseSortingOrder;
+        if (belowRenderer != null)
+            belowRenderer.sortingOrder = obj.baseSortingOrder - 1;
     }
 
     /// <summary>

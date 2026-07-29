@@ -173,24 +173,29 @@ MonoBehaviour:
     manualTileHeight: 0
     tileHeight: 0
     duplicate: {fileID: 0}
+    baseZ: 0
   - target: {fileID: 1053119560}
     parallaxFactor: -0.035
     manualTileHeight: 0
     tileHeight: 0
     duplicate: {fileID: 0}
+    baseZ: 0
   - target: {fileID: 863554778}
     parallaxFactor: 0.25
     manualTileHeight: 0
     tileHeight: 0
     duplicate: {fileID: 0}
+    baseZ: 0
   - target: {fileID: 2125827023}
     parallaxFactor: 0.6
     manualTileHeight: 0
     tileHeight: 0
     duplicate: {fileID: 0}
-  seamOverlapWorld: 0.02
+    baseZ: 0
+  seamOverlapWorld: 0.03
   seamOverlapPixels: 2
-  snapTilesToPixelGrid: 1
+  spriteEdgeInsetPixels: 4
+  tileDepthSeparation: 0.01
 --- !u!1 &60219931
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,18 +314,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1180048}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5714285, y: 14.471429}
+    oldSize: {x: 1.5714285, y: 14}
     newSize: {x: 1.5714285, y: 14.471429}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5857143, y: 14.471429}
+  m_Size: {x: 1.5857143, y: 14.23542}
   m_EdgeRadius: 0
 --- !u!114 &60219936
 MonoBehaviour:
@@ -716,18 +721,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.116701365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5714285, y: 14.471429}
+    oldSize: {x: 1.5714285, y: 14}
     newSize: {x: 1.5714285, y: 14.471429}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5857143, y: 14.471429}
+  m_Size: {x: 1.5857143, y: 14.238026}
   m_EdgeRadius: 0
 --- !u!114 &1053119563
 MonoBehaviour:
@@ -938,6 +943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCount: 4
   levelHeight: 200
+  towerCompleteEndDelay: 1
   player: {fileID: 0}
   cameraFollow: {fileID: 0}
   coin1Prefab: {fileID: 6595305194927341745, guid: 2fc9cb9f09d913c428525279aaab1131, type: 3}
