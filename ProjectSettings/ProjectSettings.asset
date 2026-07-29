@@ -165,6 +165,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.rugustudios.bouncyjump
     Standalone: com.DefaultCompany.2DProject
+    iPhone: com.rugustudios.bouncyjump
   buildNumber:
     Standalone: 0
     VisionOS: 0

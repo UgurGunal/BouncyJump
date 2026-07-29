@@ -68,6 +68,10 @@ sysinfo.txt
 /.android-signing
 /user.keystore
 /*.keystore
+
+# App Store Connect API keys (never commit)
+AuthKey_*.p8
+*.p8
 /BuildAndroid.status
 /BuildAndroid.now
 /BuildAndroidAab.now
