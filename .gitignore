@@ -66,6 +66,8 @@ sysinfo.txt
 /AndroidKeystore.local
 /keystore.pass
 /.android-signing
+/user.keystore
+/*.keystore
 /BuildAndroid.status
 /BuildAndroid.now
 /BuildAndroidAab.now
