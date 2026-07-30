@@ -36,6 +36,13 @@ public static class iOSFixNestedFrameworks
 
         project.AddShellScriptBuildPhase(mainTarget, ShellPhaseName, "/bin/sh", script);
         project.WriteToFile(projectPath);
+
+        // Exempt encryption only (HTTPS / OS crypto via Ads & IAP) — skips App Store Connect prompt.
+        string plistPath = pathToBuiltProject + "/Info.plist";
+        var plist = new PlistDocument();
+        plist.ReadFromFile(plistPath);
+        plist.root.SetBoolean("ITSAppUsesNonExemptEncryption", false);
+        plist.WriteToFile(plistPath);
     }
 }
 #endif
