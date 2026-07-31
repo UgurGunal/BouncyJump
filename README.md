@@ -1,7 +1,10 @@
 <p align="center">
-  <img src="Docs/Screenshots/01.png" width="220" alt="Screenshot 1" />
-  <img src="Docs/Screenshots/02.png" width="220" alt="Screenshot 2" />
-  <img src="Docs/Screenshots/03.png" width="220" alt="Screenshot 3" />
+  <img src="Docs/Screenshots/Image%20Sequence_001_0000.png" width="220" alt="Screenshot 1" />
+  <img src="Docs/Screenshots/Image%20Sequence_004_0000.png" width="220" alt="Screenshot 2" />
+  <img src="Docs/Screenshots/Image%20Sequence_016_0002.png" width="220" alt="Screenshot 3" />
+  <img src="Docs/Screenshots/Image%20Sequence_072_0000.png" width="220" alt="Screenshot 4" />
+  <img src="Docs/Screenshots/Image%20Sequence_078_0001.png" width="220" alt="Screenshot 5" />
+  <img src="Docs/Screenshots/Image%20Sequence_081_0019.png" width="220" alt="Screenshot 6" />
 </p>
 
 # Bouncy Jump
@@ -33,16 +36,7 @@ Releasing on **Google Play** and the **App Store** (pending review).
 
 ## Screenshots
 
-Place store/gameplay images in:
-
-```text
-Docs/Screenshots/
-  01.png
-  02.png
-  03.png
-```
-
-They appear at the top of this README (220px wide).
+Store/gameplay images live in `Docs/Screenshots/` and are shown at the top of this README (220px wide).
 
 ## Repository layout
 
