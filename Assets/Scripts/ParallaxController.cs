@@ -13,6 +13,9 @@ public class ParallaxObject
     [HideInInspector] public Transform duplicate;
     [HideInInspector] public float baseZ;
     [HideInInspector] public int baseSortingOrder;
+    [HideInInspector] public SpriteRenderer targetRenderer;
+    [HideInInspector] public SpriteRenderer duplicateRenderer;
+    [HideInInspector] public Transform lastAbove;
 }
 
 /// <summary>
@@ -42,7 +45,11 @@ public class ParallaxController : MonoBehaviour
 
     Vector3 lastCameraPosition;
     float worldPixelSize = -1f;
+    float cachedOrthoSize = -1f;
+    int cachedPixelHeight = -1;
+    Camera cachedCamera;
     readonly List<Sprite> generatedSprites = new List<Sprite>();
+    readonly Dictionary<int, Sprite> trimmedSpriteCache = new Dictionary<int, Sprite>();
 
     void Start()
     {
@@ -58,7 +65,7 @@ public class ParallaxController : MonoBehaviour
             yield break;
 
         lastCameraPosition = cameraTransform.position;
-        RefreshWorldPixelSize();
+        RefreshWorldPixelSize(force: true);
 
         foreach (ParallaxObject obj in parallaxObjects)
             SetupParallaxObject(obj);
@@ -69,7 +76,7 @@ public class ParallaxController : MonoBehaviour
         if (cameraTransform == null)
             return;
 
-        RefreshWorldPixelSize();
+        RefreshWorldPixelSize(force: false);
 
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
 
@@ -88,6 +95,7 @@ public class ParallaxController : MonoBehaviour
         }
 
         generatedSprites.Clear();
+        trimmedSpriteCache.Clear();
     }
 
     void SetupParallaxObject(ParallaxObject obj)
@@ -98,25 +106,26 @@ public class ParallaxController : MonoBehaviour
         if (obj.duplicate != null)
             Destroy(obj.duplicate.gameObject);
 
-        ApplyEdgeInset(obj.target);
+        obj.targetRenderer = obj.target.GetComponent<SpriteRenderer>();
+        ApplyEdgeInset(obj.targetRenderer);
 
-        obj.tileHeight = obj.manualTileHeight > 0f ? obj.manualTileHeight : MeasureTileHeight(obj.target);
+        obj.tileHeight = obj.manualTileHeight > 0f ? obj.manualTileHeight : MeasureTileHeight(obj.target, obj.targetRenderer);
         if (obj.tileHeight <= 0f)
             return;
 
         obj.baseZ = obj.target.position.z;
-
-        SpriteRenderer sourceRenderer = obj.target.GetComponent<SpriteRenderer>();
-        obj.baseSortingOrder = sourceRenderer != null ? sourceRenderer.sortingOrder : 0;
+        obj.baseSortingOrder = obj.targetRenderer != null ? obj.targetRenderer.sortingOrder : 0;
 
         obj.duplicate = Instantiate(obj.target, obj.target.parent);
         obj.duplicate.name = obj.target.name + "_ParallaxDuplicate";
+        obj.duplicateRenderer = obj.duplicate.GetComponent<SpriteRenderer>();
 
         float step = GetTileStep(obj.tileHeight);
         obj.duplicate.position = obj.target.position + Vector3.up * step;
 
-        CopySpriteSettings(obj.target, obj.duplicate);
-        ApplySeamSort(obj.target, obj.duplicate, obj);
+        CopySpriteSettings(obj.targetRenderer, obj.duplicateRenderer);
+        obj.lastAbove = null;
+        ApplySeamSort(obj, obj.duplicate, obj.target);
     }
 
     void UpdateParallaxObject(ParallaxObject obj, Vector3 deltaMovement)
@@ -133,61 +142,79 @@ public class ParallaxController : MonoBehaviour
 
         float belowY = Mathf.Min(targetY, duplicateY) + deltaMovement.y * obj.parallaxFactor;
         float cameraY = cameraTransform.position.y;
+        bool wrapped = false;
 
         if (deltaMovement.y > 0f && cameraY - belowY > step)
         {
             belowY += step;
-            Transform wrapped = below;
+            Transform wrappedTile = below;
             below = above;
-            above = wrapped;
+            above = wrappedTile;
+            wrapped = true;
         }
         else if (deltaMovement.y < 0f && belowY > cameraY)
         {
             belowY -= step;
-            Transform wrapped = above;
+            Transform wrappedTile = above;
             above = below;
-            below = wrapped;
+            below = wrappedTile;
+            wrapped = true;
         }
 
         // Keep the pair exactly one step apart so a sub-pixel gap never opens.
         // Upper tile stays in front via sortingOrder (Default 2D sort ignores Z).
         above.position = new Vector3(above.position.x, belowY + step, obj.baseZ);
         below.position = new Vector3(below.position.x, belowY, obj.baseZ + tileDepthSeparation);
-        ApplySeamSort(above, below, obj);
+
+        // Only rewrite sortingOrder when the above/below roles change (wrap) or on first update.
+        if (wrapped || obj.lastAbove != above)
+            ApplySeamSort(obj, above, below);
     }
 
     /// <summary>
     /// Default transparency sort ignores Z, so both tiles must differ in sortingOrder.
     /// Lower tile is pushed one order behind the original so nothing jumps in front of gameplay.
     /// </summary>
-    static void ApplySeamSort(Transform above, Transform below, ParallaxObject obj)
+    static void ApplySeamSort(ParallaxObject obj, Transform above, Transform below)
     {
-        SpriteRenderer aboveRenderer = above.GetComponent<SpriteRenderer>();
-        SpriteRenderer belowRenderer = below.GetComponent<SpriteRenderer>();
+        SpriteRenderer aboveRenderer = above == obj.target ? obj.targetRenderer : obj.duplicateRenderer;
+        SpriteRenderer belowRenderer = below == obj.target ? obj.targetRenderer : obj.duplicateRenderer;
 
         if (aboveRenderer != null)
             aboveRenderer.sortingOrder = obj.baseSortingOrder;
         if (belowRenderer != null)
             belowRenderer.sortingOrder = obj.baseSortingOrder - 1;
+
+        obj.lastAbove = above;
     }
 
     /// <summary>
     /// Rebuilds the tile sprite from a slightly smaller rect so the outermost texture rows,
     /// which pick up the white atlas margin through filtering and block compression, are
-    /// never sampled.
+    /// never sampled. Trimmed sprites are cached per source sprite so duplicates share one.
     /// </summary>
-    void ApplyEdgeInset(Transform tile)
+    void ApplyEdgeInset(SpriteRenderer renderer)
     {
-        if (spriteEdgeInsetPixels <= 0)
-            return;
-
-        SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
-        if (renderer == null || renderer.sprite == null)
+        if (spriteEdgeInsetPixels <= 0 || renderer == null || renderer.sprite == null)
             return;
 
         Sprite source = renderer.sprite;
-        if (source.texture == null || generatedSprites.Contains(source))
+        if (source.texture == null)
             return;
+
+        int sourceId = source.GetInstanceID();
+        if (trimmedSpriteCache.TryGetValue(sourceId, out Sprite cached) && cached != null)
+        {
+            renderer.sprite = cached;
+            return;
+        }
+
+        // Already a generated inset sprite (e.g. re-init).
+        if (generatedSprites.Contains(source))
+        {
+            trimmedSpriteCache[sourceId] = source;
+            return;
+        }
 
         Rect rect = source.rect;
         float inset = Mathf.Min(spriteEdgeInsetPixels, (rect.height - 1f) * 0.5f);
@@ -204,6 +231,8 @@ public class ParallaxController : MonoBehaviour
 
         renderer.sprite = trimmed;
         generatedSprites.Add(trimmed);
+        trimmedSpriteCache[sourceId] = trimmed;
+        trimmedSpriteCache[trimmed.GetInstanceID()] = trimmed;
     }
 
     float GetTileStep(float tileHeight)
@@ -213,19 +242,29 @@ public class ParallaxController : MonoBehaviour
         return Mathf.Max(0.01f, tileHeight - overlap);
     }
 
-    void RefreshWorldPixelSize()
+    void RefreshWorldPixelSize(bool force)
     {
         if (cameraTransform == null)
             return;
 
-        Camera cam = cameraTransform.GetComponent<Camera>();
-        if (cam != null && cam.orthographic)
-            worldPixelSize = (2f * cam.orthographicSize) / Mathf.Max(1, cam.pixelHeight);
+        if (cachedCamera == null)
+            cachedCamera = cameraTransform.GetComponent<Camera>();
+
+        if (cachedCamera == null || !cachedCamera.orthographic)
+            return;
+
+        int pixelHeight = cachedCamera.pixelHeight;
+        float orthoSize = cachedCamera.orthographicSize;
+        if (!force && pixelHeight == cachedPixelHeight && Mathf.Approximately(orthoSize, cachedOrthoSize))
+            return;
+
+        cachedPixelHeight = pixelHeight;
+        cachedOrthoSize = orthoSize;
+        worldPixelSize = (2f * orthoSize) / Mathf.Max(1, pixelHeight);
     }
 
-    static float MeasureTileHeight(Transform target)
+    static float MeasureTileHeight(Transform target, SpriteRenderer spriteRenderer)
     {
-        SpriteRenderer spriteRenderer = target.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && spriteRenderer.sprite != null)
         {
             float scaleY = target.lossyScale.y;
@@ -243,13 +282,12 @@ public class ParallaxController : MonoBehaviour
         return 0f;
     }
 
-    static void CopySpriteSettings(Transform source, Transform duplicate)
+    static void CopySpriteSettings(SpriteRenderer sourceRenderer, SpriteRenderer duplicateRenderer)
     {
-        SpriteRenderer sourceRenderer = source.GetComponent<SpriteRenderer>();
-        SpriteRenderer duplicateRenderer = duplicate.GetComponent<SpriteRenderer>();
         if (sourceRenderer == null || duplicateRenderer == null)
             return;
 
+        duplicateRenderer.sprite = sourceRenderer.sprite;
         duplicateRenderer.sortingLayerID = sourceRenderer.sortingLayerID;
         duplicateRenderer.sortingOrder = sourceRenderer.sortingOrder;
     }
@@ -257,7 +295,10 @@ public class ParallaxController : MonoBehaviour
     void FindCameraReference()
     {
         if (cameraTransform != null)
+        {
+            cachedCamera = cameraTransform.GetComponent<Camera>();
             return;
+        }
 
         if (Camera.main != null)
             cameraTransform = Camera.main.transform;
@@ -267,5 +308,8 @@ public class ParallaxController : MonoBehaviour
             if (anyCamera != null)
                 cameraTransform = anyCamera.transform;
         }
+
+        if (cameraTransform != null)
+            cachedCamera = cameraTransform.GetComponent<Camera>();
     }
 }

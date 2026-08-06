@@ -174,6 +174,9 @@ public class GameEndPanelUI : MonoBehaviour
         float pulseDuration = Mathf.Max(0.01f, maxLevelGlowPulseDuration);
         Vector3 originalScale = maxLevelText.rectTransform.localScale;
 
+        // Cache once — repeated fontMaterial access can instantiate TMP materials every frame.
+        Material glowMaterial = maxLevelText.fontMaterial;
+
         if (startDelay > 0f)
             yield return new WaitForSecondsRealtime(startDelay);
 
@@ -186,7 +189,8 @@ public class GameEndPanelUI : MonoBehaviour
             // 0->1->0 curve over a single cycle.
             float pingPong = 1f - Mathf.Abs((progress * 2f) - 1f);
             float glowOuter = Mathf.Lerp(minGlow, maxGlow, pingPong);
-            maxLevelText.fontMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, glowOuter);
+            if (glowMaterial != null)
+                glowMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, glowOuter);
             float scaleMultiplier = Mathf.Lerp(minScale, maxScale, pingPong);
             maxLevelText.rectTransform.localScale = originalScale * scaleMultiplier;
             yield return null;
@@ -194,7 +198,8 @@ public class GameEndPanelUI : MonoBehaviour
 
         if (maxLevelText != null)
         {
-            maxLevelText.fontMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, minGlow);
+            if (glowMaterial != null)
+                glowMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, minGlow);
             maxLevelText.rectTransform.localScale = originalScale * minScale;
         }
     }

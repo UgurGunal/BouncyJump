@@ -21,11 +21,23 @@ public class GameStatsUI : MonoBehaviour
 
     private float _lastUpdateTime;
     private bool _lastShowRunTimer;
+    private int _lastHeight = int.MinValue;
+    private int _lastCoins = int.MinValue;
+    private int _lastGems = int.MinValue;
+    private int _lastLevel = int.MinValue;
+    private string _lastTimeText;
+    private string _lastLevelText;
 
     void OnEnable()
     {
         // Force one apply so default-off matches hidden HUD on first run.
         _lastShowRunTimer = !GameplayDisplaySettings.ShowRunTimer;
+        _lastHeight = int.MinValue;
+        _lastCoins = int.MinValue;
+        _lastGems = int.MinValue;
+        _lastLevel = int.MinValue;
+        _lastTimeText = null;
+        _lastLevelText = null;
         ApplyRunTimerVisibility();
     }
 
@@ -49,28 +61,61 @@ public class GameStatsUI : MonoBehaviour
         if (heightText != null)
         {
             int heightValue = Mathf.RoundToInt(PointsManager.Instance.HighestHeightReached * 5);
-            heightText.text = $"{heightValue:N0}";
+            if (heightValue != _lastHeight)
+            {
+                _lastHeight = heightValue;
+                heightText.text = $"{heightValue:N0}";
+            }
         }
 
         // Update Coins Text
         if (coinsText != null)
         {
-            coinsText.text = $"{PointsManager.Instance.CoinsCollected:N0}";
+            int coins = PointsManager.Instance.CoinsCollected;
+            if (coins != _lastCoins)
+            {
+                _lastCoins = coins;
+                coinsText.text = $"{coins:N0}";
+            }
         }
 
         // Update Gems Text
         if (gemsText != null)
         {
-            gemsText.text = $"{PointsManager.Instance.GemsCollected}";
+            int gems = PointsManager.Instance.GemsCollected;
+            if (gems != _lastGems)
+            {
+                _lastGems = gems;
+                gemsText.text = $"{gems}";
+            }
         }
 
         ApplyRunTimerVisibility();
 
         if (GameplayDisplaySettings.ShowRunTimer && timeText != null)
-            timeText.text = $"{PointsManager.Instance.SessionDuration:F1}";
+        {
+            string timeString = $"{PointsManager.Instance.SessionDuration:F1}";
+            if (timeString != _lastTimeText)
+            {
+                _lastTimeText = timeString;
+                timeText.text = timeString;
+            }
+        }
 
         if (levelText != null && !IsLevelChangePopupActive())
-            levelText.text = string.Format(levelTextFormat, PointsManager.Instance.CurrentLevel);
+        {
+            int level = PointsManager.Instance.CurrentLevel;
+            if (level != _lastLevel)
+            {
+                _lastLevel = level;
+                string levelString = string.Format(levelTextFormat, level);
+                if (levelString != _lastLevelText)
+                {
+                    _lastLevelText = levelString;
+                    levelText.text = levelString;
+                }
+            }
+        }
     }
 
     static bool IsLevelChangePopupActive()

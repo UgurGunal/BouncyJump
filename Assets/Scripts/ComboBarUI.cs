@@ -14,8 +14,10 @@ public class ComboBarUI : MonoBehaviour
     private ComboManager comboManager;
     private float targetComboValue = 0f;
     private float currentSliderValue = 0f;
+    private float lastWrittenSliderValue = float.NaN;
     private float lastUpdateTime = 0f;
     private const float UPDATE_INTERVAL = 1f / 60f; // 60 FPS update interval
+    private const float SliderWriteEpsilon = 0.01f;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class ComboBarUI : MonoBehaviour
             comboSlider.maxValue = comboManager.maxCombo; // Automatically fetch maxCombo
             comboSlider.value = 0f;
             currentSliderValue = 0f;
+            lastWrittenSliderValue = 0f;
         }
     }
 
@@ -58,21 +61,30 @@ public class ComboBarUI : MonoBehaviour
         {
             float t = 1f - Mathf.Exp(-smoothSpeed * UPDATE_INTERVAL);
             currentSliderValue = Mathf.Lerp(currentSliderValue, targetComboValue, t);
-            
-            // Update slider with smooth value
-            if (comboSlider != null)
-            {
-                comboSlider.value = currentSliderValue;
-            }
+
+            // Snap when close enough so we stop dirtying the Canvas every frame.
+            if (Mathf.Abs(currentSliderValue - targetComboValue) <= SliderWriteEpsilon)
+                currentSliderValue = targetComboValue;
+
+            WriteSliderValue(currentSliderValue);
         }
         else
         {
-            // Instant update (original behavior)
-            if (comboSlider != null)
-            {
-                comboSlider.value = targetComboValue;
-            }
+            currentSliderValue = targetComboValue;
+            WriteSliderValue(targetComboValue);
         }
+    }
+
+    void WriteSliderValue(float value)
+    {
+        if (comboSlider == null)
+            return;
+
+        if (!float.IsNaN(lastWrittenSliderValue) && Mathf.Abs(value - lastWrittenSliderValue) < SliderWriteEpsilon)
+            return;
+
+        comboSlider.value = value;
+        lastWrittenSliderValue = value;
     }
 
     // Public method to force instant update (useful for testing)
@@ -82,7 +94,8 @@ public class ComboBarUI : MonoBehaviour
         {
             targetComboValue = comboManager.CurrentCombo;
             currentSliderValue = targetComboValue;
-            comboSlider.value = targetComboValue;
+            lastWrittenSliderValue = float.NaN;
+            WriteSliderValue(targetComboValue);
         }
     }
 
@@ -97,4 +110,4 @@ public class ComboBarUI : MonoBehaviour
     {
         smoothSpeed = Mathf.Max(0.1f, speed);
     }
-} 
+}

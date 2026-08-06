@@ -50,8 +50,13 @@ public class PlayerBallController : MonoBehaviour
     private bool isScaleEffectActive = false; // Track if scale effect is currently active
     private bool isPlatformScaleEffectActive = false; // Track if platform scale effect is currently active
     private TrailRenderer trailRenderer; // Reference to trail renderer component
+    private bool trailEmitting;
+    private float lastTrailAlpha = -1f;
+    private bool lastTrailPowerupActive;
+    private Color lastTrailRgb = new Color(-1f, -1f, -1f, -1f);
 
     static readonly Color PowerupTrailColor = new Color(0f, 0xBB / 255f, 1f);
+    const float TrailVisibleAlphaThreshold = 0.01f;
 
     public Rigidbody2D Rigidbody
     {
@@ -83,10 +88,10 @@ public class PlayerBallController : MonoBehaviour
         // Get trail renderer component
         trailRenderer = GetComponent<TrailRenderer>();
         
-        // Always enable trail emission with dynamic gradient
         if (trailRenderer != null)
         {
-            trailRenderer.emitting = true;
+            trailRenderer.emitting = false;
+            trailEmitting = false;
             SetupTrailRenderer();
         }
         
@@ -163,6 +168,27 @@ public class PlayerBallController : MonoBehaviour
         Color trailRgb = powerupActive ? PowerupTrailColor : Color.white;
         if (powerupActive)
             alpha = 1f;
+
+        bool shouldEmit = powerupActive || alpha >= TrailVisibleAlphaThreshold;
+        if (shouldEmit != trailEmitting)
+        {
+            trailRenderer.emitting = shouldEmit;
+            trailEmitting = shouldEmit;
+            if (!shouldEmit)
+                trailRenderer.Clear();
+        }
+
+        if (!shouldEmit)
+            return;
+
+        if (Mathf.Approximately(alpha, lastTrailAlpha)
+            && powerupActive == lastTrailPowerupActive
+            && trailRgb == lastTrailRgb)
+            return;
+
+        lastTrailAlpha = alpha;
+        lastTrailPowerupActive = powerupActive;
+        lastTrailRgb = trailRgb;
 
         Color startColor = new Color(trailRgb.r, trailRgb.g, trailRgb.b, alpha);
         Color endColor = new Color(trailRgb.r, trailRgb.g, trailRgb.b, 0f);
