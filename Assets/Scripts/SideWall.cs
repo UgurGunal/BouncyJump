@@ -58,7 +58,7 @@ public class SideWall : MonoBehaviour
                         float bounceDirection = (wallSide == WallSide.Left) ? 1f : -1f;
                         player.BounceFromWall(bounceForce, bounceDirection);
                     }
-                    player.SetTouchingSideWall(true);
+                    player.NotifySideWallContact(wallSide);
                     return; // Exit early, don't process combo addition
                 }
             }
@@ -127,8 +127,21 @@ public class SideWall : MonoBehaviour
                 }
             }
             
-            player.SetTouchingSideWall(true);
+            player.NotifySideWallContact(wallSide);
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        PlayerBallController player = PlayerBallController.Instance;
+        if (player == null)
+            player = collision.gameObject.GetComponent<PlayerBallController>();
+
+        if (player != null)
+            player.NotifySideWallContact(wallSide);
     }
 
     private float CalculateBounceForce(float playerSpeed)

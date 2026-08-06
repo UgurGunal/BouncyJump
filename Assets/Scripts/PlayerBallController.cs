@@ -39,6 +39,9 @@ public class PlayerBallController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput = 0f;
     private bool isTouchingSideWall = false;
+    private SideWall.WallSide touchingWallSide;
+    /// <summary>Wall contact is refreshed by SideWall Stay; cleared if Stay stops (missed Exit on slow devices).</summary>
+    private float wallContactExpireFixedTime = float.NegativeInfinity;
     private Camera mainCamera;
     private float effectiveMaxSpeed; // Dynamic max speed including combo bonus
     private ComboManager comboManager; // Direct reference instead of reflection
@@ -178,14 +181,12 @@ public class PlayerBallController : MonoBehaviour
         #endif
 
         #if UNITY_ANDROID || UNITY_IOS
-        if (Input.touchCount > 0)
+        // Half-screen steer. Prefer touches; fall back to mouse (some older Android stacks expose the
+        // primary finger only via mouse simulation, or drop GetTouch(0) while another finger is held).
+        if (TryGetSteeringPointerX(out float pointerX))
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-            {
-                float screenMid = Screen.width * 0.5f;
-                moveInput = touch.position.x < screenMid ? -1f : 1f;
-            }
+            float screenMid = Screen.width * 0.5f;
+            moveInput = pointerX < screenMid ? -1f : 1f;
         }
         #endif
 
@@ -193,10 +194,44 @@ public class PlayerBallController : MonoBehaviour
             OnDirectionalInput?.Invoke(moveInput);
     }
 
+    /// <summary>
+    /// Resolves the active pointer X in screen pixels for left/right steering.
+    /// </summary>
+    private static bool TryGetSteeringPointerX(out float pointerX)
+    {
+        pointerX = 0f;
+
+        int touchCount = Input.touchCount;
+        for (int i = 0; i < touchCount; i++)
+        {
+            Touch touch = Input.GetTouch(i);
+            if (touch.phase == TouchPhase.Began ||
+                touch.phase == TouchPhase.Moved ||
+                touch.phase == TouchPhase.Stationary)
+            {
+                pointerX = touch.position.x;
+                return true;
+            }
+        }
+
+        // Mouse fallback also covers Editor device simulation and OEM stacks that mirror touch as mouse.
+        if (Input.GetMouseButton(0))
+        {
+            pointerX = Input.mousePosition.x;
+            return true;
+        }
+
+        return false;
+    }
+
     void FixedUpdate()
     {
         // Only allow physics movement if the game has started
         if (!gameStarted) return;
+
+        // Clear stale wall contact when Exit was missed (common on low-FPS / large physics steps).
+        if (isTouchingSideWall && Time.fixedTime > wallContactExpireFixedTime)
+            isTouchingSideWall = false;
 
         UpdateEffectiveMaxSpeed();
 
@@ -265,34 +300,36 @@ public class PlayerBallController : MonoBehaviour
     public void SetTouchingSideWall(bool touching)
     {
         isTouchingSideWall = touching;
+        if (!touching)
+            wallContactExpireFixedTime = float.NegativeInfinity;
+    }
+
+    /// <summary>
+    /// Called from SideWall Enter/Stay so contact stays fresh even if Exit is skipped.
+    /// </summary>
+    public void NotifySideWallContact(SideWall.WallSide wallSide)
+    {
+        isTouchingSideWall = true;
+        touchingWallSide = wallSide;
+        // Stay must refresh within a couple of physics steps or contact is considered cleared.
+        wallContactExpireFixedTime = Time.fixedTime + Time.fixedDeltaTime * 2.5f;
     }
     
     private bool IsMovingAwayFromWall()
     {
-        // If not touching wall, always allow movement
         if (!isTouchingSideWall) return true;
-        
-        // Check if player is trying to move away from the wall they're touching
-        // This requires knowing which wall we're touching, so let's use a simpler approach:
-        // Allow movement if input direction is opposite to current velocity direction
-        // or if player is at the edge of the screen and trying to move inward
-        
-        float screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        float playerX = transform.position.x;
-        
-        // If player is on left side and moving right, or on right side and moving left
-        if ((playerX < 0 && moveInput > 0) || (playerX > 0 && moveInput < 0))
-        {
-            return true; // Moving toward center, allow it
-        }
-        
-        // If player has no input, allow natural physics to take over
+
+        // No steer: let bounce / physics resolve without forcing X velocity.
         if (Mathf.Abs(moveInput) < 0.1f)
-        {
             return true;
-        }
-        
-        return false; // Prevent moving further into wall
+
+        // Block only pressing further into the wall we are actually contacting.
+        if (touchingWallSide == SideWall.WallSide.Left && moveInput < 0f)
+            return false;
+        if (touchingWallSide == SideWall.WallSide.Right && moveInput > 0f)
+            return false;
+
+        return true;
     }
 
     public void Jump(float jumpForce)
@@ -486,7 +523,6 @@ public class PlayerBallController : MonoBehaviour
         }
         
         // Reset any other player state as needed
-        isTouchingSideWall = false;
-        
+        SetTouchingSideWall(false);
     }
 }
