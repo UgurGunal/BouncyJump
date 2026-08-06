@@ -17,8 +17,8 @@ public static class AndroidBuilder
     const string DefaultApkRelativePath = "Builds/Android/bouncyjump.apk";
     const string DefaultAabRelativePath = "Builds/Android/bouncyjump.aab";
 
-    // Google Play requires target API 35+ for current uploads.
-    const AndroidSdkVersions RequiredTargetSdk = (AndroidSdkVersions)35;
+    // Google Play requires target API 36+ (Android 16) from Aug 31, 2026.
+    const AndroidSdkVersions RequiredTargetSdk = (AndroidSdkVersions)36;
 
     static bool _isBuilding;
     static bool _triggerQueued;
