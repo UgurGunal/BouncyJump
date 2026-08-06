@@ -38,14 +38,13 @@ public static class iOSFixNestedFrameworks
         project.WriteToFile(projectPath);
 
         // Exempt encryption only (HTTPS / OS crypto via Ads & IAP) — skips App Store Connect prompt.
-        // ATT: required when App Privacy declares tracking / Unity Ads may use IDFA.
+        // No NSUserTrackingUsageDescription: App Privacy declares Tracking = No (no ATT).
         string plistPath = pathToBuiltProject + "/Info.plist";
         var plist = new PlistDocument();
         plist.ReadFromFile(plistPath);
         plist.root.SetBoolean("ITSAppUsesNonExemptEncryption", false);
-        plist.root.SetString(
-            "NSUserTrackingUsageDescription",
-            "This identifier will be used to deliver personalized ads to you.");
+        if (plist.root.values.ContainsKey("NSUserTrackingUsageDescription"))
+            plist.root.values.Remove("NSUserTrackingUsageDescription");
         plist.WriteToFile(plistPath);
     }
 }

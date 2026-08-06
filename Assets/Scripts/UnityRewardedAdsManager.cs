@@ -3,15 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-#if UNITY_IOS && !UNITY_EDITOR
-using Unity.Advertisement.IosSupport;
-#endif
 
 /// <summary>
 /// One place for Unity Ads init and rewarded Load/Show. Use different ad unit IDs in the dashboard
 /// for shop diamonds vs revive (or reuse the same placement if you prefer).
 /// Add this to your first-loaded scene (e.g. Home); it persists with DontDestroyOnLoad.
-/// On iOS, App Tracking Transparency is requested before Advertisement.Initialize.
+/// No ATT / IDFA tracking request — App Privacy declares Tracking = No.
 /// </summary>
 public class UnityRewardedAdsManager : MonoBehaviour,
     IUnityAdsInitializationListener,
@@ -73,40 +70,7 @@ public class UnityRewardedAdsManager : MonoBehaviour,
             return;
         }
 
-        StartCoroutine(RequestTrackingThenInitializeAds());
-    }
-
-    /// <summary>
-    /// iOS: show ATT on first launch (when status is NotDetermined), then init Unity Ads.
-    /// Android / Editor: init ads immediately.
-    /// </summary>
-    IEnumerator RequestTrackingThenInitializeAds()
-    {
-#if UNITY_IOS && !UNITY_EDITOR
-        // ATT only appears while the app is active / focused.
-        yield return new WaitUntil(() => Application.isFocused);
-        yield return null;
-
-        var status = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
-        if (status == ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED)
-        {
-            ATTrackingStatusBinding.RequestAuthorizationTracking();
-            // Wait until the user answers (or Settings already set a value).
-            yield return new WaitUntil(() =>
-                ATTrackingStatusBinding.GetAuthorizationTrackingStatus()
-                != ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED);
-        }
-
-        Debug.Log(
-            $"ATT status before Unity Ads init: {ATTrackingStatusBinding.GetAuthorizationTrackingStatus()}");
-#else
-        yield return null;
-#endif
-
-        if (!Advertisement.isInitialized)
-            Advertisement.Initialize(_gameId, testMode, this);
-        else
-            _initialized = true;
+        Advertisement.Initialize(_gameId, testMode, this);
     }
 
     public bool IsInitialized => _initialized && Advertisement.isInitialized;
