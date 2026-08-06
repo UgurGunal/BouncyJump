@@ -39,11 +39,37 @@ public class ShopManager : MonoBehaviour
 
     void Awake()
     {
+        DestroyStalePersistedShops();
+
         // Same-frame order with BuyGoldButton (DefaultExecutionOrder 50): scroll runs first, then purchase.
         if (shopPanelBuyGoldButton != null)
             shopPanelBuyGoldButton.onClick.AddListener(OnShopPanelBuyGoldScrollClicked);
         if (shopPanelBuyDiamondButton != null)
             shopPanelBuyDiamondButton.onClick.AddListener(OnShopPanelBuyDiamondScrollClicked);
+    }
+
+    /// <summary>
+    /// Older builds DontDestroyOnLoad'd this object with IAPManager, leaving a shop with a dead panel.
+    /// Remove those leftovers so the live HomeScene shop is the one buttons use.
+    /// </summary>
+    void DestroyStalePersistedShops()
+    {
+        ShopManager[] all = FindObjectsOfType<ShopManager>(true);
+        for (int i = 0; i < all.Length; i++)
+        {
+            ShopManager other = all[i];
+            if (other == null || other == this)
+                continue;
+            if (other.shopPanel != null)
+                continue;
+
+            // Keep the live IAP singleton if it still shares that leftover object.
+            IAPManager iap = other.GetComponent<IAPManager>();
+            if (iap != null && IAPManager.Instance == iap)
+                Destroy(other);
+            else
+                Destroy(other.gameObject);
+        }
     }
     
     void Start()

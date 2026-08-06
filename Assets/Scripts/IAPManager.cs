@@ -52,7 +52,20 @@ public class IAPManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            // Only remove this duplicate component. Destroy(gameObject) would also wipe
+            // co-mounted scene objects (e.g. ShopManager on HomeScene) and break the shop
+            // after returning from Tutorial / towers.
+            Destroy(this);
+            return;
+        }
+
+        // Never DontDestroyOnLoad a shared HomeScene object — that would persist ShopManager
+        // with destroyed UI refs after the scene unloads.
+        if (IsMountedWithOtherBehaviours())
+        {
+            var dedicated = new GameObject("IAPManager");
+            dedicated.AddComponent<IAPManager>();
+            Destroy(this);
             return;
         }
 
@@ -60,6 +73,17 @@ public class IAPManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         _processedTxIds = LoadProcessedTxIds();
         InitializeStore();
+    }
+
+    bool IsMountedWithOtherBehaviours()
+    {
+        MonoBehaviour[] behaviours = GetComponents<MonoBehaviour>();
+        for (int i = 0; i < behaviours.Length; i++)
+        {
+            if (behaviours[i] != null && behaviours[i] != this)
+                return true;
+        }
+        return false;
     }
 
     void OnDestroy()

@@ -64,16 +64,7 @@ public class HomeScreenUI : MonoBehaviour
             buyGoldButton.onClick.AddListener(OnBuyGoldShopClick);
 
         // Initialize managers if not assigned (search inactive so we find manager on disabled shop panel)
-        if (shopManager == null)
-        {
-            shopManager = FindObjectOfType<ShopManager>();
-            if (shopManager == null)
-            {
-                ShopManager[] found = FindObjectsOfType<ShopManager>(true);
-                if (found != null && found.Length > 0)
-                    shopManager = found[0];
-            }
-        }
+        shopManager = ResolveShopManager();
         
         if (towerManager == null)
         {
@@ -226,27 +217,48 @@ public class HomeScreenUI : MonoBehaviour
 
     void OnShopButtonClick()
     {
-        
+        shopManager = ResolveShopManager();
         if (shopManager != null)
             shopManager.OpenShop();
     }
 
     void OnBuyGoldShopClick()
     {
+        shopManager = ResolveShopManager();
         if (shopManager == null)
-        {
             return;
-        }
         shopManager.OpenShop(buyGoldShopContentAnchoredY);
     }
 
     void OnBuyDiamondShopClick()
     {
+        shopManager = ResolveShopManager();
         if (shopManager == null)
-        {
             return;
-        }
         shopManager.OpenShop(buyDiamondShopContentAnchoredY);
+    }
+
+    /// <summary>
+    /// Prefer a ShopManager that still has a live shop panel (scene instance),
+    /// not a stale DontDestroyOnLoad leftover with destroyed UI refs.
+    /// </summary>
+    ShopManager ResolveShopManager()
+    {
+        if (shopManager != null && shopManager.shopPanel != null)
+            return shopManager;
+
+        ShopManager[] found = FindObjectsOfType<ShopManager>(true);
+        if (found == null || found.Length == 0)
+            return null;
+
+        for (int i = 0; i < found.Length; i++)
+        {
+            ShopManager candidate = found[i];
+            if (candidate != null && candidate.shopPanel != null)
+                return candidate;
+        }
+
+        return found[0];
     }
 
     // Mock amount for IAP path (replace with real purchase payload when ready).
